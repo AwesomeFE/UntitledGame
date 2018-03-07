@@ -16,21 +16,22 @@ export class Game extends Vue {
     this.engine = new Engine(this.canvas, true);
     this.scene = new Scene(this.engine);
     this.camera = new FreeCamera('camera', new Vector3(0, 5,-10), this.scene);
+    this.light = new HemisphericLight('light1', new Vector3(0,1,0), this.scene);
+    this.sphere = MeshBuilder.CreateSphere('sphere', {segments:16, diameter:2}, this.scene);
+    this.ground = MeshBuilder.CreateGround('ground1', {height:6, width:6, subdivisions: 2}, this.scene);
 
+    this.sphere.position.y = 1;
     this.camera.setTarget(Vector3.Zero());
     this.camera.attachControl(this.canvas, false);
-
-    this.light = new HemisphericLight('light1', new Vector3(0,1,0), this.scene);
-
-    this.sphere = MeshBuilder.CreateSphere('sphere', {segments:16, diameter:2}, this.scene);
-    this.sphere.position.y = 1;
-
-    this.ground = MeshBuilder.CreateGround('ground1', {height:6, width:6, subdivisions: 2}, this.scene);
   }
 
   startup() {
     this.engine.runRenderLoop(() => {
       this.scene.render();
+    });
+
+    window.addEventListener('resize', () => {
+      this.engine.resize();
     });
   }
 };
