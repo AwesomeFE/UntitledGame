@@ -17,6 +17,10 @@ export default () => new VueRouter({
           component: () => import('./views/Entry')
         },
         {
+          path: 'game',
+          component: () => import('./views/Game')
+        },
+        {
           path: '*',
           component: () => import('./views/NotFound')
         }

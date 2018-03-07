@@ -9,6 +9,7 @@
       </div>
       <div class="right">
         <router-link class="menu" :to="linkUrls.CART">{{$t('CART')}}</router-link>
+        <router-link class="menu" :to="linkUrls.GAME">{{$t('GAME')}}</router-link>
         <router-link class="menu" :to="linkUrls.SIGNIN">{{$t('SIGNIN')}}</router-link>
         <router-link class="menu" :to="linkUrls.SIGNUP">{{$t('SIGNUP')}}</router-link>
         <a class="menu">{{$t('ACCOUNT')}}</a>
@@ -75,6 +76,7 @@ zh-cn:
   SIGNOUT: "退出"
   ORDER: "我的订单"
   SETTING: "账户设置"
+  GAME: "游戏"
 en-us:
   LOGO: "Coffee Bar"
 </i18n>

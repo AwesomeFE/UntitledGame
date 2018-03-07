@@ -7,6 +7,7 @@ export function workboxPlugin(options) {
 
   if(useServiceWorker) {
     plugin.push(new WorkboxPlugin({
+      maximumFileSizeToCacheInBytes: 3145728,
       swSrc: `./client/src/${appName}/sw/index.js`,
       swDest: `./client/dist/${appName}/javascripts/sw.js`,
       templatedUrls: {
