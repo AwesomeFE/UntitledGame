@@ -12,7 +12,19 @@ class GameHome extends Game {
     const canvas = this.$refs.Stage;
 
     this.init({ canvas });
-    this.startup();
+    this.initEventListener();
+  }
+
+  beforeDestroy() {
+    this.removeEventListener();
+  }
+
+  initEventListener() {
+    window.addEventListener('resize', this.resizeHandler);
+  }
+
+  removeEventListener() {
+    window.removeEventListener('resize', this.resizeHandler);
   }
 }
 
@@ -21,6 +33,9 @@ export default GameHome;
 
 <style type="text/scss" lang="scss">
 .GameHome {
-
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  outline: none;
 }
 </style>
