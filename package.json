@@ -71,6 +71,7 @@
     "file-loader": "^1.1.6",
     "font-awesome": "^4.7.0",
     "hammerjs": "^2.0.8",
+    "handjs": "^1.3.11",
     "html-webpack-include-assets-plugin": "^1.0.2",
     "html-webpack-plugin": "^2.30.1",
     "http-proxy-middleware": "^0.17.4",

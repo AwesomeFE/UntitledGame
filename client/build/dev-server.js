@@ -11,7 +11,7 @@ class DevServer {
   static usedPort = 4000;
 
   constructor(webpackConfig, proxyConfig) {
-    this.host = '192.168.0.100';
+    this.host = 'localhost';
     this.port = DevServer.usedPort += 1;
     this.webpackConfig = this.getDevWebpackConfig(webpackConfig);
     this.proxyConfig = proxyConfig || {};
