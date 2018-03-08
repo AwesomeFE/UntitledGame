@@ -1,30 +1,44 @@
 <template>
-  <canvas ref="Stage" class="GameHome"></canvas>
+  <div>
+    <canvas ref="canvas" class="GameHome"></canvas>
+    <MainScene
+      :canvas="canvas"
+      @sceneChanged="sceneChanged"
+    />
+    <Camera
+      name="camera"
+      :canvas="canvas"
+      :scene="scene"
+      @cameraChanged="cameraChanged"
+    />
+  </div>
 </template>
 
 <script>
-import { Game } from '../../common';
+import { Vue, Game } from '../../common';
 import { Component } from 'vue-property-decorator';
 
-@Component()
-class GameHome extends Game {
+@Component({
+  components: {
+    MainScene: Game.MainScene,
+    Camera: Game.Camera
+  }
+})
+class GameHome extends Vue {
+  canvas = null;
+  scene = null;
+  camera = null;
+
   mounted() {
-    const canvas = this.$refs.Stage;
-
-    this.init({ canvas });
-    this.initEventListener();
+    this.canvas = this.$refs.canvas;
   }
 
-  beforeDestroy() {
-    this.removeEventListener();
+  sceneChanged(scene) {
+    this.scene = scene;
   }
 
-  initEventListener() {
-    window.addEventListener('resize', this.resizeHandler);
-  }
-
-  removeEventListener() {
-    window.removeEventListener('resize', this.resizeHandler);
+  cameraChanged(camera) {
+    this.camera = camera;
   }
 }
 
