@@ -7,15 +7,21 @@ import { UniversalCamera, Vector3 } from 'babylonjs';
 import { Component, Watch } from 'vue-property-decorator';
 
 @Component({
+  inject: [
+    'canvas',
+    'scene'
+  ],
   props: {
-    canvas: HTMLCanvasElement,
-    scene: Object,
     name: String,
     position: Object
   }
 })
 class Camera extends Vue {
-  camera = null;
+  $camera = null;
+
+  mounted() {
+    console.log(this)
+  }
 
   @Watch('scene')
   onSceneChange(newScene, oldScene) {
@@ -27,11 +33,11 @@ class Camera extends Vue {
 
   createCamera(scene) {
     console.log('createCamera')
-    const currentPosition = this.position || new Vector3(0, 0, -10);
+    // const currentPosition = this.position || new Vector3(0, 0, -10);
 
-    this.camera = new UniversalCamera(this.name, currentPosition, scene);
-    this.camera.setTarget(Vector3.Zero());
-    this.camera.attachControl(this.canvas, false);
+    // this.camera = new UniversalCamera(this.name, currentPosition, scene);
+    // this.camera.setTarget(Vector3.Zero());
+    // this.camera.attachControl(this.canvas, false);
   }
 
   destoryCamera() {

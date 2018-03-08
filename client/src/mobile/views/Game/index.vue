@@ -1,16 +1,9 @@
 <template>
   <div>
     <canvas ref="canvas" class="GameHome"></canvas>
-    <MainScene
-      :canvas="canvas"
-      @sceneChanged="sceneChanged"
-    />
-    <Camera
-      name="camera"
-      :canvas="canvas"
-      :scene="scene"
-      @cameraChanged="cameraChanged"
-    />
+    <Scene :stage="canvas">
+      <Camera name="camera" />
+    </Scene>
   </div>
 </template>
 
@@ -20,25 +13,15 @@ import { Component } from 'vue-property-decorator';
 
 @Component({
   components: {
-    MainScene: Game.MainScene,
+    Scene: Game.Scene,
     Camera: Game.Camera
   }
 })
 class GameHome extends Vue {
   canvas = null;
-  scene = null;
-  camera = null;
 
   mounted() {
     this.canvas = this.$refs.canvas;
-  }
-
-  sceneChanged(scene) {
-    this.scene = scene;
-  }
-
-  cameraChanged(camera) {
-    this.camera = camera;
   }
 }
 

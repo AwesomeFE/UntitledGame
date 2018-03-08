@@ -36,10 +36,10 @@
 //     this.engine.runRenderLoop(() => this.scene.render());
 //   }
 // };
-import MainScene from './MainScene';
+import Scene from './Scene';
 import Camera from './Camera';
 
 export const Game = {
-  MainScene,
+  Scene,
   Camera
 };
