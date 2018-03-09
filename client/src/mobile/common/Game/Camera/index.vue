@@ -8,8 +8,7 @@ import { Component, Watch } from 'vue-property-decorator';
 
 @Component({
   inject: [
-    'canvas',
-    'scene'
+    '$babylon'
   ],
   props: {
     name: String,
@@ -17,13 +16,17 @@ import { Component, Watch } from 'vue-property-decorator';
   }
 })
 class Camera extends Vue {
-  $camera = null;
+  camera = null;
 
   mounted() {
-    console.log(this)
+    console.log('camera mounted', this)
   }
 
-  @Watch('scene')
+  created() {
+    console.log('camera created', this);
+  }
+
+  @Watch('$babylon.scene')
   onSceneChange(newScene, oldScene) {
     if(newScene !== oldScene) {
       this.destoryCamera();
