@@ -2,7 +2,7 @@
 </template>
 
 <script>
-import { Vue } from '../../';
+import { Vue } from '../../common';
 import GUI from 'babylonjs-gui';
 import { Component, Watch } from 'vue-property-decorator';
 
@@ -16,26 +16,27 @@ import { Component, Watch } from 'vue-property-decorator';
     width: [String, Number]
   }
 })
-class HomeHeader extends Vue {
+class OneImage extends Vue {
   bgImage = null;
 
   @Watch('$container2D.texture')
   onTextureChange(newValue, oldValue) {
-    this.createBlock(newValue);
-  }
-
-  createBlock() {
     if(this.background) {
       this.bgImage = new GUI.Image('background', this.background);
       this.bgImage.width = this.width;
       this.bgImage.height = this.height;
-      this.bgImage.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP
+      this.bgImage.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
       this.$container2D.texture.addControl(this.bgImage);
     }
   }
+
+  @Watch('height')
+  onHeightChange(newValue, oldValue) {
+    this.bgImage.height = newValue;
+  }
 }
 
-export default HomeHeader;
+export default OneImage;
 </script>
 
 <style type="text/scss" lang="scss">

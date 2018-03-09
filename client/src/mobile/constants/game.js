@@ -1,5 +1,6 @@
-export const GAME = {
+export const Game = {
   CAMERA: {
-    UNIVERSAL: 'universal'
+    UNIVERSAL: 'universal',
+    FREE: 'Free'
   }
 };

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { Vue } from '../../';
+import { Vue } from '../../common';
 import { Scene, Engine, MeshBuilder } from 'babylonjs';
 import { Component, Watch, Provide } from 'vue-property-decorator';
 

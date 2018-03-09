@@ -2,8 +2,8 @@
 </template>
 
 <script>
-import { Vue } from '../../';
-import { UniversalCamera, Vector3 } from 'babylonjs';
+import { Vue } from '../../common';
+import { UniversalCamera, Vector3, FreeCamera } from 'babylonjs';
 import { Component, Watch } from 'vue-property-decorator';
 
 @Component({
@@ -49,14 +49,17 @@ class Camera extends Vue {
   }
 
   createCamera(scene) {
-    const { GAME } = this.strings;
+    const { Game } = this.strings;
     const position = this.position;
     const target = this.target;
 
     switch(this.type) {
-      case GAME.CAMERA.UNIVERSAL:
-      default:
+      case Game.CAMERA.UNIVERSAL:
         this.camera = new UniversalCamera(this.name, position, scene);
+        break;
+      case Game.CAMERA.FREE:
+      default:
+        this.camera = new FreeCamera(this.name, position, scene);
         break;
     }
     this.camera.setTarget(target);

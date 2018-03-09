@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { Vue } from '../../';
+import { Vue } from '../../common';
 import GUI, { AdvancedDynamicTexture } from 'babylonjs-gui';
 import { Component, Watch } from 'vue-property-decorator';
 
@@ -30,8 +30,6 @@ class Container2D extends Vue {
       this.container2D.texture = AdvancedDynamicTexture.CreateFullscreenUI('UI', true, newValue);
     }
   }
-
-
 }
 
 export default Container2D;
