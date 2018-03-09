@@ -42,6 +42,8 @@ const menuButtonOptions = [
   { name: 'search', text: 'search', url: '' },
   { name: 'test', text: 'test', url: '' },
   { name: 'ccc', text: 'ccc', url: '' },
+  { name: 'shop', text: 'shop', url: '' },
+  { name: 'gogo', text: 'gogo', url: '' },
 ];
 
 export function Home({ canvas }) {
