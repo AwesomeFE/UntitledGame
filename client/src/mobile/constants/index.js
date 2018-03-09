@@ -1,0 +1,1 @@
+export { GAME } from './game';

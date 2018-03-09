@@ -6,68 +6,8 @@
 
 <script>
 import { Vue } from '../../';
-import { Scene, Engine } from 'babylonjs';
+import { Scene, Engine, MeshBuilder } from 'babylonjs';
 import { Component, Watch, Provide } from 'vue-property-decorator';
-
-// export default {
-//   data() {
-//     return {
-//       engine: null,
-//       scene: null,
-//       canvas: null
-//     };
-//   },
-//   props: {
-//     stage: HTMLCanvasElement
-//   },
-//   provide() {
-//     return {
-//       engine: this.engine,
-//       scene: this.scene,
-//       canvas: this.canvas
-//     };
-//   },
-//   watch: {
-//     stage(newStage, oldStage) {
-//       if(newStage !== oldStage) {
-//         this.destoryScene();
-//         this.createScene(newStage);
-//       }
-//     }
-//   },
-//   methods: {
-//     destoryScene() {
-//       this.engine = null;
-//       this.scene = null;
-//     },
-//     createScene(canvas) {
-//       this.canvas = canvas;
-//       this.engine = new Engine(this.canvas, false);
-//       this.scene = new Scene(this.engine);
-//       console.log('createScene')
-
-//       window.addEventListener('resize', this.resizeHandler);
-//     },
-
-//     resizeHandler() {
-//       this.engine.resize();
-//     }
-//   },
-
-//   created() {
-//     console.log('scene created', this);
-//   },
-
-//   mounted() {
-//     console.log('scene mounted', this);
-//     this.resizeHandler = this.resizeHandler.bind(this);
-//   },
-
-//   beforeDestroy() {
-//     window.removeEventListener('resize', this.resizeHandler);
-//   }
-// }
-
 
 @Component({
   props: {
@@ -103,6 +43,9 @@ class SceneClass extends Vue {
     this.babylon.canvas = canvas;
     this.babylon.engine = new Engine(this.babylon.canvas, false);
     this.babylon.scene = new Scene(this.babylon.engine);
+    this.babylon.engine.runRenderLoop(() => this.babylon.scene.render());
+
+    MeshBuilder.CreateBox('box', { height: 2, width: 2, depth: 2 }, this.babylon.scene);
 
     window.addEventListener('resize', this.resizeHandler);
   }

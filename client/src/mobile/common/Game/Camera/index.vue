@@ -12,35 +12,59 @@ import { Component, Watch } from 'vue-property-decorator';
   ],
   props: {
     name: String,
-    position: Object
+    type: String,
+    position: {
+      type: Object,
+      default: new Vector3(0, 0, -10)
+    },
+    target: {
+      type: Object,
+      default: Vector3.Zero()
+    },
+    canRotate: {
+      type: Boolean,
+      default: true
+    }
   }
 })
 class Camera extends Vue {
   camera = null;
 
-  mounted() {
-    console.log('camera mounted', this)
-  }
-
-  created() {
-    console.log('camera created', this);
-  }
-
   @Watch('$babylon.scene')
-  onSceneChange(newScene, oldScene) {
-    if(newScene !== oldScene) {
+  onSceneChange(newValue, oldValue) {
+    if(newValue !== oldValue) {
       this.destoryCamera();
-      this.createCamera(newScene);
+      this.createCamera(newValue);
     }
   }
 
-  createCamera(scene) {
-    console.log('createCamera')
-    // const currentPosition = this.position || new Vector3(0, 0, -10);
+  @Watch('target')
+  onTargetChange(newValue, oldValue) {
+    this.camera.setTarget(newValue);
+  }
 
-    // this.camera = new UniversalCamera(this.name, currentPosition, scene);
-    // this.camera.setTarget(Vector3.Zero());
-    // this.camera.attachControl(this.canvas, false);
+  @Watch('position')
+  onTargetChange(newValue, oldValue) {
+    this.camera.position = newValue;
+  }
+
+  createCamera(scene) {
+    const { GAME } = this.strings;
+    const position = this.position;
+    const target = this.target;
+
+    switch(this.type) {
+      case GAME.CAMERA.UNIVERSAL:
+      default:
+        this.camera = new UniversalCamera(this.name, position, scene);
+        break;
+    }
+    this.camera.setTarget(target);
+    this.camera.attachControl(this.$babylon.canvas, false);
+    
+    if(!this.canRotate) {
+      this.camera.detachControl(this.$babylon.canvas, false);
+    }
   }
 
   destoryCamera() {
