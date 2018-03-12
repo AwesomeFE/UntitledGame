@@ -2,7 +2,7 @@
 </template>
 
 <script>
-import { Vue } from '../../common';
+import Babylon from '../common/Babylon';
 import GUI from 'babylonjs-gui';
 import { Component, Watch } from 'vue-property-decorator';
 
@@ -11,28 +11,62 @@ import { Component, Watch } from 'vue-property-decorator';
     '$container2D'
   ],
   props: {
-    background: String,
-    height: [String, Number],
-    width: [String, Number]
-  }
-})
-class OneImage extends Vue {
-  bgImage = null;
-
-  @Watch('$container2D.texture')
-  onTextureChange(newValue, oldValue) {
-    if(this.background) {
-      this.bgImage = new GUI.Image('background', this.background);
-      this.bgImage.width = this.width;
-      this.bgImage.height = this.height;
-      this.bgImage.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
-      this.$container2D.texture.addControl(this.bgImage);
+    name: String,
+    url: String,
+    height: {
+      type: String,
+      default: '100%'
+    },
+    width: {
+      type: String,
+      default: '100%'
+    },
+    horizontalAlignment: Number,
+    verticalAlignment: Number,
+    left: {
+      type: String,
+      default: '0%'
+    },
+    top: {
+      type: String,
+      default: '0%'
+    },
+    paddingTop: {
+      type: String,
+      default: '0%'
+    },
+    paddingBottom: {
+      type: String,
+      default: '0%'
+    },
+    paddingLeft: {
+      type: String,
+      default: '0%'
+    },
+    paddingRight: {
+      type: String,
+      default: '0%'
     }
   }
+})
+class OneImage extends Babylon {
+  image = null;
 
-  @Watch('height')
-  onHeightChange(newValue, oldValue) {
-    this.bgImage.height = newValue;
+  mounted() {
+    if(this.url) {
+      this.image = new GUI.Image(this.name, this.url);
+      this.image.width = this.width;
+      this.image.height = this.height;
+      this.image.top = this.top;
+      this.image.left = this.left;
+      this.image.verticalAlignment = this.verticalAlignment;
+      this.image.horizontalAlignment = this.horizontalAlignment;
+      this.image.paddingTop = this.paddingTop;
+      this.image.paddingBottom = this.paddingBottom;
+      this.image.paddingLeft = this.paddingLeft;
+      this.image.paddingRight = this.paddingRight;
+      this.$container2D.texture.addControl(this.image);
+    }
   }
 }
 

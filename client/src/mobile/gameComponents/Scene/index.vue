@@ -1,62 +1,50 @@
 <template>
   <div>
-    <slot></slot>
+    <canvas class="Scene" :id="name" ref="canvas"></canvas>
+    <slot class="Elments" v-if="system.canvas"></slot>
   </div>
 </template>
 
 <script>
-import { Vue } from '../../common';
+import Babylon from '../common/Babylon';
 import { Scene, Engine, MeshBuilder } from 'babylonjs';
 import { Component, Watch, Provide } from 'vue-property-decorator';
 
 @Component({
   props: {
-    stage: HTMLCanvasElement
+    name: {
+      type: String,
+      required: true
+    }
   },
   provide() {
-    return {
-      $babylon: this.babylon
-    };
+    return { $system: this.system };
   }
 })
-class SceneClass extends Vue {
-  babylon = {
+class SceneClass extends Babylon {
+  system = {
     engine: null,
     scene: null,
-    canvas: null
+    canvas: null,
+    camera: null
   };
 
-  @Watch('stage')
-  onCanvasChange(newStage, oldStage) {
-    if(newStage !== oldStage) {
-      this.destoryScene();
-      this.createScene(newStage);
-    }
+  resizeHandler() {
+    this.system.engine.resize();
   }
 
-  destoryScene() {
-    this.babylon.engine = null;
-    this.babylon.scene = null;
-  }
+  mounted() {
+    this.system.canvas = this.$refs.canvas;
+    this.resizeHandler = this.resizeHandler.bind(this);
+    
+    this.system.engine = new Engine(this.system.canvas, false);
+    this.system.scene = new Scene(this.system.engine);
 
-  createScene(canvas) {
-    this.babylon.canvas = canvas;
-    this.babylon.engine = new Engine(this.babylon.canvas, false);
-    this.babylon.scene = new Scene(this.babylon.engine);
-    this.babylon.engine.runRenderLoop(() => this.babylon.scene.render());
+    this.system.engine.runRenderLoop(() => this.system.scene.render());
 
-    MeshBuilder.CreateBox('box', { height: 2, width: 2, depth: 2 }, this.babylon.scene);
+    // MeshBuilder.CreateBox('box', { height: 2, width: 2, depth: 2 }, this.system.scene);
 
     window.addEventListener('resize', this.resizeHandler);
-  }
-
-  resizeHandler() {
-    this.babylon.engine.resize();
-  }
-
-  // life cycle hook
-  mounted() {
-    this.resizeHandler = this.resizeHandler.bind(this);
   }
 
   beforeDestroy() {
@@ -68,4 +56,11 @@ export default SceneClass;
 </script>
 
 <style type="text/scss" lang="scss">
+.Scene {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  outline: none;
+  touch-action: none;
+}
 </style>

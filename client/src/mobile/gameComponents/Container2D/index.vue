@@ -1,17 +1,17 @@
 <template>
   <div>
-    <slot></slot>
+    <slot v-if="container2D.texture"></slot>
   </div>
 </template>
 
 <script>
-import { Vue } from '../../common';
+import Babylon from '../common/Babylon';
 import GUI, { AdvancedDynamicTexture } from 'babylonjs-gui';
 import { Component, Watch } from 'vue-property-decorator';
 
 @Component({
   inject: [
-    '$babylon'
+    '$system'
   ],
   provide() {
     return {
@@ -19,16 +19,14 @@ import { Component, Watch } from 'vue-property-decorator';
     };
   }
 })
-class Container2D extends Vue {
+class Container2D extends Babylon {
   container2D = {
     texture: null
   };
 
-  @Watch('$babylon.scene')
-  onSceneChange(newValue, oldValue) {
-    if(newValue !== oldValue) {
-      this.container2D.texture = AdvancedDynamicTexture.CreateFullscreenUI('UI', true, newValue);
-    }
+  mounted() {
+    const { scene } = this.$system;
+    this.container2D.texture = AdvancedDynamicTexture.CreateFullscreenUI('UI', true, scene);
   }
 }
 
