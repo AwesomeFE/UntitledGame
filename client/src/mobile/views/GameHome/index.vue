@@ -20,14 +20,14 @@
         </OneBlock> -->
 
         <OneBlock :verticalAlignment="GUI.Control.VERTICAL_ALIGNMENT_BOTTOM">
-          <OneButton width="100px" height="50px" text="首页" paddingRight="30px" />
-          <OneButton width="100px" height="50px" text="副本" paddingRight="30px" />
-          <OneButton width="100px" height="50px" text="素材" paddingRight="30px" />
-          <OneButton width="100px" height="50px" text="公会" paddingRight="30px" />
-          <OneButton width="100px" height="50px" text="氪金" paddingRight="30px" />
-          <OneButton width="100px" height="50px" text="交易" paddingRight="30px" />
-          <OneButton width="100px" height="50px" text="设置" paddingRight="30px" />
-          <OneButton width="100px" height="50px" text="聊天" paddingRight="30px" />
+          <OneButton width="100px" height="50px" text="首页" paddingRight="30px" path="gameHome" />
+          <OneButton width="100px" height="50px" text="副本" paddingRight="30px" path="gameFuBen" />
+          <OneButton width="100px" height="50px" text="素材" paddingRight="30px" path="gameResource" />
+          <OneButton width="100px" height="50px" text="公会" paddingRight="30px" path="gameGongHui" />
+          <OneButton width="100px" height="50px" text="氪金" paddingRight="30px" path="gameShop" />
+          <OneButton width="100px" height="50px" text="交易" paddingRight="30px" path="gameExchange" />
+          <OneButton width="100px" height="50px" text="设置" paddingRight="30px" path="gameSetting" />
+          <OneButton width="100px" height="50px" text="聊天" paddingRight="30px" path="gameChat" />
         </OneBlock>
 
       </Container2D>

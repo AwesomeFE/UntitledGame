@@ -15,6 +15,7 @@ import { Component } from 'vue-property-decorator';
     text: String,
     horizontalAlignment: Number,
     verticalAlignment: Number,
+    path: String,
     width: {
       type: String,
       default: '20%'
@@ -64,14 +65,13 @@ class OneButton extends Babylon {
     this.button.paddingBottom = this.paddingBottom;
     this.button.paddingLeft = this.paddingLeft;
     this.button.paddingRight = this.paddingRight;
-    console.log(this.button.onPointerClickObservable)
-    this.button.onPointerDownObservable.add(function() {
-      alert('123')
-    });
-    // this.button.onPointerDownObservable.add(function() {
-    //   alert('123')
-    // });
     this.$container2D.texture.addControl(this.button);
+
+    if(this.path) {
+      this.button.onPointerDownObservable.add(() => {
+        this.$router.push(this.path);
+      });
+    }
   }
 }
 

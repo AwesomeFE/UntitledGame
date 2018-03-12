@@ -6,7 +6,7 @@ export const linkUrls = {
     path: 'cart'
   },
   GAME: {
-    path: 'game'
+    path: 'gameHome'
   },
   SIGNIN: {
     path: 'entry',
