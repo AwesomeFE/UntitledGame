@@ -24,7 +24,9 @@ export default [
     vendor: [
       'vue-property-decorator',
       'babylonjs',
-      'babylonjs-gui'
+      'babylonjs-gui',
+      // for mobile touch library
+      'handjs'
     ]
   }),
   // webpackTask({
