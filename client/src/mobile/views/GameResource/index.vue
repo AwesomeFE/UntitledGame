@@ -2,9 +2,13 @@
   <div>
     <Scene name="Resource">
       <Camera :position="position" :target="target" />
+      <Light :direction="direction" />
+      <Ground :width="ground.width" :height="ground.height"></Ground>
       <Container2D>
-        <OneButton width="100px" height="50px" text="我是羊" paddingRight="30px" />
+        <OneButton width="100px" height="50px" text="返回" paddingRight="30px" path="gameHome" />
       </Container2D>
+
+      <Plane name="sheep" :width="1" :height="2" :url="images.Game.resources.sheep"></Plane>
     </Scene>
   </div>
 </template>
@@ -19,7 +23,10 @@ import { Component } from 'vue-property-decorator';
 @Component({
   components: {
     Scene: GameComponents.Scene,
+    Light: GameComponents.Light,
     Camera: GameComponents.Camera,
+    Ground: GameComponents.Ground,
+    Plane: GameComponents.Plane,
     OneImage: GameComponents.OneImage,
     OneBlock: GameComponents.OneBlock,
     OneButton: GameComponents.OneButton,
@@ -27,9 +34,14 @@ import { Component } from 'vue-property-decorator';
   }
 })
 class GameResource extends Vue {
-  position = new Vector3(0, 0, -10);
+  position = new Vector3(0, 2.5, -10);
   target = Vector3.Zero();
+  direction = new Vector3(0, -50, 50);
   GUI = GUI;
+  ground = {
+    width: 10,
+    height: 10
+  };
 
   mounted() {
   }

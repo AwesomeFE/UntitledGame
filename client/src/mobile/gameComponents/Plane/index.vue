@@ -3,18 +3,39 @@
 
 <script>
 import { Vue } from '../../common';
-import { MeshBuilder } from 'babylonjs';
+import { MeshBuilder, StandardMaterial, Texture } from 'babylonjs';
 import { Component, Watch } from 'vue-property-decorator';
 
 @Component({
   inject: [
-    '$babylon'
-  ]
+    '$system'
+  ],
+  props: {
+    name: String,
+    url: String,
+    width: Number,
+    height: Number
+  }
 })
 class Plane extends Vue {
-  @Watch('$babylon.scene')
-  onSceneChanged(newValue, oldValue) {
-    MeshBuilder.CreatePlane('Dashboard', {}, newValue);
+  plane = null;
+  material = null;
+
+  mounted() {
+    const { scene } = this.$system;
+    const options = this.getOptions();
+
+    this.plane = MeshBuilder.CreatePlane(this.name, options, scene);
+    this.material = new StandardMaterial(`${this.name}-material`, scene);
+    this.material.diffuseTexture = new Texture(this.url, scene);
+    this.plane.material = this.material;
+  }
+
+  getOptions() {
+    return {
+      width: this.width,
+      height: this.height
+    }
   }
 }
 
