@@ -19,6 +19,7 @@ import { Component, Watch } from 'vue-property-decorator';
     };
   },
   props: {
+    name: String,
     isVertical: Boolean,
     horizontalAlignment: Number,
     verticalAlignment: Number,
@@ -54,7 +55,7 @@ class OneBlock extends Babylon {
   };
 
   mounted() {
-    this.container2D.texture = new GUI.StackPanel();
+    this.container2D.texture = new GUI.StackPanel(this.name);
     this.container2D.texture.top = this.top;
     this.container2D.texture.left = this.left;
     this.container2D.texture.isVertical = this.isVertical;

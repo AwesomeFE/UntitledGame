@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="Game">
     <Scene name="Resource">
       <Camera :position="position" :target="target" />
       <Light :direction="direction" />

@@ -22,8 +22,6 @@ export default App;
 @import '../../assets/scss/variable.scss';
 
 .App {
-  min-height: 100vh;
-  position: relative;
   .PageBody {
     min-height: $page-min-height;
     padding-bottom: $footer-height;

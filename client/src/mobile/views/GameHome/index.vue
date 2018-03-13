@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="Game">
     <Scene name="Home">
       <Camera :position="position" :target="target" />
       <Container2D>
 
-        <OneBlock :verticalAlignment="GUI.Control.VERTICAL_ALIGNMENT_TOP">
-          <OneImage name="mainHeader" :url="images.Game.MainBackgound" width="100%" height="50px" />
+        <OneBlock name="header" :verticalAlignment="GUI.Control.VERTICAL_ALIGNMENT_TOP">
+          <OneImage name="header-image" :url="images.Game.MainBackgound" width="100%" height="50px" />
         </OneBlock>
 
         <!-- <OneBlock name="QuickAction">
@@ -19,7 +19,7 @@
           </OneBlock>
         </OneBlock> -->
 
-        <OneBlock :verticalAlignment="GUI.Control.VERTICAL_ALIGNMENT_BOTTOM">
+        <OneBlock name="menu" :verticalAlignment="GUI.Control.VERTICAL_ALIGNMENT_BOTTOM">
           <OneButton width="100px" height="50px" text="首页" paddingRight="30px" path="gameHome" />
           <OneButton width="100px" height="50px" text="副本" paddingRight="30px" path="gameFuBen" />
           <OneButton width="100px" height="50px" text="素材" paddingRight="30px" path="gameResource" />

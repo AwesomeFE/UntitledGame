@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <canvas class="Scene" :id="name" ref="canvas"></canvas>
+  <div class="Scene">
+    <canvas class="canvas" :id="name" ref="canvas" touch-action="none"></canvas>
     <slot class="Elments" v-if="system.canvas"></slot>
   </div>
 </template>
@@ -56,11 +56,30 @@ export default SceneClass;
 </script>
 
 <style type="text/scss" lang="scss">
-.Scene {
-  width: 100vw;
-  height: 100vh;
+body,
+html,
+#app,
+.App,
+.Game,
+.Scene,
+.canvas {
+  height: 100%;
+  width: 100%;
+}
+.canvas {
   display: block;
   outline: none;
   touch-action: none;
+}
+body, html {
+  position: fixed;
+  touch-action: none;
+  overflow: hidden;
+}
+
+[touch-action="none"]{
+  -ms-touch-action: none;
+  touch-action: none;
+  touch-action-delay: none;
 }
 </style>

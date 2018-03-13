@@ -45,7 +45,6 @@ class Camera extends Babylon {
         this.$system.camera = new FreeCamera(this.name, position, scene);
         break;
     }
-
     this.$system.camera.setTarget(target);
 
     if(this.canRotate) {
