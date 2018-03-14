@@ -23,9 +23,9 @@ const positions = [
 ];
 
 const resources = [
-  { id: '1', name: '羊', materials: materials[0], width: 2, height: 2, position: positions[0] },
-  { id: '2', name: '羊', materials: materials[2], width: 2, height: 2, position: positions[1] },
-  { id: '3', name: '羊', materials: materials[3], width: 2, height: 2, position: positions[2] }
+  { id: '羊-1', name: '羊', materials: materials[0], width: 2, height: 2, position: positions[0] },
+  { id: '羊-2', name: '羊', materials: materials[2], width: 2, height: 2, position: positions[1] },
+  { id: '羊-3', name: '羊', materials: materials[3], width: 2, height: 2, position: positions[2] }
 ];
 
 export const actions = {

@@ -33,9 +33,19 @@ class SceneClass extends Babylon {
     this.system.engine.resize();
   }
 
+  clickHandler(event) {
+    const { scene } = this.system;
+    const pickResult = scene.pick(scene.pointerX, scene.pointerY);
+
+    if(pickResult.pickedMesh) {
+      alert(pickResult.pickedMesh.id);
+    }
+  }
+
   mounted() {
     this.system.canvas = this.$refs.canvas;
     this.resizeHandler = this.resizeHandler.bind(this);
+    this.clickHandler = this.clickHandler.bind(this);
     
     this.system.engine = new Engine(this.system.canvas, false);
     this.system.scene = new Scene(this.system.engine);
@@ -43,10 +53,12 @@ class SceneClass extends Babylon {
     this.system.engine.runRenderLoop(() => this.system.scene.render());
 
     window.addEventListener('resize', this.resizeHandler);
+    document.addEventListener('click', this.clickHandler);
   }
 
   beforeDestroy() {
     window.removeEventListener('resize', this.resizeHandler);
+    document.removeEventListener('click', this.clickHandler);
   }
 }
 
@@ -74,7 +86,6 @@ body, html {
   touch-action: none;
   overflow: hidden;
 }
-
 [touch-action="none"]{
   -ms-touch-action: none;
   touch-action: none;
