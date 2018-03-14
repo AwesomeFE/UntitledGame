@@ -42,8 +42,6 @@ class SceneClass extends Babylon {
 
     this.system.engine.runRenderLoop(() => this.system.scene.render());
 
-    // MeshBuilder.CreateBox('box', { height: 2, width: 2, depth: 2 }, this.system.scene);
-
     window.addEventListener('resize', this.resizeHandler);
   }
 

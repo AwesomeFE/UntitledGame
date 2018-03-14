@@ -3,7 +3,7 @@
 
 <script>
 import { Vue } from '../../common';
-import { MeshBuilder, StandardMaterial, Texture } from 'babylonjs';
+import { MeshBuilder, StandardMaterial, Texture, Vector3 } from 'babylonjs';
 import { Component, Watch } from 'vue-property-decorator';
 
 @Component({
@@ -14,7 +14,8 @@ import { Component, Watch } from 'vue-property-decorator';
     name: String,
     url: String,
     width: Number,
-    height: Number
+    height: Number,
+    position: Object
   }
 })
 class Plane extends Vue {
@@ -29,6 +30,7 @@ class Plane extends Vue {
     this.material = new StandardMaterial(`${this.name}-material`, scene);
     this.material.diffuseTexture = new Texture(this.url, scene);
     this.plane.material = this.material;
+    this.plane.setPositionWithLocalVector(new Vector3(this.position.x, this.position.y, this.position.z ));
   }
 
   getOptions() {

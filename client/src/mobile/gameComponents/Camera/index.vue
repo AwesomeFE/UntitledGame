@@ -51,15 +51,7 @@ class Camera extends Babylon {
       this.$system.camera.attachControl(canvas, false);
     }
 
-    this.propsWatcher();
-  }
-
-  propsWatcher() {
-    for(const watch of watchArray) {
-      const handler = watch.handler.bind(this);
-
-      this.$watch(watch.propName, handler);
-    }
+    this.watchingProps(watchArray);
   }
 }
 

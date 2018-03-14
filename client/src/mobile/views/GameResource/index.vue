@@ -8,12 +8,21 @@
         <OneButton width="100px" height="50px" text="返回" paddingRight="30px" path="gameHome" />
       </Container2D>
 
-      <Plane name="sheep" :width="1" :height="2" :url="images.Game.resources.sheep"></Plane>
+      <Plane
+        v-for="resource in resources"
+        :key="resource.id"
+        :name="resource.id"
+        :width="resource.width"
+        :height="resource.height"
+        :url="images.Game.resources.sheep"
+        :position="resource.position"
+      ></Plane>
     </Scene>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { Vue } from '../../common';
 import GUI from 'babylonjs-gui';
 import { Vector3 } from 'babylonjs';
@@ -31,6 +40,11 @@ import { Component } from 'vue-property-decorator';
     OneBlock: GameComponents.OneBlock,
     OneButton: GameComponents.OneButton,
     Container2D: GameComponents.Container2D,
+  },
+  computed: {
+    ...mapState('GameResource', {
+      resources: state => state.resources
+    })
   }
 })
 class GameResource extends Vue {
@@ -43,7 +57,8 @@ class GameResource extends Vue {
     height: 10
   };
 
-  mounted() {
+  async mounted() {
+    await this.$store.dispatch('GameResource/getResources');
   }
 }
 

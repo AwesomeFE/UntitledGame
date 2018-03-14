@@ -2,31 +2,31 @@ import util from '../utils';
 
 export const watchArray = [
   {
-    propName: 'name',
+    name: 'name',
     handler(newValue, oldValue) {
       util.showPropsWarning(propName);
     }
   },
   {
-    propName: 'type',
+    name: 'type',
     handler(newValue, oldValue) {
       util.showPropsWarning(propName);
     }
   },
   {
-    propName: 'position',
+    name: 'position',
     handler(newValue, oldValue) {
       this.$system.camera.position = newValue;
     }
   },
   {
-    propName: 'target',
+    name: 'target',
     handler(newValue, oldValue) {
       this.$system.camera.setTarget(newValue);
     }
   },
   {
-    propName: 'canRotate',
+    name: 'canRotate',
     handler(newValue, oldValue) {
       const { camera, canvas } = this.$system;
 
