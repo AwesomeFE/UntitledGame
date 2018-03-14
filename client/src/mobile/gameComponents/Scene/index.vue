@@ -37,7 +37,7 @@ class SceneClass extends Babylon {
     const { scene } = this.system;
     const pickResult = scene.pick(scene.pointerX, scene.pointerY);
 
-    if(pickResult.pickedMesh) {
+    if(pickResult.pickedMesh && pickResult.pickedMesh.name !== 'ground') {
       alert(pickResult.pickedMesh.id);
     }
   }
@@ -53,11 +53,13 @@ class SceneClass extends Babylon {
     this.system.engine.runRenderLoop(() => this.system.scene.render());
 
     window.addEventListener('resize', this.resizeHandler);
+    document.addEventListener('touchend', this.clickHandler);
     document.addEventListener('click', this.clickHandler);
   }
 
   beforeDestroy() {
     window.removeEventListener('resize', this.resizeHandler);
+    document.removeEventListener('touchend', this.clickHandler);
     document.removeEventListener('click', this.clickHandler);
   }
 }

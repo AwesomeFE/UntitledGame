@@ -3,7 +3,7 @@
     <Scene name="Resource">
       <Camera :position="position" :target="target" />
       <Light :direction="direction" />
-      <Ground :width="ground.width" :height="ground.height"></Ground>
+      <Ground name="ground" :width="ground.width" :height="ground.height"></Ground>
       <Container2D>
         <OneButton width="100px" height="50px" text="返回" paddingRight="30px" path="gameHome" />
       </Container2D>
