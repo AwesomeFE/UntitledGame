@@ -26,7 +26,9 @@ export default [
       'babylonjs',
       'babylonjs-gui',
       // for mobile touch library
-      'handjs'
+      'handjs',
+      // for support loading glTF, OBJ, STL files
+      'babylonjs-loaders'
     ]
   }),
   // webpackTask({

@@ -1,5 +1,6 @@
 import YetiBin from './Yeti_Idle.bin';
 import YetiGltf from './Yeti_Idle.gltf';
+import YetiGltfManifest from './Yeti_Idle.gltf.manifest';
 import YetiAO from './Yeti_NewUVs_YetiMat_AO.png';
 import YetiNormal from './Yeti_NewUVs_YetiMat_Normal.png';
 import YetiBase from './YetiMat_baseColor.png';
@@ -11,5 +12,6 @@ export const Yeti = {
   YetiAO,
   YetiNormal,
   YetiBase,
-  YetiMetallic
+  YetiMetallic,
+  YetiGltfManifest
 };
