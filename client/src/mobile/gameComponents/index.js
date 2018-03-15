@@ -8,6 +8,7 @@ import OneBlock from './OneBlock';
 import OneButton from './OneButton';
 import Container2D from './Container2D';
 import Plane from './Plane';
+import ImportMesh from './ImportMesh';
 
 export default {
   Scene,
@@ -19,6 +20,7 @@ export default {
   OneBlock,
   OneButton,
   Container2D,
-  Plane
+  Plane,
+  ImportMesh
   // Carousel
 };

@@ -17,6 +17,11 @@
         :url="images.Game.resources.sheep"
         :position="resource.position"
       ></Plane>
+      <ImportMesh
+        v-if="url"
+        name="mesh-1"
+        :assetUrl="url"
+      ></ImportMesh>
     </Scene>
   </div>
 </template>
@@ -36,6 +41,7 @@ import { Component } from 'vue-property-decorator';
     Camera: GameComponents.Camera,
     Ground: GameComponents.Ground,
     Plane: GameComponents.Plane,
+    ImportMesh: GameComponents.ImportMesh,
     OneImage: GameComponents.OneImage,
     OneBlock: GameComponents.OneBlock,
     OneButton: GameComponents.OneButton,
@@ -56,9 +62,18 @@ class GameResource extends Vue {
     width: 10,
     height: 10
   };
+  url = null;
 
   async mounted() {
     await this.$store.dispatch('GameResource/getResources');
+
+    const url = this.assets.Yeti.YetiGltf;
+    const paths = url.split('/');
+    const fileName = paths[paths.length - 1];
+    this.url = {
+      path: this.assets.Yeti.YetiGltf.replace(fileName, ''),
+      fileName
+    };
   }
 }
 

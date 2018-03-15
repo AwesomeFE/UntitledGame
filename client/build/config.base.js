@@ -55,7 +55,7 @@ export default (options) => {
           use: loaders.lessLoader(options)
         },
         {
-          test: /\.png$|\.jpg$|\.gif$/,
+          test: /\.png$|\.jpg$|\.gltf$|\.bin$|\.gif$/,
           use: loaders.imageLoader(options)
         },
         {
