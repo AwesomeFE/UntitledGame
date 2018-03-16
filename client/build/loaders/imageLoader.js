@@ -2,8 +2,8 @@ export default () => [
   {
     loader: 'url-loader',
     options: {
-      name: 'images/[name].[ext]',
-      limit: '1'
+      name: 'images/[hash].[ext]',
+      limit: '5000'
     }
   }
 ]

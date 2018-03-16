@@ -17,10 +17,15 @@
         :url="images.Game.resources.sheep"
         :position="resource.position"
       ></Plane>
-      <ImportMesh
+      <!-- <ImportMesh
         v-if="url"
         name="mesh-1"
         :assetUrl="url"
+      ></ImportMesh> -->
+      <ImportMesh
+        v-if="babylonModel"
+        name="mesh-2"
+        :assetUrl="babylonModel"
       ></ImportMesh>
     </Scene>
   </div>
@@ -63,15 +68,31 @@ class GameResource extends Vue {
     height: 10
   };
   url = null;
+  babylonModel = null;
 
   async mounted() {
     await this.$store.dispatch('GameResource/getResources');
+    this.create1();
+    this.create2();
+  }
 
+  create1() {
     const url = this.assets.Yeti.YetiGltf;
     const paths = url.split('/');
     const fileName = paths[paths.length - 1];
     this.url = {
       path: this.assets.Yeti.YetiGltf.replace(fileName, ''),
+      fileName
+    };
+  }
+
+  create2() {
+    const url = this.assets.Dona.DonaBabylon;
+    const paths = url.split('/');
+    const fileName = paths[paths.length - 1];
+    console.log(fileName)
+    this.babylonModel = {
+      path: this.assets.Dona.DonaBabylon.replace(fileName, ''),
       fileName
     };
   }

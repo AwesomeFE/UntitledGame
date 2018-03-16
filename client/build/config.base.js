@@ -55,12 +55,22 @@ export default (options) => {
           use: loaders.lessLoader(options)
         },
         {
-          test: /\.png$|\.jpg$|\.gltf$|\.bin$|\.manifest$|\.gif$/,
-          use: loaders.imageLoader(options)
+          test: /\.(png|jpg|gif)$/,
+          use: loaders.imageLoader(options),
+          exclude: [
+            path.join(__dirname, `../src/${appName}/assets/game`)
+          ]
         },
         {
           test: /\.(woff2|woff|eot|svg|ttf)(\?v=\d+\.\d+\.\d+)?$/,
           use: loaders.fontLoader(options)
+        },
+        {
+          test: /\/*\.(tga|babylon|gltf|bin|manifest|png|jpg|gif)$/,
+          use: loaders.asseetLoader(options),
+          include: [
+            path.join(__dirname, `../src/${appName}/assets/game`)
+          ]
         }
       ]
     },
