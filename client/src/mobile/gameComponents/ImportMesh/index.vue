@@ -37,9 +37,9 @@ class ImportMesh extends Babylon {
     this.container = await SceneLoader.LoadAssetContainerAsync(rootUrl, fileName, scene);
     this.container.addAllToScene();
 
-    this.setScaling();
     this.setPosition();
     this.setRotation();
+    this.setScaling();
   }
 
   setScaling() {

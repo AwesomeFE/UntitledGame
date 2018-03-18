@@ -38,7 +38,7 @@ class SceneClass extends Babylon {
     const pickResult = scene.pick(scene.pointerX, scene.pointerY);
 
     if(pickResult.pickedMesh && pickResult.pickedMesh.name !== 'ground') {
-      console.log(pickResult.pickedMesh)
+      // console.log(pickResult.pickedMesh)
       // alert(pickResult.pickedMesh.name);
     }
   }
