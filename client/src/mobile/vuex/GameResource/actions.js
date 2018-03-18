@@ -1,3 +1,6 @@
+import { Sheep } from '../../assets/game'
+import { Vector3 } from 'babylonjs';
+
 const materials = [
   [
     { id: 'sheep-1', name: '羊毛' },
@@ -17,15 +20,23 @@ const materials = [
 ];
 
 const positions = [
-  { x: (Math.random() - 0.5) * 8, y: 1, z: (Math.random() - 0.5) * 8 },
-  { x: (Math.random() - 0.5) * 8, y: 1, z: (Math.random() - 0.5) * 8 },
-  { x: (Math.random() - 0.5) * 8, y: 1, z: (Math.random() - 0.5) * 8 }
+  new Vector3((Math.random() - 0.5) * 4, 0, (Math.random() - 0.5) * 4),
+  new Vector3((Math.random() - 0.5) * 4, 0, (Math.random() - 0.5) * 4),
+  new Vector3((Math.random() - 0.5) * 4, 0, (Math.random() - 0.5) * 4)
+];
+
+const scaling = new Vector3(0.5, 2, 1);
+
+const rotation = [
+  new Vector3(Math.PI / 2, 0, 0),
+  new Vector3(0, 0, 0),
+  new Vector3(0, 0, 0)
 ];
 
 const resources = [
-  { id: '羊-1', name: '羊', materials: materials[0], width: 2, height: 2, position: positions[0] },
-  { id: '羊-2', name: '羊', materials: materials[2], width: 2, height: 2, position: positions[1] },
-  { id: '羊-3', name: '羊', materials: materials[3], width: 2, height: 2, position: positions[2] }
+  { id: '羊-1', name: '羊', materials: materials[0], url: Sheep.SheepBabylon, position: positions[0], scaling, /*rotation: rotation[0]*/ },
+  { id: '羊-2', name: '羊', materials: materials[2], url: Sheep.SheepBabylon, position: positions[1], scaling, /*rotation: rotation[1]*/ },
+  { id: '羊-3', name: '羊', materials: materials[3], url: Sheep.SheepBabylon, position: positions[2], scaling, /*rotation: rotation[2]*/ }
 ];
 
 export const actions = {

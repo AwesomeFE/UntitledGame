@@ -3,7 +3,7 @@
 
 <script>
 import Babylon from '../common/Babylon';
-import { SceneLoader } from 'babylonjs';
+import { SceneLoader, Vector3 } from 'babylonjs';
 import { Component, Watch } from 'vue-property-decorator';
 
 @Component({
@@ -14,26 +14,66 @@ import { Component, Watch } from 'vue-property-decorator';
     name: {
       type: String
     },
+    scaling: {
+      type: Object
+    },
+    rotation: {
+      type: Object
+    },
     position: {
       type: Object
     },
     assetUrl: {
-      validator(value = {}) {
-        return typeof value.path === 'string'
-          && typeof value.fileName === 'string';
-      }
+      type: String
     }
   }
 })
 class ImportMesh extends Babylon {
-  mesh = null;
+  container = null;
 
   async mounted() {
     const { scene } = this.$system;
-    const { path, fileName } = this.assetUrl;
-    SceneLoader.Append(path, fileName, scene, (result) => {
-      console.log(result)
-    });
+    const { rootUrl, fileName } = this.parseUrl();
+    this.container = await SceneLoader.LoadAssetContainerAsync(rootUrl, fileName, scene);
+    this.container.addAllToScene();
+
+    this.setScaling();
+    this.setPosition();
+    this.setRotation();
+  }
+
+  setScaling() {
+    if(this.scaling) {
+      for(const mesh of this.container.meshes) {
+        mesh.scaling = this.scaling;
+      }
+    }
+  }
+
+  setPosition() {
+    if(this.position) {
+      for(const mesh of this.container.meshes) {
+        mesh.position = this.position;
+      }
+    }
+  }
+
+  setRotation() {
+    if(this.rotation) {
+      for(const mesh of this.container.meshes) {
+        mesh.rotation.x = this.rotation.x;
+        mesh.rotation.y = this.rotation.y;
+        mesh.rotation.z = this.rotation.z;
+      }
+    }
+  }
+
+  parseUrl() {
+    const paths = this.assetUrl.split('/');
+    const fileName = paths[paths.length - 1];
+    const rootUrl = this.assetUrl.replace(fileName, '');
+
+    return { rootUrl, fileName };
   }
 }
 

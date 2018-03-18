@@ -8,7 +8,17 @@
         <OneButton width="100px" height="50px" text="返回" paddingRight="30px" path="gameHome" />
       </Container2D>
 
-      <Plane
+      <ImportMesh
+        v-for="resource in resources"
+        :key="resource.id"
+        :name="resource.id"
+        :assetUrl="resource.url"
+        :position="resource.position"
+        :scaling="resource.scaling"
+        :rotation="resource.rotation"
+      ></ImportMesh>
+
+      <!-- <Plane
         v-for="resource in resources"
         :key="resource.id"
         :name="resource.id"
@@ -16,17 +26,17 @@
         :height="resource.height"
         :url="images.Game.resources.sheep"
         :position="resource.position"
-      ></Plane>
+      ></Plane> -->
       <!-- <ImportMesh
         v-if="url"
         name="mesh-1"
         :assetUrl="url"
       ></ImportMesh> -->
-      <ImportMesh
+      <!-- <ImportMesh
         v-if="babylonModel"
         name="mesh-2"
         :assetUrl="babylonModel"
-      ></ImportMesh>
+      ></ImportMesh> -->
     </Scene>
   </div>
 </template>
@@ -67,34 +77,9 @@ class GameResource extends Vue {
     width: 10,
     height: 10
   };
-  url = null;
-  babylonModel = null;
 
   async mounted() {
     await this.$store.dispatch('GameResource/getResources');
-    this.create1();
-    this.create2();
-  }
-
-  create1() {
-    const url = this.assets.Yeti.YetiGltf;
-    const paths = url.split('/');
-    const fileName = paths[paths.length - 1];
-    this.url = {
-      path: this.assets.Yeti.YetiGltf.replace(fileName, ''),
-      fileName
-    };
-  }
-
-  create2() {
-    const url = this.assets.Dona.DonaBabylon;
-    const paths = url.split('/');
-    const fileName = paths[paths.length - 1];
-    console.log(fileName)
-    this.babylonModel = {
-      path: this.assets.Dona.DonaBabylon.replace(fileName, ''),
-      fileName
-    };
   }
 }
 
