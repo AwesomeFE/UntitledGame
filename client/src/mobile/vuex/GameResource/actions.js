@@ -19,31 +19,35 @@ const materials = [
   ]
 ];
 
-// const positions = [
-//   new Vector3((Math.random() - 0.5) * 4, 0, (Math.random() - 0.5) * 4),
-//   new Vector3((Math.random() - 0.5) * 4, 0, (Math.random() - 0.5) * 4),
-//   new Vector3((Math.random() - 0.5) * 4, 0, (Math.random() - 0.5) * 4)
-// ];
-
 const positions = [
-  new Vector3(0, 0, 0),
+  new Vector3((Math.random() - 0.5) * 4, 0, (Math.random() - 0.5) * 4),
   new Vector3((Math.random() - 0.5) * 4, 0, (Math.random() - 0.5) * 4),
   new Vector3((Math.random() - 0.5) * 4, 0, (Math.random() - 0.5) * 4)
 ];
 
-// const scaling = new Vector3(0.5, 2, 1);
 const scaling = new Vector3(1, 1, 1);
 
 const rotation = [
-  new Vector3(Math.PI / 2, 0, 0),
-  new Vector3(0, 0, 0),
-  new Vector3(0, 0, 0)
+  new Vector3(0, Math.PI * 2 * Math.random(), 0),
+  new Vector3(0, Math.PI * 2 * Math.random(), 0),
+  new Vector3(0, Math.PI * 2 * Math.random(), 0)
 ];
 
 const resources = [
-  { id: '羊-1', name: '羊', materials: materials[0], url: Sheep.SheepBabylon, position: positions[0], scaling, /*rotation: rotation[0]*/ },
-  // { id: '羊-2', name: '羊', materials: materials[2], url: Sheep.SheepBabylon, position: positions[1], scaling, /*rotation: rotation[1]*/ },
-  // { id: '羊-3', name: '羊', materials: materials[3], url: Sheep.SheepBabylon, position: positions[2], scaling, /*rotation: rotation[2]*/ }
+  {
+    id: '羊-1',
+    name: '羊',
+    materials: materials[0],
+    url: Sheep.SheepBabylon,
+    scaling,
+    rotation: rotation[0],
+    position: positions[0],
+    from: positions[0],
+    to: positions[0],
+    speed: 1
+  },
+  // { id: '羊-2', name: '羊', materials: materials[2], url: Sheep.SheepBabylon, position: positions[1], scaling, rotation: rotation[1] },
+  // { id: '羊-3', name: '羊', materials: materials[3], url: Sheep.SheepBabylon, position: positions[2], scaling, rotation: rotation[2] }
 ];
 
 export const actions = {

@@ -7,7 +7,7 @@
 
 <script>
 import Babylon from '../common/Babylon';
-import { Scene, Engine, MeshBuilder } from 'babylonjs';
+import { Scene, Engine, MeshBuilder, Vector3 } from 'babylonjs';
 import { Component, Watch, Provide } from 'vue-property-decorator';
 
 @Component({

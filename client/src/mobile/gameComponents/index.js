@@ -9,6 +9,7 @@ import OneButton from './OneButton';
 import Container2D from './Container2D';
 import Plane from './Plane';
 import ImportMesh from './ImportMesh';
+import WorldAxis from './WorldAxis';
 
 export default {
   Scene,
@@ -21,6 +22,7 @@ export default {
   OneButton,
   Container2D,
   Plane,
-  ImportMesh
+  ImportMesh,
+  WorldAxis
   // Carousel
 };

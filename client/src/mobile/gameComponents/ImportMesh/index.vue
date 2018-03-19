@@ -25,11 +25,17 @@ import { Component, Watch } from 'vue-property-decorator';
     },
     assetUrl: {
       type: String
+    },
+    speed: {
+      type: Number
     }
   }
 })
 class ImportMesh extends Babylon {
   container = null;
+  from = null;
+  to = null;
+  movingTimer = null;
 
   async mounted() {
     const { scene } = this.$system;
@@ -44,27 +50,47 @@ class ImportMesh extends Babylon {
 
   setScaling() {
     if(this.scaling) {
-      for(const mesh of this.container.meshes) {
-        mesh.scaling = this.scaling;
-      }
+      this.container.meshes[0].scaling = this.scaling;
     }
+  }
+
+  @Watch('position')
+  onPositionChange() {
+    this.setMoving();
   }
 
   setPosition() {
     if(this.position) {
-      for(const mesh of this.container.meshes) {
-        mesh.position = this.position;
-      }
+      this.container.meshes[0].position = this.position;
+      this.from = this.position;
     }
+  }
+
+  setMoving() {
+    this.to = this.position;
+
+    if(this.movingTimer) {
+      this.stopMoving();
+    }
+
+    this.startMoving();
+  }
+
+  stopMoving() {
+    clearInterval(this.movingTimer);
+    this.movingTimer = null;
+  }
+
+  startMoving() {
+    const distance = Vector3.Distance(this.from, this.to);
+    console.log(distance);
   }
 
   setRotation() {
     if(this.rotation) {
-      for(const mesh of this.container.meshes) {
-        mesh.rotation.x = this.rotation.x;
-        mesh.rotation.y = this.rotation.y;
-        mesh.rotation.z = this.rotation.z;
-      }
+      this.container.meshes[0].rotation.x = this.rotation.x;
+      this.container.meshes[0].rotation.y = this.rotation.y;
+      this.container.meshes[0].rotation.z = this.rotation.z;
     }
   }
 
