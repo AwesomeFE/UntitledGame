@@ -1,11 +1,15 @@
 import MainBackgound from './background/main.jpg';
 import HomeHeader from './header/home.png';
-import sheep from './resources/sheep.png';
+import heightMap from './resources/heightMap.jpg';
+import material from './resources/material.png';
 
 export const Game = {
   MainBackgound,
   HomeHeader,
   resources: {
-    sheep
+    ground: {
+      heightMap,
+      material
+    }
   }
 };

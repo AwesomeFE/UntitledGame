@@ -7,4 +7,6 @@ export class Vue extends CommonVue {
   strings = strings;
   images = images;
   assets = assets;
+
+  static images = images;
 };

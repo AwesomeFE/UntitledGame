@@ -15,6 +15,9 @@ import { Component, Watch, Provide } from 'vue-property-decorator';
     name: {
       type: String,
       required: true
+    },
+    gravity: {
+      type: Object
     }
   },
   provide() {
@@ -52,6 +55,11 @@ class SceneClass extends Babylon {
     this.system.scene = new Scene(this.system.engine);
 
     this.system.engine.runRenderLoop(() => this.system.scene.render());
+
+    if(this.gravity) {
+      this.system.scene.gravity = this.gravity;	
+      this.system.scene.collisionsEnabled = true;	
+    }
 
     window.addEventListener('resize', this.resizeHandler);
     document.addEventListener('touchend', this.clickHandler);
