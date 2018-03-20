@@ -28,6 +28,9 @@ import { Component, Watch } from 'vue-property-decorator';
     },
     speed: {
       type: Number
+    },
+    size: {
+      type: Object
     }
   }
 })
@@ -56,24 +59,21 @@ class ImportMesh extends Babylon {
 
   @Watch('position')
   onPositionChange() {
-    this.setMoving();
-  }
-
-  setPosition() {
-    if(this.position) {
-      this.container.meshes[0].position = this.position;
-      this.from = this.position;
-    }
-  }
-
-  setMoving() {
-    this.to = this.position;
-
     if(this.movingTimer) {
       this.stopMoving();
     }
 
     this.startMoving();
+  }
+
+  setPosition() {
+    if(this.position) {
+      this.container.meshes[0].checkCollisions = true;
+      this.container.meshes[0].applyGravity = true;
+      this.container.meshes[0].position = new Vector3(0, 10, 0);
+      this.container.meshes[0].moveWithCollisions(new Vector3(0, -10, 0));
+      // this.container.meshes[0].position = this.position;
+    }
   }
 
   stopMoving() {
@@ -82,8 +82,10 @@ class ImportMesh extends Babylon {
   }
 
   startMoving() {
-    const distance = Vector3.Distance(this.from, this.to);
-    console.log(distance);
+    setInterval(() => {
+      // console.log('startMoving')
+      this.container.meshes[0].moveWithCollisions(new Vector3(0, -0.01, 0.01));
+    }, 10);
   }
 
   setRotation() {

@@ -1,7 +1,7 @@
 <template>
   <div class="Game">
     <Scene name="Resource" :gravity="gravity">
-      <Camera :position="position" :target="target" />
+      <Camera type="Arc" :position="position" :target="target" :alpha="0" :beta="0" :radius="-10" />
       <!-- <WorldAxis /> -->
       <Light :direction="direction" />
       <Ground
@@ -25,15 +25,6 @@
         :rotation="resource.rotation"
       ></ImportMesh>
 
-      <!-- <Plane
-        v-for="resource in resources"
-        :key="resource.id"
-        :name="resource.id"
-        :width="resource.width"
-        :height="resource.height"
-        :url="images.Game.resources.sheep"
-        :position="resource.position"
-      ></Plane> -->
       <!-- <ImportMesh
         v-if="url"
         name="mesh-1"
@@ -49,7 +40,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from 'vuex';
 import { Vue } from '../../common';
 import { Vector3 } from 'babylonjs';
 import GameComponents from '../../gameComponents';
@@ -78,8 +69,9 @@ const images = Vue.images.Game.resources;
   }
 })
 class GameResource extends Vue {
-  gravity = new Vector3(0, -0.5, 0);
-  position = new Vector3(0, 2.5, -10);
+  gravity = new Vector3(0, -9.81, 0);
+  // position = new Vector3(0, 2.5, -10);
+  position = new Vector3(0, 0, -10);
   target = Vector3.Zero();
   direction = new Vector3(0, -50, 50);
   ground = {

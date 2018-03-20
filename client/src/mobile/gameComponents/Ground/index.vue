@@ -59,7 +59,7 @@ class Ground extends Babylon {
       height: this.height,
       subdivisions: this.subdivisions || 100,
       minHeight: this.minHeight || 0,
-      maxHeight: this.maxHeight || 0.8
+      maxHeight: this.maxHeight || 1
     }
   }
 }
