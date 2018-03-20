@@ -68,10 +68,13 @@ class ImportMesh extends Babylon {
 
   setPosition() {
     if(this.position) {
+      // for(const mesh of this.container.meshes) {
+      //   mesh.checkCollisions = true;
+      //   this.container.meshes[0].position = new Vector3(0, 2, 0);
+      // }
       this.container.meshes[0].checkCollisions = true;
-      this.container.meshes[0].applyGravity = true;
-      this.container.meshes[0].position = new Vector3(0, 2, 0);
-      this.container.meshes[0].ellipsoid = new Vector3(0.01, 0.001, 0.01);
+      // this.container.meshes[0].position = new Vector3(0, 2, 0);
+      // this.container.meshes[0].ellipsoid = new Vector3(0.01, 0.001, 0.01);
       // this.container.meshes[0].moveWithCollisions(new Vector3(0, -2, 0));
       // this.container.meshes[0].position = this.position;
     }
