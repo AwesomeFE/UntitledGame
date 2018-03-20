@@ -43,6 +43,7 @@ class Ground extends Babylon {
   mounted() {
     const { scene } = this.$system;
     this.ground = MeshBuilder.CreateGroundFromHeightMap(this.name, this.heightMap, this.getOption(), scene);
+    // this.ground = MeshBuilder.CreateGround(this.name, this.getOption(), scene);
 
     const groundMaterial = new StandardMaterial(`${this.name}Mat`, scene);
     groundMaterial.diffuseTexture = new Texture(this.material, scene);
@@ -55,8 +56,8 @@ class Ground extends Babylon {
 
   getOption() {
     return {
-      width: this.width,
-      height: this.height,
+      width: /*this.width*/ 10,
+      height: /*this.height*/ 10,
       subdivisions: this.subdivisions || 100,
       minHeight: this.minHeight || 0,
       maxHeight: this.maxHeight || 1

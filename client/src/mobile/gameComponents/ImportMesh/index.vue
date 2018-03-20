@@ -70,8 +70,9 @@ class ImportMesh extends Babylon {
     if(this.position) {
       this.container.meshes[0].checkCollisions = true;
       this.container.meshes[0].applyGravity = true;
-      this.container.meshes[0].position = new Vector3(0, 10, 0);
-      this.container.meshes[0].moveWithCollisions(new Vector3(0, -10, 0));
+      this.container.meshes[0].position = new Vector3(0, 2, 0);
+      this.container.meshes[0].ellipsoid = new Vector3(0.01, 0.001, 0.01);
+      // this.container.meshes[0].moveWithCollisions(new Vector3(0, -2, 0));
       // this.container.meshes[0].position = this.position;
     }
   }
@@ -83,9 +84,9 @@ class ImportMesh extends Babylon {
 
   startMoving() {
     setInterval(() => {
-      // console.log('startMoving')
-      this.container.meshes[0].moveWithCollisions(new Vector3(0, -0.01, 0.01));
-    }, 10);
+      console.log('startMoving')
+      this.container.meshes[0].moveWithCollisions(new Vector3(0, -0.1, 0.1));
+    }, 100);
   }
 
   setRotation() {

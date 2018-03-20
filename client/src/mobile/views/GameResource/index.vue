@@ -1,8 +1,9 @@
 <template>
   <div class="Game">
+    <!-- <canvas id="canvas" class="canvas"></canvas> -->
     <Scene name="Resource" :gravity="gravity">
       <Camera type="Arc" :position="position" :target="target" :alpha="0" :beta="0" :radius="-10" />
-      <!-- <WorldAxis /> -->
+      <WorldAxis />
       <Light :direction="direction" />
       <Ground
         name="ground"
@@ -24,17 +25,6 @@
         :scaling="resource.scaling"
         :rotation="resource.rotation"
       ></ImportMesh>
-
-      <!-- <ImportMesh
-        v-if="url"
-        name="mesh-1"
-        :assetUrl="url"
-      ></ImportMesh> -->
-      <!-- <ImportMesh
-        v-if="babylonModel"
-        name="mesh-2"
-        :assetUrl="babylonModel"
-      ></ImportMesh> -->
     </Scene>
   </div>
 </template>
@@ -45,6 +35,7 @@ import { Vue } from '../../common';
 import { Vector3 } from 'babylonjs';
 import GameComponents from '../../gameComponents';
 import { Component } from 'vue-property-decorator';
+import script from './script';
 
 const images = Vue.images.Game.resources;
 
@@ -82,6 +73,7 @@ class GameResource extends Vue {
   };
 
   async mounted() {
+    // script('canvas');
     await this.$store.dispatch('GameResource/getResources');
     
     setTimeout(() => {
@@ -94,4 +86,29 @@ export default GameResource;
 </script>
 
 <style type="text/scss" lang="scss">
+// body,
+// html,
+// #app,
+// .App,
+// .Game,
+// .Scene,
+// .canvas {
+//   height: 100%;
+//   width: 100%;
+// }
+// .canvas {
+//   display: block;
+//   outline: none;
+//   touch-action: none;
+// }
+// body, html {
+//   position: fixed;
+//   touch-action: none;
+//   overflow: hidden;
+// }
+// [touch-action="none"]{
+//   -ms-touch-action: none;
+//   touch-action: none;
+//   touch-action-delay: none;
+// }
 </style>
