@@ -19,9 +19,9 @@ export default (canvasId) => {
 
   createAxis(8);
 
-  const ball = MeshBuilder.CreateSphere('ball', { segments: 10, diameter: 1 }, scene);
-  ball.material = new StandardMaterial('ballMat', scene);
-  ball.position = new Vector3(0, 2, 0);
+  // const ball = MeshBuilder.CreateSphere('ball', { segments: 10, diameter: 1 }, scene);
+  // ball.material = new StandardMaterial('ballMat', scene);
+  // ball.position = new Vector3(0, 0, 0);
 
   /**
    * Ground
@@ -35,22 +35,30 @@ export default (canvasId) => {
   ground.material = groundMat;
   ground.checkCollisions = true;
 
-  if(ball.intersectsMesh(ground, false)) {
-    ball.material.emissiveColor = new Color3(1, 0, 0);
-  } else {
-    ball.material.emissiveColor = new Color3(1, 1, 1);
-  }
+  // let x = 0, y = 0, z = 0;
+
+  // setInterval(() => {
+  //   ball.position = new Vector3(0, y, 0);
+
+  //   y += 0.1;
+
+  //   if(ball.intersectsMesh(ground, true)) {
+  //     ball.material.emissiveColor = new Color3(1, 0, 0);
+  //   } else {
+  //     ball.material.emissiveColor = new Color3(1, 1, 1);
+  //   }
+  // }, 100);
 
   /**
    * Box
    */
-  // const box = MeshBuilder.CreateBox('box', {height: 1, width: 1, depth: 1}, scene);
-  // box.position = new Vector3(0, 5, 0);
-  // box.checkCollisions = true;
+  const box = MeshBuilder.CreateBox('box', {height: 1, width: 1, depth: 1}, scene);
+  box.position = new Vector3(0, 5, 0);
+  box.checkCollisions = true;
 
-  // setInterval(() => {
-  //   box.moveWithCollisions(new Vector3(-0.1, -0.1, 0));
-  // }, 100);
+  setInterval(() => {
+    box.moveWithCollisions(new Vector3(0, -0.1, 0));
+  }, 100);
 
   engine.runRenderLoop(() => {
     scene.render();

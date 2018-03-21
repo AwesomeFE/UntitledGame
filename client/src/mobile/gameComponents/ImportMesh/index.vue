@@ -73,10 +73,14 @@ class ImportMesh extends Babylon {
       //   this.container.meshes[0].position = new Vector3(0, 2, 0);
       // }
       this.container.meshes[0].checkCollisions = true;
-      // this.container.meshes[0].position = new Vector3(0, 2, 0);
+      this.container.meshes[0].position = new Vector3(0, 5, 0);
       // this.container.meshes[0].ellipsoid = new Vector3(0.01, 0.001, 0.01);
-      // this.container.meshes[0].moveWithCollisions(new Vector3(0, -2, 0));
+      this.container.meshes[0].moveWithCollisions(new Vector3(0, -5, 0));
       // this.container.meshes[0].position = this.position;
+
+      setInterval(() => {
+        this.container.meshes[0].moveWithCollisions(new Vector3(0, -0.1, 0));
+      }, 100);
     }
   }
 

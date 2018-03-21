@@ -62,16 +62,14 @@ class SceneClass extends Babylon {
     }
 
     // const box = new MeshBuilder.CreateBox('box', { width: 0.5, height: 0.5, depth: 0.5 }, this.system.scene);
-    // box.position = new Vector3(0, 10, 0);
+    // box.position = new Vector3(0, 4, 0);
     // box.checkCollisions = true;
-    // box.applyGravity = true;
-    // box.ellipsoid = new Vector3(0.25, 0.25, 0.25);
+    // // box.applyGravity = true;
+    // // box.ellipsoid = new Vector3(0.25, 0.25, 0.25);
 
     // setInterval(() => {
-    //   box.moveWithCollisions(new Vector3(0, -1, 0));
+    //   box.moveWithCollisions(new Vector3(0, -0.1, 0));
     // }, 100);
-    // const box = new MeshBuilder.CreateBox('box', { width: 0.3, height: 0.3, depth: 0.3 }, this.system.scene);
-    // box.position = new Vector3(0, 0, 0);
 
 
     window.addEventListener('resize', this.resizeHandler);
