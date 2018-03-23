@@ -9,7 +9,7 @@ export const mutations = {
     const currentResource = state.resources.find((resource) => resource.id === resourceId);
 
     if(currentResource) {
-      currentResource.position = new Vector3(0, 0, 0);
+      currentResource.position = new Vector3(1, 0, 0);
     }
   }
 };

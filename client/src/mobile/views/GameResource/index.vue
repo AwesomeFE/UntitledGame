@@ -24,6 +24,9 @@
         :position="resource.position"
         :scaling="resource.scaling"
         :rotation="resource.rotation"
+        :ellipsoidOffset="resource.ellipsoidOffset"
+        :speed="resource.speed"
+        :enableCollisions="true"
       ></ImportMesh>
     </Scene>
   </div>
@@ -76,9 +79,9 @@ class GameResource extends Vue {
     // script('canvas');
     await this.$store.dispatch('GameResource/getResources');
     
-    // setTimeout(() => {
-    //   this.$store.commit('GameResource/moveResourceById', '羊-1');
-    // }, 5000)
+    setTimeout(() => {
+      this.$store.commit('GameResource/moveResourceById', '羊-1');
+    }, 1000)
   }
 }
 

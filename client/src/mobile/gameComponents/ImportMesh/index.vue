@@ -5,6 +5,8 @@
 import Babylon from '../common/Babylon';
 import { SceneLoader, Vector3 } from 'babylonjs';
 import { Component, Watch } from 'vue-property-decorator';
+import { ABSOLUTE_RESOURCE_PATH } from 'webpack/lib/ModuleFilenameHelpers';
+import * as handler from './handler';
 
 @Component({
   inject: [
@@ -31,77 +33,58 @@ import { Component, Watch } from 'vue-property-decorator';
     },
     size: {
       type: Object
+    },
+    ellipsoidOffset: {
+      type: Object
+    },
+    enableCollisions: {
+      type: Boolean
     }
   }
 })
 class ImportMesh extends Babylon {
   container = null;
-  from = null;
-  to = null;
   movingTimer = null;
+  prePosition = null;
 
   async mounted() {
     const { scene } = this.$system;
     const { rootUrl, fileName } = this.parseUrl();
+
     this.container = await SceneLoader.LoadAssetContainerAsync(rootUrl, fileName, scene);
     this.container.addAllToScene();
 
     this.setPosition();
     this.setRotation();
     this.setScaling();
+    this.setCollisions();
+  }
+
+  setPosition() {
+    this.container.meshes[0].position = this.position || new Vector3(0, 0, 0);
+  }
+  
+  setRotation() {
+    this.container.meshes[0].rotation.x = (this.rotation && this.rotation.x) || 0;
+    this.container.meshes[0].rotation.y = (this.rotation && this.rotation.y) || 0;
+    this.container.meshes[0].rotation.z = (this.rotation && this.rotation.z) || 0;
   }
 
   setScaling() {
-    if(this.scaling) {
-      this.container.meshes[0].scaling = this.scaling;
+    this.container.meshes[0].scaling = this.scaling || new Vector3(1, 1, 1);
+  }
+
+  setCollisions() {
+    if(this.enableCollisions) {
+      this.container.meshes[0].applyGravity = true;
+      this.container.meshes[0].checkCollisions = true;
+      this.container.meshes[0].ellipsoidOffset = this.ellipsoidOffset || new Vector3(0, 0, 0);
     }
   }
 
   @Watch('position')
-  onPositionChange() {
-    if(this.movingTimer) {
-      this.stopMoving();
-    }
-
-    this.startMoving();
-  }
-
-  setPosition() {
-    if(this.position) {
-      // for(const mesh of this.container.meshes) {
-      //   mesh.checkCollisions = true;
-      //   this.container.meshes[0].position = new Vector3(0, 2, 0);
-      // }
-      this.container.meshes[0].checkCollisions = true;
-      this.container.meshes[0].position = new Vector3(0, 5, 0);
-      // this.container.meshes[0].ellipsoid = new Vector3(0.01, 0.001, 0.01);
-      this.container.meshes[0].moveWithCollisions(new Vector3(0, -5, 0));
-      // this.container.meshes[0].position = this.position;
-
-      setInterval(() => {
-        this.container.meshes[0].moveWithCollisions(new Vector3(0, -0.1, 0));
-      }, 100);
-    }
-  }
-
-  stopMoving() {
-    clearInterval(this.movingTimer);
-    this.movingTimer = null;
-  }
-
-  startMoving() {
-    setInterval(() => {
-      console.log('startMoving')
-      this.container.meshes[0].moveWithCollisions(new Vector3(0, -0.1, 0.1));
-    }, 100);
-  }
-
-  setRotation() {
-    if(this.rotation) {
-      this.container.meshes[0].rotation.x = this.rotation.x;
-      this.container.meshes[0].rotation.y = this.rotation.y;
-      this.container.meshes[0].rotation.z = this.rotation.z;
-    }
+  onPositionChange(newValue, oldValue) {
+    handler.onPositionChange(this, oldValue);
   }
 
   parseUrl() {

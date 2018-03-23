@@ -19,32 +19,26 @@ const materials = [
   ]
 ];
 
-// const positions = [
-//   new Vector3((Math.random() - 0.5) * 4, 1, (Math.random() - 0.5) * 4),
-//   new Vector3((Math.random() - 0.5) * 4, 0, (Math.random() - 0.5) * 4),
-//   new Vector3((Math.random() - 0.5) * 4, 0, (Math.random() - 0.5) * 4),
-//   new Vector3((Math.random() - 0.5) * 4, 0, (Math.random() - 0.5) * 4),
-//   new Vector3((Math.random() - 0.5) * 4, 0, (Math.random() - 0.5) * 4),
-//   new Vector3((Math.random() - 0.5) * 4, 0, (Math.random() - 0.5) * 4)
-// ];
+const ellipsoidOffset = new Vector3(0, 1, 0);
 
 const positions = [
-  new Vector3(0, 0, 0)
+  new Vector3((Math.random() - 0.5) * 4, 1, (Math.random() - 0.5) * 4),
+  new Vector3((Math.random() - 0.5) * 4, 0, (Math.random() - 0.5) * 4),
+  new Vector3((Math.random() - 0.5) * 4, 0, (Math.random() - 0.5) * 4),
+  new Vector3((Math.random() - 0.5) * 4, 0, (Math.random() - 0.5) * 4),
+  new Vector3((Math.random() - 0.5) * 4, 0, (Math.random() - 0.5) * 4),
+  new Vector3((Math.random() - 0.5) * 4, 0, (Math.random() - 0.5) * 4)
 ];
 
 const scaling = new Vector3(0.3, 0.3, 0.3);
 
-// const rotation = [
-//   new Vector3(0, Math.PI * 2 * Math.random(), 0),
-//   new Vector3(0, Math.PI * 2 * Math.random(), 0),
-//   new Vector3(0, Math.PI * 2 * Math.random(), 0),
-//   new Vector3(0, Math.PI * 2 * Math.random(), 0),
-//   new Vector3(0, Math.PI * 2 * Math.random(), 0),
-//   new Vector3(0, Math.PI * 2 * Math.random(), 0),
-// ];
-
 const rotation = [
-  new Vector3(0, 0, 0)
+  new Vector3(0, Math.PI * 2 * Math.random(), 0),
+  new Vector3(0, Math.PI * 2 * Math.random(), 0),
+  new Vector3(0, Math.PI * 2 * Math.random(), 0),
+  new Vector3(0, Math.PI * 2 * Math.random(), 0),
+  new Vector3(0, Math.PI * 2 * Math.random(), 0),
+  new Vector3(0, Math.PI * 2 * Math.random(), 0),
 ];
 
 const resources = [
@@ -56,13 +50,14 @@ const resources = [
     scaling,
     rotation: rotation[0],
     position: positions[0],
+    ellipsoidOffset,
     speed: 1
   },
-  // { id: '羊-2', name: '羊', materials: materials[2], url: Sheep.SheepBabylon, position: positions[1], scaling, rotation: rotation[1] },
-  // { id: '羊-3', name: '羊', materials: materials[3], url: Sheep.SheepBabylon, position: positions[2], scaling, rotation: rotation[2] },
-  // { id: '羊-4', name: '羊', materials: materials[3], url: Sheep.SheepBabylon, position: positions[3], scaling, rotation: rotation[3] },
-  // { id: '羊-5', name: '羊', materials: materials[3], url: Sheep.SheepBabylon, position: positions[4], scaling, rotation: rotation[4] },
-  // { id: '羊-6', name: '羊', materials: materials[3], url: Sheep.SheepBabylon, position: positions[5], scaling, rotation: rotation[5] },
+  { id: '羊-2', name: '羊', materials: materials[2], url: Sheep.SheepBabylon, position: positions[1], scaling, rotation: rotation[1], ellipsoidOffset, speed: 1 },
+  { id: '羊-3', name: '羊', materials: materials[3], url: Sheep.SheepBabylon, position: positions[2], scaling, rotation: rotation[2], ellipsoidOffset, speed: 1 },
+  { id: '羊-4', name: '羊', materials: materials[3], url: Sheep.SheepBabylon, position: positions[3], scaling, rotation: rotation[3], ellipsoidOffset, speed: 1 },
+  { id: '羊-5', name: '羊', materials: materials[3], url: Sheep.SheepBabylon, position: positions[4], scaling, rotation: rotation[4], ellipsoidOffset, speed: 1 },
+  { id: '羊-6', name: '羊', materials: materials[3], url: Sheep.SheepBabylon, position: positions[5], scaling, rotation: rotation[5], ellipsoidOffset, speed: 1 },
 ];
 
 export const actions = {
