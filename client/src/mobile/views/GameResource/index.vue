@@ -1,10 +1,9 @@
 <template>
   <div class="Game">
-    <!-- <canvas id="canvas" class="canvas"></canvas> -->
-    <Scene name="Resource" :gravity="gravity">
-      <Camera type="Arc" :position="position" :target="target" :alpha="0" :beta="0" :radius="-10" />
+    <Scene name="Resource" :gravity="scene.gravity" :isShowFPS="true">
+      <Camera type="Arc" :position="camera.position" :target="camera.target" :alpha="0" :beta="0" :radius="-10" />
       <WorldAxis />
-      <Light :direction="direction" />
+      <Light :direction="light.direction" />
       <Ground
         name="ground"
         :width="ground.width"
@@ -55,19 +54,22 @@ const images = Vue.images.Game.resources;
     OneButton: GameComponents.OneButton,
     Container2D: GameComponents.Container2D,
     WorldAxis: GameComponents.WorldAxis,
-  },
-  computed: {
-    ...mapState('GameResource', {
-      resources: state => state.resources
-    })
   }
 })
 class GameResource extends Vue {
-  gravity = new Vector3(0, -9.81, 0);
-  // position = new Vector3(0, 2.5, -10);
-  position = new Vector3(0, 0, -10);
-  target = Vector3.Zero();
-  direction = new Vector3(0, -50, 50);
+  scene = {
+    gravity: new Vector3(0, -0.5, 0)
+  };
+
+  camera = {
+    position: new Vector3(0, 0, -10),
+    target: Vector3.Zero()
+  };
+
+  light = {
+    direction: new Vector3(0, -50, 50)
+  };
+
   ground = {
     width: 10,
     height: 10,
@@ -75,13 +77,35 @@ class GameResource extends Vue {
     material: images.ground.material
   };
 
-  async mounted() {
-    // script('canvas');
-    await this.$store.dispatch('GameResource/getResources');
-    
+  resources = [];
+
+  getRandomPosition(isFirst) {
+    return new Vector3((Math.random() - 0.5) * 3, 0, (Math.random() - 0.5) * 3);
+  }
+
+  enableResources() {
+    const resources = this.$store.state.GameResource.resources;
+
+    resources.forEach((resource, i) => {
+      this.resources.push({...resource, position: this.getRandomPosition()});
+
+      this.randomMove(resource, i, true);
+    });
+  }
+
+  randomMove(resource, i, isFirst) {
+    let duration = !isFirst ? Math.random() * 10000 : 1000;
+
     setTimeout(() => {
-      this.$store.commit('GameResource/moveResourceById', '羊-1');
-    }, 1000)
+      this.resources[i].position = this.getRandomPosition();
+
+      this.randomMove(resource, i);
+    }, duration);
+  }
+
+  async mounted() {
+    await this.$store.dispatch('GameResource/getResources');
+    this.enableResources();
   }
 }
 
@@ -89,29 +113,4 @@ export default GameResource;
 </script>
 
 <style type="text/scss" lang="scss">
-// body,
-// html,
-// #app,
-// .App,
-// .Game,
-// .Scene,
-// .canvas {
-//   height: 100%;
-//   width: 100%;
-// }
-// .canvas {
-//   display: block;
-//   outline: none;
-//   touch-action: none;
-// }
-// body, html {
-//   position: fixed;
-//   touch-action: none;
-//   overflow: hidden;
-// }
-// [touch-action="none"]{
-//   -ms-touch-action: none;
-//   touch-action: none;
-//   touch-action-delay: none;
-// }
 </style>

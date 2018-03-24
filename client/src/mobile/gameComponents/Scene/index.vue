@@ -1,6 +1,7 @@
 <template>
   <div class="Scene">
     <canvas class="canvas" :id="name" ref="canvas" touch-action="none"></canvas>
+    <div class="fps" v-if="isShowFPS">{{fps}}</div>
     <slot class="Elments" v-if="system.canvas"></slot>
   </div>
 </template>
@@ -18,6 +19,9 @@ import { Component, Watch, Provide } from 'vue-property-decorator';
     },
     gravity: {
       type: Object
+    },
+    isShowFPS: {
+      type: Boolean
     }
   },
   provide() {
@@ -32,6 +36,43 @@ class SceneClass extends Babylon {
     camera: null
   };
 
+  fps = 0;
+
+  mounted() {
+    this.system.canvas = this.$refs.canvas;
+    this.resizeHandler = this.resizeHandler.bind(this);
+    this.clickHandler = this.clickHandler.bind(this);
+    
+    this.system.engine = new Engine(this.system.canvas, false);
+    this.system.scene = new Scene(this.system.engine);
+
+    this.system.engine.runRenderLoop(this.renderLoop);
+
+    if(this.gravity) {
+      this.system.scene.gravity = this.gravity;	
+      this.system.scene.collisionsEnabled = true;	
+      this.system.scene.workerCollisions = true;
+    }
+
+    window.addEventListener('resize', this.resizeHandler);
+    document.addEventListener('touchend', this.clickHandler);
+    document.addEventListener('click', this.clickHandler);
+  }
+
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resizeHandler);
+    document.removeEventListener('touchend', this.clickHandler);
+    document.removeEventListener('click', this.clickHandler);
+  }
+
+  renderLoop() {
+    this.system.scene.render();
+
+    if(this.isShowFPS) {
+      this.fps = Math.round(this.system.engine.getFps());
+    }
+  }
+
   resizeHandler() {
     this.system.engine.resize();
   }
@@ -44,42 +85,6 @@ class SceneClass extends Babylon {
       // console.log(pickResult.pickedMesh)
       // alert(pickResult.pickedMesh.name);
     }
-  }
-
-  mounted() {
-    this.system.canvas = this.$refs.canvas;
-    this.resizeHandler = this.resizeHandler.bind(this);
-    this.clickHandler = this.clickHandler.bind(this);
-    
-    this.system.engine = new Engine(this.system.canvas, false);
-    this.system.scene = new Scene(this.system.engine);
-
-    this.system.engine.runRenderLoop(() => this.system.scene.render());
-
-    if(this.gravity) {
-      this.system.scene.gravity = this.gravity;	
-      this.system.scene.collisionsEnabled = true;	
-    }
-
-    // const box = new MeshBuilder.CreateBox('box', { width: 0.5, height: 0.5, depth: 0.5 }, this.system.scene);
-    // box.position = new Vector3(0, 10, 0);
-    // box.checkCollisions = true;
-    // // box.applyGravity = true;
-    // // box.ellipsoid = new Vector3(0.25, 0.25, 0.25);
-
-    // setInterval(() => {
-    //   box.moveWithCollisions(new Vector3(0, -0.1, 0));
-    // }, 100);
-
-    window.addEventListener('resize', this.resizeHandler);
-    document.addEventListener('touchend', this.clickHandler);
-    document.addEventListener('click', this.clickHandler);
-  }
-
-  beforeDestroy() {
-    window.removeEventListener('resize', this.resizeHandler);
-    document.removeEventListener('touchend', this.clickHandler);
-    document.removeEventListener('click', this.clickHandler);
   }
 }
 
@@ -111,5 +116,13 @@ body, html {
   -ms-touch-action: none;
   touch-action: none;
   touch-action-delay: none;
+}
+.fps {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  color: white;
+  background: gray;
 }
 </style>

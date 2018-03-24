@@ -61,7 +61,8 @@ class ImportMesh extends Babylon {
   }
 
   setPosition() {
-    this.container.meshes[0].position = this.position || new Vector3(0, 0, 0);
+    this.container.meshes[0].position = new Vector3(0, 10, 0);
+    this.container.meshes[0].moveWithCollisions(new Vector3(this.position.x, -10, this.position.z))
   }
   
   setRotation() {
@@ -84,7 +85,9 @@ class ImportMesh extends Babylon {
 
   @Watch('position')
   onPositionChange(newValue, oldValue) {
-    handler.onPositionChange(this, oldValue);
+    if(this.container) {
+      handler.onPositionChange(this, oldValue);
+    }
   }
 
   parseUrl() {

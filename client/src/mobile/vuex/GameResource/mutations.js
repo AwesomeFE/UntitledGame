@@ -5,11 +5,11 @@ export const mutations = {
     state.resources = resources;
   },
 
-  moveResourceById(state, resourceId) {
+  moveResourceById(state, resourceId, position) {
     const currentResource = state.resources.find((resource) => resource.id === resourceId);
 
     if(currentResource) {
-      currentResource.position = new Vector3(1, 0, 0);
+      currentResource.position = position;
     }
   }
 };
