@@ -56,8 +56,8 @@ class Ground extends Babylon {
 
   getOption() {
     return {
-      width: /*this.width*/ 10,
-      height: /*this.height*/ 10,
+      width: this.width,
+      height: this.height,
       subdivisions: this.subdivisions || 100,
       minHeight: this.minHeight || 0,
       maxHeight: this.maxHeight || 1

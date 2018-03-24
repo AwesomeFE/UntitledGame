@@ -39,6 +39,11 @@ class SceneClass extends Babylon {
   fps = 0;
 
   mounted() {
+    // if(!Engine.isSupported()) {
+    //   alert('go away');
+    //   return;
+    // }
+
     this.system.canvas = this.$refs.canvas;
     this.resizeHandler = this.resizeHandler.bind(this);
     this.clickHandler = this.clickHandler.bind(this);
@@ -54,6 +59,12 @@ class SceneClass extends Babylon {
       this.system.scene.workerCollisions = true;
     }
 
+    if(this.isShowFPS) {
+      setInterval(() => {
+        this.fps = Math.round(this.system.engine.getFps());
+      }, 200);
+    }
+
     window.addEventListener('resize', this.resizeHandler);
     document.addEventListener('touchend', this.clickHandler);
     document.addEventListener('click', this.clickHandler);
@@ -67,10 +78,6 @@ class SceneClass extends Babylon {
 
   renderLoop() {
     this.system.scene.render();
-
-    if(this.isShowFPS) {
-      this.fps = Math.round(this.system.engine.getFps());
-    }
   }
 
   resizeHandler() {

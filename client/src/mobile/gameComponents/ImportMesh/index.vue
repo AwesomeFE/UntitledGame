@@ -5,7 +5,6 @@
 import Babylon from '../common/Babylon';
 import { SceneLoader, Vector3 } from 'babylonjs';
 import { Component, Watch } from 'vue-property-decorator';
-import { ABSOLUTE_RESOURCE_PATH } from 'webpack/lib/ModuleFilenameHelpers';
 import * as handler from './handler';
 
 @Component({
