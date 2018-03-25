@@ -1,54 +1,22 @@
 import { Sheep } from '../../assets/game'
 import { Vector3 } from 'babylonjs';
 
-const materials = [
-  [
-    { id: 'sheep-1', name: '羊毛' },
-    { id: 'sheep-2', name: '羊毛' },
-    { id: 'sheep-3', name: '羊毛' }
-  ],
-  [
-    { id: 'sheep-4', name: '羊毛' },
-    { id: 'sheep-5', name: '羊毛' },
-    { id: 'sheep-6', name: '羊毛' }
-  ],
-  [
-    { id: 'sheep-7', name: '羊毛' },
-    { id: 'sheep-8', name: '羊毛' },
-    { id: 'sheep-9', name: '羊毛' }
-  ]
-];
+const resources = [];
 
-const ellipsoidOffset = new Vector3(0, 1, 0);
-
-const scaling = new Vector3(0.3, 0.3, 0.3);
-
-const rotation = [
-  new Vector3(0, Math.PI * 2 * Math.random(), 0),
-  new Vector3(0, Math.PI * 2 * Math.random(), 0),
-  new Vector3(0, Math.PI * 2 * Math.random(), 0),
-  new Vector3(0, Math.PI * 2 * Math.random(), 0),
-  new Vector3(0, Math.PI * 2 * Math.random(), 0),
-  new Vector3(0, Math.PI * 2 * Math.random(), 0),
-];
-
-const resources = [
-  {
-    id: '羊-1',
+for(let i = 0; i < 1; i++) {
+  resources.push({
+    id: `羊-${i}`,
     name: '羊',
-    materials: materials[0],
+    materials: [
+      { id: `羊毛-${i}`, name: '羊毛' }
+    ],
     url: Sheep.SheepBabylon,
-    scaling,
-    rotation: rotation[0],
-    ellipsoidOffset,
+    scaling: new Vector3(0.3, 0.3, 0.3),
+    rotation: new Vector3(0, Math.PI * 2 * Math.random(), 0),
+    ellipsoidOffset: new Vector3(0, 1, 0),
     speed: 8
-  },
-  // { id: '羊-2', name: '羊', materials: materials[2], url: Sheep.SheepBabylon, scaling, rotation: rotation[1], ellipsoidOffset, speed: 8 },
-  // { id: '羊-3', name: '羊', materials: materials[3], url: Sheep.SheepBabylon, scaling, rotation: rotation[2], ellipsoidOffset, speed: 8 },
-  // { id: '羊-4', name: '羊', materials: materials[3], url: Sheep.SheepBabylon, scaling, rotation: rotation[3], ellipsoidOffset, speed: 8 },
-  // { id: '羊-5', name: '羊', materials: materials[3], url: Sheep.SheepBabylon, scaling, rotation: rotation[4], ellipsoidOffset, speed: 8 },
-  // { id: '羊-6', name: '羊', materials: materials[3], url: Sheep.SheepBabylon, scaling, rotation: rotation[5], ellipsoidOffset, speed: 8 },
-];
+  });
+}
 
 export const actions = {
   getResources({ commit, state }) {

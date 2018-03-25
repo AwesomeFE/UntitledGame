@@ -39,11 +39,6 @@ class SceneClass extends Babylon {
   fps = 0;
 
   mounted() {
-    // if(!Engine.isSupported()) {
-    //   alert('go away');
-    //   return;
-    // }
-
     this.system.canvas = this.$refs.canvas;
     this.resizeHandler = this.resizeHandler.bind(this);
     this.clickHandler = this.clickHandler.bind(this);
@@ -86,12 +81,8 @@ class SceneClass extends Babylon {
 
   clickHandler(event) {
     const { scene } = this.system;
-    const pickResult = scene.pick(scene.pointerX, scene.pointerY);
-
-    if(pickResult.pickedMesh && pickResult.pickedMesh.name !== 'ground') {
-      // console.log(pickResult.pickedMesh)
-      // alert(pickResult.pickedMesh.name);
-    }
+    
+    this.$emit('click', scene.pick(scene.pointerX, scene.pointerY));
   }
 }
 

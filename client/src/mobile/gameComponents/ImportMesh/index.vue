@@ -53,15 +53,15 @@ class ImportMesh extends Babylon {
     this.container = await SceneLoader.LoadAssetContainerAsync(rootUrl, fileName, scene);
     this.container.addAllToScene();
 
-    this.setPosition();
     this.setRotation();
     this.setScaling();
     this.setCollisions();
+    this.setPosition();
   }
 
   setPosition() {
-    this.container.meshes[0].position = new Vector3(0, 10, 0);
-    this.container.meshes[0].moveWithCollisions(new Vector3(this.position.x, -10, this.position.z))
+    this.container.meshes[0].position = new Vector3(0, 100, 0);
+    this.container.meshes[0].moveWithCollisions(new Vector3(this.position.x, -100, this.position.z))
   }
   
   setRotation() {

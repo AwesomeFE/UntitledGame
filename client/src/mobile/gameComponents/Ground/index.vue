@@ -50,7 +50,8 @@ class Ground extends Babylon {
     groundMaterial.diffuseTexture.uScale = 5.0;
     groundMaterial.diffuseTexture.vScale = 5.0;
 
-    this.ground.material = groundMaterial;	
+    this.ground.material = groundMaterial;
+    	
     this.ground.checkCollisions = true;
   }
 
@@ -58,9 +59,10 @@ class Ground extends Babylon {
     return {
       width: this.width,
       height: this.height,
-      subdivisions: this.subdivisions || 100,
+      // This param will affect mobile fps. Should be lower.
+      subdivisions: this.subdivisions || 20,
       minHeight: this.minHeight || 0,
-      maxHeight: this.maxHeight || 1
+      maxHeight: this.maxHeight || 10
     }
   }
 }

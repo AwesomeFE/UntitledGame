@@ -1,6 +1,6 @@
 <template>
   <div class="Game">
-    <Scene name="Resource" :gravity="scene.gravity" :isShowFPS="true">
+    <Scene name="Resource" :gravity="scene.gravity" :isShowFPS="true" @click="clickHandler">
       <Camera type="Arc" :position="camera.position" :target="camera.target" :alpha="0" :beta="0" :radius="-10" />
       <WorldAxis />
       <Light :direction="light.direction" />
@@ -71,8 +71,8 @@ class GameResource extends Vue {
   };
 
   ground = {
-    width: 10,
-    height: 10,
+    width: 100,
+    height: 100,
     heightMap: images.ground.heightMap,
     material: images.ground.material
   };
@@ -86,21 +86,30 @@ class GameResource extends Vue {
   enableResources() {
     const resources = this.$store.state.GameResource.resources;
 
-    resources.forEach((resource, i) => {
+    resources.forEach(async (resource, i) => {
       this.resources.push({...resource, position: this.getRandomPosition()});
 
-      this.randomMove(resource, i, true);
+      // do {
+      //   await this.randomMove(resource, i);
+      // } while(1);
     });
   }
 
+  clickHandler(pickResult) {
+    this.resources[0].position = pickResult.pickedPoint;
+  }
+
   randomMove(resource, i, isFirst) {
-    let duration = !isFirst ? Math.random() * 10000 : 1000;
+    let duration = Math.random() * 10000;
 
-    setTimeout(() => {
-      this.resources[i].position = this.getRandomPosition();
+    return new Promise((resolve, reject) => {
+      const timer = setInterval(() => {
+        this.resources[i].position = this.getRandomPosition();
 
-      this.randomMove(resource, i);
-    }, duration);
+        clearInterval(timer);
+        resolve();
+      }, duration);
+    });
   }
 
   async mounted() {
