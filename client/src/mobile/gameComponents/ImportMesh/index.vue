@@ -43,8 +43,12 @@ import * as handler from './handler';
 })
 class ImportMesh extends Babylon {
   container = null;
+  
   movingTimer = null;
+  rotationTimer = null;
+
   prePosition = null;
+  preRotation = null;
 
   async mounted() {
     const { scene } = this.$system;

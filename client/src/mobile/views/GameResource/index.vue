@@ -80,7 +80,10 @@ class GameResource extends Vue {
   resources = [];
 
   getRandomPosition(isFirst) {
-    return new Vector3((Math.random() - 0.5) * 3, 0, (Math.random() - 0.5) * 3);
+    const positionX = (Math.random() - 0.5) * 20;
+    const positionY = (Math.random() - 0.5) * 20;
+
+    return new Vector3(positionX, 0, positionY);
   }
 
   enableResources() {
@@ -89,14 +92,14 @@ class GameResource extends Vue {
     resources.forEach(async (resource, i) => {
       this.resources.push({...resource, position: this.getRandomPosition()});
 
-      // do {
-      //   await this.randomMove(resource, i);
-      // } while(1);
+      do {
+        await this.randomMove(resource, i);
+      } while(1);
     });
   }
 
   clickHandler(pickResult) {
-    this.resources[0].position = pickResult.pickedPoint;
+    // this.resources[0].position = pickResult.pickedPoint;
   }
 
   randomMove(resource, i, isFirst) {
