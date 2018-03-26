@@ -1,16 +1,16 @@
 import { Vector3 } from "babylonjs";
 
 const minMS = 5;
+const vDeg = 1;
 
 export function onPositionChange(_this, oldValue) {
   if(!_this.prePosition) {
     _this.prePosition = oldValue;
-    _this.preRotation = _this.rotation;
+    _this.preRotation = { ..._this.rotation };
   }
 
   stopMoving(_this);
   startMoving(_this);
-  // startMovingH(_this);
 
   stopRotation(_this);
   startRotation(_this);
@@ -23,21 +23,33 @@ function stopMoving(_this) {
 
 function startMoving(_this) {
   _this.movingTimer = setInterval(() => {
-    const { position, prePosition, speed } = _this;
+    const { position, prePosition, speed, ground } = _this;
 
-    const unitSpeed = speed / 1000 * minMS;
-    const totalMoveVector = position.multiplyByFloats(1, 0, 1).subtract(prePosition);
-    const ratio = unitSpeed / totalMoveVector.length();
+    // 终点向量(x-z坐标) - 起点向量(x-z坐标) = 位移向量(x-z坐标)
+    // 计算 单位移动向量长度 / 位移向量长度 之比
+    // 获得 单位移动向量(x-z坐标)
+    const totalMoveVector = position.multiplyByFloats(1, 0, 1).subtract(prePosition.multiplyByFloats(1, 0, 1));
+    const totalMove = totalMoveVector.length();
+    const unitMove = speed / 1000 * minMS;
+    const ratio = unitMove / totalMove;
     const unitMoveVector = totalMoveVector.multiplyByFloats(ratio, 1, ratio);
 
+    // 获取 当前地面高度，移动后地面高度
+    // 移动后地面高度 - 当前地面高度 = 单位移动地面高度(y)
+    const currentY = ground.getHeightAtCoordinates(prePosition.x, prePosition.z);
+    const nextY = ground.getHeightAtCoordinates(prePosition.x + unitMoveVector.x, prePosition.z + unitMoveVector.z);
+
+    // 组合为速度向量
     const speedX = unitMoveVector.x;
     const speedZ = unitMoveVector.z;
-    const speedY = Math.abs(Math.max(speedX, speedZ)) * -1;
+    const speedY = nextY - currentY;
     const velocity = new Vector3(speedX, speedY, speedZ);
 
-    _this.container.meshes[0].moveWithCollisions(velocity);
-    _this.prePosition = _this.container.meshes[0].position.multiplyByFloats(1, 0, 1);
+    // 移动物体
+    // _this.container.meshes[0].moveWithCollisions(velocity);
+    _this.prePosition = _this.container.meshes[0].position;
 
+    // 判断是否到达终点(x/z 0.1误差)
     const isAttachDestination =
       Math.abs(_this.position.x - _this.prePosition.x) < 0.1 &&
       Math.abs(_this.position.z - _this.prePosition.z) < 0.1;
@@ -53,72 +65,30 @@ function stopRotation(_this) {
   _this.rotationTimer = null;
 }
 
+// 注：rotation范围为0~360。
 function startRotation(_this) {
-  // _this.rotationTimer = setInterval(() => {
-  //   const { position, prePosition, preRotation, speed } = _this;
-  //   const { x: newX, z: newZ } = position;
-  //   const { x: oldX, z: oldZ } = prePosition;
-  //   const { y: oldY } = preRotation;
+  const { position, prePosition, preRotation, speed } = _this;
 
-  //   const offsetX = newX - oldX;
-  //   const offsetZ = newZ - oldZ;
-  //   const distanceX = Math.abs(offsetX);
-  //   const distanceZ = Math.abs(offsetZ);
-  //   // const sin = Math.sin(Math.atan(distanceZ / distanceX));
-  //   // const cos = Math.cos(Math.atan(distanceZ / distanceX));
-  //   // const dirX = !isNaN(offsetX * Math.abs(1 / offsetX)) ? offsetX * Math.abs(1 / offsetX) : 1;
-  //   // const dirZ = !isNaN(offsetZ * Math.abs(1 / offsetZ)) ? offsetZ * Math.abs(1 / offsetZ) : 1;
-    
-  //   // const speedX = cos * speed / 1000 * minMS * dirX;
-  //   // const speedZ = sin * speed / 1000 * minMS * dirZ;
-  //   // const speedY = Math.abs(Math.min(speedX, speedZ)) * -1;
-  //   // const unitSpeed = new Vector3(speedX, speedY, speedZ);
+  const normal = new Vector3(0, 1, 0);
+  const preRotationVector = new Vector3(Math.sin(preRotation.y), 0, Math.cos(preRotation.y));
+  const totalRotationVector = position.multiplyByFloats(1, 0, 1).subtract(prePosition.multiplyByFloats(1, 0, 1));
 
-  //   // _this.container.meshes[0].moveWithCollisions(unitSpeed);
-  //   // _this.prePosition = _this.container.meshes[0].position;
+  const offsetRotation = Vector3.GetAngleBetweenVectors(totalRotationVector, preRotationVector, normal);
+  const dir = offsetRotation / Math.abs(offsetRotation);
+  const desRotation = preRotation.y + offsetRotation;
 
-  //   // const isAttachDestination =
-  //   //   Math.abs(_this.position.x - _this.prePosition.x) < 0.1 &&
-  //   //   Math.abs(_this.position.z - _this.prePosition.z) < 0.1;
+  console.log(desRotation / Math.PI * 180);
 
-  //   if(isAttachDestination) {
-  //     stopRotation(_this);
-  //   }
-  // }, minMS);
-}
+  _this.rotationTimer = setInterval(() => {
+    let unitRotation = vDeg / 1000 * minMS * dir;
 
-/**
- * 自己写的算法
- */
-function startMovingH(_this) {
-  _this.movingTimer = setInterval(() => {
-    const { position, prePosition, speed } = _this;
-    const { x: newX, z: newZ } = position;
-    const { x: oldX, z: oldZ } = prePosition;
+    _this.container.meshes[0].rotation.y += unitRotation;
+    _this.preRotation.y += unitRotation;
 
-    const offsetX = newX - oldX;
-    const offsetZ = newZ - oldZ;
-    const distanceX = Math.abs(offsetX);
-    const distanceZ = Math.abs(offsetZ);
-    const sin = Math.sin(Math.atan(distanceZ / distanceX));
-    const cos = Math.cos(Math.atan(distanceZ / distanceX));
-    const dirX = !isNaN(offsetX * Math.abs(1 / offsetX)) ? offsetX * Math.abs(1 / offsetX) : 1;
-    const dirZ = !isNaN(offsetZ * Math.abs(1 / offsetZ)) ? offsetZ * Math.abs(1 / offsetZ) : 1;
-    
-    const speedX = cos * speed / 1000 * minMS * dirX;
-    const speedZ = sin * speed / 1000 * minMS * dirZ;
-    const speedY = Math.abs(Math.min(speedX, speedZ)) * -1;
-    const unitSpeed = new Vector3(speedX, speedY, speedZ);
+    const isAttachRotation = Math.abs(desRotation - _this.preRotation.y) < 0.1;
 
-    _this.container.meshes[0].moveWithCollisions(unitSpeed);
-    _this.prePosition = _this.container.meshes[0].position;
-
-    const isAttachDestination =
-      Math.abs(_this.position.x - _this.prePosition.x) < 0.1 &&
-      Math.abs(_this.position.z - _this.prePosition.z) < 0.1;
-
-    if(isAttachDestination) {
-      stopMoving(_this);
+    if(isAttachRotation) {
+      stopRotation(_this);
     }
   }, minMS);
 }

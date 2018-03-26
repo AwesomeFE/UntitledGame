@@ -38,11 +38,15 @@ import * as handler from './handler';
     },
     enableCollisions: {
       type: Boolean
+    },
+    onGroundName: {
+      type: String
     }
   }
 })
 class ImportMesh extends Babylon {
   container = null;
+  ground = null;
   
   movingTimer = null;
   rotationTimer = null;
@@ -57,10 +61,17 @@ class ImportMesh extends Babylon {
     this.container = await SceneLoader.LoadAssetContainerAsync(rootUrl, fileName, scene);
     this.container.addAllToScene();
 
+    this.setGround();
     this.setRotation();
     this.setScaling();
     this.setCollisions();
     this.setPosition();
+  }
+
+  setGround() {
+    this.ground = this.$system.scene.getMeshByName(this.onGroundName);
+
+    !this.ground ? this.warningGround() : null;
   }
 
   setPosition() {
@@ -99,6 +110,10 @@ class ImportMesh extends Babylon {
     const rootUrl = this.assetUrl.replace(fileName, '');
 
     return { rootUrl, fileName };
+  }
+
+  warningGround() {
+    console.warn(`The ground of "${this.name}" mesh is not found. For best performance, please keep the ground existed.`);
   }
 }
 

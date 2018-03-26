@@ -3,7 +3,7 @@ import { Vector3 } from 'babylonjs';
 
 const resources = [];
 
-for(let i = 0; i < 20; i++) {
+for(let i = 0; i < 1; i++) {
   resources.push({
     id: `羊-${i}`,
     name: '羊',
@@ -12,7 +12,8 @@ for(let i = 0; i < 20; i++) {
     ],
     url: Sheep.SheepBabylon,
     scaling: new Vector3(0.3, 0.3, 0.3),
-    rotation: new Vector3(0, Math.PI * 2 * Math.random(), 0),
+    // rotation: new Vector3(0, Math.PI * 2 * Math.random(), 0),
+    rotation: new Vector3(0, Math.PI / 4, 0),
     ellipsoidOffset: new Vector3(0, 1, 0),
     speed: 8
   });

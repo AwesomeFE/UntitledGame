@@ -26,6 +26,7 @@
         :ellipsoidOffset="resource.ellipsoidOffset"
         :speed="resource.speed"
         :enableCollisions="true"
+        onGroundName="ground"
       ></ImportMesh>
     </Scene>
   </div>
@@ -80,8 +81,10 @@ class GameResource extends Vue {
   resources = [];
 
   getRandomPosition(isFirst) {
-    const positionX = (Math.random() - 0.5) * 20;
-    const positionY = (Math.random() - 0.5) * 20;
+    // const positionX = (Math.random() - 0.5) * 20;
+    // const positionY = (Math.random() - 0.5) * 20;
+    const positionX = 0;
+    const positionY = 0;
 
     return new Vector3(positionX, 0, positionY);
   }
@@ -92,14 +95,15 @@ class GameResource extends Vue {
     resources.forEach(async (resource, i) => {
       this.resources.push({...resource, position: this.getRandomPosition()});
 
-      do {
-        await this.randomMove(resource, i);
-      } while(1);
+      // do {
+      //   await this.randomMove(resource, i);
+      // } while(1);
     });
   }
 
   clickHandler(pickResult) {
-    // this.resources[0].position = pickResult.pickedPoint;
+    this.resources[0].position = pickResult.pickedPoint;
+    // this.resources[0].position = new Vector3(1, 0, -1);
   }
 
   randomMove(resource, i, isFirst) {
