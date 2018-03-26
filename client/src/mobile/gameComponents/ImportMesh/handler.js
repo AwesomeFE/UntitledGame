@@ -1,7 +1,7 @@
 import { Vector3 } from "babylonjs";
 
 const minMS = 5;
-const vDeg = 1;
+const vDeg = 10;
 
 export function onPositionChange(_this, oldValue) {
   if(!_this.prePosition) {
@@ -46,7 +46,7 @@ function startMoving(_this) {
     const velocity = new Vector3(speedX, speedY, speedZ);
 
     // 移动物体
-    // _this.container.meshes[0].moveWithCollisions(velocity);
+    _this.container.meshes[0].moveWithCollisions(velocity);
     _this.prePosition = _this.container.meshes[0].position;
 
     // 判断是否到达终点(x/z 0.1误差)
@@ -65,27 +65,33 @@ function stopRotation(_this) {
   _this.rotationTimer = null;
 }
 
-// 注：rotation范围为0~360。
+// 注：rotation范围为0~360
 function startRotation(_this) {
   const { position, prePosition, preRotation, speed } = _this;
 
+  // x-z平面法向量 normal
   const normal = new Vector3(0, 1, 0);
-  const preRotationVector = new Vector3(Math.sin(preRotation.y), 0, Math.cos(preRotation.y));
-  const totalRotationVector = position.multiplyByFloats(1, 0, 1).subtract(prePosition.multiplyByFloats(1, 0, 1));
-
-  const offsetRotation = Vector3.GetAngleBetweenVectors(totalRotationVector, preRotationVector, normal);
-  const dir = offsetRotation / Math.abs(offsetRotation);
-  const desRotation = preRotation.y + offsetRotation;
-
-  console.log(desRotation / Math.PI * 180);
+  // 初始方向向量 (注: V0方向向量x,z与Vw世界轴坐标相反，即V0第一象限角为Vw第四象限角
+  const preVector = new Vector3(-Math.sin(preRotation.y), 0, -Math.cos(preRotation.y));
+  // 最终方向向量
+  const destVector = position.multiplyByFloats(1, 0, 1).subtract(prePosition.multiplyByFloats(1, 0, 1));
+  // 最终偏移角度 = 初始方向向量 与 最终方向向量 的 夹角 (注: 以初始向量顺时针为正
+  const offsRotation = Vector3.GetAngleBetweenVectors(preVector, destVector, normal);
+  const destRotation = preRotation.y + offsRotation;
+  const dir = offsRotation / Math.abs(offsRotation);
 
   _this.rotationTimer = setInterval(() => {
-    let unitRotation = vDeg / 1000 * minMS * dir;
+    // 累加单元旋转角
+    const unitRotation = vDeg / 1000 * minMS * dir;
 
+    // 旋转物体
     _this.container.meshes[0].rotation.y += unitRotation;
     _this.preRotation.y += unitRotation;
 
-    const isAttachRotation = Math.abs(desRotation - _this.preRotation.y) < 0.1;
+    // 判断是否到达终点(x/z 0.1误差) 或者 是否旋转到最终角
+    const isAttachRotation = Math.abs(_this.preRotation.y - destRotation) < 0.05 ||
+      (Math.abs(_this.position.x - _this.prePosition.x) < 0.1 &&
+      Math.abs(_this.position.z - _this.prePosition.z) < 0.1);
 
     if(isAttachRotation) {
       stopRotation(_this);

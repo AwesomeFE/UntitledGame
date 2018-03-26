@@ -3,7 +3,7 @@ import { Vector3 } from 'babylonjs';
 
 const resources = [];
 
-for(let i = 0; i < 1; i++) {
+for(let i = 0; i < 20; i++) {
   resources.push({
     id: `羊-${i}`,
     name: '羊',
