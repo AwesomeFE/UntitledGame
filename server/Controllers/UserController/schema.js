@@ -13,7 +13,11 @@ const UserSchema = new Schema({
   players: [{
     type: Schema.Types.ObjectId,
     ref: 'Player'
-  }]
+  }],
+  projection: {
+    type: String,
+    default: 'password __v updatedAt createdAt projection'
+  }
 }, {timestamps: true});
 
 export default UserSchema;

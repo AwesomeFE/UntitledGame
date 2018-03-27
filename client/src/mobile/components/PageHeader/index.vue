@@ -9,24 +9,28 @@
       </div>
       <div class="right">
         <router-link class="menu" :to="linkUrls.GAME">{{$t('PageHeader.start')}}</router-link>
-        <router-link class="menu" :to="linkUrls.SIGNIN">{{$t('PageHeader.signin')}}</router-link>
-        <router-link class="menu" :to="linkUrls.SIGNUP">{{$t('PageHeader.signup')}}</router-link>
+        <router-link class="menu" :to="linkUrls.SIGNIN" v-if="!user">{{$t('PageHeader.signin')}}</router-link>
+        <router-link class="menu" :to="linkUrls.SIGNUP" v-if="!user">{{$t('PageHeader.signup')}}</router-link>
         <a class="menu">{{$t('PageHeader.account')}}</a>
-        <router-link class="menu" :to="linkUrls.SIGNOUT">{{$t('PageHeader.signout')}}</router-link>
+        <router-link class="menu" :to="linkUrls.SIGNOUT" v-if="user">{{$t('PageHeader.signout')}}</router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { Vue } from '../../common';
 import { Component } from 'vue-property-decorator';
 
 @Component({
+  computed: {
+    ...mapState({
+      user: state => state.user
+    })
+  }
 })
 class PageHeader extends Vue {
-  mounted() {
-  }
 }
 
 export default PageHeader;

@@ -37,6 +37,8 @@ class UserRouter extends BasicRouter {
       const user = await UserController.signIn(req.body);
       await EntryController.log(req.ip, user);
 
+      req.session.userId = user._id;
+
       res.json(messages.REQUEST_SUCCESS(user));
     }
   };
@@ -45,8 +47,15 @@ class UserRouter extends BasicRouter {
     required: {},
     validate: (req, res) => {},
     handler: async (req, res) => {
-      const { messages } = this;
-      res.json(messages.REQUEST_SUCCESS(req.user));
+      const { messages, formatData } = this;
+      const { user, user: { projection } } = req;
+      let formatedUser = null;
+
+      if(req.user) {
+        formatedUser = formatData(projection, user);
+      }
+
+      res.json(messages.REQUEST_SUCCESS(formatedUser));
     }
   };
 }
