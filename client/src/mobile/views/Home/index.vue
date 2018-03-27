@@ -3,6 +3,7 @@
     <PageHeader></PageHeader>
 
     <div class="PageBody">
+      {{$t('Home.main')}}
     </div>
 
     <PageFooter></PageFooter>
@@ -22,7 +23,8 @@ import { Component } from 'vue-property-decorator';
   }
 })
 class Home extends Vue {
-
+  mounted() {
+  }
 }
 
 export default Home;

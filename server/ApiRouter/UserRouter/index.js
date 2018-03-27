@@ -1,5 +1,5 @@
 import BasicRouter from '../BasicRouter';
-import { UserController, EntryController } from '../../Controllers';
+import { UserController, EntryController, PlayerController } from '../../Controllers';
 
 class UserRouter extends BasicRouter {
 
@@ -9,7 +9,6 @@ class UserRouter extends BasicRouter {
         'password'
       ]
     },
-
     validate: (req, res) => {
       const { username, email, mobile } = req.body;
 
@@ -31,10 +30,7 @@ class UserRouter extends BasicRouter {
         'password'
       ]
     },
-
-    validate: (req, res) => {
-    },
-
+    validate: (req, res) => {},
     handler: async (req, res) => {
       const { messages } = this;
 
@@ -42,6 +38,15 @@ class UserRouter extends BasicRouter {
       await EntryController.log(req.ip, user);
 
       res.json(messages.REQUEST_SUCCESS(user));
+    }
+  };
+
+  getSessionUser = {
+    required: {},
+    validate: (req, res) => {},
+    handler: async (req, res) => {
+      const { messages } = this;
+      res.json(messages.REQUEST_SUCCESS(req.user));
     }
   };
 }

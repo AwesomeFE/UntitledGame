@@ -39,7 +39,7 @@ import { Component, Watch } from 'vue-property-decorator';
 })
 class Camera extends Babylon {
   mounted() {
-    const { Game } = this.strings;
+    const { Game } = Babylon.strings;
     const { scene, canvas } = this.$system;
 
     const position = this.position;

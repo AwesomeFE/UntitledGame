@@ -9,7 +9,11 @@ const UserSchema = new Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+  players: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Player'
+  }]
 }, {timestamps: true});
 
 export default UserSchema;

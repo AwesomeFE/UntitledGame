@@ -36,11 +36,12 @@ import * as handler from './handler';
     ellipsoidOffset: {
       type: Object
     },
-    enableCollisions: {
+    isEnableCollisions: {
       type: Boolean
     },
     onGroundName: {
-      type: String
+      type: String,
+      required: true
     }
   }
 })
@@ -70,8 +71,6 @@ class ImportMesh extends Babylon {
 
   setGround() {
     this.ground = this.$system.scene.getMeshByName(this.onGroundName);
-
-    !this.ground ? this.warningGround() : null;
   }
 
   setPosition() {
@@ -90,11 +89,11 @@ class ImportMesh extends Babylon {
   }
 
   setCollisions() {
-    if(this.enableCollisions) {
+    if(this.isEnableCollisions) {
       this.container.meshes[0].applyGravity = true;
       this.container.meshes[0].checkCollisions = true;
-      this.container.meshes[0].ellipsoidOffset = this.ellipsoidOffset || new Vector3(0, 0, 0);
     }
+    this.container.meshes[0].ellipsoidOffset = this.ellipsoidOffset || new Vector3(0, 0, 0);
   }
 
   @Watch('position')
@@ -110,10 +109,6 @@ class ImportMesh extends Babylon {
     const rootUrl = this.assetUrl.replace(fileName, '');
 
     return { rootUrl, fileName };
-  }
-
-  warningGround() {
-    console.warn(`The ground of "${this.name}" mesh is not found. For best performance, please keep the ground existed.`);
   }
 }
 

@@ -1,8 +1,8 @@
+import { User } from '../../services';
+
 export const actions = {
-  preLogin({ commit, state }) {
-    console.log('preLogin');
-  },
-  signin({ commit, state }) {
-    
+  async getUser({ commit, state }) {
+    const user = await User.getSessionUser();
+    console.log(user)
   }
 };

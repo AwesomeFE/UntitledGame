@@ -8,5 +8,9 @@ export const apiUrls = {
     method: 'post',
     url: '/api/user/signup',
     data
+  }),
+  GET_USER: (data, params) => ({
+    method: 'get',
+    url: '/api/user'
   })
 };

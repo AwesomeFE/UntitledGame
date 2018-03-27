@@ -1,19 +1,22 @@
 import Service from '../basic/Service';
 
 class UserService extends Service {
-  preLogin() {
-  }
-
-  async signin(data) {
+  getSessionUser() {
     const { axios, apiUrls } = this;
 
-    await axios(apiUrls.SIGNIN(data));
+    return axios(apiUrls.GET_USER());
   }
 
-  async signup(data) {
+  signin(data) {
     const { axios, apiUrls } = this;
 
-    await axios(apiUrls.SIGNUP(data));
+    return axios(apiUrls.SIGNIN(data));
+  }
+
+  signup(data) {
+    const { axios, apiUrls } = this;
+
+    return axios(apiUrls.SIGNUP(data));
   }
 }
 

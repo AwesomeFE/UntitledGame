@@ -23,7 +23,7 @@ function stopMoving(_this) {
 
 function startMoving(_this) {
   _this.movingTimer = setInterval(() => {
-    const { position, prePosition, speed, ground } = _this;
+    const { position, prePosition, speed, ground, isEnableCollisions } = _this;
 
     // 终点向量(x-z坐标) - 起点向量(x-z坐标) = 位移向量(x-z坐标)
     // 计算 单位移动向量长度 / 位移向量长度 之比
@@ -39,16 +39,18 @@ function startMoving(_this) {
     const currentY = ground.getHeightAtCoordinates(prePosition.x, prePosition.z);
     const nextY = ground.getHeightAtCoordinates(prePosition.x + unitMoveVector.x, prePosition.z + unitMoveVector.z);
 
-    // 组合为速度向量
-    const speedX = unitMoveVector.x;
-    const speedZ = unitMoveVector.z;
-    const speedY = nextY - currentY;
-    const velocity = new Vector3(speedX, speedY, speedZ);
-
-    // 移动物体
-    const nextPosition = new Vector3(prePosition.x + unitMoveVector.x, nextY, prePosition.z + unitMoveVector.z);
-    _this.container.meshes[0].position = nextPosition;
-    // _this.container.meshes[0].moveWithCollisions(velocity);
+    if(isEnableCollisions) {
+      // 组合为速度向量
+      const speedX = unitMoveVector.x;
+      const speedZ = unitMoveVector.z;
+      const speedY = nextY - currentY;
+      const velocity = new Vector3(speedX, speedY, speedZ);
+      // 碰撞方式移动物体
+      _this.container.meshes[0].moveWithCollisions(velocity);
+    } else {
+      // 定位方式移动物体
+      _this.container.meshes[0].position = new Vector3(prePosition.x + unitMoveVector.x, nextY, prePosition.z + unitMoveVector.z);
+    }
     _this.prePosition = _this.container.meshes[0].position;
 
     // 判断是否到达终点(x/z 0.1误差)

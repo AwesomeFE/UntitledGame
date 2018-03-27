@@ -4,9 +4,7 @@ import * as assets from '../../assets/game';
 import { CommonVue } from '../../../common';
 
 export class Vue extends CommonVue {
-  strings = strings;
-  images = images;
-  assets = assets;
-
+  static strings = strings;
+  static assets = assets;
   static images = images;
 };

@@ -5,7 +5,7 @@
       <Container2D>
 
         <OneBlock name="header" :verticalAlignment="GUI.Control.VERTICAL_ALIGNMENT_TOP">
-          <OneImage name="header-image" :url="images.Game.MainBackgound" width="100%" height="50px" />
+          <OneImage name="header-image" :url="headerUrl" width="100%" height="50px" />
         </OneBlock>
 
         <!-- <OneBlock name="QuickAction">
@@ -56,6 +56,7 @@ class Game extends Vue {
   position = new Vector3(0, 0, -10);
   target = Vector3.Zero();
   GUI = GUI;
+  headerUrl = Vue.images.Game.MainBackgound
 
   mounted() {
   }

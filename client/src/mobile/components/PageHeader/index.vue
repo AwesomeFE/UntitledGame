@@ -1,19 +1,18 @@
 <template>
   <div class="PageHeader">
     <div class="PageHeader__logo">
-      <router-link :to="linkUrls.HOME">{{$t('LOGO')}}</router-link>
+      <router-link :to="linkUrls.HOME">{{$t('PageHeader.logo')}}</router-link>
     </div>
     <div class="PageHeader__body">
       <div class="left">
         <span>icon</span>
       </div>
       <div class="right">
-        <router-link class="menu" :to="linkUrls.CART">{{$t('CART')}}</router-link>
-        <router-link class="menu" :to="linkUrls.GAME">{{$t('GAME')}}</router-link>
-        <router-link class="menu" :to="linkUrls.SIGNIN">{{$t('SIGNIN')}}</router-link>
-        <router-link class="menu" :to="linkUrls.SIGNUP">{{$t('SIGNUP')}}</router-link>
-        <a class="menu">{{$t('ACCOUNT')}}</a>
-        <router-link class="menu" :to="linkUrls.SIGNOUT">{{$t('SIGNOUT')}}</router-link>
+        <router-link class="menu" :to="linkUrls.GAME">{{$t('PageHeader.start')}}</router-link>
+        <router-link class="menu" :to="linkUrls.SIGNIN">{{$t('PageHeader.signin')}}</router-link>
+        <router-link class="menu" :to="linkUrls.SIGNUP">{{$t('PageHeader.signup')}}</router-link>
+        <a class="menu">{{$t('PageHeader.account')}}</a>
+        <router-link class="menu" :to="linkUrls.SIGNOUT">{{$t('PageHeader.signout')}}</router-link>
       </div>
     </div>
   </div>
@@ -65,18 +64,3 @@ export default PageHeader;
   }
 }
 </style>
-
-<i18n>
-zh-cn:
-  LOGO: "咖啡馆"
-  CART: "购物车"
-  ACCOUNT: "我的账户"
-  SIGNIN: "登录"
-  SIGNUP: "注册"
-  SIGNOUT: "退出"
-  ORDER: "我的订单"
-  SETTING: "账户设置"
-  GAME: "游戏"
-en-us:
-  LOGO: "Coffee Bar"
-</i18n>

@@ -1,4 +1,7 @@
+import { UserController } from '../../Controllers';
+
 export const ensureSignIn = (req, res, next) => {
-  console.log('ensureSignIn');
+  console.log(req.session)
+
   next();
 }

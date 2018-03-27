@@ -55,6 +55,10 @@ export default (options) => {
           use: loaders.lessLoader(options)
         },
         {
+          test: /\.yaml$/,
+          use: loaders.yamlLoader(options)
+        },
+        {
           test: /\.(png|jpg|gif)$/,
           use: loaders.imageLoader(options),
           exclude: [
@@ -67,7 +71,7 @@ export default (options) => {
         },
         {
           test: /\/*\.(tga|babylon|gltf|bin|manifest|png|jpg|gif)$/,
-          use: loaders.asseetLoader(options),
+          use: loaders.assetLoader(options),
           include: [
             path.join(__dirname, `../src/${appName}/assets/game`)
           ]

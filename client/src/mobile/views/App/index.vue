@@ -11,7 +11,7 @@ import { Component } from 'vue-property-decorator';
 @Component()
 class App extends Vue {
   async mounted() {
-    await this.$store.dispatch('preLogin');
+    await this.$store.dispatch('getUser');
   }
 }
 
