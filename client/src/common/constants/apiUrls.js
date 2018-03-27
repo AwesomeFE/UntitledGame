@@ -12,5 +12,9 @@ export const apiUrls = {
   GET_USER: (data, params) => ({
     method: 'get',
     url: '/api/user'
+  }),
+  SIGNOUT: () => ({
+    method: 'get',
+    url: '/api/user/signout'
   })
 };

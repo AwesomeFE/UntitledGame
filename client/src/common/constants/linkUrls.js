@@ -17,6 +17,6 @@ export const linkUrls = {
     query: { type: 'signup' }
   },
   SIGNOUT: {
-    path: 'signout',
+    path: 'api/user/signout',
   }
 };

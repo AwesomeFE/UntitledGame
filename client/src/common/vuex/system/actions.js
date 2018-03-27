@@ -6,9 +6,15 @@ export const actions = {
     commit('setUser', data);
   },
   async signin({ commit, state }, formData) {
-    await User.signin(formData);
+    const { data } = await User.signin(formData);
+    commit('setUser', data);
   },
   async signup({ commit, state }, formData) {
-    await User.signup(formData);
+    const { data } = await User.signup(formData);
+    commit('setUser', data);
+  },
+  async signout({ commit, state }) {
+    const { data } = await User.signout();
+    commit('setUser', data);
   }
 };

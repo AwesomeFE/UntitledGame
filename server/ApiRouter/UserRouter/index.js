@@ -55,6 +55,17 @@ class UserRouter extends BasicRouter {
       res.json(messages.REQUEST_SUCCESS(formatedUser));
     }
   };
+
+  signout = {
+    required: {},
+    validate: (req, res) => {},
+    handler: async (req, res) => {
+      const { messages } = this;
+      req.session.userId = null;
+
+      res.json(messages.REQUEST_SUCCESS());
+    }
+  };
 }
 
 export default new UserRouter();

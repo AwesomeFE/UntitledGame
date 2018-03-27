@@ -12,7 +12,7 @@
         <router-link class="menu" :to="linkUrls.SIGNIN" v-if="!user">{{$t('PageHeader.signin')}}</router-link>
         <router-link class="menu" :to="linkUrls.SIGNUP" v-if="!user">{{$t('PageHeader.signup')}}</router-link>
         <a class="menu">{{$t('PageHeader.account')}}</a>
-        <router-link class="menu" :to="linkUrls.SIGNOUT" v-if="user">{{$t('PageHeader.signout')}}</router-link>
+        <a class="menu" v-if="user" @click="signout">{{$t('PageHeader.signout')}}</a>
       </div>
     </div>
   </div>
@@ -31,6 +31,9 @@ import { Component } from 'vue-property-decorator';
   }
 })
 class PageHeader extends Vue {
+  signout() {
+    this.$store.dispatch('system/signout');
+  }
 }
 
 export default PageHeader;

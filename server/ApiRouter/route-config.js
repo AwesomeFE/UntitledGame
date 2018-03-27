@@ -8,6 +8,6 @@ export default [
   { path: '/user/signup', method: 'post', ...UserRouter.signUp },
   { path: '/user', method: 'get', ...UserRouter.getSessionUser },
   middlewares.ensureSignIn,
-  { path: '/user/signout', method: 'get', ...UserRouter.getSessionUser },
+  { path: '/user/signout', method: 'get', ...UserRouter.signout },
   { path: '/player', method: 'post', ...PlayerRouter.create }
 ];
