@@ -48,12 +48,9 @@ class UserRouter extends BasicRouter {
     validate: (req, res) => {},
     handler: async (req, res) => {
       const { messages, formatData } = this;
-      const { user, user: { projection } } = req;
-      let formatedUser = null;
-
-      if(req.user) {
-        formatedUser = formatData(projection, user);
-      }
+      const { user } = req;
+      const projection = user && user.projection;
+      const formatedUser = user && projection && formatData(projection, user);
 
       res.json(messages.REQUEST_SUCCESS(formatedUser));
     }

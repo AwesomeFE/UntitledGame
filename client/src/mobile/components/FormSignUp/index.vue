@@ -45,7 +45,7 @@ class FormSignUp extends Vue {
     if(isFormValid) {
       try {
         this.disableFrom();
-        await this.$store.dispatch('user/signup', this.formData);
+        await this.$store.dispatch('system/signup', this.formData);
 
       } catch(e) {
         this.enableFrom();

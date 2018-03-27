@@ -1,15 +1,12 @@
-import { state, actions, getters, mutations } from './root';
-import * as user from './user';
+import * as system from './system';
+import * as game from './game';
 
 class CommonStore {
-  state = state;
-  getters = getters;
-  actions = actions;
-  mutations = mutations;
   strict = process.env.NODE_ENV !== 'production';
 
   modules = {
-    user
+    system,
+    game
   };
 
   constructor(options = {}) {

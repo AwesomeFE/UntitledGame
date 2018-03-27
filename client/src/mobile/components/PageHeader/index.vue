@@ -25,7 +25,7 @@ import { Component } from 'vue-property-decorator';
 
 @Component({
   computed: {
-    ...mapState({
+    ...mapState('system', {
       user: state => state.user
     })
   }
