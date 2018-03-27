@@ -75,8 +75,8 @@ class ImportMesh extends Babylon {
   }
 
   setPosition() {
-    this.container.meshes[0].position = new Vector3(0, 100, 0);
-    this.container.meshes[0].moveWithCollisions(new Vector3(this.position.x, -100, this.position.z))
+    const y = this.ground.getHeightAtCoordinates(this.position.x, this.position.z);
+    this.container.meshes[0].position = new Vector3(this.position.x, y, this.position.z);
   }
   
   setRotation() {
