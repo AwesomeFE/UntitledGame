@@ -46,7 +46,9 @@ function startMoving(_this) {
     const velocity = new Vector3(speedX, speedY, speedZ);
 
     // 移动物体
-    _this.container.meshes[0].moveWithCollisions(velocity);
+    const nextPosition = new Vector3(prePosition.x + unitMoveVector.x, nextY, prePosition.z + unitMoveVector.z);
+    _this.container.meshes[0].position = nextPosition;
+    // _this.container.meshes[0].moveWithCollisions(velocity);
     _this.prePosition = _this.container.meshes[0].position;
 
     // 判断是否到达终点(x/z 0.1误差)
