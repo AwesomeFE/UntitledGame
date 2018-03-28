@@ -64,11 +64,11 @@ class OneButton extends Vue {
   button = null;
 
   mounted() {
-    this.button = new Button.CreateImageButton(this.name, this.text, this.imageUrl);
+    this.button = new Button.CreateImageWithCenterTextButton(this.name, this.text, this.imageUrl);
     this.button.width = this.width;
     this.button.height = this.height;
     this.button.color = this.color;
-    // this.button.background = this.background;
+    this.button.background = this.background;
     this.button.verticalAlignment = this.verticalAlignment;
     this.button.horizontalAlignment = this.horizontalAlignment;
     this.button.paddingRight = this.paddingRight;

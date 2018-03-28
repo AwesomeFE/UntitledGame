@@ -44,7 +44,7 @@
             :horizontalAlignment="HORIZONTAL_ALIGNMENT_CENTER"
           />
 
-          <OneBlock width="200px" height="30px">
+          <OneBlock width="100%" height="30px">
             <OneButton
               name="submit"
               text="submit"
@@ -52,6 +52,7 @@
               width="50%"
               :imageUrl="images.button"
               :horizontalAlignment="HORIZONTAL_ALIGNMENT_CENTER"
+              @click="signin"
             />
             <OneButton
               name="cancle"
@@ -60,6 +61,7 @@
               width="50%"
               :imageUrl="images.button"
               :horizontalAlignment="HORIZONTAL_ALIGNMENT_CENTER"
+              @click="exit"
             />
           </OneBlock>
         </OneBlock>
@@ -113,6 +115,14 @@ class GameStartLink extends Vue {
     if(this.user) {
       this.$router.push(this.linkUrls.GAME_HOME);
     }
+  }
+
+  signin() {
+
+  }
+
+  exit() {
+
   }
 }
 

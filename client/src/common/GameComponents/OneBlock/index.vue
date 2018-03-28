@@ -54,6 +54,10 @@ import { Component, Watch } from 'vue-property-decorator';
     paddingRight: {
       type: String,
       default: '0%'
+    },
+    background: {
+      type: String,
+      default: 'transparent'
     }
   }
 })
@@ -75,6 +79,7 @@ class OneBlock extends Vue {
     this.container2D.texture.paddingBottom = this.paddingBottom;
     this.container2D.texture.paddingLeft = this.paddingLeft;
     this.container2D.texture.paddingRight = this.paddingRight;
+    this.container2D.texture.background = this.background;
     this.$container2D.texture.addControl(this.container2D.texture);
   }
 }
