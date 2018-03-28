@@ -39,17 +39,16 @@
 import { Vue } from '../../common';
 import GUI from 'babylonjs-gui';
 import { Vector3 } from 'babylonjs';
-import GameComponents from '../../gameComponents';
 import { Component } from 'vue-property-decorator';
 
 @Component({
   components: {
-    Scene: GameComponents.Scene,
-    Camera: GameComponents.Camera,
-    OneImage: GameComponents.OneImage,
-    OneBlock: GameComponents.OneBlock,
-    OneButton: GameComponents.OneButton,
-    Container2D: GameComponents.Container2D,
+    Scene: Vue.GameComponents.Scene,
+    Camera: Vue.GameComponents.Camera,
+    OneImage: Vue.GameComponents.OneImage,
+    OneBlock: Vue.GameComponents.OneBlock,
+    OneButton: Vue.GameComponents.OneButton,
+    Container2D: Vue.GameComponents.Container2D,
   }
 })
 class Game extends Vue {

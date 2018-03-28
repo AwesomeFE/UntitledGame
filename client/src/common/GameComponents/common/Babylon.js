@@ -1,4 +1,4 @@
-import { Vue } from '../../common';
+import { Vue } from '../../';
 
 class BabylonGUI extends Vue {
   watchingProps(watchArray) {

@@ -3,11 +3,14 @@ import UA from 'ua-parser-js';
 import map from './map';
 import geolocation from './geolocation';
 import { linkUrls, apiUrls } from '../../constants';
+import GameComponents from '../../GameComponents';
 
 class CommonVue extends Vue {
   apiUrls = apiUrls;
   linkUrls = linkUrls;
   isMobile = new UA(navigator.userAgent).getDevice().type === 'mobile';
+
+  static GameComponents = GameComponents;
 
   getGeolocation = async () => await geolocation.getGeolocation(this.isMobile);
 }

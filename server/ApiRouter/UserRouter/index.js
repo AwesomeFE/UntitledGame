@@ -17,10 +17,14 @@ class UserRouter extends BasicRouter {
       }
     },
     handler: async (req, res) => {
-      const { messages } = this;
+      const { messages, formatData } = this;
       const user = await UserController.signUp(req.body);
 
-      res.json(messages.REQUEST_SUCCESS(user));
+      req.session.userId = user._id;
+
+      const projection = user && user.projection;
+      const formatedUser = user && projection && formatData(projection, user);
+      res.json(messages.REQUEST_SUCCESS(formatedUser));
     }
   };
 
@@ -32,14 +36,16 @@ class UserRouter extends BasicRouter {
     },
     validate: (req, res) => {},
     handler: async (req, res) => {
-      const { messages } = this;
+      const { messages, formatData } = this;
 
       const user = await UserController.signIn(req.body);
       await EntryController.log(req.ip, user);
 
       req.session.userId = user._id;
 
-      res.json(messages.REQUEST_SUCCESS(user));
+      const projection = user && user.projection;
+      const formatedUser = user && projection && formatData(projection, user);
+      res.json(messages.REQUEST_SUCCESS(formatedUser));
     }
   };
 
@@ -49,9 +55,9 @@ class UserRouter extends BasicRouter {
     handler: async (req, res) => {
       const { messages, formatData } = this;
       const { user } = req;
+
       const projection = user && user.projection;
       const formatedUser = user && projection && formatData(projection, user);
-
       res.json(messages.REQUEST_SUCCESS(formatedUser));
     }
   };
