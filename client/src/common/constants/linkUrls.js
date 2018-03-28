@@ -5,7 +5,10 @@ export const linkUrls = {
   CART: {
     path: 'cart'
   },
-  GAME: {
+  GAME_START_LINK: {
+    path: 'gameStartLink'
+  },
+  GAME_HOME: {
     path: 'gameHome'
   },
   SIGNIN: {

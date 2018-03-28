@@ -4,9 +4,9 @@
       <Camera :position="position" :target="target" />
       <Container2D>
 
-        <OneBlock name="header" :verticalAlignment="GUI.Control.VERTICAL_ALIGNMENT_TOP">
+        <!-- <OneBlock name="header" :verticalAlignment="GUI.Control.VERTICAL_ALIGNMENT_TOP">
           <OneImage name="header-image" :url="headerUrl" width="100%" height="50px" />
-        </OneBlock>
+        </OneBlock> -->
 
         <!-- <OneBlock name="QuickAction">
           <OneBlock width="100%" height="50px">
@@ -51,17 +51,17 @@ import { Component } from 'vue-property-decorator';
     Container2D: GameComponents.Container2D,
   }
 })
-class Game extends Vue {
+class GameHome extends Vue {
   position = new Vector3(0, 0, -10);
   target = Vector3.Zero();
   GUI = GUI;
-  headerUrl = Vue.images.Game.MainBackgound
+  headerUrl = Vue.images.GameHome.MainBackgound;
 
   mounted() {
   }
 }
 
-export default Game;
+export default GameHome;
 </script>
 
 <style type="text/scss" lang="scss">

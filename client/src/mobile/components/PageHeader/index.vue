@@ -8,7 +8,7 @@
         <span>icon</span>
       </div>
       <div class="right">
-        <router-link class="menu" :to="linkUrls.GAME">{{$t('PageHeader.start')}}</router-link>
+        <router-link class="menu" :to="linkUrls.GAME_START_LINK">{{$t('PageHeader.start')}}</router-link>
         <router-link class="menu" :to="linkUrls.SIGNIN" v-if="!user">{{$t('PageHeader.signin')}}</router-link>
         <router-link class="menu" :to="linkUrls.SIGNUP" v-if="!user">{{$t('PageHeader.signup')}}</router-link>
         <a class="menu">{{$t('PageHeader.account')}}</a>

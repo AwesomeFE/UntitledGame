@@ -1,6 +1,7 @@
 <template>
   <div class="App">
-    <router-view></router-view>
+    <router-view v-if="isSystemPerpared"></router-view>
+    <div v-else>Loading...</div>
   </div>
 </template>
 
@@ -10,8 +11,13 @@ import { Component } from 'vue-property-decorator';
 
 @Component()
 class App extends Vue {
+  // 系统准备标志位
+  isSystemPerpared = false;
+
   async mounted() {
     await this.$store.dispatch('system/getUser');
+
+    this.isSystemPerpared = true;
   }
 }
 

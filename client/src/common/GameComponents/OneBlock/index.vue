@@ -23,6 +23,14 @@ import { Component, Watch } from 'vue-property-decorator';
     isVertical: Boolean,
     horizontalAlignment: Number,
     verticalAlignment: Number,
+    height: {
+      type: String,
+      default: '100%'
+    },
+    width: {
+      type: String,
+      default: '100%'
+    },
     left: {
       type: String,
       default: '0%'
@@ -58,6 +66,8 @@ class OneBlock extends Vue {
     this.container2D.texture = new GUI.StackPanel(this.name);
     this.container2D.texture.top = this.top;
     this.container2D.texture.left = this.left;
+    this.container2D.texture.width = this.width;
+    this.container2D.texture.height = this.height;
     this.container2D.texture.isVertical = this.isVertical;
     this.container2D.texture.horizontalAlignment = this.horizontalAlignment;
     this.container2D.texture.verticalAlignment = this.verticalAlignment;

@@ -3,7 +3,7 @@
 
 <script>
 import Vue from 'vue';
-import GUI from 'babylonjs-gui';
+import { Button } from 'babylonjs-gui';
 import { Component } from 'vue-property-decorator';
 
 @Component({
@@ -11,14 +11,24 @@ import { Component } from 'vue-property-decorator';
     '$container2D'
   ],
   props: {
-    name: String,
-    text: String,
-    horizontalAlignment: Number,
-    verticalAlignment: Number,
-    path: String,
+    name: {
+      type: String
+    },
+    text: {
+      type: String
+    },
+    imageUrl: {
+      type: String
+    },
+    horizontalAlignment: {
+      type: Number
+    },
+    verticalAlignment: {
+      type: Number
+    },
     width: {
       type: String,
-      default: '20%'
+      default: '100%'
     },
     height: {
       type: String,
@@ -54,11 +64,11 @@ class OneButton extends Vue {
   button = null;
 
   mounted() {
-    this.button = new GUI.Button.CreateSimpleButton(this.name, this.text);
+    this.button = new Button.CreateImageButton(this.name, this.text, this.imageUrl);
     this.button.width = this.width;
     this.button.height = this.height;
     this.button.color = this.color;
-    this.button.background = this.background;
+    // this.button.background = this.background;
     this.button.verticalAlignment = this.verticalAlignment;
     this.button.horizontalAlignment = this.horizontalAlignment;
     this.button.paddingRight = this.paddingRight;
@@ -66,12 +76,6 @@ class OneButton extends Vue {
     this.button.paddingLeft = this.paddingLeft;
     this.button.paddingRight = this.paddingRight;
     this.$container2D.texture.addControl(this.button);
-
-    if(this.path) {
-      this.button.onPointerDownObservable.add(() => {
-        this.$router.push(this.path);
-      });
-    }
   }
 }
 
