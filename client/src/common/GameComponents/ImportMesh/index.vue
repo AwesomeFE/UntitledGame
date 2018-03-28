@@ -2,7 +2,7 @@
 </template>
 
 <script>
-import Babylon from '../common/Babylon';
+import Vue from 'vue';
 import { SceneLoader, Vector3 } from 'babylonjs';
 import { Component, Watch } from 'vue-property-decorator';
 import * as handler from './handler';
@@ -45,7 +45,7 @@ import * as handler from './handler';
     }
   }
 })
-class ImportMesh extends Babylon {
+class ImportMesh extends Vue {
   container = null;
   ground = null;
   

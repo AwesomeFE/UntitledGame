@@ -2,7 +2,7 @@
 </template>
 
 <script>
-import Babylon from '../common/Babylon';
+import Vue from 'vue';
 import GUI from 'babylonjs-gui';
 import { Component } from 'vue-property-decorator';
 
@@ -50,7 +50,7 @@ import { Component } from 'vue-property-decorator';
     }
   }
 })
-class OneButton extends Babylon {
+class OneButton extends Vue {
   button = null;
 
   mounted() {

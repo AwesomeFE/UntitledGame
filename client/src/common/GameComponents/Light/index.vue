@@ -2,7 +2,7 @@
 </template>
 
 <script>
-import Babylon from '../common/Babylon';
+import Vue from 'vue';
 import { DirectionalLight, PointLight, SpotLight, HemisphericLight } from 'babylonjs';
 import { Component, Watch } from 'vue-property-decorator';
 
@@ -22,7 +22,7 @@ import { Component, Watch } from 'vue-property-decorator';
     }
   }
 })
-class Light extends Babylon {
+class Light extends Vue {
   light = null;
 
   mounted() {

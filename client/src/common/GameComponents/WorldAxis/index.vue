@@ -2,7 +2,7 @@
 </template>
 
 <script>
-import { Vue } from '../../';
+import Vue from 'vue';
 import { DynamicTexture, Mesh, StandardMaterial, Color3, Vector3 } from 'babylonjs';
 import { Component } from 'vue-property-decorator';
 

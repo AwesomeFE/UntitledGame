@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Babylon from '../common/Babylon';
+import Vue from 'vue';
 import GUI, { AdvancedDynamicTexture } from 'babylonjs-gui';
 import { Component, Watch } from 'vue-property-decorator';
 
@@ -19,7 +19,7 @@ import { Component, Watch } from 'vue-property-decorator';
     };
   }
 })
-class Container2D extends Babylon {
+class Container2D extends Vue {
   container2D = {
     texture: null
   };

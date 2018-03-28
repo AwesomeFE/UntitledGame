@@ -2,7 +2,7 @@
 </template>
 
 <script>
-import { Vue } from '../../';
+import Vue from 'vue';
 import { MeshBuilder, StandardMaterial, Texture, Vector3 } from 'babylonjs';
 import { Component, Watch } from 'vue-property-decorator';
 

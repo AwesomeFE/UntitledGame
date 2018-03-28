@@ -2,8 +2,8 @@
 </template>
 
 <script>
-import Babylon from '../common/Babylon';
-import { watchArray } from './configs';
+import Vue from 'vue';
+import strings from './strings';
 import { UniversalCamera, Vector3, FreeCamera, ArcRotateCamera } from 'babylonjs';
 import { Component, Watch } from 'vue-property-decorator';
 
@@ -37,23 +37,22 @@ import { Component, Watch } from 'vue-property-decorator';
     }
   }
 })
-class Camera extends Babylon {
+class Camera extends Vue {
   mounted() {
-    const { Game } = Babylon.strings;
     const { scene, canvas } = this.$system;
 
     const position = this.position;
     const target = this.target;
 
     switch(this.type) {
-      case Game.CAMERA.ARC:
+      case strings.ARC:
         this.$system.camera = new ArcRotateCamera(this.name, this.alpha, this.beta, this.radius, target, scene);
         this.$system.camera.setPosition(position);
         break;
-      case Game.CAMERA.UNIVERSAL:
+      case strings.UNIVERSAL:
         this.$system.camera = new UniversalCamera(this.name, position, scene);
         break;
-      case Game.CAMERA.FREE:
+      case strings.FREE:
       default:
         this.$system.camera = new FreeCamera(this.name, position, scene);
         break;
@@ -63,8 +62,6 @@ class Camera extends Babylon {
     if(this.canRotate) {
       this.$system.camera.attachControl(canvas, false);
     }
-
-    this.watchingProps(watchArray);
   }
 }
 

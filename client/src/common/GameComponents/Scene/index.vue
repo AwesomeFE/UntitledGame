@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Babylon from '../common/Babylon';
+import Vue from 'vue';
 import { Scene, Engine, MeshBuilder, Vector3 } from 'babylonjs';
 import { Component, Watch, Provide } from 'vue-property-decorator';
 
@@ -28,7 +28,7 @@ import { Component, Watch, Provide } from 'vue-property-decorator';
     return { $system: this.system };
   }
 })
-class SceneClass extends Babylon {
+class SceneClass extends Vue {
   system = {
     engine: null,
     scene: null,

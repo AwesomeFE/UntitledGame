@@ -2,7 +2,7 @@
 </template>
 
 <script>
-import Babylon from '../common/Babylon';
+import Vue from 'vue';
 import { MeshBuilder, StandardMaterial, Texture } from 'babylonjs';
 import { Component, Watch } from 'vue-property-decorator';
 
@@ -37,7 +37,7 @@ import { Component, Watch } from 'vue-property-decorator';
     }
   }
 })
-class Ground extends Babylon {
+class Ground extends Vue {
   ground = null;
 
   mounted() {

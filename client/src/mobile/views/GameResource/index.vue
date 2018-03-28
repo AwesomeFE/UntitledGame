@@ -34,7 +34,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { Vue } from '../../common';
+import { Vue, GameComponents } from '../../common';
 import { Vector3 } from 'babylonjs';
 import { Component } from 'vue-property-decorator';
 
@@ -42,17 +42,17 @@ const images = Vue.images.Game.resources;
 
 @Component({
   components: {
-    Scene: Vue.GameComponents.Scene,
-    Light: Vue.GameComponents.Light,
-    Camera: Vue.GameComponents.Camera,
-    Ground: Vue.GameComponents.Ground,
-    Plane: Vue.GameComponents.Plane,
-    ImportMesh: Vue.GameComponents.ImportMesh,
-    OneImage: Vue.GameComponents.OneImage,
-    OneBlock: Vue.GameComponents.OneBlock,
-    OneButton: Vue.GameComponents.OneButton,
-    Container2D: Vue.GameComponents.Container2D,
-    WorldAxis: Vue.GameComponents.WorldAxis,
+    Scene: GameComponents.Scene,
+    Light: GameComponents.Light,
+    Camera: GameComponents.Camera,
+    Ground: GameComponents.Ground,
+    Plane: GameComponents.Plane,
+    ImportMesh: GameComponents.ImportMesh,
+    OneImage: GameComponents.OneImage,
+    OneBlock: GameComponents.OneBlock,
+    OneButton: GameComponents.OneButton,
+    Container2D: GameComponents.Container2D,
+    WorldAxis: GameComponents.WorldAxis,
   }
 })
 class GameResource extends Vue {
