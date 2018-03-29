@@ -74,8 +74,12 @@ class ImportMesh extends Vue {
   }
 
   setPosition() {
-    const y = this.ground.getHeightAtCoordinates(this.position.x, this.position.z);
-    this.container.meshes[0].position = new Vector3(this.position.x, y, this.position.z);
+    const x = this.position && this.position.x || 0;
+    const z = this.position && this.position.z || 0;
+    const y = this.position && this.position.y
+      || this.ground && this.ground.getHeightAtCoordinates(x, z)
+      || 0;
+    this.container.meshes[0].position = new Vector3(x, y, z);
   }
   
   setRotation() {

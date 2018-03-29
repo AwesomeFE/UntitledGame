@@ -42,16 +42,19 @@ class Ground extends Vue {
 
   mounted() {
     const { scene } = this.$system;
-    this.ground = MeshBuilder.CreateGroundFromHeightMap(this.name, this.heightMap, this.getOption(), scene);
-    // this.ground = MeshBuilder.CreateGround(this.name, this.getOption(), scene);
+    this.ground = this.heightMap
+      ? MeshBuilder.CreateGroundFromHeightMap(this.name, this.heightMap, this.getOption(), scene)
+      : MeshBuilder.CreateGround(this.name, this.getOption(), scene);
 
-    const groundMaterial = new StandardMaterial(`${this.name}Mat`, scene);
-    groundMaterial.diffuseTexture = new Texture(this.material, scene);
-    groundMaterial.diffuseTexture.uScale = 5.0;
-    groundMaterial.diffuseTexture.vScale = 5.0;
+    if(this.material) {
+      const groundMaterial = new StandardMaterial(`${this.name}Mat`, scene);
+      groundMaterial.diffuseTexture = new Texture(this.material, scene);
+      groundMaterial.diffuseTexture.uScale = 5.0;
+      groundMaterial.diffuseTexture.vScale = 5.0;
 
-    this.ground.material = groundMaterial;
-    	
+      this.ground.material = groundMaterial;
+    }
+
     this.ground.checkCollisions = true;
   }
 

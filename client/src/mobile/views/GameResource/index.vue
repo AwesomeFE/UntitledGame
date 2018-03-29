@@ -38,7 +38,7 @@ import { Vue, GameComponents } from '../../common';
 import { Vector3 } from 'babylonjs';
 import { Component } from 'vue-property-decorator';
 
-const images = Vue.images.Game.resources;
+const images = Vue.images.GameResource;
 
 @Component({
   components: {
@@ -77,8 +77,8 @@ class GameResource extends Vue {
   ground = {
     width: 100,
     height: 100,
-    heightMap: images.ground.heightMap,
-    material: images.ground.material
+    heightMap: images.heightMap,
+    material: images.material
   };
 
   resources = [];
