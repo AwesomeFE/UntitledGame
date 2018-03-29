@@ -15,9 +15,9 @@ FormSignIn:
     placeholder: '请输入密码'
 
 GameSignIn:
-  title: '登录页面'
+  title: '登录'
   desc: 'Login'
-  submit: '递交'
+  submit: '登录'
   cancel: '取消'
   username:
     label: "账  号"
