@@ -7,11 +7,23 @@ PageHeader:
   account: '账户'
 
 FormSignIn:
-  title: '登录页面'
+  title: '登录'
   submit: '递交'
   username:
     placeholder: '请输入用户名'
   password:
+    placeholder: '请输入密码'
+
+GameSignIn:
+  title: '登录页面'
+  desc: 'Login'
+  submit: '递交'
+  cancel: '取消'
+  username:
+    label: "账  号"
+    placeholder: '请输入账号'
+  password:
+    label: "密  码"
     placeholder: '请输入密码'
 
 FormSignUp:

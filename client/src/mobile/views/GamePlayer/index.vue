@@ -1,9 +1,8 @@
 <template>
   <div class="Game">
-    <Scene name="StartLink">
+    <Scene name="Player">
       <Camera :position="camera.position" :target="camera.target" />
     </Scene>
-    <GameSignIn />
   </div>
 </template>
 
@@ -12,15 +11,13 @@ import { mapState } from 'vuex';
 import { Vector3 } from 'babylonjs';
 import { Component } from 'vue-property-decorator';
 import { Vue, GameComponents } from '../../common';
-import GameSignIn from '../../components/GameSignIn';
 
-const images = Vue.images.GameStartLink;
+const images = Vue.images.GamePlayer;
 
 @Component({
   components: {
     Scene: GameComponents.Scene,
-    Camera: GameComponents.Camera,
-    GameSignIn
+    Camera: GameComponents.Camera
   },
   computed: {
     ...mapState('system', {
@@ -28,7 +25,7 @@ const images = Vue.images.GameStartLink;
     })
   }
 })
-class GameStartLink extends Vue {
+class GamePlayer extends Vue {
   images = images;
 
   camera = {
@@ -37,13 +34,13 @@ class GameStartLink extends Vue {
   };
 
   mounted() {
-    if(this.user) {
-      return this.$router.push(this.linkUrls.GAME_PLAYER);
+    if(!this.user) {
+      return this.$router.push(this.linkUrls.GAME_START_LINK);
     }
   }
 }
 
-export default GameStartLink;
+export default GamePlayer;
 </script>
 
 <style type="text/scss" lang="scss">

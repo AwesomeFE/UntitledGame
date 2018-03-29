@@ -101,6 +101,7 @@ html,
   width: 100%;
 }
 .canvas {
+  position: absolute;
   display: block;
   outline: none;
   touch-action: none;

@@ -8,6 +8,9 @@ export const linkUrls = {
   GAME_START_LINK: {
     path: 'gameStartLink'
   },
+  GAME_PLAYER: {
+    path: 'gamePlayer'
+  },
   GAME_HOME: {
     path: 'gameHome'
   },

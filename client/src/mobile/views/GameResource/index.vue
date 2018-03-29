@@ -53,6 +53,11 @@ const images = Vue.images.Game.resources;
     OneButton: GameComponents.OneButton,
     Container2D: GameComponents.Container2D,
     WorldAxis: GameComponents.WorldAxis,
+  },
+  computed: {
+    ...mapState('system', {
+      user: state => state.user
+    })
   }
 })
 class GameResource extends Vue {

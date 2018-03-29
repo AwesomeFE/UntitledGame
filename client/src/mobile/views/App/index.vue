@@ -16,8 +16,14 @@ class App extends Vue {
 
   async mounted() {
     await this.$store.dispatch('system/getUser');
-
     this.isSystemPerpared = true;
+    this.setBaseFontSize();
+  }
+
+  setBaseFontSize() {
+    const baseWidth = 667; // 以iphone7为基础宽度
+
+    document.documentElement.style.fontSize = `${document.body.clientWidth / baseWidth * 100}px`;
   }
 }
 
@@ -28,6 +34,8 @@ export default App;
 @import '../../assets/scss/variable.scss';
 
 .App {
+  font-size: 0.12rem;
+  font-weight: 400;
   .PageBody {
     min-height: $page-min-height;
     padding-bottom: $footer-height;
