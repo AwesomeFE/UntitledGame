@@ -36,6 +36,7 @@ GamePlayer:
 GameHome:
   ActionBar:
     resource: '资源'
+    player: '选择角色'
 
 GameResource:
   ActionBar:

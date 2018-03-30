@@ -10,6 +10,12 @@
         :to="linkUrls.GAME_RESOURCE(playerId)">
         {{$t('GameHome.ActionBar.resource')}}
       </router-link>
+
+      <router-link
+        class="button"
+        :to="linkUrls.GAME_PLAYER()">
+        {{$t('GameHome.ActionBar.player')}}
+      </router-link>
     </div>
   </div>
 </template>
