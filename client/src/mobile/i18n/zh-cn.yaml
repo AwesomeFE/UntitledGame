@@ -33,6 +33,14 @@ GamePlayer:
     next: '下一个'
     prev: '前一个'
 
+GameHome:
+  ActionBar:
+    resource: '资源'
+
+GameResource:
+  ActionBar:
+    return: '返回'
+
 FormSignUp:
   title: '注册页面'
   submit: '递交'

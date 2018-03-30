@@ -1,8 +1,16 @@
 <template>
-  <div class="Game">
+  <div class="Game Home">
     <Scene name="Home">
       <Camera :position="position" :target="target" />
     </Scene>
+
+    <div class="ActionBar">
+      <router-link
+        class="button"
+        :to="linkUrls.GAME_RESOURCE(playerId)">
+        {{$t('GameHome.ActionBar.resource')}}
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -15,6 +23,9 @@ import { Component } from 'vue-property-decorator';
 const images = Vue.images.GameHome;
 
 @Component({
+  props: [
+    'playerId'
+  ],
   components: {
     Scene: GameComponents.Scene,
     Camera: GameComponents.Camera
@@ -40,4 +51,17 @@ export default GameHome;
 </script>
 
 <style type="text/scss" lang="scss">
+.Game {
+  .ActionBar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: blue;
+  }
+  .button {
+    display: inline-block;
+    padding: 10px;
+    background: white;
+  }
+}
 </style>

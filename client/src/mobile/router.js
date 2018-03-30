@@ -26,7 +26,8 @@ export default () => new VueRouter({
         },
         {
           path: 'game/:playerId',
-          component: () => import('./views/GameHome')
+          component: () => import('./views/GameHome'),
+          props: true
         },
         {
           path: 'game/:playerId/resource',

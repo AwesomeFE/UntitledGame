@@ -13,7 +13,7 @@
     <div class="ActionBar">
       <router-link
         class="button"
-        to="linkUrls.GAME_PLAYER_CREATOR">
+        :to="linkUrls.GAME_PLAYER_CREATOR()">
         {{$t('GamePlayer.ActionBar.create')}}
       </router-link>
 

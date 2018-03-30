@@ -11,10 +11,6 @@
         :heightMap="ground.heightMap"
         :material="ground.material"
       />
-      <Container2D>
-        <OneButton width="100px" height="50px" text="返回" paddingRight="30px" path="gameHome" />
-      </Container2D>
-
       <ImportMesh
         v-for="resource in resources"
         :key="resource.id"
@@ -29,6 +25,14 @@
         onGroundName="ground"
       ></ImportMesh>
     </Scene>
+
+    <div class="ActionBar">
+      <router-link
+        class="button"
+        :to="linkUrls.GAME_HOME(playerId)">
+        {{$t('GameResource.ActionBar.return')}}
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -41,6 +45,9 @@ import { Component } from 'vue-property-decorator';
 const images = Vue.images.GameResource;
 
 @Component({
+  props: [
+    'playerId'
+  ],
   components: {
     Scene: GameComponents.Scene,
     Light: GameComponents.Light,
@@ -129,4 +136,17 @@ export default GameResource;
 </script>
 
 <style type="text/scss" lang="scss">
+.Resource {
+  .ActionBar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: blue;
+  }
+  .button {
+    display: inline-block;
+    padding: 10px;
+    background: white;
+  }
+}
 </style>
