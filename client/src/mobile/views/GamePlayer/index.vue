@@ -8,6 +8,38 @@
         :height="ground.height"
       />
       <Light :direction="light.direction" />
+      <ImportMesh
+        :name="'gPlayer'"
+        :assetUrl="gPlayer.assetUrl"
+        :position="gPlayer.position"
+        :scaling="gPlayer.scaling"
+        :rotation="gPlayer.rotation"
+        onGroundName="ground"
+      />
+      <ImportMesh
+        :name="'gPlayer'"
+        :assetUrl="gPlayer1.assetUrl"
+        :position="gPlayer1.position"
+        :scaling="gPlayer1.scaling"
+        :rotation="gPlayer1.rotation"
+        onGroundName="ground"
+      />
+      <ImportMesh
+        :name="'gPlayer'"
+        :assetUrl="gPlayer2.assetUrl"
+        :position="gPlayer2.position"
+        :scaling="gPlayer2.scaling"
+        :rotation="gPlayer2.rotation"
+        onGroundName="ground"
+      />
+      <ImportMesh
+        :name="'gPlayer'"
+        :assetUrl="gPlayer3.assetUrl"
+        :position="gPlayer3.position"
+        :scaling="gPlayer3.scaling"
+        :rotation="gPlayer3.rotation"
+        onGroundName="ground"
+      />
     </Scene>
     
     <div class="ActionBar">
@@ -42,13 +74,15 @@ import { Component } from 'vue-property-decorator';
 import { Vue, GameComponents } from '../../common';
 
 const images = Vue.images.GamePlayer;
+const assets = Vue.assets;
 
 @Component({
   components: {
     Scene: GameComponents.Scene,
     Camera: GameComponents.Camera,
     Ground: GameComponents.Ground,
-    Light: GameComponents.Light
+    Light: GameComponents.Light,
+    ImportMesh: GameComponents.ImportMesh
   },
   computed: {
     ...mapState('system', {
@@ -60,17 +94,45 @@ class GamePlayer extends Vue {
   images = images;
 
   ground = {
-    width: 10,
-    height: 10
+    width: 100,
+    height: 100
   };
 
   camera = {
-    position: new Vector3(0, 5.5, 20),
-    target: new Vector3(0, 8, -10)
+    position: new Vector3(0, 5.5, -20),
+    target: new Vector3(0, 5.5, 0)
   };
 
   light = {
-    direction: new Vector3(0, -50, -20)
+    direction: new Vector3(0, -20, 20)
+  };
+
+  gPlayer = {
+    assetUrl: assets.gPlayer.babylon,
+    position: new Vector3(0, 0, -10),
+    scaling: new Vector3(7, 7, 7),
+    rotation: new Vector3(0, 0, 0),
+  };
+
+  gPlayer1 = {
+    assetUrl: assets.gPlayer.babylon,
+    position: new Vector3(10, 0, 0),
+    scaling: new Vector3(7, 7, 7),
+    rotation: new Vector3(0, -90 / 180 * Math.PI, 0),
+  };
+
+  gPlayer2 = {
+    assetUrl: assets.gPlayer.babylon,
+    position: new Vector3(0, 0, 10),
+    scaling: new Vector3(7, 7, 7),
+    rotation: new Vector3(0, Math.PI, 0),
+  };
+
+  gPlayer3 = {
+    assetUrl: assets.gPlayer.babylon,
+    position: new Vector3(-10, 0, 0),
+    scaling: new Vector3(7, 7, 7),
+    rotation: new Vector3(0, 90 / 180 * Math.PI, 0),
   };
 
   mounted() {
