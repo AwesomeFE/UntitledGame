@@ -1,6 +1,6 @@
 <template>
   <div class="Game StartLink">
-    <Scene name="StartLink">
+    <Scene name="StartLink" :isShowFPS="true">
       <Camera type="Arc" :position="camera.position" :target="camera.target" :alpha="0" :beta="0" :radius="-100" />
       <Ground
         name="ground"

@@ -1,6 +1,6 @@
 <template>
   <div class="Game Player">
-    <Scene name="Player">
+    <Scene name="Player" :isShowFPS="true">
       <Camera type="Arc" :position="camera.position" :target="camera.target" :alpha="0" :beta="0" :radius="-100" />
       <Ground
         name="ground"
