@@ -31,7 +31,8 @@ export default () => new VueRouter({
         },
         {
           path: 'game/:playerId/resource',
-          component: () => import('./views/GameResource')
+          component: () => import('./views/GameResource'),
+          props: true
         },
         {
           path: '*',
