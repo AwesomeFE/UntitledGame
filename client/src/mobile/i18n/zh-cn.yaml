@@ -26,6 +26,13 @@ GameSignIn:
     label: "密  码"
     placeholder: '请输入密码'
 
+GamePlayer:
+  ActionBar:
+    create: '创建'
+    enter: '选择'
+    next: '下一个'
+    prev: '前一个'
+
 FormSignUp:
   title: '注册页面'
   submit: '递交'

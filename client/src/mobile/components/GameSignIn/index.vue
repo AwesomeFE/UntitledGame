@@ -73,7 +73,7 @@ class GameSignIn extends Vue {
       try {
         this.disableFrom();
         await this.$store.dispatch('system/signin', this.formData);
-        this.$router.push(this.linkUrls.GAME_HOME);
+        this.$router.push(this.linkUrls.GAME_PLAYER());
       } catch(e) {
         this.enableFrom();
       }

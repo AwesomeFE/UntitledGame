@@ -1,16 +1,16 @@
 <template>
   <div class="PageHeader">
     <div class="PageHeader__logo">
-      <router-link :to="linkUrls.HOME">{{$t('PageHeader.logo')}}</router-link>
+      <router-link :to="linkUrls.HOME()">{{$t('PageHeader.logo')}}</router-link>
     </div>
     <div class="PageHeader__body">
       <div class="left">
         <span>icon</span>
       </div>
       <div class="right">
-        <router-link class="menu" :to="linkUrls.GAME_START_LINK">{{$t('PageHeader.start')}}</router-link>
-        <router-link class="menu" :to="linkUrls.SIGNIN" v-if="!user">{{$t('PageHeader.signin')}}</router-link>
-        <router-link class="menu" :to="linkUrls.SIGNUP" v-if="!user">{{$t('PageHeader.signup')}}</router-link>
+        <router-link class="menu" :to="linkUrls.GAME_START_LINK()">{{$t('PageHeader.start')}}</router-link>
+        <router-link class="menu" :to="linkUrls.SIGNIN()" v-if="!user">{{$t('PageHeader.signin')}}</router-link>
+        <router-link class="menu" :to="linkUrls.SIGNUP()" v-if="!user">{{$t('PageHeader.signup')}}</router-link>
         <a class="menu">{{$t('PageHeader.account')}}</a>
         <a class="menu" v-if="user" @click="signout">{{$t('PageHeader.signout')}}</a>
       </div>

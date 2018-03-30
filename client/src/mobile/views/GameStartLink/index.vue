@@ -1,7 +1,6 @@
 <template>
-  <div class="Game">
+  <div class="Game StartLink">
     <Scene name="StartLink">
-      <!-- <Camera :position="camera.position" :target="camera.target" /> -->
       <Camera type="Arc" :position="camera.position" :target="camera.target" :alpha="0" :beta="0" :radius="-100" />
       <Ground
         name="ground"
@@ -73,7 +72,7 @@ class GameStartLink extends Vue {
 
   mounted() {
     if(this.user) {
-      return this.$router.push(this.linkUrls.GAME_PLAYER);
+      return this.$router.push(this.linkUrls.GAME_PLAYER());
     }
   }
 }
@@ -82,4 +81,7 @@ export default GameStartLink;
 </script>
 
 <style type="text/scss" lang="scss">
+.StartLink {
+
+}
 </style>

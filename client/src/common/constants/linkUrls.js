@@ -1,28 +1,28 @@
 export const linkUrls = {
-  HOME: {
+  HOME: () => ({
     path: '/'
-  },
-  CART: {
-    path: 'cart'
-  },
-  GAME_START_LINK: {
-    path: 'gameStartLink'
-  },
-  GAME_PLAYER: {
-    path: 'gamePlayer'
-  },
-  GAME_HOME: {
-    path: 'gameHome'
-  },
-  SIGNIN: {
-    path: 'entry',
+  }),
+  CART: () => ({
+    path: '/cart'
+  }),
+  GAME_START_LINK: () => ({
+    path: '/game/startLink'
+  }),
+  GAME_PLAYER: () => ({
+    path: '/game/player'
+  }),
+  GAME_PLAYER_CREATOR: () => ({
+    path: '/game/player/creator'
+  }),
+  GAME_HOME: (playerId) => ({
+    path: `/game/${playerId}`
+  }),
+  SIGNIN: () => ({
+    path: '/entry',
     query: { type: 'signin' }
-  },
-  SIGNUP: {
-    path: 'entry',
+  }),
+  SIGNUP: () => ({
+    path: '/entry',
     query: { type: 'signup' }
-  },
-  SIGNOUT: {
-    path: 'api/user/signout',
-  }
+  })
 };

@@ -1,5 +1,5 @@
 <template>
-  <div class="Game">
+  <div class="Game Resource">
     <Scene name="Resource" :gravity="scene.gravity" :isShowFPS="true" @click="clickHandler">
       <Camera type="Arc" :position="camera.position" :target="camera.target" :alpha="0" :beta="0" :radius="-10" />
       <WorldAxis />

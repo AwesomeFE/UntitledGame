@@ -31,7 +31,7 @@ class GameHome extends Vue {
 
   mounted() {
     if(!this.user) {
-      return this.$router.push(this.linkUrls.GAME_START_LINK);
+      return this.$router.push(this.linkUrls.GAME_START_LINK());
     }
   }
 }
