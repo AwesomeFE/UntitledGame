@@ -9,6 +9,14 @@ const UserSchema = new Schema({
   password: {
     type: String,
     required: true
+  },
+  players: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Player'
+  }],
+  projection: {
+    type: String,
+    default: 'password __v updatedAt createdAt projection'
   }
 }, {timestamps: true});
 

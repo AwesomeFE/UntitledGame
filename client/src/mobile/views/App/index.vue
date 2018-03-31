@@ -1,28 +1,29 @@
 <template>
   <div class="App">
-    <PageHeader></PageHeader>
-    <div class="PageBody">
-      <router-view></router-view>
-    </div>
-    <PageFooter></PageFooter>
+    <router-view v-if="isSystemPerpared"></router-view>
+    <div v-else>Loading...</div>
   </div>
 </template>
 
 <script>
 import { Vue } from '../../common';
-import PageHeader from '../../components/PageHeader';
-import PageFooter from '../../components/PageFooter';
 import { Component } from 'vue-property-decorator';
 
-@Component({
-  components: {
-    PageHeader,
-    PageFooter
-  }
-})
+@Component()
 class App extends Vue {
+  // 系统准备标志位
+  isSystemPerpared = false;
+
   async mounted() {
-    await this.$store.dispatch('preLogin');
+    await this.$store.dispatch('system/getUser');
+    this.isSystemPerpared = true;
+    this.setBaseFontSize();
+  }
+
+  setBaseFontSize() {
+    const baseWidth = 667; // 以iphone7为基础宽度
+
+    document.documentElement.style.fontSize = `${document.body.clientWidth / baseWidth * 100}px`;
   }
 }
 
@@ -33,9 +34,8 @@ export default App;
 @import '../../assets/scss/variable.scss';
 
 .App {
-  min-height: 100vh;
-  min-width: 750px;
-  position: relative;
+  font-size: 0.12rem;
+  font-weight: 400;
   .PageBody {
     min-height: $page-min-height;
     padding-bottom: $footer-height;

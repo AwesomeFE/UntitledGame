@@ -37,6 +37,7 @@ export function initService() {
 
   Vue.config.errorHandler = (error, vm, info) => {
     console.log(error);
+    alert(error);
   };
 };
 

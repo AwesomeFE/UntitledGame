@@ -22,7 +22,11 @@ export default [
     // Dynamic import modules should be declared.
     // Link: https://github.com/webpack/webpack/issues/4360
     vendor: [
-      'vue-property-decorator'
+      'vue-property-decorator',
+      'babylonjs',
+      'babylonjs-gui',
+      // for mobile touch library
+      'handjs'
     ]
   }),
   webpackTask({

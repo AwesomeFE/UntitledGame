@@ -1,8 +1,13 @@
 import UserRouter from './UserRouter';
-import * as middlewares from './Middlewares';
+import PlayerRouter from './PlayerRouter';
+import middlewares from './Middlewares';
 
 export default [
-  middlewares.ensureSignIn,
+  middlewares.setUser,
   { path: '/user/signin', method: 'post', ...UserRouter.signIn },
-  { path: '/user/signup', method: 'post', ...UserRouter.signUp }
+  { path: '/user/signup', method: 'post', ...UserRouter.signUp },
+  { path: '/user', method: 'get', ...UserRouter.getSessionUser },
+  middlewares.ensureSignIn,
+  { path: '/user/signout', method: 'get', ...UserRouter.signout },
+  { path: '/player', method: 'post', ...PlayerRouter.create }
 ];

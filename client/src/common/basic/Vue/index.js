@@ -9,7 +9,6 @@ class CommonVue extends Vue {
   linkUrls = linkUrls;
   isMobile = new UA(navigator.userAgent).getDevice().type === 'mobile';
 
-
   getGeolocation = async () => await geolocation.getGeolocation(this.isMobile);
 }
 
