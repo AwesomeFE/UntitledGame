@@ -1,15 +1,16 @@
 <template>
   <div class="Scene">
     <canvas class="canvas" :id="name" ref="canvas" touch-action="none"></canvas>
-    <div class="fps" v-if="isShowFPS">{{fps}}</div>
     <slot class="Elments" v-if="system.canvas"></slot>
   </div>
 </template>
 
 <script>
 import Vue from 'vue';
-import { Scene, Engine, MeshBuilder, Vector3 } from 'babylonjs';
+import BABYLON, { Scene, Engine, MeshBuilder, Vector3 } from 'babylonjs';
 import { Component, Watch, Provide } from 'vue-property-decorator';
+
+BABYLON.DebugLayer.InspectorURL = '/public/mobile/javascripts/babylon.inspector.bundle.js';
 
 @Component({
   props: {
@@ -20,7 +21,7 @@ import { Component, Watch, Provide } from 'vue-property-decorator';
     gravity: {
       type: Object
     },
-    isShowFPS: {
+    isShowDebug: {
       type: Boolean
     }
   },
@@ -36,8 +37,6 @@ class SceneClass extends Vue {
     camera: null
   };
 
-  fps = 0;
-
   mounted() {
     this.system.canvas = this.$refs.canvas;
     this.resizeHandler = this.resizeHandler.bind(this);
@@ -48,17 +47,15 @@ class SceneClass extends Vue {
 
     this.system.engine.runRenderLoop(this.renderLoop);
 
+    this.system.scene.ambientColor = new Vector3(1, 1, 1);
+
     if(this.gravity) {
       this.system.scene.gravity = this.gravity;	
       this.system.scene.collisionsEnabled = true;	
       this.system.scene.workerCollisions = true;
     }
 
-    if(this.isShowFPS) {
-      setInterval(() => {
-        this.fps = Math.round(this.system.engine.getFps());
-      }, 200);
-    }
+    this.isShowDebug ? this.showDebugLayer() : null;
 
     window.addEventListener('resize', this.resizeHandler);
     document.addEventListener('touchend', this.clickHandler);
@@ -83,6 +80,21 @@ class SceneClass extends Vue {
     const { scene } = this.system;
     
     this.$emit('click', scene.pick(scene.pointerX, scene.pointerY));
+  }
+
+  showDebugLayer() {
+    this.system.scene.debugLayer.show({
+      initialTab : 2, 
+      newColors: {
+        backgroundColor: '#eee',
+        backgroundColorLighter: '#fff',
+        backgroundColorLighter2: '#fff',
+        backgroundColorLighter3: '#fff',
+        color: '#333',
+        colorTop:'red', 
+        colorBottom:'blue'
+      }
+    });
   }
 }
 
@@ -115,13 +127,5 @@ body, html {
   -ms-touch-action: none;
   touch-action: none;
   touch-action-delay: none;
-}
-.fps {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 10px;
-  color: white;
-  background: gray;
 }
 </style>

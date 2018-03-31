@@ -3,7 +3,7 @@
 
 <script>
 import Vue from 'vue';
-import { DirectionalLight, PointLight, SpotLight, HemisphericLight } from 'babylonjs';
+import { DirectionalLight, PointLight, SpotLight, HemisphericLight, Vector3 } from 'babylonjs';
 import { Component, Watch } from 'vue-property-decorator';
 
 @Component({
@@ -27,6 +27,7 @@ class Light extends Vue {
 
   mounted() {
     this.light = new DirectionalLight(this.name, this.direction, this.$system.scene);
+    this.light.groundColor = new Vector3(0.5, 0.5, 0.5);
   }
 }
 

@@ -27,7 +27,6 @@
     "body-parser": "^1.18.2",
     "canvas": "^1.6.9",
     "casual": "^1.5.19",
-    "ccap": "^0.6.10",
     "connect-mongo": "^2.0.1",
     "cross-env": "^5.1.3",
     "dotenv": "^5.0.0",

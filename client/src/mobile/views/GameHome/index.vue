@@ -1,6 +1,6 @@
 <template>
   <div class="Game Home">
-    <Scene name="Home" :isShowFPS="true">
+    <Scene name="Home" :isShowDebug="true">
       <Camera :position="position" :target="target" />
     </Scene>
 

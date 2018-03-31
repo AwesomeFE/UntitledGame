@@ -3,7 +3,7 @@
     <PageHeader></PageHeader>
 
     <div class="PageBody">
-      {{$t('Home.main')}}
+      {{$t('Home.main')}}1
     </div>
 
     <PageFooter></PageFooter>

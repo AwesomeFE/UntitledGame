@@ -14,7 +14,11 @@ export function copyWebpackPlugin(options) {
       {
         from: `./client/src/${appName}/assets/lib/workbox-sw.prod.v2.1.2.js.map`,
         to: `javascripts/workbox-sw.prod.v2.1.2.js.map`
-      }
+      },
+      {
+        from: `./client/src/${appName}/assets/lib/babylon.inspector.bundle.js`,
+        to: `javascripts/babylon.inspector.bundle.js`
+      },
     ])
   ];
 }

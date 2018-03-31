@@ -1,6 +1,6 @@
 <template>
   <div class="Game Player">
-    <Scene name="Player" :isShowFPS="true">
+    <Scene name="Player" :isShowDebug="true">
       <Camera type="Arc" :position="camera.position" :target="camera.target" :alpha="0" :beta="0" :radius="-100" />
       <Ground
         name="ground"
@@ -8,38 +8,6 @@
         :height="ground.height"
       />
       <Light :direction="light.direction" />
-      <ImportMesh
-        :name="'gPlayer'"
-        :assetUrl="gPlayer.assetUrl"
-        :position="gPlayer.position"
-        :scaling="gPlayer.scaling"
-        :rotation="gPlayer.rotation"
-        onGroundName="ground"
-      />
-      <ImportMesh
-        :name="'gPlayer'"
-        :assetUrl="gPlayer1.assetUrl"
-        :position="gPlayer1.position"
-        :scaling="gPlayer1.scaling"
-        :rotation="gPlayer1.rotation"
-        onGroundName="ground"
-      />
-      <ImportMesh
-        :name="'gPlayer'"
-        :assetUrl="gPlayer2.assetUrl"
-        :position="gPlayer2.position"
-        :scaling="gPlayer2.scaling"
-        :rotation="gPlayer2.rotation"
-        onGroundName="ground"
-      />
-      <ImportMesh
-        :name="'gPlayer'"
-        :assetUrl="gPlayer3.assetUrl"
-        :position="gPlayer3.position"
-        :scaling="gPlayer3.scaling"
-        :rotation="gPlayer3.rotation"
-        onGroundName="ground"
-      />
     </Scene>
     
     <div class="ActionBar">
@@ -94,8 +62,8 @@ class GamePlayer extends Vue {
   images = images;
 
   ground = {
-    width: 100,
-    height: 100
+    width: 10,
+    height: 10
   };
 
   camera = {
@@ -114,26 +82,26 @@ class GamePlayer extends Vue {
     rotation: new Vector3(0, 0, 0),
   };
 
-  gPlayer1 = {
-    assetUrl: assets.gPlayer.babylon,
-    position: new Vector3(10, 0, 0),
-    scaling: new Vector3(7, 7, 7),
-    rotation: new Vector3(0, -90 / 180 * Math.PI, 0),
-  };
+  // gPlayer1 = {
+  //   assetUrl: assets.gPlayer.babylon,
+  //   position: new Vector3(10, 0, 0),
+  //   scaling: new Vector3(7, 7, 7),
+  //   rotation: new Vector3(0, -90 / 180 * Math.PI, 0),
+  // };
 
-  gPlayer2 = {
-    assetUrl: assets.gPlayer.babylon,
-    position: new Vector3(0, 0, 10),
-    scaling: new Vector3(7, 7, 7),
-    rotation: new Vector3(0, Math.PI, 0),
-  };
+  // gPlayer2 = {
+  //   assetUrl: assets.gPlayer.babylon,
+  //   position: new Vector3(0, 0, 10),
+  //   scaling: new Vector3(7, 7, 7),
+  //   rotation: new Vector3(0, Math.PI, 0),
+  // };
 
-  gPlayer3 = {
-    assetUrl: assets.gPlayer.babylon,
-    position: new Vector3(-10, 0, 0),
-    scaling: new Vector3(7, 7, 7),
-    rotation: new Vector3(0, 90 / 180 * Math.PI, 0),
-  };
+  // gPlayer3 = {
+  //   assetUrl: assets.gPlayer.babylon,
+  //   position: new Vector3(-10, 0, 0),
+  //   scaling: new Vector3(7, 7, 7),
+  //   rotation: new Vector3(0, 90 / 180 * Math.PI, 0),
+  // };
 
   mounted() {
     if(!this.user) {
