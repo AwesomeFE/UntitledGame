@@ -33,6 +33,10 @@ import { Component } from 'vue-property-decorator';
     validate: String,
     placeholder: String,
     errorMsg: String,
+    className: {
+      type: String,
+      default: ''
+    }
   },
   inject: [
     '$validator'
@@ -45,7 +49,7 @@ class FormInput extends Vue {
 
   get formInputClass() {
     return [
-      'FormInput',
+      this.className,
       { hasError: this.isInvalid }
     ];
   }

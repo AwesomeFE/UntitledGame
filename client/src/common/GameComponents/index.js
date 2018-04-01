@@ -12,7 +12,7 @@ import Plane from './Plane';
 import ImportMesh from './ImportMesh';
 import WorldAxis from './WorldAxis';
 
-export default {
+export const GameComponents = {
   Scene,
   Light,
   Camera,

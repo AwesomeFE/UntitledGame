@@ -10,7 +10,7 @@ import Vue from 'vue';
 import BABYLON, { Scene, Engine, MeshBuilder, Vector3 } from 'babylonjs';
 import { Component, Watch, Provide } from 'vue-property-decorator';
 
-BABYLON.DebugLayer.InspectorURL = '/public/mobile/javascripts/babylon.inspector.bundle.js';
+BABYLON.DebugLayer.InspectorURL = '/public/mobile-game/javascripts/babylon.inspector.bundle.js';
 
 @Component({
   props: {
