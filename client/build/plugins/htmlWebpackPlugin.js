@@ -1,14 +1,13 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 export function htmlWebpackPlugin(options) {
-  const { appName } = options;
+  const { appName, disableInject } = options;
 
   return [
     new HtmlWebpackPlugin({
-      chunks: ['app', 'vendor', 'importSW', 'manifest'],
       template: `./client/src/${appName}/index.html`,
       filename: `./index.html`,
-      inject: true
+      inject: !disableInject
     })
   ];
 }

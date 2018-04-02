@@ -31,6 +31,7 @@ export default [
     minimize: true,
     sourceMap: false,
     useServiceWorker: true,
+    disableInject: true,
     copyFiles: [
       {
         from: './client/src/mobile-game/assets/lib/babylon.inspector.bundle.js',

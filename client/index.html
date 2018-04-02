@@ -3,10 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+  <style>
+    .progress-list {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .progress-list > .progress-item {
+      width: 200px;
+      height: 20px;
+      border: 1px solid black;
+      margin-bottom: 10px;
+    }
+
+    .progress-item > .progress-value {
+      width: 0%;
+      height: 100%;
+      background: red;
+    }
+  </style>
 </head>
 <body>
   <div id="app">
     <router-view></router-view>
   </div>
+
+  <script>
+    const appEl = document.querySelector('#app');
+    const progressArray = document.createElement('div');
+    let scriptCount = 0;
+    
+    progressArray.className = 'progress-list';
+    document.body.appendChild(progressArray);
+    appEl.style.display = 'none';
+
+    const vendorArray = [
+      '/public/mobile-game/javascripts/manifest.js',
+      '/public/mobile-game/javascripts/vendor.js',
+      '/public/mobile-game/javascripts/app.js'
+    ];
+
+    vendorArray.forEach((url, index) => {
+      const xhr = new XMLHttpRequest();
+      const progressItem = document.createElement('div');
+      const progressValue = document.createElement('div');
+
+      progressValue.className = 'progress-value';
+      progressItem.className = 'progress-item';
+
+      progressItem.appendChild(progressValue);
+      progressArray.appendChild(progressItem);
+
+      xhr.addEventListener('progress', event => {
+        progressValue.style.width = `${event.loaded / event.total * 100}%`;
+      });
+
+      xhr.addEventListener('load', () => {
+        scriptCount++;
+
+        if(scriptCount >= vendorArray.length) {
+          excuteScript();
+        }
+      });
+
+      xhr.addEventListener('error', (e) => {
+      });
+
+      xhr.open('GET', url);
+      xhr.send();
+    });
+
+    function excuteScript() {
+      appEl.style.display = 'block';
+      progressArray.style.display = 'none';
+
+      vendorArray.forEach((url, index) => {
+        const script = document.createElement('script');
+        script.src = url;
+        script.type = 'text/javascript';
+        setTimeout(() => {
+          document.body.appendChild(script);
+        }, 500 * index);
+      });
+    }
+    </script>
 </body>
 </html>
