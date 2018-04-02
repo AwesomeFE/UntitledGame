@@ -22,6 +22,24 @@ export default [
     // Dynamic import modules should be declared.
     // Link: https://github.com/webpack/webpack/issues/4360
     vendor: [
+      'vue-property-decorator'
+    ]
+  }),
+  webpackTask({
+    appName: 'mobile-game',
+    extract: false,
+    minimize: false,
+    sourceMap: true,
+    isHotReplace: true,
+    copyFiles: [
+      {
+        from: './client/src/mobile-game/assets/lib/babylon.inspector.bundle.js',
+        to: `javascripts/babylon.inspector.bundle.js`
+      }
+    ],
+    // Dynamic import modules should be declared.
+    // Link: https://github.com/webpack/webpack/issues/4360
+    vendor: [
       'vue-property-decorator',
       'babylonjs',
       'babylonjs-gui',

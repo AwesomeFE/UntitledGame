@@ -15,15 +15,15 @@ import initDirectives from './directives';
 import initComponents from './components';
 import initServiceWorker from './sw/statup';
 
-Vue.use(Vuex);
-Vue.use(VueI18n);
-Vue.use(VueRouter);
-Vue.use(VueValidate);
-
 initService();
 initDirectives();
 initComponents();
 initServiceWorker();
+
+Vue.use(Vuex);
+Vue.use(VueI18n);
+Vue.use(VueRouter);
+Vue.use(VueValidate);
 
 new Vue({
   i18n: i18n(),

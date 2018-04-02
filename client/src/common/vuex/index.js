@@ -1,12 +1,10 @@
 import * as system from './system';
-import * as game from './game';
 
 class CommonStore {
   strict = process.env.NODE_ENV !== 'production';
 
   modules = {
-    system,
-    game
+    system
   };
 
   constructor(options = {}) {

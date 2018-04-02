@@ -1,16 +1,30 @@
 <template>
   <div class="Home">
-    <div>PC</div>
+    <PageHeader></PageHeader>
+
+    <div class="PageBody">
+      {{$t('Home.main')}}1
+    </div>
+
+    <PageFooter></PageFooter>
   </div>
 </template>
 
 <script>
 import { Vue } from '../../common';
+import PageHeader from '../../components/PageHeader';
+import PageFooter from '../../components/PageFooter';
 import { Component } from 'vue-property-decorator';
 
-@Component()
+@Component({
+  components: {
+    PageHeader,
+    PageFooter
+  }
+})
 class Home extends Vue {
-
+  mounted() {
+  }
 }
 
 export default Home;
@@ -18,6 +32,6 @@ export default Home;
 
 <style type="text/scss" lang="scss">
 .Home {
-
+  
 }
 </style>
