@@ -3,32 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-  <style>
-    .progress-list {
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-
-    .progress-list > .progress-item {
-      width: 200px;
-      height: 20px;
-      border: 1px solid black;
-      margin-bottom: 10px;
-    }
-
-    .progress-item > .progress-value {
-      width: 0%;
-      height: 100%;
-      background: red;
-    }
-  </style>
+  <link href="/public/mobile-game/stylesheets/app.css" rel="stylesheet"></head>
 </head>
 <body>
   <div id="app">
     <router-view></router-view>
   </div>
 
-  <script>'use strict';var z=document.querySelector('#app'),x=document.createElement('div'),y=0;x.className='progress-list',document.body.appendChild(x),z.style.display='none';var w=['/public/mobile-game/javascripts/manifest.js','/public/mobile-game/javascripts/vendor.js','/public/mobile-game/javascripts/app.js'];w.forEach(function(a){var c=new XMLHttpRequest,d=document.createElement('div'),f=document.createElement('div');f.className='progress-value',d.className='progress-item',d.appendChild(f),x.appendChild(d),c.addEventListener('progress',function(g){f.style.width=100*(g.loaded/g.total)+'%'}),c.addEventListener('load',function(){y++,y>=w.length&&excuteScript()}),c.addEventListener('error',function(){}),c.open('GET',a),c.send()});function excuteScript(){z.style.display='block',x.style.display='none',w.forEach(function(a,b){var c=document.createElement('script');c.src=a,c.type='text/javascript',setTimeout(function(){document.body.appendChild(c)},500*b)})}</script>
+  <div class="loading-screen">
+      <img class="spinner" src="/public/mobile-game/images/bd4b96c0cffe44af1648ac1335ccd82b.png">
+      <div class="progress-bar">
+        <div class="progress-val"></div>
+        <img class="progress-img" src="/public/mobile-game/images/5f86079c52085925f368c55e2fd6c1a5.png">
+      </div>
+    </div>
+
+  <script>'use strict';var z=document.querySelector('#app'),y=document.querySelector('#loading'),x=document.querySelector('.loading-screen'),w=document.querySelector('.loading-screen .progress-val'),u=0,v=0;z.style.display='none';var t=[{url:'/public/mobile-game/javascripts/manifest.js',total:0},{url:'/public/mobile-game/javascripts/vendor.js',total:0},{url:'/public/mobile-game/javascripts/app.js',total:0}];t.forEach(function(a){var c=new XMLHttpRequest,d=a.url;c.addEventListener('progress',function(f){a.total||(v+=f.total,a.total=f.total),w.style.width=98*(f.loaded/v)+'%'}),c.addEventListener('load',function(){u++,u>=t.length&&excuteScript()}),c.addEventListener('error',function(){}),c.open('GET',d),c.send()});function excuteScript(){z.style.display='block',x.style.display='none',t.forEach(function(a,b){var c=document.createElement('script');c.src=a.url,c.type='text/javascript',setTimeout(function(){document.body.appendChild(c)},500*b)})}</script>
 </body>
 </html>

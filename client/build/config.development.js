@@ -13,6 +13,7 @@ export default [
   //     'vue-property-decorator'
   //   ]
   // }),
+  // I hate dynamic import...
   webpackTask({
     appName: 'mobile',
     extract: false,
@@ -25,6 +26,8 @@ export default [
       'vue-property-decorator'
     ]
   }),
+  // Because dynamic import is stupid... I have to write double app
+  // Link: https://github.com/webpack/webpack/issues/6359
   webpackTask({
     appName: 'mobile-game',
     extract: false,

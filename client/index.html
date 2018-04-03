@@ -4,23 +4,55 @@
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
   <style>
-    .progress-list {
-      position: absolute;
+    .loading-screen {
+      position: fixed;
       top: 0;
       left: 0;
-    }
-
-    .progress-list > .progress-item {
-      width: 200px;
-      height: 20px;
-      border: 1px solid black;
-      margin-bottom: 10px;
-    }
-
-    .progress-item > .progress-value {
-      width: 0%;
+      width: 100%;
       height: 100%;
+      background: grey;
+    }
+
+    .spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50px;
+      animation: scrolling 2s infinite;
+    }
+
+    @keyframes scrolling {
+      from {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+      to {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    .progress-bar {
+      position: absolute;
+      left: 50%;
+      bottom: 20px;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 15px;
+    }
+
+    .progress-img {
+      position: absolute;
+      width: 100%;
+      height: 20.45px;
+    }
+
+    .progress-val {
+      width: 0%;
+      height: 10px;
       background: red;
+      position: absolute;
+      top: 5px;
+      left: 14px;
     }
   </style>
 </head>
@@ -29,34 +61,50 @@
     <router-view></router-view>
   </div>
 
+  <div class="loading-screen">
+    <img class="spinner" src="/public/mobile-game/images/9a3becf9960204b021005ccd79e486eb.png">
+    <div class="progress-bar">
+      <div class="progress-val"></div>
+      <img class="progress-img" src="/public/mobile-game/images/5f86079c52085925f368c55e2fd6c1a5.png">
+    </div>
+  </div>
+
   <script>
-    const appEl = document.querySelector('#app');
-    const progressArray = document.createElement('div');
+    const app = document.querySelector('#app');
+    const loadingScript = document.querySelector('#loading');
+    const loadingScreen = document.querySelector('.loading-screen');
+    const progressValue = document.querySelector('.loading-screen .progress-val');
+
     let scriptCount = 0;
-    
-    progressArray.className = 'progress-list';
-    document.body.appendChild(progressArray);
-    appEl.style.display = 'none';
+    let gameTotal = 0;
+
+    app.style.display = 'none';
 
     const vendorArray = [
-      '/public/mobile-game/javascripts/manifest.js',
-      '/public/mobile-game/javascripts/vendor.js',
-      '/public/mobile-game/javascripts/app.js'
+      {
+        url: '/public/mobile-game/javascripts/manifest.js',
+        total: 0
+      },
+      {
+        url: '/public/mobile-game/javascripts/vendor.js',
+        total: 0
+      },
+      {
+        url: '/public/mobile-game/javascripts/app.js',
+        total: 0
+      }
     ];
 
-    vendorArray.forEach((url, index) => {
+    vendorArray.forEach((vendor, index) => {
       const xhr = new XMLHttpRequest();
-      const progressItem = document.createElement('div');
-      const progressValue = document.createElement('div');
-
-      progressValue.className = 'progress-value';
-      progressItem.className = 'progress-item';
-
-      progressItem.appendChild(progressValue);
-      progressArray.appendChild(progressItem);
+      const url = vendor.url;
 
       xhr.addEventListener('progress', event => {
-        progressValue.style.width = `${event.loaded / event.total * 100}%`;
+        if(!vendor.total) {
+          gameTotal += event.total;
+          vendor.total = event.total;
+        }
+        progressValue.style.width = `${event.loaded / gameTotal * 98}%`;
       });
 
       xhr.addEventListener('load', () => {
@@ -75,12 +123,12 @@
     });
 
     function excuteScript() {
-      appEl.style.display = 'block';
-      progressArray.style.display = 'none';
+      app.style.display = 'block';
+      loadingScreen.style.display = 'none';
 
-      vendorArray.forEach((url, index) => {
+      vendorArray.forEach((vendor, index) => {
         const script = document.createElement('script');
-        script.src = url;
+        script.src = vendor.url;
         script.type = 'text/javascript';
         setTimeout(() => {
           document.body.appendChild(script);
