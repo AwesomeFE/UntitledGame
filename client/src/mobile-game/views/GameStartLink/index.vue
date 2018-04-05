@@ -1,6 +1,6 @@
 <template>
   <div class="Game StartLink">
-    <Scene name="StartLink" :isShowDebug="true">
+    <!-- <Scene name="StartLink" :isShowFPS="true">
       <Camera type="Arc" :position="camera.position" :target="camera.target" :alpha="0" :beta="0" :radius="-100" />
       <Ground
         name="ground"
@@ -8,15 +8,8 @@
         :height="ground.height"
       />
       <Light :direction="light.direction" />
-      <ImportMesh
-        :name="'goddess'"
-        :assetUrl="goddess.assetUrl"
-        :position="goddess.position"
-        :scaling="goddess.scaling"
-        :rotation="goddess.rotation"
-        onGroundName="ground"
-      />
-    </Scene>
+    </Scene> -->
+    <img class="BackgroundImage" :src="images.background" />
     <GameSignIn />
   </div>
 </template>
@@ -63,13 +56,6 @@ class GameStartLink extends Vue {
     direction: new Vector3(0, -50, -20)
   };
 
-  goddess = {
-    assetUrl: assets.Goddess.GoddessBabylon,
-    position: new Vector3(-7.5, 6, 0),
-    scaling: new Vector3(0.01, 0.01, 0.01),
-    rotation: new Vector3(0, 0, 0)
-  };
-
   mounted() {
     if(this.user) {
       return this.$router.push(this.linkUrls.GAME_PLAYER());
@@ -82,6 +68,14 @@ export default GameStartLink;
 
 <style type="text/scss" lang="scss">
 .StartLink {
-
+  background: black;
+  .BackgroundImage {
+    position: absolute;
+    max-width: 100%;
+    max-height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 </style>

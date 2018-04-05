@@ -74,11 +74,7 @@
     const loadingScript = document.querySelector('#loading');
     const loadingScreen = document.querySelector('.loading-screen');
     const progressValue = document.querySelector('.loading-screen .progress-val');
-
-    let scriptCount = 0;
-    let gameTotal = 0;
-
-    app.style.display = 'none';
+    const stylesheet = document.createElement('link');
 
     const vendorArray = [
       {
@@ -95,6 +91,14 @@
       }
     ];
 
+    let scriptCount = 0;
+    let gameTotal = 0;
+
+    app.style.display = 'none';
+    stylesheet.href = '/public/mobile-game/stylesheets/app.css';
+    stylesheet.rel = 'stylesheet';
+    document.head.appendChild(stylesheet);
+
     vendorArray.forEach((vendor, index) => {
       const xhr = new XMLHttpRequest();
       const url = vendor.url;
@@ -104,7 +108,10 @@
           gameTotal += event.total;
           vendor.total = event.total;
         }
-        progressValue.style.width = `${event.loaded / gameTotal * 98}%`;
+
+        if(vendorArray.every(vendor => vendor.total)) {
+          progressValue.style.width = `${event.loaded / gameTotal * 98}%`;
+        }
       });
 
       xhr.addEventListener('load', () => {

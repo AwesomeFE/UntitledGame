@@ -32,7 +32,21 @@ export default App;
 
 <style type="text/scss" lang="scss">
 @import '../../assets/scss/variable.scss';
-
+body,
+html,
+#app,
+.App,
+.Game,
+.Scene,
+.canvas {
+  height: 100%;
+  width: 100%;
+}
+body, html {
+  position: fixed;
+  touch-action: none;
+  overflow: hidden;
+}
 .App {
   font-size: 0.12rem;
   font-weight: 400;

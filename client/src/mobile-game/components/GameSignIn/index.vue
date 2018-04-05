@@ -35,12 +35,14 @@
           v-validate="'required'"
         />
       </div>
-      <button type="button" class="GameButton" @click="handleSubmit">
-        {{$t('GameSignIn.submit')}}
-      </button>
-      <button type="button" class="GameButton" @click="handleSubmit">
-        {{$t('GameSignIn.cancel')}}
-      </button>
+      <div class="ButtonControl">
+        <button type="button" class="GameButton" @click="handleSubmit">
+          {{$t('GameSignIn.submit')}}
+        </button>
+        <button type="button" class="GameButton" @click="handleSubmit">
+          {{$t('GameSignIn.cancel')}}
+        </button>
+      </div>
     </div>
   </form>
 </template>
@@ -97,7 +99,6 @@ export default GameSignIn;
   position: absolute;
   bottom: 0.1rem;
   left: 50%;
-  height: 1.8rem;
   width: 2rem;
   background: rgba(30, 43, 30, 0.8);
   transform: translate3d(-50%, 0, 0);
@@ -136,6 +137,10 @@ export default GameSignIn;
     border: 0;
     padding: 0.05rem;
     box-shadow: 2px 2px 3px #000 inset;
+    color: wheat;
+  }
+  .ButtonControl {
+    text-align: center;
   }
   .GameButton {
     border: 1px solid rgb(90, 151, 146);

@@ -34,6 +34,7 @@ export default [
     minimize: false,
     sourceMap: true,
     isHotReplace: true,
+    disableInject: true,
     copyFiles: [
       {
         from: './client/src/mobile-game/assets/lib/babylon.inspector.bundle.js',

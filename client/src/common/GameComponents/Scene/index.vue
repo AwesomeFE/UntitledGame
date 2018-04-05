@@ -1,6 +1,7 @@
 <template>
   <div class="Scene">
     <canvas class="canvas" :id="name" ref="canvas" touch-action="none"></canvas>
+    <div class="fps" v-if="fps">{{fps}}</div>
     <slot class="Elments" v-if="system.canvas"></slot>
   </div>
 </template>
@@ -23,6 +24,9 @@ BABYLON.DebugLayer.InspectorURL = '/public/mobile-game/javascripts/babylon.inspe
     },
     isShowDebug: {
       type: Boolean
+    },
+    isShowFPS: {
+      type: Boolean
     }
   },
   provide() {
@@ -36,6 +40,8 @@ class SceneClass extends Vue {
     canvas: null,
     camera: null
   };
+
+  fps = 0;
 
   mounted() {
     this.system.canvas = this.$refs.canvas;
@@ -56,6 +62,7 @@ class SceneClass extends Vue {
     }
 
     this.isShowDebug ? this.showDebugLayer() : null;
+    this.isShowFPS ? this.showFPS() : null;
 
     window.addEventListener('resize', this.resizeHandler);
     document.addEventListener('touchend', this.clickHandler);
@@ -82,6 +89,12 @@ class SceneClass extends Vue {
     this.$emit('click', scene.pick(scene.pointerX, scene.pointerY));
   }
 
+  showFPS() {
+    setInterval(() => {
+      this.fps = this.system.engine.getFps().toFixed(0);
+    }, 250);
+  }
+
   showDebugLayer() {
     this.system.scene.debugLayer.show({
       initialTab : 2, 
@@ -102,30 +115,19 @@ export default SceneClass;
 </script>
 
 <style type="text/scss" lang="scss">
-body,
-html,
-#app,
-.App,
-.Game,
-.Scene,
-.canvas {
-  height: 100%;
-  width: 100%;
-}
 .canvas {
   position: absolute;
   display: block;
   outline: none;
   touch-action: none;
 }
-body, html {
-  position: fixed;
-  touch-action: none;
-  overflow: hidden;
-}
-[touch-action="none"]{
-  -ms-touch-action: none;
-  touch-action: none;
-  touch-action-delay: none;
+.Scene {
+  .fps {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    background: white;
+  }
 }
 </style>
