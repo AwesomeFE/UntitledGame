@@ -54,6 +54,7 @@ class SceneClass extends Vue {
     this.system.engine.runRenderLoop(this.renderLoop);
 
     this.system.scene.ambientColor = new Vector3(1, 1, 1);
+    this.system.engine.switchFullscreen();
 
     if(this.gravity) {
       this.system.scene.gravity = this.gravity;	
@@ -70,6 +71,7 @@ class SceneClass extends Vue {
   }
 
   beforeDestroy() {
+    this.system.scene.dispose();
     window.removeEventListener('resize', this.resizeHandler);
     document.removeEventListener('touchend', this.clickHandler);
     document.removeEventListener('click', this.clickHandler);

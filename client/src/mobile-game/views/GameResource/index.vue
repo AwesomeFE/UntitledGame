@@ -43,6 +43,7 @@ import { Vector3 } from 'babylonjs';
 import { Component } from 'vue-property-decorator';
 
 const images = Vue.images.GameResource;
+const models = Vue.models.GameResource;
 
 @Component({
   props: [
@@ -101,7 +102,11 @@ class GameResource extends Vue {
     const resources = this.$store.state.GameResource.resources;
 
     resources.forEach(async (resource, i) => {
-      this.resources.push({...resource, position: this.getRandomPosition()});
+      this.resources.push({
+        ...resource,
+        position: this.getRandomPosition(),
+        url: models.Sheep.url
+      });
 
       do {
         await this.randomMove(resource, i);
