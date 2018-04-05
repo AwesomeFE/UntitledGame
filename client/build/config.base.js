@@ -62,7 +62,7 @@ export default (options) => {
           test: /\.(png|jpg|gif)$/,
           use: loaders.imageLoader(options),
           exclude: [
-            path.join(__dirname, `../src/${appName}/assets/game`)
+            path.join(__dirname, `../src/${appName}/assets/models`)
           ]
         },
         {
@@ -73,7 +73,7 @@ export default (options) => {
           test: /\/*\.(tga|babylon|gltf|bin|manifest|png|jpg|gif)$/,
           use: loaders.assetLoader(options),
           include: [
-            path.join(__dirname, `../src/${appName}/assets/game`)
+            path.join(__dirname, `../src/${appName}/assets/models`)
           ]
         }
       ]

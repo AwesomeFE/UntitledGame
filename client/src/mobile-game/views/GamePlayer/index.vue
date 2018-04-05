@@ -8,6 +8,27 @@
         :height="ground.height"
       />
       <Light :direction="light.direction" />
+      <ImportMesh
+        :name="fountain.name"
+        :assetUrl="fountain.assetUrl"
+        :position="fountain.position"
+        :scaling="fountain.scaling"
+        :rotation="fountain.rotation"
+        onGroundName="ground"
+      />
+      <!-- <ImportMesh
+        v-for="player in players"
+        :key="player._id"
+        :name="player.name"
+        :assetUrl="player.url"
+        :position="player.position"
+        :scaling="player.scaling"
+        :rotation="player.rotation"
+        :ellipsoidOffset="player.ellipsoidOffset"
+        :speed="player.speed"
+        :isEnableCollisions="false"
+        onGroundName="ground"
+      /> -->
     </Scene>
     
     <div class="ActionBar">
@@ -42,7 +63,7 @@ import { Component } from 'vue-property-decorator';
 import { Vue, GameComponents } from '../../common';
 
 const images = Vue.images.GamePlayer;
-const assets = Vue.assets;
+const models = Vue.models.GamePlayer;
 
 @Component({
   components: {
@@ -67,41 +88,21 @@ class GamePlayer extends Vue {
   };
 
   camera = {
-    position: new Vector3(0, 5.5, -20),
-    target: new Vector3(0, 5.5, 0)
+    position: new Vector3(0, 3.5, -10),
+    target: new Vector3(0, 2, 0)
   };
 
   light = {
     direction: new Vector3(0, -20, 20)
   };
 
-  gPlayer = {
-    assetUrl: assets.gPlayer.babylon,
-    position: new Vector3(0, 0, -10),
-    scaling: new Vector3(7, 7, 7),
-    rotation: new Vector3(0, 0, 0),
+  fountain = {
+    name: 'fountain',
+    assetUrl: models.fountain.url,
+    position: Vector3.Zero(),
+    scaling: new Vector3(0.05, 0.05, 0.05),
+    rotation: Vector3.Zero()
   };
-
-  // gPlayer1 = {
-  //   assetUrl: assets.gPlayer.babylon,
-  //   position: new Vector3(10, 0, 0),
-  //   scaling: new Vector3(7, 7, 7),
-  //   rotation: new Vector3(0, -90 / 180 * Math.PI, 0),
-  // };
-
-  // gPlayer2 = {
-  //   assetUrl: assets.gPlayer.babylon,
-  //   position: new Vector3(0, 0, 10),
-  //   scaling: new Vector3(7, 7, 7),
-  //   rotation: new Vector3(0, Math.PI, 0),
-  // };
-
-  // gPlayer3 = {
-  //   assetUrl: assets.gPlayer.babylon,
-  //   position: new Vector3(-10, 0, 0),
-  //   scaling: new Vector3(7, 7, 7),
-  //   rotation: new Vector3(0, 90 / 180 * Math.PI, 0),
-  // };
 
   mounted() {
     if(!this.user) {

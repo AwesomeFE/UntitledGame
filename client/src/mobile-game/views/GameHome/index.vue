@@ -27,6 +27,7 @@ import { Vector3 } from 'babylonjs';
 import { Component } from 'vue-property-decorator';
 
 const images = Vue.images.GameHome;
+const models = Vue.images.models;
 
 @Component({
   props: [

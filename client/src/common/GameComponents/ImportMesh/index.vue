@@ -28,7 +28,8 @@ import * as handler from './handler';
       type: String
     },
     speed: {
-      type: Number
+      type: Number,
+      default: 1
     },
     size: {
       type: Object
@@ -37,7 +38,8 @@ import * as handler from './handler';
       type: Object
     },
     isEnableCollisions: {
-      type: Boolean
+      type: Boolean,
+      default: false
     },
     onGroundName: {
       type: String,

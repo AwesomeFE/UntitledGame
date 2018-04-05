@@ -1,10 +1,10 @@
 import * as strings from '../../constants';
 import * as images from '../../assets/images';
-import * as assets from '../../assets/game';
+import * as models from '../../assets/models';
 import { CommonVue } from '../../../common';
 
 export class Vue extends CommonVue {
   static strings = strings;
-  static assets = assets;
+  static models = models;
   static images = images;
 };

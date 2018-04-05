@@ -22,7 +22,7 @@ import { Vue, GameComponents } from '../../common';
 import GameSignIn from '../../components/GameSignIn';
 
 const images = Vue.images.GameStartLink;
-const assets = Vue.assets;
+const models = Vue.models.GameStartLink;
 
 @Component({
   components: {
