@@ -9,5 +9,6 @@ export default [
   { path: '/user', method: 'get', ...UserRouter.getSessionUser },
   middlewares.ensureSignIn,
   { path: '/user/signout', method: 'get', ...UserRouter.signout },
+  { path: '/player', method: 'get', ...PlayerRouter.getPlayers },
   { path: '/player', method: 'post', ...PlayerRouter.create }
 ];

@@ -5,7 +5,6 @@ import { encryptPassword } from './helper';
 
 class User extends BasicModel {
   static async signUp(formData) {
-    const { messages } = BasicModel;
     formData.password = encryptPassword(formData.password);
 
     return await this.create(formData);
@@ -27,6 +26,12 @@ class User extends BasicModel {
     } else {
       throw messages.USER_NOT_FOUND;
     }
+  }
+
+  static async getPlayers(userId) {
+    const userData = await this.findOne({ _id: userId }).populate('players');
+
+    return userData.players;
   }
 }
 

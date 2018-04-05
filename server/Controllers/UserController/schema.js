@@ -12,7 +12,7 @@ const UserSchema = new Schema({
   },
   players: [{
     type: Schema.Types.ObjectId,
-    ref: 'Player'
+    ref: 'players'
   }],
   projection: {
     type: String,

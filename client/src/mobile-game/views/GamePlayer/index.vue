@@ -16,11 +16,11 @@
         :rotation="fountain.rotation"
         onGroundName="ground"
       />
-      <!-- <ImportMesh
+      <ImportMesh
         v-for="player in players"
         :key="player._id"
         :name="player.name"
-        :assetUrl="player.url"
+        :assetUrl="player.assetUrl"
         :position="player.position"
         :scaling="player.scaling"
         :rotation="player.rotation"
@@ -28,7 +28,7 @@
         :speed="player.speed"
         :isEnableCollisions="false"
         onGroundName="ground"
-      /> -->
+      />
     </Scene>
     
     <div class="ActionBar">
@@ -76,6 +76,9 @@ const models = Vue.models.GamePlayer;
   computed: {
     ...mapState('system', {
       user: state => state.user
+    }),
+    ...mapState('Player', {
+      playerArray: state => state.playerArray
     })
   }
 })
@@ -83,8 +86,8 @@ class GamePlayer extends Vue {
   images = images;
 
   ground = {
-    width: 10,
-    height: 10
+    width: 30,
+    height: 30
   };
 
   camera = {
@@ -104,10 +107,35 @@ class GamePlayer extends Vue {
     rotation: Vector3.Zero()
   };
 
-  mounted() {
+  players = [];
+
+  async mounted() {
     if(!this.user) {
       return this.$router.push(this.linkUrls.GAME_START_LINK());
     }
+    await this.$store.dispatch('Player/freshPlayerArray');
+
+    this.playerArray.forEach((playerData, index) => {
+      const playerModelUrl = playerData.gender === 'female'
+        ? models.fPlayer.url
+        : models.mPlayer.url;
+
+      const radian = index / this.playerArray.length * Math.PI;
+      const position = new Vector3(-5 * Math.sin(radian), 0, -5 * Math.cos(radian));
+      const rotation = new Vector3(0, radian, 0);
+      const scaling = playerData.gender === 'female'
+        ? new Vector3(4, 4, 4)
+        : new Vector3(0.08, 0.08, 0.08);
+
+      this.players.push({
+        _id: playerData._id,
+        name: playerData.name,
+        assetUrl: playerModelUrl,
+        position,
+        scaling,
+        rotation,
+      });
+    });
   }
 
   enter() {

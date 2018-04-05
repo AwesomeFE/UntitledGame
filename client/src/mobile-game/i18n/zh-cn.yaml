@@ -33,6 +33,17 @@ GamePlayer:
     next: '下一个'
     prev: '前一个'
 
+GameNewPlayer:
+  PlayerForm:
+    info: '信息'
+    name: '名字'
+    gender: '性别'
+    age: '年龄'
+    appearance: '外形'
+  ActionBar:
+    create: '创建'
+    back: '返回'
+
 GameHome:
   ActionBar:
     resource: '资源'

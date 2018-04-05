@@ -16,6 +16,10 @@ export default () => new VueRouter({
           component: () => import('./views/GamePlayer')
         },
         {
+          path: 'player/new',
+          component: () => import('./views/GameNewPlayer')
+        },
+        {
           path: ':playerId',
           component: () => import('./views/GameHome'),
           props: true

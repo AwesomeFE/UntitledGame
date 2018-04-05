@@ -1,5 +1,9 @@
+import { mPlayer } from './mPlayer';
+import { fPlayer } from './fPlayer';
 import { fountain } from './fountain';
 
 export const GamePlayer = {
-  fountain
+  fountain,
+  mPlayer,
+  fPlayer
 };

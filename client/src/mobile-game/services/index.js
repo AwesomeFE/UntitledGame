@@ -1,3 +1,2 @@
-import { initService } from '../../common';
-
-export default initService;
+export { Player } from './player';
+export { initService } from '../../common';

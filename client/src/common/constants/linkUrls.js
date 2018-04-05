@@ -12,7 +12,7 @@ export const linkUrls = {
     path: '/game/player'
   }),
   GAME_PLAYER_CREATOR: () => ({
-    path: '/game/player/creator'
+    path: '/game/player/new'
   }),
   GAME_HOME: (playerId) => ({
     path: `/game/${playerId}`

@@ -16,5 +16,14 @@ export const apiUrls = {
   SIGNOUT: () => ({
     method: 'get',
     url: '/api/user/signout'
-  })
+  }),
+  GET_PLAYERS: () => ({
+    method: 'get',
+    url: '/api/player'
+  }),
+  CREATE_PLAYER: (data) => ({
+    method: 'post',
+    url: '/api/player',
+    data
+  }),
 };
