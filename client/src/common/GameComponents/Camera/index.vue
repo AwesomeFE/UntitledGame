@@ -58,6 +58,7 @@ class Camera extends Vue {
         break;
     }
     this.$system.camera.setTarget(target);
+    this.$system.camera.checkCollisions = true;
 
     if(this.canRotate) {
       this.$system.camera.attachControl(canvas, false);

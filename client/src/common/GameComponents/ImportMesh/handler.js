@@ -46,12 +46,12 @@ function startMoving(_this) {
       const speedY = nextY - currentY;
       const velocity = new Vector3(speedX, speedY, speedZ);
       // 碰撞方式移动物体
-      _this.container.meshes[0].moveWithCollisions(velocity);
+      _this.instance.moveWithCollisions(velocity);
     } else {
       // 定位方式移动物体
-      _this.container.meshes[0].position = new Vector3(prePosition.x + unitMoveVector.x, nextY, prePosition.z + unitMoveVector.z);
+      _this.instance.position = new Vector3(prePosition.x + unitMoveVector.x, nextY, prePosition.z + unitMoveVector.z);
     }
-    _this.prePosition = _this.container.meshes[0].position;
+    _this.prePosition = _this.instance.position;
 
     // 判断是否到达终点(x/z 0.1误差)
     const isAttachDestination =
@@ -89,7 +89,7 @@ function startRotation(_this) {
     const unitRotation = vDeg / 1000 * minMS * dir;
 
     // 旋转物体
-    _this.container.meshes[0].rotation.y += unitRotation;
+    _this.instance.rotation.y += unitRotation;
     _this.preRotation.y += unitRotation;
 
     // 判断是否到达终点(x/z 0.1误差) 或者 是否旋转到最终角

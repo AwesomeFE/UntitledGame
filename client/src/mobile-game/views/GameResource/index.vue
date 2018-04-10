@@ -13,8 +13,9 @@
       />
       <ImportMesh
         v-for="resource in resources"
-        :key="resource.id"
-        :name="resource.id"
+        :key="resource._id"
+        :id="resource._id"
+        :name="resource._id"
         :assetUrl="resource.url"
         :position="resource.position"
         :scaling="resource.scaling"

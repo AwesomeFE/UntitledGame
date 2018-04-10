@@ -3,9 +3,12 @@
 
 <script>
 import Vue from 'vue';
-import { SceneLoader, Vector3 } from 'babylonjs';
+import { SceneLoader, Vector3, MeshBuilder, StandardMaterial, Color3 } from 'babylonjs';
 import { Component, Watch } from 'vue-property-decorator';
 import * as handler from './handler';
+
+const containerCache = {};
+const pendingPool = {};
 
 @Component({
   inject: [
@@ -13,6 +16,9 @@ import * as handler from './handler';
   ],
   props: {
     name: {
+      type: String
+    },
+    id: {
       type: String
     },
     scaling: {
@@ -44,11 +50,15 @@ import * as handler from './handler';
     onGroundName: {
       type: String,
       required: true
+    },
+    isDebugMode: {
+      type: Boolean,
+      required: false
     }
   }
 })
 class ImportMesh extends Vue {
-  container = null;
+  instance = null;
   ground = null;
   
   movingTimer = null;
@@ -58,11 +68,7 @@ class ImportMesh extends Vue {
   preRotation = null;
 
   async mounted() {
-    const { scene } = this.$system;
-    const { rootUrl, fileName } = this.parseUrl();
-
-    this.container = await SceneLoader.LoadAssetContainerAsync(rootUrl, fileName, scene);
-    this.container.addAllToScene();
+    this.instance = await this.getInstance();
 
     this.setGround();
     this.setRotation();
@@ -81,30 +87,30 @@ class ImportMesh extends Vue {
     const y = this.position && this.position.y
       || this.ground && this.ground.getHeightAtCoordinates(x, z)
       || 0;
-    this.container.meshes[0].position = new Vector3(x, y, z);
+    this.instance.position = new Vector3(x, y, z);
   }
   
   setRotation() {
-    this.container.meshes[0].rotation.x = (this.rotation && this.rotation.x) || 0;
-    this.container.meshes[0].rotation.y = (this.rotation && this.rotation.y) || 0;
-    this.container.meshes[0].rotation.z = (this.rotation && this.rotation.z) || 0;
+    this.instance.rotation.x = (this.rotation && this.rotation.x) || 0;
+    this.instance.rotation.y = (this.rotation && this.rotation.y) || 0;
+    this.instance.rotation.z = (this.rotation && this.rotation.z) || 0;
   }
 
   setScaling() {
-    this.container.meshes[0].scaling = this.scaling || new Vector3(1, 1, 1);
+    this.instance.scaling = this.scaling || new Vector3(1, 1, 1);
   }
 
   setCollisions() {
     if(this.isEnableCollisions) {
-      this.container.meshes[0].applyGravity = true;
-      this.container.meshes[0].checkCollisions = true;
+      this.instance.applyGravity = true;
+      this.instance.checkCollisions = true;
     }
-    this.container.meshes[0].ellipsoidOffset = this.ellipsoidOffset || new Vector3(0, 0, 0);
+    this.instance.ellipsoidOffset = this.ellipsoidOffset || new Vector3(0, 0, 0);
   }
 
   @Watch('position')
   onPositionChange(newValue, oldValue) {
-    if(this.container) {
+    if(this.instance) {
       handler.onPositionChange(this, oldValue);
     }
   }
@@ -115,6 +121,50 @@ class ImportMesh extends Vue {
     const rootUrl = this.assetUrl.replace(fileName, '');
 
     return { rootUrl, fileName };
+  }
+
+  async getInstance() {
+    const { scene } = this.$system;
+    const { rootUrl, fileName } = this.parseUrl();
+
+    if(!containerCache[this.assetUrl]) {
+      if(!pendingPool[this.assetUrl]) {
+        pendingPool[this.assetUrl] = SceneLoader.LoadAssetContainerAsync(rootUrl, fileName, scene);
+        containerCache[this.assetUrl] = await pendingPool[this.assetUrl];
+        delete pendingPool[this.assetUrl];
+        containerCache[this.assetUrl].addAllToScene();
+
+        this.getDebugLayer();
+      } else {
+        await pendingPool[this.assetUrl];
+        return containerCache[this.assetUrl].meshes[0].clone();
+      }
+    }
+
+    return containerCache[this.assetUrl].meshes[0];
+  }
+
+  getDebugLayer() {
+    if(this.isDebugMode) {
+      const { scene } = this.$system;
+
+      containerCache[this.assetUrl].meshes.forEach((mesh, index) => {
+        // mesh.visibility = 0;
+        mesh.showBoundingBox = true;
+        // mesh.refreshBoundingInfo();
+        const sphereMat = new StandardMaterial(`${this.id}-${index}-mat`, scene);
+        const sphere = MeshBuilder.CreateSphere(`${this.id}-${index}`, {
+          diameterX: mesh.ellipsoid.x,
+          diameterY: mesh.ellipsoid.y,
+          diameterZ: mesh.ellipsoid.z
+        }, scene);
+
+        sphereMat.wireframe = true;
+        sphere.position = mesh.getAbsolutePosition().add(mesh.ellipsoidOffset);
+        sphere.material = sphereMat;
+        sphere.material.diffuseColor = Color3.Yellow();
+      });
+    }
   }
 }
 
