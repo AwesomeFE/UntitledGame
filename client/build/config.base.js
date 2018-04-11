@@ -34,13 +34,13 @@ export default (options) => {
     module: {
       rules: [
         {
-          test: /\.vue/,
-          use: loaders.vueLoader(options)
-        },
-        {
           test: /\.js/,
           use: loaders.babelLoader(options),
-          exclude: /node_modules/
+          exclude: /node_modules\/(?!(dom7|swiper)\/).*/
+        },
+        {
+          test: /\.vue/,
+          use: loaders.vueLoader(options)
         },
         {
           test: /\.css$/,

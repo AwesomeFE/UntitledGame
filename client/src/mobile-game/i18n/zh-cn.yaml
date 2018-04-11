@@ -46,7 +46,8 @@ GameNewPlayer:
 
 GameHome:
   ActionBar:
-    resource: '资源'
+    dungeon: '副本'
+    resource: '素材本'
     player: '选择角色'
 
 GameResource:

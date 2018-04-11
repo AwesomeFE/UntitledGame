@@ -6,10 +6,17 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { Vue } from '../../common';
 import { Component } from 'vue-property-decorator';
 
-@Component()
+@Component({
+  computed: {
+    ...mapState('system', {
+      user: state => state.user
+    })
+  }
+})
 class App extends Vue {
   // 系统准备标志位
   isSystemPerpared = false;
@@ -18,6 +25,14 @@ class App extends Vue {
     await this.$store.dispatch('system/getUser');
     this.isSystemPerpared = true;
     this.setBaseFontSize();
+
+    if(!this.user) {
+      return this.$router.push(this.linkUrls.GAME_START_LINK());
+    }
+
+    if(this.user && this.$route.path === this.linkUrls.GAME_START_LINK().path) {
+      return this.$router.push(this.linkUrls.GAME_PLAYER());
+    }
   }
 
   setBaseFontSize() {

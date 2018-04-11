@@ -10,6 +10,10 @@ const PlayerSchema = new Schema({
     type: String,
     enum: ['male', 'female']
   },
+  level: {
+    type: Number,
+    default: 0
+  },
   friends: [{
     type: Schema.Types.ObjectId,
     ref: 'Player'

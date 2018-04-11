@@ -1,14 +1,19 @@
 <template>
   <div class="Game Home">
-    <Scene name="Home" :isShowFPS="true">
-      <Camera :position="position" :target="target" />
-    </Scene>
-
+    <div class="Character">
+      <img class="Character__img" :src="images.character"/>
+    </div>
     <div class="ActionBar">
       <router-link
         class="button"
         :to="linkUrls.GAME_RESOURCE(playerId)">
         {{$t('GameHome.ActionBar.resource')}}
+      </router-link>
+
+      <router-link
+        class="button"
+        :to="linkUrls.GAME_RESOURCE(playerId)">
+        {{$t('GameHome.ActionBar.dungeon')}}
       </router-link>
 
       <router-link
@@ -27,31 +32,19 @@ import { Vector3 } from 'babylonjs';
 import { Component } from 'vue-property-decorator';
 
 const images = Vue.images.GameHome;
-const models = Vue.images.models;
 
 @Component({
   props: [
     'playerId'
   ],
-  components: {
-    Scene: GameComponents.Scene,
-    Camera: GameComponents.Camera
-  },
   computed: {
-    ...mapState('system', {
-      user: state => state.user
+    ...mapState('Player', {
+      players: state => state.playerArray
     })
   }
 })
 class GameHome extends Vue {
-  position = new Vector3(0, 0, -10);
-  target = Vector3.Zero();
-
-  mounted() {
-    if(!this.user) {
-      return this.$router.push(this.linkUrls.GAME_START_LINK());
-    }
-  }
+  images = images;
 }
 
 export default GameHome;
@@ -59,6 +52,16 @@ export default GameHome;
 
 <style type="text/scss" lang="scss">
 .Game {
+  background: linear-gradient(rgb(38, 38, 38), rgb(94, 94, 130));
+  .Character {
+    width: 50%;
+    height: 100%;
+    text-align: center;
+  }
+  .Character__img {
+    max-width: 100%;
+    max-height: 100%;
+  }
   .ActionBar {
     position: absolute;
     bottom: 0;

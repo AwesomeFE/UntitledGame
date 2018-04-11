@@ -1,7 +1,5 @@
-import MainBackgound from './background/main.jpg';
-import HomeHeader from './header/home.png';
+import character from './character.png';
 
 export const GameHome = {
-  MainBackgound,
-  HomeHeader
+  character
 };

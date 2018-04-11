@@ -32,11 +32,6 @@ const models = Vue.models.GameStartLink;
     Ground: GameComponents.Ground,
     Light: GameComponents.Light,
     GameSignIn
-  },
-  computed: {
-    ...mapState('system', {
-      user: state => state.user
-    })
   }
 })
 class GameStartLink extends Vue {
@@ -55,12 +50,6 @@ class GameStartLink extends Vue {
   light = {
     direction: new Vector3(0, -50, -20)
   };
-
-  mounted() {
-    if(this.user) {
-      return this.$router.push(this.linkUrls.GAME_PLAYER());
-    }
-  }
 }
 
 export default GameStartLink;
