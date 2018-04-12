@@ -54,6 +54,10 @@ GameResource:
   ActionBar:
     return: '返回'
 
+GameDungeon:
+  ActionBar:
+    home: '主城'
+
 FormSignUp:
   title: '注册页面'
   submit: '递交'

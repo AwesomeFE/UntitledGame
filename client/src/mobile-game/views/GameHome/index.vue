@@ -1,5 +1,5 @@
 <template>
-  <div class="Game Home">
+  <div class="Game Home" :style="{background: `url(${images.background})`, backgroundSize: 'cover'}">
     <div class="Character">
       <img class="Character__img" :src="images.character"/>
     </div>
@@ -12,7 +12,7 @@
 
       <router-link
         class="button"
-        :to="linkUrls.GAME_RESOURCE(playerId)">
+        :to="linkUrls.GAME_DUNGEON(playerId, '1')">
         {{$t('GameHome.ActionBar.dungeon')}}
       </router-link>
 

@@ -47,7 +47,7 @@ import Swiper from 'swiper';
 import { mapState } from 'vuex';
 import { Vector3 } from 'babylonjs';
 import { Component } from 'vue-property-decorator';
-import { Vue, GameComponents } from '../../common';
+import { Vue } from '../../common';
 
 const images = Vue.images.GamePlayer;
 const models = Vue.models.GamePlayer;
@@ -76,14 +76,29 @@ class GamePlayer extends Vue {
     return this.players[this.selectedPlayerIndex + 1];
   }
 
-  initPlayersData() {
-    this.selectedPlayer = this.players[0] || {};
-    this.swiper = new Swiper(this.$refs.swiper);
+  async mounted() {
+    await this.initData();
+    await this.initView();
   }
 
-  async mounted() {
+  async initData() {
     await this.$store.dispatch('Player/freshPlayerArray');
-    await this.initPlayersData();
+
+    this.selectedPlayer = this.players[0] || {};
+  }
+
+  async initView() {
+    this.$nextTick(() =>
+      this.initSwiper()
+    );
+  }
+
+  initSwiper() {
+    this.swiper = new Swiper(this.$refs.swiper);
+    this.swiper.on('slideChangeTransitionEnd', () => {
+      const index = this.swiper.activeIndex;
+      this.selectedPlayer = this.players[index];
+    });
   }
 
   switchPlayer(player) {

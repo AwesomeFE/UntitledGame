@@ -30,6 +30,11 @@ export default () => new VueRouter({
           props: true
         },
         {
+          path: ':playerId/dungeon/:dungeonId',
+          component: () => import('./views/GameDungeon'),
+          props: true
+        },
+        {
           path: '*',
           component: () => import('./views/NotFound')
         }
