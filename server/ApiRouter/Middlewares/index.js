@@ -17,6 +17,10 @@ class Middlewares extends BasicRouter {
   ensureSignIn(req, res, next) {
     req.user ? next() : next(this.messages.AUTH_INVALID);
   }
+
+  ensureAdmin(req, res, next) {
+    req.user.isAdmin ? next() : next(this.messages.AUTH_INVALID);
+  }
 }
 
 export default new Middlewares();

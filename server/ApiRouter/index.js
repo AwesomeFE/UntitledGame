@@ -8,7 +8,9 @@ for(const route of routes) {
   const isMiddleware = typeof route === 'function';
 
   if(!isMiddleware) {
-    router[route.method](route.path, routeHandler);
+    route.middleware
+      ? router[route.method](route.path, route.middleware, routeHandler)
+      : router[route.method](route.path, routeHandler);
   } else {
     router.use(route);
   }
@@ -21,6 +23,7 @@ for(const route of routes) {
    */
   async function routeHandler(req, res, next) {
     try {
+      console.dir(req.body)
       requestCheck(req, route.required);
       route.validate && await route.validate(req, res, next);
       route.handler && await route.handler(req, res, next);
@@ -39,7 +42,7 @@ for(const route of routes) {
 
   function fieldCheck(type = 'body', payload = {}, requiredFields = []) {
     for(const fieldName of requiredFields) {
-      if(!payload[fieldName]) {
+      if(!payload[fieldName] && payload[fieldName] !== 0) {
         throw messages.REQUEST_INVALID`${type}${fieldName}`;
       }
     }

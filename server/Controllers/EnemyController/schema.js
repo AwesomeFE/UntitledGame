@@ -1,39 +1,36 @@
 import { Schema } from 'mongoose';
 import AbilitiesSchema from './abilitiesSchema';
 
-const PlayerSchema = new Schema({
+const EnemySchema = new Schema({
   name: {
     type: String,
-    unique: true,
     required: true
   },
-  gender: {
+  level: {
+    type: Number,
+    required: true
+  },
+  type: {
     type: String,
-    enum: ['male', 'female', 'none']
+    default: 'human',
+    enum: [ 'human' ]
   },
   abilities: {
     type: AbilitiesSchema,
     default: AbilitiesSchema
   },
-  level: {
-    type: Number,
-    default: 0
+  url2D: {
+    type: String
   },
-  friends: [{
-    type: Schema.Types.ObjectId,
-    ref: 'players'
-  }],
-  storys: [{
-    type: Schema.Types.ObjectId,
-    ref: 'storys'
-  }],
-  items: [{
+  url3D: {
+    type: String
+  },
+  // immortal: {
+  //   type: Boolean
+  // },
+  prizes: [{
     type: Schema.Types.ObjectId,
     ref: 'items'
-  }],
-  skills: [{
-    type: Schema.Types.ObjectId,
-    ref: 'skills'
   }]
 }, {
   timestamps: true,
@@ -45,4 +42,4 @@ const PlayerSchema = new Schema({
   }
 });
 
-export default PlayerSchema;
+export default EnemySchema;

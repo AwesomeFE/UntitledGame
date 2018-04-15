@@ -1,5 +1,7 @@
 import UserRouter from './UserRouter';
+import EnemyRouter from './EnemyRouter';
 import PlayerRouter from './PlayerRouter';
+import DungeonRouter from './DungeonRouter';
 import middlewares from './Middlewares';
 
 export default [
@@ -12,4 +14,9 @@ export default [
   { path: '/player', method: 'get', ...PlayerRouter.getPlayers },
   { path: '/player', method: 'post', ...PlayerRouter.create },
   { path: '/player/:playerId', method: 'delete', ...PlayerRouter.deletePlayer },
+  { path: '/dungeon', method: 'get', ...DungeonRouter.getAllDungeons },
+  // middlewares.ensureAdmin,
+  { path: '/dungeon', method: 'post', ...DungeonRouter.createDungeon },
+  { path: '/enemy', method: 'get', ...EnemyRouter.getAllEnemys },
+  { path: '/enemy', method: 'post', ...EnemyRouter.createEnemy },
 ];
