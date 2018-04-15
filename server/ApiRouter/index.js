@@ -23,7 +23,6 @@ for(const route of routes) {
    */
   async function routeHandler(req, res, next) {
     try {
-      console.dir(req.body)
       requestCheck(req, route.required);
       route.validate && await route.validate(req, res, next);
       route.handler && await route.handler(req, res, next);
