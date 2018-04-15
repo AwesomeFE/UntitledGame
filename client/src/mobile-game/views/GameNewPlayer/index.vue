@@ -73,12 +73,12 @@
 
     <div class="ActionBar">
         <a class="button" @click="createPlayer">
-          {{$t('GameNewPlayer.ActionBar.create')}}
+          {{$t('ActionBar.create')}}
         </a>
         <router-link
           class="button"
           :to="linkUrls.GAME_PLAYER()">
-          {{$t('GameNewPlayer.ActionBar.back')}}
+          {{$t('ActionBar.back')}}
         </router-link>
       </div>
   </div>

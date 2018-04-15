@@ -31,7 +31,7 @@
       <router-link
         class="button"
         :to="linkUrls.GAME_HOME(playerId)">
-        {{$t('GameResource.ActionBar.return')}}
+        {{$t('ActionBar.home')}}
       </router-link>
     </div>
   </div>

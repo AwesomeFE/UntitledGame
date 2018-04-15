@@ -26,4 +26,8 @@ export const apiUrls = {
     url: '/api/player',
     data
   }),
+  DELETE_PLAYER: (playerId) => ({
+    method: 'delete',
+    url: `/api/player/${playerId}`
+  }),
 };

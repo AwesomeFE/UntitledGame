@@ -27,11 +27,6 @@ GameSignIn:
     placeholder: '请输入密码'
 
 GamePlayer:
-  ActionBar:
-    create: '创建'
-    enter: '选择'
-    next: '下一个'
-    prev: '前一个'
 
 GameNewPlayer:
   PlayerForm:
@@ -40,23 +35,12 @@ GameNewPlayer:
     gender: '性别'
     age: '年龄'
     appearance: '外形'
-  ActionBar:
-    create: '创建'
-    back: '返回'
 
 GameHome:
-  ActionBar:
-    dungeon: '副本'
-    resource: '素材本'
-    player: '选择角色'
 
 GameResource:
-  ActionBar:
-    return: '返回'
 
 GameDungeon:
-  ActionBar:
-    home: '主城'
 
 FormSignUp:
   title: '注册页面'
@@ -68,3 +52,16 @@ FormSignUp:
 
 Home:
   main: '游戏主页'
+
+ActionBar:
+  create: '创建'
+  enter: '选择'
+  next: '下一个'
+  prev: '前一个'
+  back: '返回'
+  dungeon: '副本'
+  resource: '素材本'
+  player: '选择角色'
+  return: '返回'
+  home: '主城'
+  delete: '删除'

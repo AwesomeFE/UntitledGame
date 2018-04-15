@@ -31,7 +31,7 @@ class User extends BasicModel {
   static async getPlayers(userId) {
     const userData = await this.findOne({ _id: userId }).populate('players');
 
-    return userData.players;
+    return userData.toJSON().players;
   }
 }
 

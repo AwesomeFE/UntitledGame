@@ -7,5 +7,11 @@ export const actions = {
   },
   async create({ commit, state }, playerData) {
     await Player.create(playerData);
+  },
+  async deletePlayer({ commit, state }, playerId) {
+    await Player.deletePlayer(playerId);
+
+    const { data } = await Player.getPlayers();
+    commit('freshPlayerArray', data);
   }
 };

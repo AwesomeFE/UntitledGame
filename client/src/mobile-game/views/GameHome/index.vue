@@ -7,19 +7,19 @@
       <router-link
         class="button"
         :to="linkUrls.GAME_RESOURCE(playerId)">
-        {{$t('GameHome.ActionBar.resource')}}
+        {{$t('ActionBar.resource')}}
       </router-link>
 
       <router-link
         class="button"
         :to="linkUrls.GAME_DUNGEON(playerId, '1')">
-        {{$t('GameHome.ActionBar.dungeon')}}
+        {{$t('ActionBar.dungeon')}}
       </router-link>
 
       <router-link
         class="button"
         :to="linkUrls.GAME_PLAYER()">
-        {{$t('GameHome.ActionBar.player')}}
+        {{$t('ActionBar.player')}}
       </router-link>
     </div>
   </div>

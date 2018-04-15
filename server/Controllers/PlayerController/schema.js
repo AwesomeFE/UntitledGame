@@ -1,4 +1,5 @@
 import { Schema } from 'mongoose';
+import AbilitiesSchema from './abilitiesSchema';
 
 const PlayerSchema = new Schema({
   name: {
@@ -8,7 +9,11 @@ const PlayerSchema = new Schema({
   },
   gender: {
     type: String,
-    enum: ['male', 'female']
+    enum: ['male', 'female', 'none']
+  },
+  abilities: {
+    type: AbilitiesSchema,
+    default: AbilitiesSchema
   },
   level: {
     type: Number,
@@ -30,6 +35,14 @@ const PlayerSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Skill'
   }]
-}, {timestamps: true});
+}, {
+  timestamps: true,
+  toObject: {
+    virtuals: true
+  },
+  toJSON: {
+    virtuals: true
+  }
+});
 
 export default PlayerSchema;

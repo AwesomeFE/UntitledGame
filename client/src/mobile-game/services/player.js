@@ -1,14 +1,17 @@
-import Service from "../../common/basic/Service";
+import axios from 'axios';
+import { constants } from '../../common';
 
-class PlayerService extends Service {
+class PlayerService {
   getPlayers() {
-    const { axios, apiUrls } = this;
-    return axios(apiUrls.GET_PLAYERS());
+    return axios(constants.apiUrls.GET_PLAYERS());
   }
 
   create(formData) {
-    const { axios, apiUrls } = this;
-    return axios(apiUrls.CREATE_PLAYER(formData));
+    return axios(constants.apiUrls.CREATE_PLAYER(formData));
+  }
+
+  deletePlayer(playerId) {
+    return axios(constants.apiUrls.DELETE_PLAYER(playerId));
   }
 }
 

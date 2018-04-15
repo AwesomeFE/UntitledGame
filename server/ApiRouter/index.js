@@ -30,7 +30,7 @@ for(const route of routes) {
   }
 
   function requestCheck(request, requiredFieldsArray = {}) {
-    const checkTypes = ['body', 'query'];
+    const checkTypes = ['body', 'query', 'params'];
 
     for(const checkType of checkTypes) {
       fieldCheck(checkType, request[checkType], requiredFieldsArray[checkType]);

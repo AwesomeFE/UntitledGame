@@ -20,6 +20,24 @@ class PlayerRouter extends BasicRouter {
     }
   };
 
+  deletePlayer = {
+    required: {
+      params: [ 'playerId' ]
+    },
+    validate: (req, res) => {},
+    handler: async (req, res) => {
+      const { messages } = this;
+      const { playerId } = req.params;
+
+      req.user.players = req.user.players.filter(playerItem => playerItem !== playerId);
+
+      await req.user.save();
+      await PlayerController.findByIdAndRemove(playerId);
+
+      res.json(messages.REQUEST_SUCCESS());
+    }
+  };
+
   getPlayers = {
     handler: async (req, res) => {
       const { messages } = this;

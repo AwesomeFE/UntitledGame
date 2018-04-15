@@ -21,22 +21,27 @@
       <router-link
         class="button"
         :to="linkUrls.GAME_PLAYER_CREATOR()">
-        {{$t('GamePlayer.ActionBar.create')}}
+        {{$t('ActionBar.create')}}
       </router-link>
 
       <a class="button"
         @click="enter(selectedPlayer)">
-        {{$t('GamePlayer.ActionBar.enter')}}
+        {{$t('ActionBar.enter')}}
+      </a>
+
+      <a class="button"
+        @click="deletePlayer(selectedPlayer)">
+        {{$t('ActionBar.delete')}}
       </a>
 
       <a class="button"
         @click="switchPlayer(prevPlayer)">
-        {{$t('GamePlayer.ActionBar.prev')}}
+        {{$t('ActionBar.prev')}}
       </a>
 
       <a class="button"
         @click="switchPlayer(nextPlayer)">
-        {{$t('GamePlayer.ActionBar.next')}}
+        {{$t('ActionBar.next')}}
       </a>
     </div>
   </div>
@@ -45,7 +50,6 @@
 <script>
 import Swiper from 'swiper';
 import { mapState } from 'vuex';
-import { Vector3 } from 'babylonjs';
 import { Component } from 'vue-property-decorator';
 import { Vue } from '../../common';
 
@@ -98,6 +102,7 @@ class GamePlayer extends Vue {
     this.swiper.on('slideChangeTransitionEnd', () => {
       const index = this.swiper.activeIndex;
       this.selectedPlayer = this.players[index];
+      this.swiper.update();
     });
   }
 
@@ -112,6 +117,14 @@ class GamePlayer extends Vue {
 
   enter(player) {
     this.$router.push(this.linkUrls.GAME_HOME(player._id));
+  }
+
+  async deletePlayer(player) {
+    const { prevPlayer, nextPlayer } = this;
+
+    await this.$store.dispatch('Player/deletePlayer', player._id);
+
+    this.switchPlayer(prevPlayer ? prevPlayer : nextPlayer);
   }
 }
 
