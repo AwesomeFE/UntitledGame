@@ -22,10 +22,11 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import { mapState } from 'vuex';
-import { Vue } from '../../common';
-import FormInput from '../FormInput';
 import { Component } from 'vue-property-decorator';
+
+import FormInput from '../FormInput';
 
 @Component({
   components: {

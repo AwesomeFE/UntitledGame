@@ -1,2 +1,2 @@
-export * from './apiUrls';
-export * from './linkUrls';
+export { apiUrls } from './apiUrls';
+export { linkUrls } from './linkUrls';

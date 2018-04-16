@@ -1,23 +1,20 @@
-import Service from '../basic/Service';
+import axios from 'axios';
+import { apiUrls } from '../constants';
 
-class UserService extends Service {
+class UserService {
   getSessionUser() {
-    const { axios, apiUrls } = this;
     return axios(apiUrls.GET_USER());
   }
 
   signin(data) {
-    const { axios, apiUrls } = this;
     return axios(apiUrls.SIGNIN(data));
   }
 
   signup(data) {
-    const { axios, apiUrls } = this;
     return axios(apiUrls.SIGNUP(data));
   }
 
   signout() {
-    const { axios, apiUrls } = this;
     return axios(apiUrls.SIGNOUT());
   }
 }

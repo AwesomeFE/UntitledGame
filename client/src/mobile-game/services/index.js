@@ -1,2 +1,2 @@
 export { Player } from './player';
-export { initService } from '../../common';
+export { initService } from '../../common/services';

@@ -1,55 +1,25 @@
 <template>
   <div class="Game StartLink">
-    <!-- <Scene name="StartLink" :isShowFPS="true">
-      <Camera type="Arc" :position="camera.position" :target="camera.target" :alpha="0" :beta="0" :radius="-100" />
-      <Ground
-        name="ground"
-        :width="ground.width"
-        :height="ground.height"
-      />
-      <Light :direction="light.direction" />
-    </Scene> -->
     <img class="BackgroundImage" :src="images.background" />
     <GameSignIn />
   </div>
 </template>
 
 <script>
+import Vue from 'vue';
 import { mapState } from 'vuex';
-import { Vector3 } from 'babylonjs';
 import { Component } from 'vue-property-decorator';
-import { Vue, GameComponents } from '../../common';
-import GameSignIn from '../../components/GameSignIn';
 
-const images = Vue.images.GameStartLink;
-const models = Vue.models.GameStartLink;
+import GameSignIn from '../../components/GameSignIn';
+import { GameStartLink as images } from '../../assets/images';
 
 @Component({
   components: {
-    Scene: GameComponents.Scene,
-    Camera: GameComponents.Camera,
-    ImportMesh: GameComponents.ImportMesh,
-    Ground: GameComponents.Ground,
-    Light: GameComponents.Light,
     GameSignIn
   }
 })
 class GameStartLink extends Vue {
   images = images;
-
-  ground = {
-    width: 10,
-    height: 10
-  };
-
-  camera = {
-    position: new Vector3(0, 5.5, 20),
-    target: new Vector3(0, 8, -10)
-  };
-
-  light = {
-    direction: new Vector3(0, -50, -20)
-  };
 }
 
 export default GameStartLink;

@@ -41,4 +41,4 @@ export function initService() {
   };
 };
 
-export * from './user';
+export { User } from './user';

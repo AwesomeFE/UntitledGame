@@ -1,2 +1,2 @@
-export { Vue } from './Vue';
-export { GameComponents } from '../../common';
+export { GameComponents } from '../../common/GameComponents';
+export { linkUrls } from '../../common/constants'

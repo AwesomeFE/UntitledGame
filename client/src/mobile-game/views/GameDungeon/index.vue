@@ -28,11 +28,12 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import { mapState } from 'vuex';
-import { Vue } from '../../common';
 import { Component } from 'vue-property-decorator';
 
-const images = Vue.images.GameDungeon;
+import { linkUrls } from '../../common';
+import { GameDungeon as images } from '../../assets/images';
 
 @Component({
   props: [
@@ -46,6 +47,7 @@ const images = Vue.images.GameDungeon;
 })
 class GameHome extends Vue {
   images = images;
+  linkUrls = linkUrls;
   isFinished = false;
 
   attack() {

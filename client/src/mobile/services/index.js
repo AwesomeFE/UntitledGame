@@ -1,3 +1,1 @@
-import { initService } from '../../common';
-
-export default initService;
+export { initService } from '../../common/services';

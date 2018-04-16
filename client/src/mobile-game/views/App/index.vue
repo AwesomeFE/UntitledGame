@@ -6,9 +6,11 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import { mapState } from 'vuex';
-import { Vue } from '../../common';
 import { Component } from 'vue-property-decorator';
+
+import { linkUrls } from '../../common';
 
 @Component({
   computed: {
@@ -27,11 +29,11 @@ class App extends Vue {
     this.setBaseFontSize();
 
     if(!this.user) {
-      return this.$router.push(this.linkUrls.GAME_START_LINK());
+      return this.$router.push(linkUrls.GAME_START_LINK());
     }
 
-    if(this.user && this.$route.path === this.linkUrls.GAME_START_LINK().path) {
-      return this.$router.push(this.linkUrls.GAME_PLAYER());
+    if(this.user && this.$route.path === linkUrls.GAME_START_LINK().path) {
+      return this.$router.push(linkUrls.GAME_PLAYER());
     }
   }
 

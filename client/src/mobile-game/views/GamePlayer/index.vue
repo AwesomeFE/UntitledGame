@@ -48,13 +48,13 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import Swiper from 'swiper';
 import { mapState } from 'vuex';
 import { Component } from 'vue-property-decorator';
-import { Vue } from '../../common';
 
-const images = Vue.images.GamePlayer;
-const models = Vue.models.GamePlayer;
+import { linkUrls } from '../../common';
+import { GamePlayer as images } from '../../assets/images';
 
 @Component({
   computed: {
@@ -65,6 +65,7 @@ const models = Vue.models.GamePlayer;
 })
 class GamePlayer extends Vue {
   images = images;
+  linkUrls = linkUrls;
   swiper = null;
   selectedPlayer = {};
 
@@ -116,7 +117,7 @@ class GamePlayer extends Vue {
   }
 
   enter(player) {
-    this.$router.push(this.linkUrls.GAME_HOME(player._id));
+    this.$router.push(linkUrls.GAME_HOME(player._id));
   }
 
   async deletePlayer(player) {

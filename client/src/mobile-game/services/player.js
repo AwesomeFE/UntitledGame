@@ -1,17 +1,17 @@
 import axios from 'axios';
-import { constants } from '../../common';
+import { apiUrls } from '../common';
 
 class PlayerService {
   getPlayers() {
-    return axios(constants.apiUrls.GET_PLAYERS());
+    return axios(apiUrls.GET_PLAYERS());
   }
 
   create(formData) {
-    return axios(constants.apiUrls.CREATE_PLAYER(formData));
+    return axios(apiUrls.CREATE_PLAYER(formData));
   }
 
   deletePlayer(playerId) {
-    return axios(constants.apiUrls.DELETE_PLAYER(playerId));
+    return axios(apiUrls.DELETE_PLAYER(playerId));
   }
 }
 

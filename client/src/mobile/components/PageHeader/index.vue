@@ -19,9 +19,11 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import { mapState } from 'vuex';
-import { Vue } from '../../common';
 import { Component } from 'vue-property-decorator';
+
+import { linkUrls } from '../../common';
 
 @Component({
   computed: {
@@ -31,6 +33,8 @@ import { Component } from 'vue-property-decorator';
   }
 })
 class PageHeader extends Vue {
+  linkUrls = linkUrls;
+  
   signout() {
     this.$store.dispatch('system/signout');
   }

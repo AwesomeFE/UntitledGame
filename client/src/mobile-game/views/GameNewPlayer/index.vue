@@ -85,12 +85,12 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import { mapState } from 'vuex';
 import { Component } from 'vue-property-decorator';
-import { Vue } from '../../common';
 
-const images = Vue.images.GameNewPlayer;
-const models = Vue.models.GameNewPlayer;
+import { linkUrls } from '../../common';
+import { GameNewPlayer as images } from '../../assets/images';
 
 @Component({
   computed: {
@@ -101,6 +101,7 @@ const models = Vue.models.GameNewPlayer;
 })
 class GameNewPlayer extends Vue {
   images = images;
+  linkUrls = linkUrls;
   viewType = 'PlayerInfo';
 
   player = {
@@ -111,7 +112,7 @@ class GameNewPlayer extends Vue {
 
   mounted() {
     if(!this.user) {
-      return this.$router.push(this.linkUrls.GAME_START_LINK());
+      return this.$router.push(linkUrls.GAME_START_LINK());
     }
   }
 
@@ -122,7 +123,7 @@ class GameNewPlayer extends Vue {
       try {
         this.disableFrom();
         await this.$store.dispatch('Player/create', this.player);
-        this.$router.push(this.linkUrls.GAME_PLAYER());
+        this.$router.push(linkUrls.GAME_PLAYER());
       } catch(e) {
         this.enableFrom();
       }

@@ -38,13 +38,14 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import { mapState } from 'vuex';
-import { Vue, GameComponents } from '../../common';
 import { Vector3 } from 'babylonjs';
 import { Component } from 'vue-property-decorator';
 
-const images = Vue.images.GameResource;
-const models = Vue.models.GameResource;
+import { GameComponents, linkUrls } from '../../common';
+import { GameResource as images } from '../../assets/images';
+import { GameResource as models } from '../../assets/models';
 
 @Component({
   props: [
@@ -70,6 +71,7 @@ const models = Vue.models.GameResource;
   }
 })
 class GameResource extends Vue {
+  linkUrls = linkUrls;
   scene = {
     gravity: new Vector3(0, -0.5, 0)
   };
