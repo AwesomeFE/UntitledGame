@@ -41,6 +41,8 @@ GameHome:
 GameResource:
 
 GameDungeon:
+  order:
+    0: '第一章'
 
 FormSignUp:
   title: '注册页面'

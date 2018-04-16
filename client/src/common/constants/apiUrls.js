@@ -30,4 +30,8 @@ export const apiUrls = {
     method: 'delete',
     url: `/api/player/${playerId}`
   }),
+  GET_DUNGEONS: () => ({
+    method: 'get',
+    url: '/api/dungeon'
+  })
 };

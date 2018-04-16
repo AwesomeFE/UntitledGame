@@ -20,8 +20,11 @@ export const linkUrls = {
   GAME_RESOURCE: (playerId) => ({
     path: `/game/${playerId}/resource`
   }),
-  GAME_DUNGEON: (playerId, dungeonId) => ({
-    path: `/game/${playerId}/dungeon/${dungeonId}`
+  GAME_DUNGEON: (playerId) => ({
+    path: `/game/${playerId}/dungeon`
+  }),
+  GAME_DUNGEON_LEVEL: (playerId, dungeonId, levelIdx) => ({
+    path: `/game/${playerId}/dungeon/${dungeonId}/level/${levelIdx}`
   }),
   SIGNIN: () => ({
     path: '/entry',

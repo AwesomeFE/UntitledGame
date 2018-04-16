@@ -4,3 +4,4 @@ export { GameResource } from './GameResource';
 export { GameNewPlayer } from './GameNewPlayer';
 export { GamePlayer } from './GamePlayer';
 export { GameDungeon } from './GameDungeon';
+export { GameDungeonBattle } from './GameDungeonBattle';

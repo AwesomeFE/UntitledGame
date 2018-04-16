@@ -30,8 +30,13 @@ export default () => new VueRouter({
           props: true
         },
         {
-          path: ':playerId/dungeon/:dungeonId',
+          path: ':playerId/dungeon',
           component: () => import('./views/GameDungeon'),
+          props: true
+        },
+        {
+          path: ':playerId/dungeon/:dungeonId/level/:levelIdx',
+          component: () => import('./views/GameDungeonBattle'),
           props: true
         },
         {
