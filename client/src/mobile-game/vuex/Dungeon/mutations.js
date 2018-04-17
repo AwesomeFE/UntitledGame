@@ -13,7 +13,9 @@ export const mutations = {
         dungeon.isShowLevels = !dungeon.isShowLevels;
       }
     });
-    // state.dungeonArray = state.dungeonArray;
-  }
+  },
 
+  setBattles(state, battles) {
+    state.battles = battles;
+  }
 };

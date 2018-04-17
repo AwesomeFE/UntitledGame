@@ -1,6 +1,6 @@
 <template>
   <div class="Game DungeonBattle">
-    {{JSON.stringify(dungeons)}}
+    {{JSON.stringify(battles)}}
 
     <div></div>
     <div class="ActionBar">
@@ -29,7 +29,7 @@ import { GameDungeonBattle as images } from '../../assets/images';
   ],
   computed: {
     ...mapState('Dungeon', {
-      dungeons: state => state.dungeonArray
+      battles: state => state.battles
     })
   }
 })
@@ -38,7 +38,8 @@ class GameDungeonBattle extends Vue {
   linkUrls = linkUrls;
 
   async mounted() {
-    await this.$store.dispatch('Dungeon/getAllDungeons');
+    const { playerId, dungeonId, levelIdx } = this;
+    await this.$store.dispatch('Dungeon/startLevel', { playerId, dungeonId, levelIdx });
   }
 }
 

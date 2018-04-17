@@ -33,5 +33,10 @@ export const apiUrls = {
   GET_DUNGEONS: () => ({
     method: 'get',
     url: '/api/dungeon'
+  }),
+  START_DUNGEONS_LEVEL: (playerId, dungeonId, levelIdx) => ({
+    method: 'post',
+    url: '/api/dungeon/start',
+    data: { playerId, dungeonId, levelIdx }
   })
 };

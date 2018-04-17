@@ -15,6 +15,7 @@ export default [
   { path: '/player', method: 'post', ...PlayerRouter.create },
   { path: '/player/:playerId', method: 'delete', ...PlayerRouter.deletePlayer },
   { path: '/dungeon', method: 'get', ...DungeonRouter.getAllDungeons },
+  { path: '/dungeon/start', method: 'post', ...DungeonRouter.startDungeonLevel },
   // middlewares.ensureAdmin,
   { path: '/dungeon', method: 'post', ...DungeonRouter.createDungeon },
   { path: '/enemy', method: 'get', ...EnemyRouter.getAllEnemys },
