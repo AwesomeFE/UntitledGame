@@ -43,19 +43,17 @@ class DungeonRouter extends BasicRouter {
       const { playerId, dungeonId, levelIdx } = req.body;
       const battles = [];
 
-      const dungeon = await DungeonController.findById(dungeonId);
+      const dungeon = await DungeonController.findById(dungeonId).populate('levels.stages.enemys.enemy');
       if(!dungeon) throw messages.DUNGEON_NOTFOUND;
 
-      const level = dungeon.levels.find(level => level.order === +levelIdx);
+      const level = dungeon.toJSON().levels.find(level => level.order === +levelIdx);
       if(!level) throw messages.DUNGEON_LEVEL_NOTFOUND;
 
       for(const stage of level.stages) {
         const enemys = [];
 
         for(let i = 0; i < stage.enemyNumber; i++) {
-          const enemy = getRandomResult(stage.enemys);
-
-          enemys.push(enemy);
+          enemys.push(getRandomResult(stage.enemys));
         }
 
         battles.push({ enemys });
