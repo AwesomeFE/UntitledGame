@@ -22,7 +22,7 @@ class EnemyRouter extends BasicRouter {
         'name', 'level'
       ]
     },
-    middleware: multer({ dest: 'uploads/' }).fields([
+    middleware: multer({ dest: 'uploads/emenys' }).fields([
       { name: 'url2D', maxCount: 1 },
       { name: 'url3D', maxCount: 1 }
     ]),
@@ -36,10 +36,10 @@ class EnemyRouter extends BasicRouter {
         files.url3D && FileController.create(files.url3D[0])
       ].filter(processor => !!processor);
 
-      const [ url2D, url3D ] = await Promise.all(fileProcessor);
+      const [ file2D = {}, file3D = {} ] = await Promise.all(fileProcessor);
 
-      req.body.url2D = url2D;
-      req.body.url3D = url3D;
+      req.body.url2D = file2D.path;
+      req.body.url3D = file3D.path;
 
       const enemy = await EnemyController.create(req.body);
 

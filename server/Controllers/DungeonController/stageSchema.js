@@ -7,18 +7,19 @@ const StageSchema = new Schema({
   order: {
     type: Number
   },
-  enemyNumber: {
-    type: Number,
-    default: 3
-  },
   enemys: [{
-    rate: {
-      type: Number
+    name: {
+      type: String
     },
-    enemy: {
-      type: Schema.Types.ObjectId,
-      ref: 'enemys'
-    },
+    enemyPool: [{
+      rate: {
+        type: Number
+      },
+      enemyId: {
+        type: Schema.Types.ObjectId,
+        ref: 'enemys'
+      }
+    }],
     enhance: {
       STR: {
         type: Number,
