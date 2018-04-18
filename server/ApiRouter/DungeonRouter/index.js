@@ -1,5 +1,5 @@
 import BasicRouter from '../BasicRouter';
-import { DungeonController } from '../../Controllers';
+import { DungeonController, EnemyController } from '../../Controllers';
 import { getRandomResult } from './helper';
 
 class DungeonRouter extends BasicRouter {
@@ -50,18 +50,17 @@ class DungeonRouter extends BasicRouter {
       if(!level) throw messages.DUNGEON_LEVEL_NOTFOUND;
 
       for(const stage of level.stages) {
-        const enemys = [];
+        const enemyProcessor = [];
 
-        for(const enemy of stage.enemys) {
-          const { enemyId } = getRandomResult(enemy.enemyPool);
-
-          enemys.push({
-            ...enemy,
-            enemyId
-          });
+        for(const enemyInfo of stage.enemys) {
+          const { enemyId } = getRandomResult(enemyInfo.enemyPool);
+          enemyProcessor.push(EnemyController.findById(enemyId));
         }
 
-        battles.push({ enemys });
+        let enemys = await Promise.all(enemyProcessor);
+        enemys = enemys.map(enemy => enemy.toJSON());
+
+        battles.push({ enemys, idx: stage.order });
       }
 
       res.json(messages.REQUEST_SUCCESS(battles));
