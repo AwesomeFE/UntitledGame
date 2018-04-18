@@ -36,7 +36,10 @@ export default (options) => {
         {
           test: /\.js/,
           use: loaders.babelLoader(options),
-          exclude: /node_modules\/(?!(dom7|swiper)\/).*/
+          exclude: /node_modules\/(?!(dom7|swiper)\/).*/,
+          include: [
+            path.join(__dirname, `../src`)
+          ]
         },
         {
           test: /\.vue/,
