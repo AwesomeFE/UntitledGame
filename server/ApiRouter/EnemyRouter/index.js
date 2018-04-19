@@ -1,7 +1,6 @@
 import multer from 'multer';
 import BasicRouter from '../BasicRouter';
 import { EnemyController, FileController } from '../../Controllers';
-import { Promise } from 'mongoose';
 
 class EnemyRouter extends BasicRouter {
   getAllEnemys = {

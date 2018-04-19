@@ -8,13 +8,15 @@
         :key="enemy._id"
         :style="{ width: 1 / battle.enemys.length * 100 + '%' }"
         @click="attack(enemy._id)">
-        <div class="EnemyName">{{enemy.name}}</div>
-        <div class="EnemyHP">
-          <div class="EnemyHP__value" :style="{ width: enemy.status.HP / enemy.status.MAXHP * 100 + '%' }"></div>
+        <div class="EnemyHeader">
+          <div class="EnemyName">{{enemy.name}}</div>
+          <div class="EnemyHP">
+            <div class="EnemyHP__value" :style="{ width: enemy.status.HP / enemy.status.MAXHP * 100 + '%' }"></div>
+          </div>
         </div>
 
         <div class="EnemyBody">
-          <img />
+          <img :src="linkUrls.BASE_URL() + enemy.url2D" />
         </div>
       </div>
     </div>
@@ -123,13 +125,28 @@ export default GameDungeonBattle;
   .EnemyName {
     color: white;
   }
+  .EnemyHeader {
+    height: 20%;
+  }
   .EnemyHP {
     width: 100%;
     border: 1px solid green;
+    box-sizing: border-box;
+    height: 0.1rem;
   }
   .EnemyHP__value {
-    height: 0.1rem;
+    height: 100%;
     background: red;
+  }
+  .EnemyBody {
+    position: relative;
+    height: 80%;
+  }
+  .EnemyBody > img {
+    display: block;
+    width: 100%;
+    position: absolute;
+    bottom: 0.2rem;
   }
   .ActionBar {
     position: absolute;

@@ -1,4 +1,9 @@
 export const apiUrls = {
+  BASE_URL: () => {
+    const { SERVER_HOST, SERVER_PORT } = process.env;
+
+    return `http://${SERVER_HOST}:${SERVER_PORT}/`;
+  },
   SIGNIN: (data, params) => ({
     method: 'post',
     url: '/api/user/signin',

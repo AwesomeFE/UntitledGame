@@ -47,7 +47,7 @@ class Application extends Database {
 
   useStaticResource() {
     this.app.use('/public', express.static(path.join(__dirname, '../../client/dist')));
-    this.app.use('/public', express.static(path.join(__dirname, '../../uploads')));
+    this.app.use('/uploads', express.static(path.join(__dirname, '../../uploads')));
   }
 
   useBodyParser() {
