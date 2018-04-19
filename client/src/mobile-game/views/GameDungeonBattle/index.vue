@@ -1,15 +1,20 @@
 <template>
   <div class="Game DungeonBattle">
-    <div v-for="battle of battles" :key="battle.idx" v-if="battleIdx === battle.idx">
-      <div class="EnemyArray">
-        <div class="Enemy"
-          v-for="enemy of battle.enemys"
-          :key="enemy._id"
-          @click="attack(enemy._id)">
-          <div class="EnemyHP">
-            <div class="EnemyHP__value" :style="{ width: enemy.status.HP / enemy.status.MAXHP * 100 + '%' }"></div>
-          </div>
-          <h1 class="EnemyName">{{enemy.name}}</h1>
+    <div class="Battle" v-for="battle of battles" :key="battle.idx" v-if="currentBattleIdx === battle.idx">
+      <div
+        class="Enemy"
+        v-if="enemy.status.HP"
+        v-for="enemy of battle.enemys"
+        :key="enemy._id"
+        :style="{ width: 1 / battle.enemys.length * 100 + '%' }"
+        @click="attack(enemy._id)">
+        <div class="EnemyName">{{enemy.name}}</div>
+        <div class="EnemyHP">
+          <div class="EnemyHP__value" :style="{ width: enemy.status.HP / enemy.status.MAXHP * 100 + '%' }"></div>
+        </div>
+
+        <div class="EnemyBody">
+          <img />
         </div>
       </div>
     </div>
@@ -36,21 +41,39 @@ import { GameDungeonBattle as images } from '../../assets/images';
     'playerId',
     'dungeonId',
     'levelIdx'
-  ],
-  computed: {
-    ...mapState('Dungeon', {
-      battlesData: state => state.battles
-    })
-  }
+  ]
 })
 class GameDungeonBattle extends Vue {
   images = images;
   linkUrls = linkUrls;
-  battleIdx = 0;
   battles = [];
 
-  initData() {
-    for(const battleData of this.battlesData) {
+  get currentBattleIdx() {
+    let battleIdx = 0;
+    for(const battle of this.battles) {
+      for(const enemy of battle.enemys) {
+        if(enemy.status.HP) {
+          return battleIdx;
+        }
+      }
+      battleIdx++;
+    }
+  }
+
+  get currentBattle() {
+    return this.battles[this.currentBattleIdx];
+  }
+
+  get activeEnemyCount() {
+    let activeEnemyCount = 0;
+    for(const enemy of this.currentBattle.enemys) {
+      enemy.status.HP && activeEnemyCount++;
+    }
+    return activeEnemyCount;
+  }
+
+  initData(battlesData) {
+    for(const battleData of battlesData) {
       const enemys = [];
       battleData.enemys.forEach((enemy, idx) => {
         enemy = { ...enemy, _id: `${enemy._id}_${idx}` };
@@ -64,18 +87,18 @@ class GameDungeonBattle extends Vue {
   }
 
   attack(enemyId) {
-    const { battleIdx, battles } = this;
-    const currentBattle = battles[battleIdx];
-    const enemyIdx = currentBattle.enemys.findIndex(enemy => enemy._id === enemyId);
+    const { currentBattleIdx, battles } = this;
+    const currentBattle = battles[currentBattleIdx];
+    const attackedEnemy = currentBattle.enemys.find(enemy => enemy._id === enemyId);
 
-    currentBattle.enemys[enemyIdx].status.HP--;
+    attackedEnemy.status.HP && attackedEnemy.status.HP--;
   }
 
   async mounted() {
     const { playerId, dungeonId, levelIdx } = this;
-    await this.$store.dispatch('Dungeon/startLevel', { playerId, dungeonId, levelIdx });
+    const battlesData = await this.$store.dispatch('Dungeon/startLevel', { playerId, dungeonId, levelIdx });
 
-    this.initData();
+    this.initData(battlesData);
   }
 }
 
@@ -85,25 +108,27 @@ export default GameDungeonBattle;
 <style type="text/scss" lang="scss">
 .DungeonBattle {
   background: linear-gradient(rgb(38, 38, 38), rgb(94, 94, 130));
-  .EnemyArray {
-    position: relative;
+  .Battle {
     width: 50%;
     height: 100%;
+    padding: 0.1rem;
+    box-sizing: border-box;
   }
   .Enemy {
     display: inline-block;
-    width: 33.3333%;
-    height: 50%;
+    height: 100%;
     box-sizing: border-box;
-    padding: 10px;
+    padding: 0 0.1rem;
+  }
+  .EnemyName {
+    color: white;
   }
   .EnemyHP {
     width: 100%;
     border: 1px solid green;
   }
   .EnemyHP__value {
-    width: 100%;
-    height: 10px;
+    height: 0.1rem;
     background: red;
   }
   .ActionBar {

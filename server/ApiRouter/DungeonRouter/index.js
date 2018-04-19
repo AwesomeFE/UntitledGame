@@ -58,7 +58,9 @@ class DungeonRouter extends BasicRouter {
         }
 
         let enemys = await Promise.all(enemyProcessor);
-        enemys = enemys.map(enemy => enemy.toJSON());
+        enemys = enemys
+          .filter(enemy => enemys)
+          .map(enemy => enemy.toJSON());
 
         battles.push({ enemys, idx: stage.order });
       }

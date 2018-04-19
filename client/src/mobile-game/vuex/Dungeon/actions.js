@@ -7,6 +7,6 @@ export const actions = {
   },
   async startLevel({ commit, state }, { playerId, dungeonId, levelIdx }) {
     const { data } = await Dungeon.startLevel(playerId, dungeonId, levelIdx);
-    commit('setBattles', data);
+    return data;
   }
 };
