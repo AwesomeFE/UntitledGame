@@ -11,8 +11,8 @@ class Player extends BasicModel {
       DEF: abilities.STR * 0.75 + abilities.VIT * 0.25,
       MATK: abilities.INT,
       MDEF: abilities.INT * 0.75 + abilities.AGI * 0.25,
-      HP: abilities.VIT * 0.75 + abilities.STR * 0.25,
-      MP: abilities.INT
+      MAXHP: abilities.VIT * 0.75 + abilities.STR * 0.25,
+      MAXMP: abilities.INT
     }
   }
 }

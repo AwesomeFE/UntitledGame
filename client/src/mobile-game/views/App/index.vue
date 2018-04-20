@@ -25,6 +25,7 @@ class App extends Vue {
 
   async mounted() {
     await this.$store.dispatch('system/getUser');
+    await this.$store.dispatch('Player/freshPlayerArray');
     this.isSystemPerpared = true;
     this.setBaseFontSize();
 
