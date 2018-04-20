@@ -1,23 +1,29 @@
 <template>
   <div class="Game DungeonBattle">
     <div class="Battle" v-for="battle of battles" :key="battle.idx" v-if="currentBattleIdx === battle.idx">
-      <div
-        class="Enemy"
-        v-if="enemy.status.HP"
-        v-for="enemy of battle.enemys"
-        :key="enemy._id"
-        :style="{ width: 1 / battle.enemys.length * 100 + '%' }"
-        @click="attack(enemy._id)">
-        <div class="EnemyHeader">
-          <div class="EnemyName">{{enemy.name}}</div>
-          <div class="EnemyHP">
-            <div class="EnemyHP__value" :style="{ width: enemy.status.HP / enemy.status.MAXHP * 100 + '%' }"></div>
+      <div class="Enemys">
+        <div
+          class="Enemy"
+          v-if="enemy.status.HP"
+          v-for="enemy of battle.enemys"
+          :key="enemy._id"
+          :style="{ width: 1 / battle.enemys.length * 100 + '%' }"
+          @click="attack(enemy._id)">
+          <div class="EnemyHeader">
+            <div class="EnemyName">{{enemy.name}}</div>
+            <div class="EnemyHP">
+              <div class="EnemyHP__value" :style="{ width: enemy.status.HP / enemy.status.MAXHP * 100 + '%' }"></div>
+            </div>
+          </div>
+
+          <div class="EnemyBody">
+            <img :src="linkUrls.BASE_URL() + enemy.url2D" />
           </div>
         </div>
+      </div>
 
-        <div class="EnemyBody">
-          <img :src="linkUrls.BASE_URL() + enemy.url2D" />
-        </div>
+      <div class="Players">
+
       </div>
     </div>
     <div class="ActionBar">
@@ -111,10 +117,18 @@ export default GameDungeonBattle;
 .DungeonBattle {
   background: linear-gradient(rgb(38, 38, 38), rgb(94, 94, 130));
   .Battle {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .Enemys,
+  .Players {
+    float: left;
     width: 50%;
     height: 100%;
-    padding: 0.1rem;
     box-sizing: border-box;
+    padding: 0 0.1rem;
   }
   .Enemy {
     display: inline-block;

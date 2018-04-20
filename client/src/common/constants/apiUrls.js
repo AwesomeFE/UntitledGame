@@ -1,6 +1,7 @@
 export const apiUrls = {
   BASE_URL: () => {
-    const { SERVER_HOST, SERVER_PORT } = process.env;
+    const SERVER_HOST = process.env.SERVER_HOST;
+    const SERVER_PORT = process.env.SERVER_PORT;
 
     return `http://${SERVER_HOST}:${SERVER_PORT}/`;
   },
