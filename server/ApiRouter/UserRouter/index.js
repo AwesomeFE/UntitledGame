@@ -1,5 +1,5 @@
 import BasicRouter from '../BasicRouter';
-import { UserController, EntryController, PlayerController } from '../../Controllers';
+import { UserController, EntryController } from '../../Controllers';
 
 class UserRouter extends BasicRouter {
 

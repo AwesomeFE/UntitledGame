@@ -1,5 +1,5 @@
 import BasicRouter from '../BasicRouter';
-import { UserController, PlayerController } from '../../Controllers';
+import { UserController, FGW } from '../../Controllers';
 
 class PlayerRouter extends BasicRouter {
   create = {
@@ -11,7 +11,7 @@ class PlayerRouter extends BasicRouter {
     validate: (req, res) => {},
     handler: async (req, res) => {
       const { messages } = this;
-      const player = await PlayerController.create(req.body);
+      const player = await FGW.PlayerController.create(req.body);
       
       req.user.players.push(player);
       await req.user.save();
@@ -32,7 +32,7 @@ class PlayerRouter extends BasicRouter {
       req.user.players = req.user.players.filter(playerItem => playerItem !== playerId);
 
       await req.user.save();
-      await PlayerController.findByIdAndRemove(playerId);
+      await FGW.PlayerController.findByIdAndRemove(playerId);
 
       res.json(messages.REQUEST_SUCCESS());
     }
@@ -41,7 +41,7 @@ class PlayerRouter extends BasicRouter {
   getPlayers = {
     handler: async (req, res) => {
       const { messages } = this;
-      const players = await UserController.getPlayers(req.session.userId);
+      const players = await UserController.getPlayers(req.session.userId, ['FGW']);
 
       res.json(messages.REQUEST_SUCCESS(players));
     }
