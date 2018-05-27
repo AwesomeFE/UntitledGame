@@ -1,5 +1,5 @@
 import log4js from 'log4js';
-import uuid from 'node-uuid';
+import uuid from 'uuid';
 const GrobalTracer = log4js.getLogger('system');
 
 class Message {
