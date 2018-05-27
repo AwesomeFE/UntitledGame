@@ -1,12 +1,12 @@
-const path = require("path");
-const nodeExternals = require("webpack-node-externals");
+const path = require('path');
+const nodeExternals = require('webpack-node-externals');
 
 module.exports = product => {
   return {
-    mode: "development",
-    target: "node",
+    mode: 'development',
+    target: 'node',
     entry: {
-      index: `./server/${product}`
+      index: ['babel-polyfill', `./server/${product}`]
     },
     output: {
       path: path.resolve(`server/dist/${product}/`),
@@ -16,13 +16,13 @@ module.exports = product => {
       rules: [
         {
           test: /\.js$/,
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
             plugins: [
-              "transform-class-properties",
-              "transform-decorators-legacy"
+              'transform-class-properties',
+              'transform-decorators-legacy'
             ],
-            presets: ["env", "stage-0"]
+            presets: ['env', 'stage-0']
           }
         }
       ]

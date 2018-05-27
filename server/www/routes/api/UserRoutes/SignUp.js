@@ -1,0 +1,29 @@
+import { User } from '../../../models';
+import { messages } from '../../../../common/constants';
+import { projectionFormat } from '../../../../common/utils/dataFormat';
+
+class SignUpRoute {
+  required = {
+    body: [ 'password' ]
+  };
+
+  validate(req, res) {
+    const { username, email, mobile } = req.body;
+
+    if(!username && !email && !mobile) {
+      throw messages.SIGNUP_INVALID;
+    }
+  }
+
+  async handler(req, res) {
+    const user = await User.signUp(req.body);
+
+    req.session.userId = user._id;
+
+    const projection = user && user.projection;
+    const formatedUser = user && projection && projectionFormat(projection, user);
+    res.json(messages.REQUEST_SUCCESS(formatedUser));
+  }
+}
+
+export const SignUp = new SignUpRoute();
