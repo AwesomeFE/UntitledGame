@@ -6,7 +6,7 @@ module.exports = product => {
     mode: 'production',
     target: 'node',
     entry: {
-      index: `./server/${product}`
+      index: ['babel-polyfill', `./server/${product}`]
     },
     output: {
       path: path.resolve(`server/dist/${product}/`),
@@ -18,14 +18,15 @@ module.exports = product => {
           test: /\.js$/,
           loader: 'babel-loader',
           options: {
-            plugins: [ 'transform-class-properties', 'transform-decorators-legacy' ],
-            presets: [ 'env', 'stage-0' ]
+            plugins: [
+              'transform-class-properties',
+              'transform-decorators-legacy'
+            ],
+            presets: ['env', 'stage-0']
           }
         }
       ]
     },
-    externals: [
-      nodeExternals()
-    ]
-  }
+    externals: [nodeExternals()]
+  };
 };
