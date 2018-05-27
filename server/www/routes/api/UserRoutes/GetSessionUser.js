@@ -5,6 +5,11 @@ import { projectionFormat } from '../../../../common/utils/dataFormat';
 class GetSessionUserRoute {
   required = {};
 
+  constructor() {
+    this.validate = this.validate.bind(this);
+    this.handler = this.handler.bind(this);
+  }
+
   validate(req, res) {}
 
   async handler(req, res) {

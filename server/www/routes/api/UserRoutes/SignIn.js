@@ -2,10 +2,15 @@ import { User, Entry } from '../../../models';
 import { messages } from '../../../../common/constants';
 import { projectionFormat } from '../../../../common/utils/dataFormat';
 
-class SignUpRoute {
+class SignInRoute {
   required = {
     body: [ 'password' ]
   };
+
+  constructor() {
+    this.validate = this.validate.bind(this);
+    this.handler = this.handler.bind(this);
+  }
 
   validate(req, res) {}
 
@@ -16,9 +21,9 @@ class SignUpRoute {
     req.session.userId = user._id;
 
     const projection = user && user.projection;
-    const formatedUser = user && projection && formatData(projection, user);
+    const formatedUser = user && projection && projectionFormat(projection, user);
     res.json(messages.REQUEST_SUCCESS(formatedUser));
   }
 }
 
-export const SignUp = new SignUpRoute();
+export const SignIn = new SignInRoute();

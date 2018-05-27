@@ -3,6 +3,11 @@ import { messages } from '../../../../common/constants';
 class SignOutRoute {
   required = {};
 
+  constructor() {
+    this.validate = this.validate.bind(this);
+    this.handler = this.handler.bind(this);
+  }
+
   validate(req, res) {}
 
   async handler(req, res) {

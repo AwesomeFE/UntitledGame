@@ -1,6 +1,7 @@
 import mongoose, { Model } from 'mongoose';
 import schema from './schema';
 import { encryptPassword } from '../../../common/utils/encrypt';
+import { messages } from '../../../common/constants';
 
 class UserModel extends Model {
   static async signUp(formData) {
@@ -10,7 +11,6 @@ class UserModel extends Model {
   }
 
   static async signIn(formData) {
-    const { messages } = BasicModel;
     const password = encryptPassword(formData.password);
 
     delete formData.password;

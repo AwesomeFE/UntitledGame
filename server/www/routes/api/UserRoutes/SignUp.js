@@ -7,6 +7,11 @@ class SignUpRoute {
     body: [ 'password' ]
   };
 
+  constructor() {
+    this.validate = this.validate.bind(this);
+    this.handler = this.handler.bind(this);
+  }
+
   validate(req, res) {
     const { username, email, mobile } = req.body;
 
