@@ -1,23 +1,18 @@
 import { Schema } from 'mongoose';
 
-const UserSchema = new Schema({
-  username:  {
-    type: String,
-    unique: true,
-    sparse: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
-  players: [{
+const PlayerSchema = new Schema({
+  stories: [{
     type: Schema.Types.ObjectId,
-    ref: 'players'
+    ref: 'story'
   }],
-  projection: {
-    type: String,
-    default: 'password __v updatedAt createdAt projection'
-  }
+  friends: [{
+    type: Schema.Types.ObjectId,
+    ref: 'player'
+  }],
+  heros: [{
+    type: Schema.Types.ObjectId,
+    ref: 'hero'
+  }],
 }, {timestamps: true});
 
-export default UserSchema;
+export default PlayerSchema;

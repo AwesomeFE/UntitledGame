@@ -9,4 +9,4 @@ class EntryModel extends Model {
 
 schema.loadClass(EntryModel);
 
-export const Entry = mongoose.model('entries', schema);
+export const Entry = mongoose.model('entry', schema);
