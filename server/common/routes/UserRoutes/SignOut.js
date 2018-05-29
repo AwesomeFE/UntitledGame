@@ -1,4 +1,4 @@
-import { messages } from '../../../../common/constants';
+import { messages } from '../../constants';
 
 class SignOutRoute {
   required = {};

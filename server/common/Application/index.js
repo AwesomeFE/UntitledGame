@@ -82,7 +82,11 @@ class Application {
   }
 
   run() {
+    const message = `Server is started on http://${this.host}:${this.port}`;
+    const GrobalTracer = Logger.getLogger('system');
+
     this.server.listen(this.port, this.host);
+    GrobalTracer.info(message);
   }
 
   connectDB() {

@@ -1,7 +1,7 @@
 import mongoose, { Model } from 'mongoose';
 import schema from './schema';
-import { encryptPassword } from '../../../common/utils/encrypt';
-import { messages } from '../../../common/constants';
+import { encryptPassword } from '../../utils/encrypt';
+import { messages } from '../../constants';
 
 class UserModel extends Model {
   static async signUp(formData) {

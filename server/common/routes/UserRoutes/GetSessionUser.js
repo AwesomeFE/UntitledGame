@@ -1,6 +1,6 @@
-import { User } from '../../../models';
-import { messages } from '../../../../common/constants';
-import { projectionFormat } from '../../../../common/utils/dataFormat';
+import { User } from '../../models';
+import { messages } from '../../constants';
+import { projectionFormat } from '../../utils/dataFormat';
 
 class GetSessionUserRoute {
   required = {};

@@ -1,8 +1,8 @@
-import { User, Entry } from '../../../models';
-import { messages } from '../../../../common/constants';
-import { projectionFormat } from '../../../../common/utils/dataFormat';
+import { User } from '../../models';
+import { messages } from '../../constants';
+import { projectionFormat } from '../../utils/dataFormat';
 
-class SignInRoute {
+class SignUpRoute {
   required = {
     body: [ 'password' ]
   };
@@ -12,11 +12,16 @@ class SignInRoute {
     this.handler = this.handler.bind(this);
   }
 
-  validate(req, res) {}
+  validate(req, res) {
+    const { username, email, mobile } = req.body;
+
+    if(!username && !email && !mobile) {
+      throw messages.SIGNUP_INVALID;
+    }
+  }
 
   async handler(req, res) {
-    const user = await User.signIn(req.body);
-    await Entry.log(req.ip, user);
+    const user = await User.signUp(req.body);
 
     req.session.userId = user._id;
 
@@ -26,4 +31,4 @@ class SignInRoute {
   }
 }
 
-export const SignIn = new SignInRoute();
+export const SignUp = new SignUpRoute();

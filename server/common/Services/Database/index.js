@@ -73,7 +73,6 @@ class Database {
     const message = `Connect database mongodb://${host}:${port}/${name} successfully!`;
 
     GrobalTracer.info(message);
-    console.log(message);
   }
 
   /**

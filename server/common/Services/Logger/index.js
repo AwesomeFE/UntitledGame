@@ -6,13 +6,21 @@ class Logger {
   PATH = process.env.LOG_PATH || './logs';
 
   logConfig = {
-    appenders: {},
+    appenders: {
+      out: {
+        type: 'stdout'
+      }
+    },
     categories: {
       default: {
         appenders: [],
         level: this.LEVEL
       }
     }
+  }
+
+  getLogger(name) {
+    return log4js.getLogger(name);
   }
 
   createLogger(loggerName) {
@@ -53,7 +61,7 @@ class Logger {
 
   _getLoggerCategory(loggerName) {
     return {
-      appenders: [ loggerName ],
+      appenders: [ loggerName, 'out' ],
       level: this.LEVEL
     };
   }
