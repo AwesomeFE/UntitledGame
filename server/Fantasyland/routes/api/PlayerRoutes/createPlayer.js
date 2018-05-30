@@ -2,7 +2,9 @@ import { Player } from '../../../models';
 import { messages } from '../../../../common/constants';
 
 class CreatePlayer {
-  required = {};
+  required = {
+    body: [ 'name', 'gender' ]
+  };
 
   constructor() {
     this.validate = this.validate.bind(this);
@@ -12,9 +14,13 @@ class CreatePlayer {
   validate(req, res) {}
 
   async handler(req, res) {
-    const players = await Player.find();
+    const { messages } = this;
+    const player = await Player.create(req.body);
+    
+    req.user.players.push(player);
+    await req.user.save();
 
-    res.json(messages.REQUEST_SUCCESS(players));
+    res.json(messages.REQUEST_SUCCESS(player));
   }
 }
 

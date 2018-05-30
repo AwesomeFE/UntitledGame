@@ -2,7 +2,9 @@ import { Player } from '../../../models';
 import { messages } from '../../../../common/constants';
 
 class DeletePlayer {
-  required = {};
+  required = {
+    params: [ 'playerId' ]
+  };
 
   constructor() {
     this.validate = this.validate.bind(this);
@@ -12,9 +14,14 @@ class DeletePlayer {
   validate(req, res) {}
 
   async handler(req, res) {
-    const players = await Player.find();
+    const { playerId } = req.params;
 
-    res.json(messages.REQUEST_SUCCESS(players));
+    req.user.players = req.user.players.filter(playerItem => playerItem !== playerId);
+
+    await req.user.save();
+    await Player.findByIdAndRemove(playerId);
+
+    res.json(messages.REQUEST_SUCCESS());
   }
 }
 
