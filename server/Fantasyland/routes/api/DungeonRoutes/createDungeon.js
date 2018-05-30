@@ -1,9 +1,9 @@
-import { Player } from '../../../models';
+import { DungeonInfo } from '../../../models';
 import { messages } from '../../../../common/constants';
 
 class CreateDungeon {
   required = {
-    params: [ 'playerId' ]
+    body: [ 'name' ]
   };
 
   constructor() {
@@ -14,11 +14,9 @@ class CreateDungeon {
   validate(req, res) {}
 
   async handler(req, res) {
-    const { playerId } = req.params;
-    const player = await Player.findById(playerId);
-    const formatedPlayer = player && player.toJSON();
+    const dungeonInfo = await DungeonInfo.create(req.body);
 
-    res.json(messages.REQUEST_SUCCESS(formatedPlayer));
+    res.json(messages.REQUEST_SUCCESS(dungeonInfo));
   }
 }
 

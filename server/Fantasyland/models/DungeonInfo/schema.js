@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 
-const DungeonModelSchema = new Schema({
+const DungeonInfoSchema = new Schema({
   name: {
     type: String
   },
@@ -18,4 +18,4 @@ const DungeonModelSchema = new Schema({
   }]
 }, {timestamps: true});
 
-export default PlayerSchema;
+export default DungeonInfoSchema;
