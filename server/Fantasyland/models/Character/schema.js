@@ -7,55 +7,70 @@ const CharacterSchema = new Schema({
   },
   gender: {
     type: String,
+    default: 'male',
     enum: [ 'male', 'female' ]
   },
   XP: {
-    type: Number
+    type: Number,
+    default: 0
   },
   HP: {
-    type: Number
+    type: Number,
+    default: 0
   },
   MP: {
-    type: Number
+    type: Number,
+    default: 0
   },
   career: {
     type: Schema.Types.ObjectId
   },
   SP: {
-    type: Number
+    type: Number,
+    default: 0
   },
   AP: {
-    type: Number
+    type: Number,
+    default: 0
   },
   ability: {
     STR: {
-      type: Number
+      type: Number,
+      default: 0
     },
     AGI: {
-      type: Number
+      type: Number,
+      default: 0
     },
     VIT: {
-      type: Number
+      type: Number,
+      default: 0
     },
     INT: {
-      type: Number
+      type: Number,
+      default: 0
     },
     DEX: {
-      type: Number
+      type: Number,
+      default: 0
     },
     LUK: {
-      type: Number
+      type: Number,
+      default: 0
     }
   },
   lastPosition: {
     x: {
-      type: Number
+      type: Number,
+      default: 0
     },
     y: {
-      type: Number
+      type: Number,
+      default: 0
     },
     z: {
-      type: Number
+      type: Number,
+      default: 0
     },
     mapId: {
       type: Schema.Types.ObjectId
@@ -73,6 +88,14 @@ const CharacterSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'buff'
   }]
-}, {timestamps: true});
+}, {
+  timestamps: true,
+  toObject: {
+    virtuals: true
+  },
+  toJSON: {
+    virtuals: true
+  }
+});
 
 export default CharacterSchema;

@@ -1,5 +1,6 @@
 import { Player } from '../../../models';
 import { messages } from '../../../../common/constants';
+import { getFieldsFromProjection } from '../../../../common/utils/dataFormat';
 
 class CreatePlayer {
   required = {
@@ -14,13 +15,15 @@ class CreatePlayer {
   validate(req, res) {}
 
   async handler(req, res) {
-    const { messages } = this;
     const player = await Player.create(req.body);
     
     req.user.players.push(player);
     await req.user.save();
 
-    res.json(messages.REQUEST_SUCCESS(player));
+    const projection = player.projectionFromPlayerList;
+    const formatedPlayer = getFieldsFromProjection(projection, player);
+
+    res.json(messages.REQUEST_SUCCESS(formatedPlayer));
   }
 }
 

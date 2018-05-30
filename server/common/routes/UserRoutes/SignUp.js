@@ -1,6 +1,6 @@
 import { User } from '../../models';
 import { messages } from '../../constants';
-import { projectionFormat } from '../../utils/dataFormat';
+import { removeFieldsFromProjection } from '../../utils/dataFormat';
 
 class SignUp {
   required = {
@@ -26,7 +26,7 @@ class SignUp {
     req.session.userId = user._id;
 
     const projection = user && user.projection;
-    const formatedUser = user && projection && projectionFormat(projection, user);
+    const formatedUser = user && projection && removeFieldsFromProjection(projection, user);
     res.json(messages.REQUEST_SUCCESS(formatedUser));
   }
 }

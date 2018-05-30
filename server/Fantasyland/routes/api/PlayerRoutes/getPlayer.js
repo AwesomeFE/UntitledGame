@@ -2,7 +2,9 @@ import { Player } from '../../../models';
 import { messages } from '../../../../common/constants';
 
 class GetPlayer {
-  required = {};
+  required = {
+    params: [ 'playerId' ]
+  };
 
   constructor() {
     this.validate = this.validate.bind(this);
@@ -12,9 +14,11 @@ class GetPlayer {
   validate(req, res) {}
 
   async handler(req, res) {
-    const players = await Player.find();
+    const { playerId } = req.params;
+    const player = await Player.findById(playerId);
+    const formatedPlayer = player && player.toJSON();
 
-    res.json(messages.REQUEST_SUCCESS(players));
+    res.json(messages.REQUEST_SUCCESS(formatedPlayer));
   }
 }
 

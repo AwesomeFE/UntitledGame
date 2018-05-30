@@ -13,6 +13,10 @@ const PlayerSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'hero'
   }],
+  projectionFromPlayerList: {
+    type: String,
+    default: '_id name gender'
+  }
 }, {timestamps: true});
 
 export default PlayerSchema;

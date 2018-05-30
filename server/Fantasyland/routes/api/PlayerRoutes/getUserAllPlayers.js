@@ -1,5 +1,6 @@
 import { Player } from '../../../models';
 import { messages } from '../../../../common/constants';
+import { getFieldsFromProjection } from '../../../../common/utils/dataFormat';
 
 class GetUserAllPlayers {
   required = {};
@@ -13,8 +14,15 @@ class GetUserAllPlayers {
 
   async handler(req, res) {
     const players = await Player.find();
+    const formatedPlayers = [];
 
-    res.json(messages.REQUEST_SUCCESS(players));
+    for(const player of players) {
+      const projection = player.projectionFromPlayerList;
+
+      formatedPlayers.push(getFieldsFromProjection(projection, player));
+    }
+
+    res.json(messages.REQUEST_SUCCESS(formatedPlayers));
   }
 }
 
