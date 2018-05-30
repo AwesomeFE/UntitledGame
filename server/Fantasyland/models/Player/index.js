@@ -7,4 +7,4 @@ class PlayerModel extends Model {
 
 schema.loadClass(PlayerModel);
 
-export const PlayerController = Character.discriminator('player', schema);
+export const Player = Character.discriminator('player', schema);
