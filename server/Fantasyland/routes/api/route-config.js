@@ -1,10 +1,12 @@
 import * as UserRoutes from '../../../common/routes/UserRoutes';
 import * as PlayerRoutes from './PlayerRoutes';
 import * as DungeonRoutes from './DungeonRoutes';
+import * as EnemyRoutes from './EnemyRoutes';
 import middlewares from './middlewares';
 
 export default [
   middlewares.setUser,
+  middlewares.setPlayer,
   { path: '/user/signin', method: 'post', ...UserRoutes.signIn },
   { path: '/user/signup', method: 'post', ...UserRoutes.signUp },
   { path: '/user', method: 'get', ...UserRoutes.getSessionUser },
@@ -19,6 +21,10 @@ export default [
   middlewares.ensurePlayerLogin,
   { path: '/dungeon', method: 'get', ...DungeonRoutes.getAllDungeons },
   // { path: '/dungeon/start', method: 'post', ...DungeonRoutes.startDungeon },
+
   // middlewares.ensureAdmin,
+  { path: '/enemy', method: 'post', ...EnemyRoutes.createEnemy },
+  { path: '/enemy', method: 'get', ...EnemyRoutes.getAllEnemy },
+  { path: '/enemy/:enemyId', method: 'delete', ...EnemyRoutes.deleteEnemy },
   { path: '/dungeon', method: 'post', ...DungeonRoutes.createDungeon },
 ];

@@ -11,12 +11,21 @@ class DeletePlayer {
     this.handler = this.handler.bind(this);
   }
 
-  validate(req, res) {}
+  validate(req, res) {
+    const { playerId } = req.params;
+    const { players } = req.user;
+
+    const isNotUserPlayer = players.every(playerItemId => playerItemId.toString() !== playerId);
+
+    if(isNotUserPlayer) {
+      throw messages.AUTH_INVALID;
+    }
+  }
 
   async handler(req, res) {
     const { playerId } = req.params;
 
-    req.user.players = req.user.players.filter(playerItem => playerItem !== playerId);
+    req.user.players = req.user.players.filter(playerItemId => playerItemId.toString() !== playerId);
 
     await req.user.save();
     await Player.findByIdAndRemove(playerId);

@@ -11,20 +11,26 @@ class LoginPlayer {
     this.handler = this.handler.bind(this);
   }
 
-  validate(req, res) {}
+  validate(req, res) {
+    const { playerId } = req.params;
+    const { players } = req.user;
+
+    const isNotUserPlayer = players.every(playerItemId => playerItemId.toString() !== playerId);
+
+    if(isNotUserPlayer) {
+      throw messages.AUTH_INVALID;
+    }
+  }
 
   async handler(req, res) {
     const { playerId } = req.params;
     const { players } = req.user;
-    
+
     let currentPlayer = null;
 
-    if(players.includes(playerId)) {
-      const player = await Player.findById(playerId);
-      currentPlayer = player && player.toJSON();
-    }
-
-    req.session.playerId = currentPlayer._id;
+    const player = await Player.findById(playerId);
+    currentPlayer = player && player.toJSON();
+    req.session.playerId = playerId;
     
     res.json(messages.REQUEST_SUCCESS(currentPlayer));
   }

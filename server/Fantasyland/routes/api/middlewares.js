@@ -16,7 +16,7 @@ class Middlewares {
 
   async setPlayer(req, res, next) {
     const { playerId } = req.session;
-    req.player = playerId && await Player.findById(userId);
+    req.player = playerId && await Player.findById(playerId);
     next();
   }
 

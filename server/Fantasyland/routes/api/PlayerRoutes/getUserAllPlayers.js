@@ -13,7 +13,8 @@ class GetUserAllPlayers {
   validate(req, res) {}
 
   async handler(req, res) {
-    const players = await Player.find();
+    const { players: playerIds } = req.user;
+    const players = await Player.find({ _id: { $in: playerIds } });
     const formatedPlayers = [];
 
     for(const player of players) {
