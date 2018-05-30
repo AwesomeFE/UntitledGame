@@ -47,4 +47,6 @@ class UserModel extends Model {
 
 schema.loadClass(UserModel);
 
-export const User = mongoose.model('user', schema);
+const connection = mongoose.connection.useDb('www');
+
+export const User = connection.model('user', schema);

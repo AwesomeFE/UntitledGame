@@ -2,7 +2,7 @@ import { User, Entry } from '../../models';
 import { messages } from '../../constants';
 import { projectionFormat } from '../../utils/dataFormat';
 
-class SignInRoute {
+class SignIn {
   required = {
     body: [ 'password' ]
   };
@@ -26,4 +26,4 @@ class SignInRoute {
   }
 }
 
-export const SignIn = new SignInRoute();
+export const signIn = new SignIn();

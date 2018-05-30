@@ -1,4 +1,4 @@
-export { SignUp } from './SignUp';
-export { SignIn } from './SignIn';
-export { SignOut } from './SignOut';
-export { GetSessionUser } from './GetSessionUser';
+export { signUp } from './signUp';
+export { signIn } from './signIn';
+export { signOut } from './signOut';
+export { getSessionUser } from './getSessionUser';

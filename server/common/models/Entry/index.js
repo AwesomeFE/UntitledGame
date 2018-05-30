@@ -9,4 +9,6 @@ class EntryModel extends Model {
 
 schema.loadClass(EntryModel);
 
-export const Entry = mongoose.model('entry', schema);
+const connection = mongoose.connection.useDb('www');
+
+export const Entry = connection.model('entry', schema);

@@ -1,6 +1,6 @@
 import { messages } from '../../constants';
 
-class SignOutRoute {
+class SignOut {
   required = {};
 
   constructor() {
@@ -16,4 +16,4 @@ class SignOutRoute {
   }
 }
 
-export const SignOut = new SignOutRoute();
+export const signOut = new SignOut();

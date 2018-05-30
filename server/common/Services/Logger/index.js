@@ -37,12 +37,9 @@ class Logger {
     const httpLogger = log4js.getLogger('http');
     const morganFormat = ':remote-addr :method :url :status :response-time ms';
     const mroganOptions = { stream: { write: str => {
-
       if(httpLogger.level.levelStr !== 'OFF') {
         httpLogger.info(str.trim());
       }
-      console.log(str.trim());
-
     }}};
 
     return morgan(morganFormat, mroganOptions);

@@ -2,7 +2,7 @@ import { User } from '../../models';
 import { messages } from '../../constants';
 import { projectionFormat } from '../../utils/dataFormat';
 
-class GetSessionUserRoute {
+class GetSessionUser {
   required = {};
 
   constructor() {
@@ -21,4 +21,4 @@ class GetSessionUserRoute {
   }
 }
 
-export const GetSessionUser = new GetSessionUserRoute();
+export const getSessionUser = new GetSessionUser();
