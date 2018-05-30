@@ -1,7 +1,7 @@
 import { Player } from '../../../models';
 import { messages } from '../../../../common/constants';
 
-class GetPlayer {
+class CreateDungeon {
   required = {
     params: [ 'playerId' ]
   };
@@ -22,4 +22,4 @@ class GetPlayer {
   }
 }
 
-export const getPlayer = new GetPlayer();
+export const createDungeon = new CreateDungeon();

@@ -1,5 +1,5 @@
 import { messages } from '../../../common/constants';
-import { User } from '../../models';
+import { User, Player } from '../../models';
 
 class Middlewares {
   constructor() {
@@ -12,6 +12,16 @@ class Middlewares {
     const { userId } = req.session;
     req.user = userId && await User.findById(userId);
     next();
+  }
+
+  async setPlayer(req, res, next) {
+    const { playerId } = req.session;
+    req.player = playerId && await Player.findById(userId);
+    next();
+  }
+
+  ensurePlayerLogin(req, res, next) {
+    req.player ? next() : next(messages.AUTH_INVALID);
   }
 
   ensureSignIn(req, res, next) {
