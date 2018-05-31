@@ -1,9 +1,9 @@
 import { DungeonInfo } from '../../../models';
 import { messages } from '../../../../common/constants';
 
-class CreateDungeon {
+class CreateDungeonChapter {
   required = {
-    body: [ 'name' ]
+    body: [ 'name', 'dungeons' ]
   };
 
   constructor() {
@@ -20,4 +20,4 @@ class CreateDungeon {
   }
 }
 
-export const createDungeon = new CreateDungeon();
+export const createDungeonChapter = new CreateDungeonChapter();

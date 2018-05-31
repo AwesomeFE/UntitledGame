@@ -5,13 +5,19 @@ const DungeonChapterSchema = new Schema({
   name: {
     type: String
   },
-  dungeon: {
+  dungeons: [{
+    dungeon: {
+      type: Schema.Types.ObjectId,
+      ref: 'dungeon'
+    },
+    dungeonStory: {
+      type: DungeonStorySchema
+    }
+  }],
+  items: [{
     type: Schema.Types.ObjectId,
-    ref: 'dungeon'
-  },
-  dungeonStory: {
-    type: DungeonStorySchema
-  }
+    ref: 'item'
+  }]
 }, {timestamps: true});
 
 export default DungeonChapterSchema;

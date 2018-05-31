@@ -1,7 +1,7 @@
 import * as UserRoutes from '../../../common/routes/UserRoutes';
-import * as PlayerRoutes from './PlayerRoutes';
-import * as DungeonRoutes from './DungeonRoutes';
 import * as EnemyRoutes from './EnemyRoutes';
+import * as PlayerRoutes from './PlayerRoutes';
+import * as DungeonChapterRoutes from './DungeonChapterRoutes';
 import middlewares from './middlewares';
 
 export default [
@@ -19,12 +19,12 @@ export default [
   { path: '/player/:playerId', method: 'patch', ...PlayerRoutes.patchPlayer },
   { path: '/player/:playerId', method: 'delete', ...PlayerRoutes.deletePlayer },
   middlewares.ensurePlayerLogin,
-  { path: '/dungeon', method: 'get', ...DungeonRoutes.getAllDungeons },
+  { path: '/dungeon', method: 'get', ...DungeonChapterRoutes.getAllDungeonChapters },
   // { path: '/dungeon/start', method: 'post', ...DungeonRoutes.startDungeon },
 
   // middlewares.ensureAdmin,
   { path: '/enemy', method: 'post', ...EnemyRoutes.createEnemy },
   { path: '/enemy', method: 'get', ...EnemyRoutes.getAllEnemy },
   { path: '/enemy/:enemyId', method: 'delete', ...EnemyRoutes.deleteEnemy },
-  { path: '/dungeon', method: 'post', ...DungeonRoutes.createDungeon },
+  { path: '/dungeon', method: 'post', ...DungeonChapterRoutes.createDungeonChapter },
 ];
