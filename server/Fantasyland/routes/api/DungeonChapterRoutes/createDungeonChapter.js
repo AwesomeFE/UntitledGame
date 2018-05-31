@@ -1,4 +1,4 @@
-import { DungeonInfo } from '../../../models';
+import { DungeonChapter } from '../../../models';
 import { messages } from '../../../../common/constants';
 
 class CreateDungeonChapter {
@@ -14,9 +14,9 @@ class CreateDungeonChapter {
   validate(req, res) {}
 
   async handler(req, res) {
-    const dungeonInfo = await DungeonInfo.create(req.body);
+    const dungeonChapter = await DungeonChapter.create(req.body);
 
-    res.json(messages.REQUEST_SUCCESS(dungeonInfo));
+    res.json(messages.REQUEST_SUCCESS(dungeonChapter));
   }
 }
 

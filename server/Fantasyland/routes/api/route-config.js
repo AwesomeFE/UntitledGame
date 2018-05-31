@@ -19,12 +19,13 @@ export default [
   { path: '/player/:playerId', method: 'patch', ...PlayerRoutes.patchPlayer },
   { path: '/player/:playerId', method: 'delete', ...PlayerRoutes.deletePlayer },
   middlewares.ensurePlayerLogin,
-  { path: '/dungeon', method: 'get', ...DungeonChapterRoutes.getAllDungeonChapters },
+  { path: '/dungeon-chapter', method: 'get', ...DungeonChapterRoutes.getAllDungeonChapters },
   // { path: '/dungeon/start', method: 'post', ...DungeonRoutes.startDungeon },
 
   // middlewares.ensureAdmin,
+  // { path: '/dungeon', method: 'get', ...DungeonChapterRoutes.getAllDungeonChapters },
   { path: '/enemy', method: 'post', ...EnemyRoutes.createEnemy },
   { path: '/enemy', method: 'get', ...EnemyRoutes.getAllEnemy },
   { path: '/enemy/:enemyId', method: 'delete', ...EnemyRoutes.deleteEnemy },
-  { path: '/dungeon', method: 'post', ...DungeonChapterRoutes.createDungeonChapter },
+  { path: '/dungeon-chapter', method: 'post', ...DungeonChapterRoutes.createDungeonChapter },
 ];
