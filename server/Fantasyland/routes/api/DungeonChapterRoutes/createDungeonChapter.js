@@ -1,4 +1,4 @@
-import { DungeonChapter } from '../../../models';
+import { DungeonChapter, Dungeon } from '../../../models';
 import { messages } from '../../../../common/constants';
 
 class CreateDungeonChapter {
@@ -14,9 +14,19 @@ class CreateDungeonChapter {
   validate(req, res) {}
 
   async handler(req, res) {
+    let { dungeons: dungeonsData = [] } = req.body;
+
+    dungeonsData = [...dungeonsData];
+    dungeonsData = dungeonsData.map(dungeonData => dungeonData.dungeon);
+
+    const dungeons = await Dungeon.create(dungeonsData);
     const dungeonChapter = await DungeonChapter.create(req.body);
 
     res.json(messages.REQUEST_SUCCESS(dungeonChapter));
+  }
+
+  getDungeonsData(dungeonsData = []) {
+    return [...dungeonsData].map(dungeonData => dungeonData.dungeon);
   }
 }
 
