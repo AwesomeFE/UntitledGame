@@ -1,10 +1,9 @@
 import schema from './schema';
-import { Model } from 'mongoose';
-import { DungeonScene } from '../DungeonScene';
+import mongoose, { Model } from 'mongoose';
 
-class DungeonBattleModel extends Model {
+class BattleModel extends Model {
 }
 
-schema.loadClass(DungeonBattleModel);
+schema.loadClass(BattleModel);
 
-export const DungeonBattle = DungeonScene.discriminator('dungeon-battle', schema);
+export const Battle = mongoose.model('battle', schema);

@@ -1,0 +1,296 @@
+{
+  "name": "英法百年战争",
+  "chapters": [
+    {
+      "name": "英国边境战",
+      "dungeons": [
+        {
+          "type": "dungeon-story",
+          "name": "故事1"
+        },
+        {
+          "type": "dungeon-battle",
+          "name": "战斗",
+          "battles": [
+            {
+              "name": "战斗1",
+              "enemys": [
+                {
+                  "pool": [
+                    {
+                      "name": "敌人1",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人2",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人3",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人4",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人5",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    }
+                  ]
+                },
+                {
+                  "pool": [
+                    {
+                      "name": "敌人1",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人2",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人3",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人4",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人5",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    }
+                  ]
+                },
+                {
+                  "pool": [
+                    {
+                      "name": "敌人1",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人2",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人3",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人4",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人5",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "战斗2",
+              "enemys": [
+                {
+                  "pool": [
+                    {
+                      "name": "敌人1",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人2",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人3",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人4",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人5",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    }
+                  ]
+                },
+                {
+                  "pool": [
+                    {
+                      "name": "敌人1",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人2",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人3",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人4",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人5",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    }
+                  ]
+                },
+                {
+                  "pool": [
+                    {
+                      "name": "敌人1",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人2",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人3",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人4",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人5",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "战斗3",
+              "enemys": [
+                {
+                  "pool": [
+                    {
+                      "name": "敌人1",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人2",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人3",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人4",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人5",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    }
+                  ]
+                },
+                {
+                  "pool": [
+                    {
+                      "name": "敌人1",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人2",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人3",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人4",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人5",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    }
+                  ]
+                },
+                {
+                  "pool": [
+                    {
+                      "name": "敌人1",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人2",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人3",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人4",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    },
+                    {
+                      "name": "敌人5",
+                      "probability": 0.2,
+                      "item": "5b0e9fee9805e573a99a5e62"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

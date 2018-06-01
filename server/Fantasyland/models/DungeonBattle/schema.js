@@ -5,17 +5,19 @@ const DungeonBattleSchema = new Schema({
     name: {
       type: String
     },
-    enemyArray: [{
-      name: {
-        type: String
-      },
-      probability: {
-        type: Number
-      },
-      enemy: {
-        type: Schema.Types.ObjectId,
-        ref: 'enemy'
-      }
+    enemys: [{
+      pool: [{
+        name: {
+          type: String
+        },
+        probability: {
+          type: Number
+        },
+        item: {
+          type: Schema.Types.ObjectId,
+          ref: 'enemy'
+        }
+      }]
     }]
   }]
 }, {timestamps: true});

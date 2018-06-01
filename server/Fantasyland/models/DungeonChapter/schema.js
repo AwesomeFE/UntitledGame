@@ -28,6 +28,14 @@ const DungeonChapterSchema = new Schema({
   chapters: [
     ChapterSchema
   ]
-}, {timestamps: true});
+}, {
+  timestamps: true,
+  toObject: {
+    virtuals: true
+  },
+  toJSON: {
+    virtuals: true
+  }
+});
 
 export default DungeonChapterSchema;

@@ -1,13 +1,14 @@
 import { Schema } from 'mongoose';
-import DungeonSchema from '../Dungeon';
-import DungeonStorySchema from '../DungeonStory';
 
-const DungeonChapterSchema = new Schema({
+const BattleSchema = new Schema({
   name: {
     type: String
   },
   battles: [{
-    enemyArray: [{
+    name: {
+      type: String
+    },
+    enemys: [{
       name: {
         type: String
       },
@@ -20,7 +21,11 @@ const DungeonChapterSchema = new Schema({
         ref: 'item'
       }]
     }]
+  }],
+  items: [{
+    type: Schema.Types.ObjectId,
+    ref: 'item'
   }]
 }, {timestamps: true});
 
-export default DungeonChapterSchema;
+export default BattleSchema;
