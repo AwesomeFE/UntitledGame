@@ -16,17 +16,27 @@ class StartDungeonBattle {
 
   async handler(req, res) {
     const { dungeonBattleId } = req.params;
+    const { player } = req;
 
     const dungeonChapter = await DungeonChapter.findOne({
       'chapters.dungeons.type': 'dungeon-battle',
       'chapters.dungeons._id': dungeonBattleId
     });
 
-    const currentDungeonBattle = this.getDungeonBattleById(dungeonChapter, dungeonBattleId);
-    const battleData = this.generateBattle(currentDungeonBattle.toJSON());
-    const battle = await Battle.create(battleData);
+    const currentDungeonBattle = this.getDungeonBattleById(dungeonChapter.toJSON(), dungeonBattleId);
+    const battleData = this.generateBattle(currentDungeonBattle);
+    const battle = await this.saveUserBattle(player._id, battleData);
 
-    res.json(messages.REQUEST_SUCCESS(battleData));
+    res.json(messages.REQUEST_SUCCESS(battle));
+  }
+
+  /**
+   * 保存用户的一场战斗
+   * @param {*} playerId 
+   * @param {*} battleData 
+   */
+  saveUserBattle(playerId, battleData) {
+    return Battle.create({ ...battleData, player: playerId });
   }
 
   /**
@@ -41,7 +51,8 @@ class StartDungeonBattle {
       const enemys = [];
       // 遍历每一个敌人池
       for(const enemy of battle.enemys) {
-        enemys.push(generateItemFromPool(enemy.pool));
+        const currentEnemy = generateItemFromPool(enemy.pool);
+        enemys.push({ enemy: currentEnemy, items: [] });
       }
       battles.push({ ...battle, enemys });
     }
@@ -66,6 +77,7 @@ class StartDungeonBattle {
       }
     }
 
+    delete currentDungeonBattle._id;
     return currentDungeonBattle;
   }
 }

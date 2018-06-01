@@ -25,7 +25,15 @@ const BattleSchema = new Schema({
   items: [{
     type: Schema.Types.ObjectId,
     ref: 'item'
-  }]
+  }],
+  player: {
+    type: Schema.Types.ObjectId,
+    ref: 'character'
+  },
+  isFinished: {
+    type: Boolean,
+    default: false
+  }
 }, {timestamps: true});
 
 export default BattleSchema;
