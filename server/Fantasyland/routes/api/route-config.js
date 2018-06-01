@@ -20,7 +20,7 @@ export default [
   { path: '/player/:playerId', method: 'delete', ...PlayerRoutes.deletePlayer },
   middlewares.ensurePlayerLogin,
   { path: '/dungeon-chapter', method: 'get', ...DungeonChapterRoutes.getAllDungeonChapters },
-  // { path: '/dungeon/start', method: 'post', ...DungeonRoutes.startDungeon },
+  { path: '/dungeon/:dungeonBattleId/start', method: 'get', ...DungeonChapterRoutes.startDungeonBattle },
 
   // middlewares.ensureAdmin,
   // { path: '/dungeon', method: 'get', ...DungeonChapterRoutes.getAllDungeonChapters },
