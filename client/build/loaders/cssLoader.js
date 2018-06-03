@@ -1,6 +1,6 @@
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
-export default (options) => {
+export const cssLoader = (options) => {
   const cssLoader = {
     loader: 'css-loader',
     options: {

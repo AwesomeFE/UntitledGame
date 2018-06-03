@@ -1,8 +1,8 @@
-import cssLoader from './cssLoader';
-import scssLoader from './scssLoader';
-import lessLoader from './lessLoader';
+import { cssLoader } from './cssLoader';
+import { scssLoader } from './scssLoader';
+import { lessLoader } from './lessLoader';
 
-export default (options) => {
+export const vueLoader = (options) => {
   return {
     loader: 'vue-loader',
     options: {

@@ -5,6 +5,7 @@ import UA from 'ua-parser-js';
 const router = express.Router();
 
 router.get('/*', userHandler);
+router.get('/admin', adminHandler);
 
 function userHandler(req, res, next) {
   const ua = new UA(req.headers['user-agent']);
@@ -19,6 +20,12 @@ function userHandler(req, res, next) {
       root: path.resolve('client/dist/www/pc')
     });
   }
+}
+
+function adminHandler(req, res, next) {
+  res.sendFile('index.html', {
+    root: path.resolve('client/dist/FantasylandAdmin')
+  });
 }
 
 export const WebRoutes = router;

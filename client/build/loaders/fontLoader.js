@@ -1,9 +1,9 @@
-export default () => [
+export const fontLoader = () => [
   {
     loader: 'url-loader',
     options: {
       name: 'fonts/[hash].[ext]',
-      limit: '10000'
+      limit: '1000'
     }
   }
-]
+];

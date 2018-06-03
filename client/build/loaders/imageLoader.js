@@ -1,9 +1,9 @@
-export default () => [
+export const imageLoader = () => [
   {
     loader: 'url-loader',
     options: {
       name: 'images/[hash].[ext]',
-      limit: '5000'
+      limit: '1024'
     }
   }
-]
+];

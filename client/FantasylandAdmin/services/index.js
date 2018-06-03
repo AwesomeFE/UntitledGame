@@ -1,0 +1,1 @@
+export { initService } from '../../common/services';

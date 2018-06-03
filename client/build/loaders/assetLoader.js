@@ -1,4 +1,4 @@
-export default () => [
+export const assetLoader = () => [
   {
     loader: 'url-loader',
     options: {
@@ -6,4 +6,4 @@ export default () => [
       limit: '1'
     }
   }
-]
+];

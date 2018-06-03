@@ -1,9 +1,7 @@
-import '../../config';
+import '../../common/config';
 import webpack from 'webpack';
-import webpackDevServer from './dev-server';
-import webpackDevConfig from './config.development';
-import webpackStagingConfig from './config.staging';
-import webpackProductionConfig from './config.production';
+import webpackServer from './dev-server';
+import webpackConfig from './webpack.config';
 
 let compiler = {};
 
@@ -20,12 +18,7 @@ switch (process.env.NODE_ENV) {
       }
     };
 
-    webpackDevServer(webpackDevConfig, proxyConfig);
-    break;
-  }
-  case 'staging': {
-    compiler = webpack(webpackStagingConfig);
-    compiler.run(resultHandler);
+    webpackServer(webpackConfig, proxyConfig);
     break;
   }
   case 'production': {
@@ -35,16 +28,14 @@ switch (process.env.NODE_ENV) {
   }
 }
 
-function resultHandler(err, stats) {
+function resultHandler(err, stat) {
   if (err) throw err;
 
-  for(let stat of stats.stats) {
-    process.stdout.write(stat.toString({
-        colors: true,
-        modules: false,
-        children: false,
-        chunks: false,
-        chunkModules: false
-      }) + '\n');
-  }
+  process.stdout.write(stat.toString({
+    colors: true,
+    modules: false,
+    children: false,
+    chunks: false,
+    chunkModules: false
+  }) + '\n');
 }

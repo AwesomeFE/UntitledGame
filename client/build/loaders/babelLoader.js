@@ -1,5 +1,5 @@
-export default () => [
+export const babelLoader = () => [
   {
     loader: 'babel-loader'
   }
-]
+];

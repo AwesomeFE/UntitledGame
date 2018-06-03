@@ -108,8 +108,8 @@ class DevServer {
   }
 }
 
-function createDevServers(webpackDevConfigs, proxyConfig) {
-  return webpackDevConfigs.map(webpackDevConfig => new DevServer(webpackDevConfig, proxyConfig));
+function createDevServers(webpackConfig, proxyConfig) {
+  return new DevServer(webpackConfig, proxyConfig);
 }
 
 export default createDevServers;
