@@ -87,7 +87,12 @@ const CharacterSchema = new Schema({
   buffs: [{
     type: Schema.Types.ObjectId,
     ref: 'buff'
-  }]
+  }],
+  // 2d 角色模型贴图
+  '2Dstanding': {
+    type: Schema.Types.ObjectId,
+    ref: 'file'
+  }
 }, {
   timestamps: true,
   toObject: {
