@@ -11,21 +11,17 @@
     "dev:client": "cross-env NODE_ENV=development babel-node ./client/build",
     "dev:server": "cross-env NODE_ENV=development babel-node ./server",
     "build:server:www": "cross-env NODE_ENV=production PRODUCT=www node ./server/build",
-
     "run:prd:server:www": "cross-env NODE_ENV=production PRODUCT=www node ./server/dist/www",
     "build:prd:server:www": "cross-env NODE_ENV=production PRODUCT=www node ./server/build",
     "start:prd:server:www": "npm run build:prd:server:www&&npm run run:prd:server:www",
-
     "run:dev:server:www": "cross-env NODE_ENV=development PRODUCT=www node ./server/dist/www",
     "build:dev:server:www": "cross-env NODE_ENV=development PRODUCT=www node ./server/build",
     "start:dev:server:www": "npm run build:dev:server:www&&npm run run:dev:server:www",
-
     "run:prd:server:Fantasyland": "cross-env NODE_ENV=production PRODUCT=Fantasyland node ./server/dist/Fantasyland",
     "build:prd:server:Fantasyland": "cross-env NODE_ENV=production PRODUCT=Fantasyland node ./server/build",
     "start:prd:server:Fantasyland": "npm run build:prd:server:Fantasyland&&npm run run:prd:server:Fantasyland",
-
     "debug:client:FantasylandAdmin": "cross-env NODE_ENV=development PRODUCT=FantasylandAdmin babel-node ./client/build",
-
+    "build:client:FantasylandAdmin": "cross-env NODE_ENV=production PRODUCT=FantasylandAdmin babel-node ./client/build",
     "run:dev:server:Fantasyland": "cross-env NODE_ENV=development PRODUCT=Fantasyland node ./server/dist/Fantasyland",
     "build:dev:server:Fantasyland": "cross-env NODE_ENV=development PRODUCT=Fantasyland node ./server/build",
     "start:dev:server:Fantasyland": "npm run build:dev:server:Fantasyland&&npm run run:dev:server:Fantasyland"
@@ -64,6 +60,7 @@
   },
   "devDependencies": {
     "@kazupon/vue-i18n-loader": "^0.3.0",
+    "@types/node": "^10.3.2",
     "babel-cli": "^6.26.0",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "babel-loader": "^7.1.4",
@@ -86,7 +83,6 @@
     "css-loader": "^0.28.11",
     "date-fns": "^1.29.0",
     "eventsource-polyfill": "^0.9.6",
-    "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.11",
     "font-awesome": "^4.7.0",
     "hammerjs": "^2.0.8",
@@ -96,6 +92,7 @@
     "http-proxy-middleware": "^0.18.0",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
+    "mini-css-extract-plugin": "^0.4.0",
     "mocha": "^5.2.0",
     "mqtt": "^2.18.0",
     "node-sass": "^4.9.0",
@@ -106,6 +103,8 @@
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
     "swiper": "^4.3.0",
+    "ts-loader": "^4.3.1",
+    "typescript": "^2.9.1",
     "url-loader": "^1.0.1",
     "vee-validate": "^2.0.9",
     "vue": "^2.5.16",

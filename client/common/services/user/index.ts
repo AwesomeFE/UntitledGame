@@ -1,16 +1,17 @@
 import axios from 'axios';
-import { apiUrls } from '../constants';
+import FormData from './index.d';
+import { apiUrls } from '../../constants';
 
 class UserService {
   getSessionUser() {
     return axios(apiUrls.GET_USER());
   }
 
-  signin(data) {
+  signin(data: FormData.Signin) {
     return axios(apiUrls.SIGNIN(data));
   }
 
-  signup(data) {
+  signup(data: FormData.Signup) {
     return axios(apiUrls.SIGNUP(data));
   }
 

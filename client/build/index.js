@@ -22,7 +22,7 @@ switch (process.env.NODE_ENV) {
     break;
   }
   case 'production': {
-    compiler = webpack(webpackProductionConfig);
+    compiler = webpack(webpackConfig);
     compiler.run(resultHandler);
     break;
   }

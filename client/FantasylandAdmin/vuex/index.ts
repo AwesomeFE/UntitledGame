@@ -1,9 +1,9 @@
 import Vuex from 'vuex';
-import { CommonStore } from '../../common';
+import CommonStore from '../../common/vuex';
 
 class Store extends CommonStore {
-  constructor(options) {
-    super(options);
+  constructor() {
+    super();
   }
 }
 

@@ -5,7 +5,7 @@ export function htmlWebpackPlugin(options) {
 
   return [
     new HtmlWebpackPlugin({
-      template: `./client/src/${appName}/index.html`,
+      template: `./client/${appName}/index.html`,
       filename: `./index.html`,
       inject: !disableInject
     })

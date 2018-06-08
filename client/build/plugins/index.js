@@ -1,11 +1,9 @@
 export { cleanPlugin } from './cleanPlugin';
 export { definePlugin } from './definePlugin';
 export { workboxPlugin } from './workboxPlugin';
-export { uglifyJsPlugin } from './uglifyJsPlugin';
 export { copyWebpackPlugin } from './copyWebpackPlugin';
-export { extractTextPlugin } from './extractTextPlugin';
 export { htmlWebpackPlugin } from './htmlWebpackPlugin';
-export { commonsChunkPlugin } from './commonsChunkPlugin';
+export { miniCssExtractPlugin } from './miniCssExtractPlugin';
 export { writeFileWebpackPlugin } from './writeFileWebpackPlugin';
 export { htmlIncludeAssetsPlugin } from './htmlIncludeAssetsPlugin';
 export { hotModuleReplacementPlugin } from './hotModuleReplacementPlugin';

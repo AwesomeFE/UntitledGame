@@ -8,11 +8,11 @@ export function copyWebpackPlugin(options) {
   return [
     new CopyWebpackPlugin([
       {
-        from: `./client/src/${appName}/assets/lib/workbox-sw.prod.v2.1.2.js`,
+        from: `./client/${appName}/assets/lib/workbox-sw.prod.v2.1.2.js`,
         to: `javascripts/workbox-sw.prod.v2.1.2.js`
       },
       {
-        from: `./client/src/${appName}/assets/lib/workbox-sw.prod.v2.1.2.js.map`,
+        from: `./client/${appName}/assets/lib/workbox-sw.prod.v2.1.2.js.map`,
         to: `javascripts/workbox-sw.prod.v2.1.2.js.map`
       },
       ...copyFiles

@@ -5,6 +5,7 @@ import * as plugins from './plugins';
 const mode = process.env.NODE_ENV;
 const appName = process.env.PRODUCT;
 const isDevelopment = process.env.NODE_ENV === 'development';
+
 const extract = !isDevelopment;
 const minimize = !isDevelopment;
 const sourceMap = isDevelopment;
@@ -15,7 +16,7 @@ const options = { mode, appName, extract, minimize, sourceMap, isHotReplace };
 export default {
   mode,
   entry: {
-    app: `./client/${appName}/main.js`
+    app: `./client/${appName}/main.ts`
   },
   output: {
     path: path.resolve(`client/dist/${appName}/`),
@@ -25,7 +26,8 @@ export default {
   resolve: {
     extensions: [
       '.js',
-      '.vue'
+      '.vue',
+      '.ts'
     ],
     alias: {
       'vue$': 'vue/dist/vue.esm.js'
@@ -34,8 +36,16 @@ export default {
   module: {
     rules: [
       {
-        test: /\.js/,
-        use: loaders.babelLoader(options)
+        test: /\.ts$/,
+        use: loaders.tsLoader(options)
+      },
+      {
+        test: /\.js$/,
+        use: loaders.babelLoader(options),
+        // Issue: https://github.com/airyland/vux/issues/443#issuecomment-237688990
+        include: [
+          path.resolve(`client/${appName}`)
+        ]
       },
       {
         test: /\.vue/,
@@ -81,14 +91,17 @@ export default {
     ...plugins.cleanPlugin(options),
     ...plugins.definePlugin(options),
     ...plugins.workboxPlugin(options),
-    // ...plugins.uglifyJsPlugin(options),
     ...plugins.copyWebpackPlugin(options),
-    ...plugins.extractTextPlugin(options),
     ...plugins.htmlWebpackPlugin(options),
-    // ...plugins.commonsChunkPlugin(options),
+    ...plugins.miniCssExtractPlugin(options),
     ...plugins.writeFileWebpackPlugin(options),
     ...plugins.htmlIncludeAssetsPlugin(options),
     ...plugins.hotModuleReplacementPlugin(options)
   ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  }
   // devtool: sourceMap ? 'source-map' : undefined
 };

@@ -1,4 +1,4 @@
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 export const lessLoader = (options) => {
   const cssLoader = {
@@ -21,12 +21,7 @@ export const lessLoader = (options) => {
     loader: 'resolve-url-loader'
   };
 
-  if(options.extract) {
-    return ExtractTextPlugin.extract({
-      use: [cssLoader, resolveUrlLoader, lessLoader],
-      fallback: 'vue-style-loader'
-    });
-  }
-
-  return ['vue-style-loader', cssLoader, resolveUrlLoader, lessLoader];
+  return options.extract
+    ? [MiniCssExtractPlugin.loader, cssLoader, resolveUrlLoader, lessLoader]
+    : ['vue-style-loader', cssLoader, resolveUrlLoader, lessLoader];
 }

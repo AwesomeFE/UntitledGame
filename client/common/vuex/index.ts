@@ -1,13 +1,15 @@
+/// <reference types="node" />
+import { CommonStoreOptions, Module } from './index.d';
 import * as system from './system';
 
 class CommonStore {
   strict = process.env.NODE_ENV !== 'production';
 
-  modules = {
+  modules: Module = {
     system
   };
 
-  constructor(options = {}) {
+  constructor(options?: CommonStoreOptions) {
     const { disableModules = [], modules } = options;
     
     for(const moduleName of disableModules) {

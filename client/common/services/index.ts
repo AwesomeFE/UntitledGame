@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import axios from 'axios';
+import axios, { AxiosResponse, AxiosError } from 'axios';
 
 /**
  * Redefine server response success process
@@ -7,7 +7,7 @@ import axios from 'axios';
  * @param {*} response 
  * @returns {Promise.reject|Object} result
  */
-const responseSuccess = response => {
+const responseSuccess = (response: AxiosResponse) => {
   // 获取response的code
   const { status } = response.data;
 
@@ -22,7 +22,7 @@ const responseSuccess = response => {
  * 重定义服务器响应失败逻辑
  * @param {*} error 
  */
-const responseFailed = error => {
+const responseFailed = (error: AxiosError) => {
   const { status } = error.response;
 
   status >= 400 && status < 500
