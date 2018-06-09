@@ -1,21 +1,6 @@
 <template>
   <div class="App">
-    <template v-if="isInitialized">
-      <PageHeader>
-        <div class="left">
-          <MenuItem to="/">{{$t('Home')}}</MenuItem>
-          <MenuItem>按钮1</MenuItem>
-          <MenuItem>按钮2</MenuItem>
-        </div>
-        <div class="right">
-          <MenuItem>{{$t('Account')}}</MenuItem>
-          <MenuItem>{{$t('Settings')}}</MenuItem>
-          <MenuItem>{{$t('SignOut')}}</MenuItem>
-        </div>
-      </PageHeader>
-
-      <router-view></router-view>
-    </template>
+    <router-view v-if="isInitialized"></router-view>
 
     <LoadingModal></LoadingModal>
   </div>
@@ -25,23 +10,20 @@
 import Vue from 'vue';
 import { namespace } from 'vuex-class';
 import { Component } from 'vue-property-decorator';
+import { Route, RawLocation } from 'vue-router';
 
 import { Store } from '../../../common/types';
 import LoadingModal from '../../components/LoadingModal/index.vue';
-import MenuItem from '../../../common/AdminComponents/MenuItem/index.vue';
-import PageHeader from '../../../common/AdminComponents/PageHeader/index.vue';
 import { modalTypes } from '../../constants';
 
 const System = namespace('system');
 
 @Component({
   components: {
-    PageHeader,
-    MenuItem,
     LoadingModal
   }
 })
-export default class extends Vue {
+export default class App extends Vue {
   @System.State((state: Store.System.State) => state.user)
   user: Store.System.User;
 
@@ -53,6 +35,14 @@ export default class extends Vue {
 
   @System.Mutation('hideModal')
   hideModal: (modalType: string) => void;
+
+  beforeRouteEnter(to: Route, from: Route, next: (to?: ((vm: Vue) => any)) => void) {
+    next((vm: any) => vm.checkUser());
+  }
+
+  checkUser() {
+    // this.user ? this.$router.push('') : null;
+  }
 
   isInitialized = false;
 

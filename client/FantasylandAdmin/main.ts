@@ -12,8 +12,8 @@ import store from './vuex';
 import router from './router';
 // import initService from './services';
 // import initDirectives from './directives';
-// import initComponents from './components';
-// import initServiceWorker from './sw/statup';
+import initComponents from './components';
+import initServiceWorker from './sw/statup';
 
 Vue.use(Vuex);
 Vue.use(VueI18n);
@@ -22,8 +22,8 @@ Vue.use(VueValidate);
 
 // initService();
 // initDirectives();
-// initComponents();
-// initServiceWorker();
+initComponents();
+initServiceWorker();
 
 new Vue({
   el: '#app',

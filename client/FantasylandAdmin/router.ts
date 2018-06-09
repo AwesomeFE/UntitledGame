@@ -6,21 +6,21 @@ export default () => new VueRouter({
     {
       path: '/',
       component: () => import('./views/App/index.vue'),
-      // children: [
-      //   {
-      //     name: 'home',
-      //     path: '/',
-      //     component: () => import('./views/Home')
-      //   },
-      //   {
-      //     path: 'entry',
-      //     component: () => import('./views/Entry')
-      //   },
-      //   {
-      //     path: '*',
-      //     component: () => import('./views/NotFound')
-      //   }
-      // ]
+      children: [
+        {
+          name: 'home',
+          path: '/',
+          component: () => import('./views/Home/index.vue')
+        },
+        // {
+        //   path: 'entry',
+        //   component: () => import('./views/Entry/index.vue')
+        // },
+        // {
+        //   path: '*',
+        //   component: () => import('./views/NotFound/index.vue')
+        // }
+      ]
     }
   ],
   scrollBehavior(to, from, savedPosition) {

@@ -1,19 +1,43 @@
 <template>
   <div class="Home">
-    <div>PC</div>
+    <PageHeader>
+      <div class="left">
+        <MenuItem to="/">{{$t('Home')}}</MenuItem>
+        <MenuItem>按钮1</MenuItem>
+        <MenuItem>按钮2</MenuItem>
+      </div>
+      <div class="right">
+        <MenuItem>{{$t('Account')}}</MenuItem>
+        <MenuItem>{{$t('Settings')}}</MenuItem>
+        <MenuItem>{{$t('SignOut')}}</MenuItem>
+      </div>
+    </PageHeader>
+
+    <div>
+      Home
+    </div>
   </div>
 </template>
 
 <script>
-import { Vue } from '../../common';
+import Vue from 'vue';
+import { namespace } from 'vuex-class';
 import { Component } from 'vue-property-decorator';
 
-@Component()
-class Home extends Vue {
+import MenuItem from '../../../common/AdminComponents/MenuItem/index.vue';
+import PageHeader from '../../../common/AdminComponents/PageHeader/index.vue';
+
+const System = namespace('system');
+
+@Component({
+  components: {
+    MenuItem,
+    PageHeader,
+  }
+})
+export default class Home extends Vue {
 
 }
-
-export default Home;
 </script>
 
 <style type="text/scss" lang="scss">

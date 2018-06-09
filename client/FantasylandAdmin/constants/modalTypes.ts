@@ -1,3 +1,3 @@
 export const modalTypes = {
-  LoadingModal: 'loading-modal',
+  LoadingModal: 'loading-modal'
 };
