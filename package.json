@@ -82,6 +82,7 @@
     "core-decorators": "^0.20.0",
     "css-loader": "^0.28.11",
     "date-fns": "^1.29.0",
+    "element-ui": "^2.4.1",
     "eventsource-polyfill": "^0.9.6",
     "file-loader": "^1.1.11",
     "font-awesome": "^4.7.0",

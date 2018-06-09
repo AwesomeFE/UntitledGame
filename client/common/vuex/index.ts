@@ -1,4 +1,5 @@
 /// <reference types="node" />
+
 import { CommonStoreOptions, Module } from './index.d';
 import * as system from './system';
 

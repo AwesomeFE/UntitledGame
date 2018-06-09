@@ -1,6 +1,6 @@
 <template>
   <div class="App">
-    <!-- <PageHeader></PageHeader> -->
+    <PageHeader></PageHeader>
     <div class="PageBody">
       <router-view></router-view>
     </div>
@@ -10,19 +10,19 @@
 
 <script lang="ts">
 import Vue from 'vue';
-// import PageHeader from '../../components/PageHeader';
+import PageHeader from '../../../common/AdminComponents/PageHeader/index.vue';
 // import PageFooter from '../../components/PageFooter';
 import { Component } from 'vue-property-decorator';
 
 @Component({
-  // components: {
-  //   PageHeader,
-  //   PageFooter
-  // }
+  components: {
+    PageHeader,
+    // PageFooter
+  }
 })
 class App extends Vue {
   async mounted() {
-    await this.$store.dispatch('preLogin');
+    // await this.$store.dispatch('preLogin');
   }
 }
 
@@ -33,6 +33,6 @@ export default App;
 @import '../../assets/scss/variable.scss';
 
 .App {
-  min-height: 100%;
+  height: 100%;
 }
 </style>

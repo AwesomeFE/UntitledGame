@@ -3,7 +3,7 @@ export { vueLoader } from './vueLoader';
 export { fontLoader } from './fontLoader';
 export { lessLoader } from './lessLoader';
 export { scssLoader } from './scssLoader';
-export { yamlLoader } from './yamlLoader';
+export { i18nLoader } from './i18nLoader';
 export { assetLoader } from './assetLoader';
 export { babelLoader } from './babelLoader';
 export { imageLoader } from './imageLoader';

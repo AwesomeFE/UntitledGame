@@ -64,8 +64,8 @@ export default {
         use: loaders.lessLoader(options)
       },
       {
-        test: /\.yaml$/,
-        use: loaders.yamlLoader(options)
+        test: /\.i18n$/,
+        use: loaders.i18nLoader(options)
       },
       {
         test: /\.(png|jpg|gif)$/,
