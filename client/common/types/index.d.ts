@@ -7,12 +7,18 @@ export declare namespace Store {
     interface User {
       _id: string;
     }
+
+    interface Modal {
+      isShow?: boolean;
+      type: string;
+    }
     
     /**
      * Store.System.State
      */
     interface State {
       user?: User;
+      modals: Array<Modal>
     }
 
     /**

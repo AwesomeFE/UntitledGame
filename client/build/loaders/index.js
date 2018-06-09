@@ -1,10 +1,11 @@
+export { tsLoader } from './tsLoader';
 export { cssLoader } from './cssLoader';
 export { vueLoader } from './vueLoader';
 export { fontLoader } from './fontLoader';
 export { lessLoader } from './lessLoader';
 export { scssLoader } from './scssLoader';
 export { i18nLoader } from './i18nLoader';
+export { yamlLoader } from './yamlLoader';
 export { assetLoader } from './assetLoader';
 export { babelLoader } from './babelLoader';
 export { imageLoader } from './imageLoader';
-export { tsLoader } from './tsLoader';

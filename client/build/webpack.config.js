@@ -68,6 +68,10 @@ export default {
         use: loaders.i18nLoader(options)
       },
       {
+        test: /\.yaml$/,
+        use: loaders.yamlLoader(options)
+      },
+      {
         test: /\.(png|jpg|gif)$/,
         use: loaders.imageLoader(options),
         exclude: [

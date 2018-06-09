@@ -1,19 +1,21 @@
 <template>
-  <router-link class="menu-item" to="/">
+  <router-link class="menu-item" :to="to">
     <slot></slot>
   </router-link>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
+import { Component, Prop } from 'vue-property-decorator';
 
-@Component({
-  components: {
-  }
-})
+@Component
 export default class extends Vue {
-
+  @Prop({default: '#'})
+  to: string;
+  
+  get isSubMenu() {
+    return this.$slots.default.length > 1;
+  }
 }
 </script>
 
@@ -24,5 +26,6 @@ export default class extends Vue {
   height: 50px;
   padding: 0 10px;
   line-height: 50px;
+  cursor: pointer;
 }
 </style>

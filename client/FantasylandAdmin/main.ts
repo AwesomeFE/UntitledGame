@@ -26,7 +26,8 @@ Vue.use(VueValidate);
 // initServiceWorker();
 
 new Vue({
+  el: '#app',
   i18n: i18n(),
   store: store(),
   router: router()
-}).$mount('#app');
+});
