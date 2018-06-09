@@ -1,6 +1,7 @@
 export { cleanPlugin } from './cleanPlugin';
 export { definePlugin } from './definePlugin';
 export { workboxPlugin } from './workboxPlugin';
+export { vueLoaderPlugin } from './vueLoaderPlugin';
 export { copyWebpackPlugin } from './copyWebpackPlugin';
 export { htmlWebpackPlugin } from './htmlWebpackPlugin';
 export { miniCssExtractPlugin } from './miniCssExtractPlugin';

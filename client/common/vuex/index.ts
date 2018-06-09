@@ -10,15 +10,21 @@ class CommonStore {
   };
 
   constructor(options?: CommonStoreOptions) {
-    const { disableModules = [], modules } = options;
-    
-    for(const moduleName of disableModules) {
-      delete this.modules[moduleName];
-    }
+    this.mergeModulesFromOption(options);
+  }
 
-    this.modules = {
-      ...this.modules, ...modules
-    };
+  mergeModulesFromOption(options?: CommonStoreOptions) {
+    if(options) {
+      const { disableModules = [], modules } = options;
+    
+      for(const moduleName of disableModules) {
+        delete this.modules[moduleName];
+      }
+
+      this.modules = {
+        ...this.modules, ...modules
+      };
+    }
   }
 };
 

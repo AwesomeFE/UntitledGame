@@ -13,7 +13,11 @@ export const vueLoader = (options) => {
         i18n: '@kazupon/vue-i18n-loader',
         css: cssLoader(options),
         scss: scssLoader(options),
-        less: lessLoader(options)
+        less: lessLoader(options),
+        ts: [
+          'bable-loader',
+          'ts-loader'
+        ]
       }
     }
   };

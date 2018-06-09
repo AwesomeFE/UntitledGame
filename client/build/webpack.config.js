@@ -48,7 +48,7 @@ export default {
         ]
       },
       {
-        test: /\.vue/,
+        test: /\.vue$/,
         use: loaders.vueLoader(options)
       },
       {
@@ -91,6 +91,7 @@ export default {
     ...plugins.cleanPlugin(options),
     ...plugins.definePlugin(options),
     ...plugins.workboxPlugin(options),
+    ...plugins.vueLoaderPlugin(options),
     ...plugins.copyWebpackPlugin(options),
     ...plugins.htmlWebpackPlugin(options),
     ...plugins.miniCssExtractPlugin(options),

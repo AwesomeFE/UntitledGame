@@ -1,5 +1,5 @@
 import axios from 'axios';
-import FormData from './index.d';
+import { Store } from '../../types';
 import { apiUrls } from '../../constants';
 
 class UserService {
@@ -7,11 +7,11 @@ class UserService {
     return axios(apiUrls.GET_USER());
   }
 
-  signin(data: FormData.Signin) {
+  signin(data: Store.System.FormData.Signin) {
     return axios(apiUrls.SIGNIN(data));
   }
 
-  signup(data: FormData.Signup) {
+  signup(data: Store.System.FormData.Signup) {
     return axios(apiUrls.SIGNUP(data));
   }
 

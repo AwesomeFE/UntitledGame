@@ -1,11 +1,5 @@
-export interface User {
-  _id: string
-};
+import { Store } from '../../types/index.d'
 
-export interface State {
-  user?: User;
-};
-
-export const state: State = {
+export const state: Store.System.State = {
   user: null
 };
