@@ -1,32 +1,38 @@
 <template>
-  <el-menu class="page-header" mode="horizontal">
-    <el-menu-item index="1">{{$t('Logo')}}</el-menu-item>
-  </el-menu>
+  <header class="page-header">
+    <div class="header-logo">Fantasyland</div>
+    <nav class="header-menu">
+      <slot></slot>
+      <div class="clear-fix"></div>
+    </nav>
+    <div class="clear-fix"></div>
+  </header>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { Menu, MenuItem, Submenu } from 'element-ui';
 import { Component } from 'vue-property-decorator';
 
-@Component({
-  components: {
-    [Menu.name]: Menu,
-    [Submenu.name]: Submenu,
-    [MenuItem.name]: MenuItem,
-  }
-})
-class PageHeader extends Vue {
-}
+@Component
+export default class extends Vue {
 
-export default PageHeader;
+}
 </script>
 
 <style type="text/scss" lang="scss">
-
+.page-header {
+  .header-logo {
+    height: 50px;
+    width: 230px;
+    float: left;
+    line-height: 50px;
+    text-align: center;
+  }
+  .header-menu {
+    margin-left: 230px;
+  }
+}
 </style>
 
 <i18n lang="i18n">
-"zh-cn":
-  "Logo": "光羽游戏控制台——"
 </i18n>
