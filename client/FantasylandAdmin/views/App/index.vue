@@ -13,8 +13,8 @@ import { Component } from 'vue-property-decorator';
 import { Route, RawLocation } from 'vue-router';
 
 import { Store } from '../../../common/types';
+import { modalTypes, linkUrls } from '../../constants';
 import LoadingModal from '../../components/LoadingModal/index.vue';
-import { modalTypes } from '../../constants';
 
 const System = namespace('system');
 
@@ -41,7 +41,7 @@ export default class App extends Vue {
   }
 
   checkUser() {
-    // this.user ? this.$router.push('') : null;
+    !this.user ? this.$router.push(linkUrls.SIGNIN()) : null;
   }
 
   isInitialized = false;
