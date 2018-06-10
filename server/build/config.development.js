@@ -9,7 +9,7 @@ module.exports = product => {
       index: ['babel-polyfill', `./server/${product}`]
     },
     output: {
-      path: path.resolve(`server/dist/${product}/`),
+      path: path.resolve(`server/dist/`),
       filename: `[name].js`
     },
     module: {

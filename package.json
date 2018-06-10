@@ -17,14 +17,10 @@
     "run:dev:server:www": "cross-env NODE_ENV=development PRODUCT=www node ./server/dist/www",
     "build:dev:server:www": "cross-env NODE_ENV=development PRODUCT=www node ./server/build",
     "start:dev:server:www": "npm run build:dev:server:www&&npm run run:dev:server:www",
-    "run:prd:server:Fantasyland": "cross-env NODE_ENV=production PRODUCT=Fantasyland node ./server/dist/Fantasyland",
-    "build:prd:server:Fantasyland": "cross-env NODE_ENV=production PRODUCT=Fantasyland node ./server/build",
-    "start:prd:server:Fantasyland": "npm run build:prd:server:Fantasyland&&npm run run:prd:server:Fantasyland",
-    "debug:client:FantasylandAdmin": "cross-env NODE_ENV=development PRODUCT=FantasylandAdmin babel-node ./client/build",
-    "build:client:FantasylandAdmin": "cross-env NODE_ENV=production PRODUCT=FantasylandAdmin babel-node ./client/build",
-    "run:dev:server:Fantasyland": "cross-env NODE_ENV=development PRODUCT=Fantasyland node ./server/dist/Fantasyland",
-    "build:dev:server:Fantasyland": "cross-env NODE_ENV=development PRODUCT=Fantasyland node ./server/build",
-    "start:dev:server:Fantasyland": "npm run build:dev:server:Fantasyland&&npm run run:dev:server:Fantasyland"
+
+    "start:server": "cross-env NODE_ENV=production node ./server/build&&cross-env NODE_ENV=production node ./server/dist",
+    "debug:server": "cross-env NODE_ENV=development node ./server/build&&cross-env NODE_ENV=development node ./server/dist",
+    "debug:client": "cross-env NODE_ENV=development babel-node ./client/build"
   },
   "repository": {
     "type": "git",

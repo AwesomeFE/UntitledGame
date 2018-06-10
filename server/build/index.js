@@ -1,3 +1,4 @@
+require('../../common/config');
 const webpack = require('webpack');
 const { NODE_ENV, PRODUCT } = process.env;
 const webpackConfig = require(`./config.${NODE_ENV}`)(PRODUCT);
