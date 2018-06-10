@@ -2,9 +2,10 @@
   <div class="home">
     <vPageHeader></vPageHeader>
     <vSidebar></vSidebar>
-    <div>
+    
+    <PageBody>
       Home
-    </div>
+    </PageBody>
   </div>
 </template>
 
@@ -13,15 +14,17 @@ import Vue from 'vue';
 import { namespace } from 'vuex-class';
 import { Component } from 'vue-property-decorator';
 
-import vPageHeader from '../../components/vPageHeader/index.vue';
 import vSidebar from '../../components/vSidebar/index.vue';
+import vPageHeader from '../../components/vPageHeader/index.vue';
+import PageBody from '../../../common/AdminComponents/PageBody/index.vue';
 
 const System = namespace('system');
 
 @Component({
   components: {
     vPageHeader,
-    vSidebar
+    vSidebar,
+    PageBody
   }
 })
 export default class Home extends Vue {

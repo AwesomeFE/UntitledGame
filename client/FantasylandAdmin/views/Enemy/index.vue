@@ -1,10 +1,10 @@
 <template>
-  <div class="user">
+  <div class="enemy">
     <vPageHeader></vPageHeader>
     <vSidebar></vSidebar>
     
     <PageBody>
-      user
+      Enemy
     </PageBody>
   </div>
 </template>
@@ -27,12 +27,12 @@ const System = namespace('system');
     PageBody
   }
 })
-export default class User extends Vue {
+export default class Enemy extends Vue {
 }
 </script>
 
 <style type="text/scss" lang="scss">
-.user {
+.enemy {
 
 }
 </style>

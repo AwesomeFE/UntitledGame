@@ -15,5 +15,6 @@ export default class PageBody extends Vue {
 
 <style type="text/scss" lang="scss">
 .page-body {
+  margin-left: 230px;
 }
 </style>

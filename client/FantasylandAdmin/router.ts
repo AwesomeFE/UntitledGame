@@ -17,14 +17,20 @@ export default () => new VueRouter({
           path: '/signin',
           component: () => import('./views/Signin/index.vue')
         },
-        // {
-        //   path: 'entry',
-        //   component: () => import('./views/Entry/index.vue')
-        // },
-        // {
-        //   path: '*',
-        //   component: () => import('./views/NotFound/index.vue')
-        // }
+        {
+          name: 'user',
+          path: 'user',
+          component: () => import('./views/User/index.vue')
+        },
+        {
+          name: 'enemy',
+          path: 'enemy',
+          component: () => import('./views/Enemy/index.vue')
+        },
+        {
+          path: '*',
+          component: () => import('./views/NotFound/index.vue')
+        }
       ]
     }
   ],
