@@ -1,5 +1,5 @@
 <template>
-  <router-link class="menu-item" :to="to" @click.native="clickHandler">
+  <router-link class="side-item" :to="to" @click.native="clickHandler">
     <slot></slot>
   </router-link>
 </template>
@@ -9,7 +9,7 @@ import Vue from 'vue';
 import { Component, Prop, Emit } from 'vue-property-decorator';
 
 @Component
-export default class MenuItem extends Vue {
+export default class SideItem extends Vue {
   @Prop({default: '#'})
   to: string;
 
@@ -23,12 +23,10 @@ export default class MenuItem extends Vue {
 </script>
 
 <style type="text/scss" lang="scss">
-.menu-item {
+.side-item {
   display: block;
-  float: left;
-  height: 50px;
-  padding: 0 10px;
-  line-height: 50px;
+  padding: 12px 5px 12px 15px;
   cursor: pointer;
+  font-size: 13px;
 }
 </style>

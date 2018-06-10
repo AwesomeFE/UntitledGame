@@ -1,5 +1,5 @@
 <template>
-  <Modal class="loading-modal" v-show="isModalShow">
+  <Modal class="loading-modal" v-show="modal.isModalShow">
     loading
   </Modal>
 </template>
@@ -21,8 +21,8 @@ const System = namespace('system');
   }
 })
 export default class LoadingModal extends Vue {
-  @System.State((state: Store.System.State) => state.modals.find(modalItem => modalItem.type === modalTypes.LoadingModal).isShow)
-  isModalShow: boolean;
+  @System.State((state: Store.System.State) => (state.modals.find(modalItem => modalItem.type === modalTypes.LoadingModal) || {}))
+  modal: Store.System.Modal;
 
   @System.Mutation('registerModal')
   registerModal: (modalType: string) => void;

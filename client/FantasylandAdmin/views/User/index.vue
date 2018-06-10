@@ -1,9 +1,9 @@
 <template>
-  <div class="home">
+  <div class="user">
     <vPageHeader></vPageHeader>
     <vSidebar></vSidebar>
     <div>
-      Home
+      User
     </div>
   </div>
 </template>

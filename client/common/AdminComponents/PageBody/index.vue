@@ -1,23 +1,19 @@
 <template>
-  <div class="not-found">
-    not-found
+  <div class="page-body">
+    <slot></slot>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { namespace } from 'vuex-class';
 import { Component } from 'vue-property-decorator';
 
-const System = namespace('system');
-
 @Component
-export default class NotFound extends Vue {
+export default class PageBody extends Vue {
 }
 </script>
 
 <style type="text/scss" lang="scss">
-.not-found {
-
+.page-body {
 }
 </style>

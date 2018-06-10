@@ -1,7 +1,7 @@
 <template>
-  <div class="not-found">
-    not-found
-  </div>
+  <aside class="sidebar">
+    <slot></slot>
+  </aside>
 </template>
 
 <script lang="ts">
@@ -12,12 +12,19 @@ import { Component } from 'vue-property-decorator';
 const System = namespace('system');
 
 @Component
-export default class NotFound extends Vue {
+export default class Sidebar extends Vue {
 }
 </script>
 
 <style type="text/scss" lang="scss">
-.not-found {
-
+.sidebar {
+  width: 230px;
+  position: absolute;
+  min-height: 100%;
+  top: 0;
+  padding-top: 50px;
+  background: #222d32;
+  box-sizing: border-box;
+  color: white;
 }
 </style>

@@ -14,22 +14,27 @@ import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 
 @Component
-export default class extends Vue {
+export default class PageHeader extends Vue {
 
 }
 </script>
 
 <style type="text/scss" lang="scss">
 .page-header {
+  position: relative;
+  z-index: 1;
+  color: white;
   .header-logo {
     height: 50px;
     width: 230px;
     float: left;
     line-height: 50px;
     text-align: center;
+    background: #367fa9;
   }
   .header-menu {
     margin-left: 230px;
+    background: #3c8dbc;
   }
 }
 </style>
