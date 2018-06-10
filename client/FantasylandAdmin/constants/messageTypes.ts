@@ -1,0 +1,4 @@
+export const messageTypes = {
+  PLEASE_SIGNIN: 'PLEASE_SIGNIN',
+  FIELD_REQUIRED: 'FIELD_REQUIRED'
+};

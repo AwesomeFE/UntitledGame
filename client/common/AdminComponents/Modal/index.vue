@@ -15,7 +15,7 @@ import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 
 @Component
-export default class extends Vue {
+export default class Modal extends Vue {
 }
 </script>
 

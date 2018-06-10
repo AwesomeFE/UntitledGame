@@ -36,12 +36,16 @@ export default class App extends Vue {
   @System.Mutation('hideModal')
   hideModal: (modalType: string) => void;
 
-  beforeRouteEnter(to: Route, from: Route, next: (to?: ((vm: Vue) => any)) => void) {
-    next((vm: any) => vm.checkUser());
+  beforeRouteUpdate(to: Route, from: Route, next: () => void) {
+    this.checkUser(next);
   }
 
-  checkUser() {
-    !this.user ? this.$router.push(linkUrls.SIGNIN()) : null;
+  checkUser(next?: () => void) {
+    if(!this.user) {
+      this.$router.push(linkUrls.SIGNIN())
+    } else {
+      next && next();
+    }
   }
 
   isInitialized = false;
@@ -49,6 +53,7 @@ export default class App extends Vue {
   async mounted() {
     this.showModal(modalTypes.LoadingModal);
     await this.getUser();
+    this.checkUser();
 
     this.hideModal(modalTypes.LoadingModal);
     this.showApp();
@@ -63,7 +68,11 @@ export default class App extends Vue {
 <style type="text/scss" lang="scss">
 @import '../../assets/scss/variable.scss';
 
+#app,
 .App {
   height: 100%;
+}
+.App {
+  overflow: auto;
 }
 </style>

@@ -1,6 +1,7 @@
 html, body {
   margin: 0;
   height: 100%;
+  line-height: 1;
 }
 
 a {
@@ -16,6 +17,10 @@ ul {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+button, input, optgroup, select, textarea {
+  font: inherit;
 }
 
 .left {

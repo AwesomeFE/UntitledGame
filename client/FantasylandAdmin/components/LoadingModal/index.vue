@@ -20,7 +20,7 @@ const System = namespace('system');
     Modal
   }
 })
-export default class extends Vue {
+export default class LoadingModal extends Vue {
   @System.State((state: Store.System.State) => state.modals.find(modalItem => modalItem.type === modalTypes.LoadingModal).isShow)
   isModalShow: boolean;
 

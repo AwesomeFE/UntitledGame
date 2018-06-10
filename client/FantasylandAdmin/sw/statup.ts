@@ -1,3 +1,5 @@
+/// <reference types="node" />
+
 export default function() {
   const { DIST } = process.env;
   const { NODE_ENV } = process.env;

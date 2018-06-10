@@ -10,8 +10,8 @@ import './assets/scss/main.scss';
 import i18n from './i18n';
 import store from './vuex';
 import router from './router';
-// import initService from './services';
-// import initDirectives from './directives';
+import initService from './services';
+import initDirectives from './directives';
 import initComponents from './components';
 import initServiceWorker from './sw/statup';
 
@@ -20,8 +20,8 @@ Vue.use(VueI18n);
 Vue.use(VueRouter);
 Vue.use(VueValidate);
 
-// initService();
-// initDirectives();
+initService();
+initDirectives();
 initComponents();
 initServiceWorker();
 

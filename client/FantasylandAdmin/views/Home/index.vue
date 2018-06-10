@@ -2,14 +2,14 @@
   <div class="Home">
     <PageHeader>
       <div class="left">
-        <MenuItem to="/">{{$t('Home')}}</MenuItem>
+        <MenuItem to="/">{{$t('home')}}</MenuItem>
         <MenuItem>按钮1</MenuItem>
         <MenuItem>按钮2</MenuItem>
       </div>
       <div class="right">
-        <MenuItem>{{$t('Account')}}</MenuItem>
-        <MenuItem>{{$t('Settings')}}</MenuItem>
-        <MenuItem>{{$t('SignOut')}}</MenuItem>
+        <MenuItem>{{$t('account')}}</MenuItem>
+        <MenuItem>{{$t('settings')}}</MenuItem>
+        <MenuItem>{{$t('signout')}}</MenuItem>
       </div>
     </PageHeader>
 
