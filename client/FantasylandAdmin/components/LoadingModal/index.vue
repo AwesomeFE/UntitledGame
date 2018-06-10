@@ -24,10 +24,18 @@ export default class LoadingModal extends Vue {
   @System.State((state: Store.System.State) => state.modals.find(modalItem => modalItem.type === modalTypes.LoadingModal).isShow)
   isModalShow: boolean;
 
-  @System.Mutation('registerModal') registerModal: (modalType: string) => void;
+  @System.Mutation('registerModal')
+  registerModal: (modalType: string) => void;
+
+  @System.Mutation('destoryModal')
+  destoryModal: (modalType: string) => void;
 
   created() {
     this.registerModal(modalTypes.LoadingModal);
+  }
+
+  destroyed() {
+    this.destoryModal(modalTypes.LoadingModal);
   }
 }
 </script>

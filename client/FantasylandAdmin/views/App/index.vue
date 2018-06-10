@@ -9,7 +9,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import { namespace } from 'vuex-class';
-import { Component } from 'vue-property-decorator';
+import { Component, Watch } from 'vue-property-decorator';
 import { Route, RawLocation } from 'vue-router';
 
 import { Store } from '../../../common/types';
@@ -36,15 +36,10 @@ export default class App extends Vue {
   @System.Mutation('hideModal')
   hideModal: (modalType: string) => void;
 
-  beforeRouteUpdate(to: Route, from: Route, next: () => void) {
-    this.checkUser(next);
-  }
-
-  checkUser(next?: () => void) {
-    if(!this.user) {
-      this.$router.push(linkUrls.SIGNIN())
-    } else {
-      next && next();
+  @Watch('user')
+  userChangeHandler(user: Store.System.User) {
+    if(!user) {
+      this.$router.push(linkUrls.SIGNIN());
     }
   }
 
@@ -53,7 +48,6 @@ export default class App extends Vue {
   async mounted() {
     this.showModal(modalTypes.LoadingModal);
     await this.getUser();
-    this.checkUser();
 
     this.hideModal(modalTypes.LoadingModal);
     this.showApp();
@@ -68,7 +62,6 @@ export default class App extends Vue {
 <style type="text/scss" lang="scss">
 @import '../../assets/scss/variable.scss';
 
-#app,
 .App {
   height: 100%;
 }

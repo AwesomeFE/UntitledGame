@@ -11,6 +11,10 @@ export const mutations = {
       ? state.modals.push({ type, isShow: false })
       : console.warn(`Modal '${type}' is existed! Regist failed.`);
   },
+  destoryModal(state: Store.System.State, type: string) {
+    const modalIndex = state.modals.findIndex(modalItem => modalItem.type === type);
+    state.modals.splice(modalIndex, 1);
+  },
   showModal(state: Store.System.State, type: string) {
     const modal = state.modals.find(modalItem => modalItem.type === type);
     modal.isShow = true;

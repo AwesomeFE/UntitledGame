@@ -9,7 +9,7 @@
       <div class="right">
         <MenuItem>{{$t('account')}}</MenuItem>
         <MenuItem>{{$t('settings')}}</MenuItem>
-        <MenuItem>{{$t('signout')}}</MenuItem>
+        <MenuItem @click="signout">{{$t('signout')}}</MenuItem>
       </div>
     </PageHeader>
 
@@ -19,7 +19,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Vue from 'vue';
 import { namespace } from 'vuex-class';
 import { Component } from 'vue-property-decorator';
@@ -36,7 +36,8 @@ const System = namespace('system');
   }
 })
 export default class Home extends Vue {
-
+  @System.Action('signout')
+  signout: () => void;
 }
 </script>
 
