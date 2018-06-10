@@ -17,6 +17,10 @@ const UserSchema = new Schema({
   projection: {
     type: String,
     default: 'password __v updatedAt createdAt projection'
+  },
+  isAdmin: {
+    type: Boolean,
+    default: false
   }
 }, {timestamps: true});
 

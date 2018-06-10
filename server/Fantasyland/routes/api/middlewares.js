@@ -21,7 +21,7 @@ class Middlewares {
   }
 
   ensurePlayerLogin(req, res, next) {
-    req.player ? next() : next(messages.AUTH_INVALID);
+    (req.player || req.user.isAdmin) ? next() : next(messages.AUTH_INVALID);
   }
 
   ensureSignIn(req, res, next) {

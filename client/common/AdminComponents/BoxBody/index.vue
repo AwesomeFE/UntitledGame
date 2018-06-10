@@ -1,5 +1,5 @@
 <template>
-  <div class="page-body">
+  <div class="box-body">
     <slot></slot>
   </div>
 </template>
@@ -9,14 +9,12 @@ import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 
 @Component
-export default class PageBody extends Vue {
+export default class BoxBody extends Vue {
 }
 </script>
 
 <style type="text/scss" lang="scss">
-.page-body {
-  padding: 15px;
-  margin-left: 230px;
-  background: #ecf0f5;
+.box-body {
+  padding: 10px;
 }
 </style>

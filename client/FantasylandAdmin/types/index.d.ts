@@ -1,4 +1,6 @@
-declare module "*.vue" {
-  import Vue from "vue";
-  export default Vue;
+export declare namespace Store {
+  namespace Enemy {
+    namespace FormData {
+    }
+  }
 }

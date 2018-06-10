@@ -25,7 +25,7 @@ export default () => new VueRouter({
         {
           name: 'enemy',
           path: 'enemy',
-          component: () => import('./views/Enemy/index.vue')
+          component: () => import('./views/EnemyList/index.vue')
         },
         {
           path: '*',

@@ -82,8 +82,14 @@ export default class Signin extends Vue {
 
     if(await this.$validator.validateAll()) {
       this.showMessage();
-      await this.signin(this.formData);
-      this.$router.push(linkUrls.HOME());
+      
+      try {
+        await this.signin(this.formData);
+        this.$router.push(linkUrls.HOME());
+      } catch(res) {
+        this.isDisabled = false;
+        this.message = res.type;
+      }
     } else {
       this.showMessage();
       this.isDisabled = false;
@@ -112,7 +118,7 @@ export default class Signin extends Vue {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -70%);
     width: 360px;
     font-size: 14px;
   }
