@@ -11,6 +11,7 @@ export default {
   password: '密码',
   userList: '用户列表',
   enemyList: '敌人列表',
+  enemyEdit: '编辑敌人',
   USER_NOT_FOUND: '用户不存在',
   PASSWORD_INVALID: '密码不正确',
   [messageTypes.PLEASE_SIGNIN]: '请登录您的账号',

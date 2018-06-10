@@ -28,6 +28,11 @@ export default () => new VueRouter({
           component: () => import('./views/EnemyList/index.vue')
         },
         {
+          name: 'enemyEdit',
+          path: 'enemy/:enemyId',
+          component: () => import('./views/EnemyEdit/index.vue')
+        },
+        {
           path: '*',
           component: () => import('./views/NotFound/index.vue')
         }
