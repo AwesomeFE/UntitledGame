@@ -8,8 +8,10 @@
         <BoxHeader>{{$t('enemyList')}}</BoxHeader>
         <BoxBody>
           <DataTable :isShowPaginaton="false">
-            <!-- <TableHeader></TableHeader> -->
-            <!-- <TableRow></TableRow> -->
+            <TableHeader :headers="headers"></TableHeader>
+            <TableRow v-for="tableRow in tableRows" :key="tableRow.no" :row="tableRow">
+              <!-- <TableAction></TableAction> -->
+            </TableRow>
           </DataTable>
         </BoxBody>
       </Box>
@@ -22,6 +24,8 @@ import Vue from 'vue';
 import { namespace } from 'vuex-class';
 import { Component } from 'vue-property-decorator';
 
+import { table } from '../../../common/utils';
+import { EnemyDataItem } from './index.d'
 import { Enemy } from '../../services';
 import vSidebar from '../../components/vSidebar/index.vue';
 import vPageHeader from '../../components/vPageHeader/index.vue';
@@ -31,7 +35,8 @@ import BoxHeader from '../../../common/AdminComponents/BoxHeader/index.vue';
 import BoxBody from '../../../common/AdminComponents/BoxBody/index.vue';
 import DataTable from '../../../common/AdminComponents/DataTable/index.vue';
 import TableHeader from '../../../common/AdminComponents/TableHeader/index.vue';
-// import TableRow from '../../../common/AdminComponents/TableRow/index.vue';
+import TableRow from '../../../common/AdminComponents/TableRow/index.vue';
+// import TableAction from '../../../common/AdminComponents/TableAction/index.vue';
 
 const System = namespace('system');
 
@@ -45,14 +50,29 @@ const System = namespace('system');
     BoxBody,
     DataTable,
     TableHeader,
-    // TableRow
+    TableRow,
+    // TableAction
   }
 })
 export default class EnemyList extends Vue {
-  async mounted() {
-    const { data } = await Enemy.getEnemy();
+  headers = [
+    { key: 'no', title: '#' },
+    { key: '_id', title: 'id' },
+    { key: 'name', title: '名称' },
+    { key: 'action', title: '操作', sortable: false}
+  ];
 
-    console.log(data);
+  tableRows: Array<Array<EnemyDataItem>> = [];
+
+  async fetchNextPage() {
+    const { data = [] } = await Enemy.getEnemy();
+    const newTableRows = table.getTableRows(this.headers, data);
+
+    newTableRows.forEach((tableRow) => this.tableRows.push(tableRow));
+  }
+
+  async mounted() {
+    await this.fetchNextPage();
   }
 }
 </script>

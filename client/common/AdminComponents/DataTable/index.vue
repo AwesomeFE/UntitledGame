@@ -20,8 +20,10 @@ export default class DataTable extends Vue {
 <style type="text/scss" lang="scss">
 .data-table {
   table {
-    display: block;
+    border: 1px solid #f4f4f4;
     width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
   }
 }
 </style>

@@ -1,4 +1,4 @@
-export declare namespace Store {
+export namespace Store {
 
   namespace System {
     /**
@@ -35,5 +35,17 @@ export declare namespace Store {
         password: string;
       }
     }
+  }
+}
+
+export namespace DataTable {
+  interface headerItem {
+    key: string,
+    title: string
+  }
+
+  interface dataItem {
+    key: string,
+    value: number | string
   }
 }
