@@ -44,8 +44,9 @@ export default {
         use: loaders.babelLoader(options),
         // Issue: https://github.com/airyland/vux/issues/443#issuecomment-237688990
         include: [
-          path.resolve(`client/${appName}`)
-        ]
+          path.resolve(`client/${appName}`),
+        ],
+        exclude: /node_modules\/(?!(dom7|swiper)\/).*/
       },
       {
         test: /\.vue$/,

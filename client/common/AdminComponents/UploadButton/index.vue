@@ -1,10 +1,8 @@
 <template>
-  <span class="upload-button">
-    <FormButton class="btn-primary">
-      <slot></slot>
-    </FormButton>
+  <FormButton class="upload-button btn-primary">
+    <slot></slot>
     <input class="file-input" type="file" :name="name" :value="value" @change="$emit('input', $event.target.value)" />
-  </span>
+  </FormButton>
 </template>
 
 <script lang="ts">
@@ -28,14 +26,18 @@ export default class UploadButton extends Vue {
 .upload-button {
   position: relative;
   display: inline-block;
-  cursor: pointer;
+  overflow: hidden;
 
-  .file-input {
+  input[type="file"].file-input {
     opacity: 0;
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    right: 0;
+    width: 300%;
+    height: 200%;
+    display: inline-block;
+    border: 0;
+    cursor: pointer;
   }
 }
 </style>

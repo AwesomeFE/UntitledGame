@@ -69,7 +69,7 @@ import PageBody from '../../../common/AdminComponents/PageBody/index.vue';
 import Box from '../../../common/AdminComponents/Box/index.vue';
 import BoxHeader from '../../../common/AdminComponents/BoxHeader/index.vue';
 import BoxBody from '../../../common/AdminComponents/BoxBody/index.vue';
-import Swiper from '../../../common/AdminComponents/Swiper/index.vue';
+// import Swiper from '../../../common/AdminComponents/Swiper/index.vue';
 import FormInput from '../../../common/AdminComponents/FormInput/index.vue';
 import FormImage from '../../../common/AdminComponents/FormImage/index.vue';
 import FormButton from '../../../common/AdminComponents/FormButton/index.vue';
@@ -88,7 +88,7 @@ const System = namespace('system');
     FormInput,
     FormButton,
     FormImage,
-    Swiper,
+    // Swiper,
     UploadButton
   }
 })
