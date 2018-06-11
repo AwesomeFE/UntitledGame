@@ -36,8 +36,6 @@ export default class ImagePreview extends Vue {
     this.isLoading = true;
     this.blobUrl = await image.fetchImage(this.src);
     this.isLoading = false;
-
-    console.log(this.emptyImageUrl)
   }
 }
 </script>
