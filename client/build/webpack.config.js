@@ -73,7 +73,7 @@ export default {
         use: loaders.yamlLoader(options)
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif|svg)$/,
         use: loaders.imageLoader(options),
         exclude: [
           path.resolve(`client/${appName}/assets/models`)
@@ -81,7 +81,10 @@ export default {
       },
       {
         test: /\.(woff2|woff|eot|svg|ttf)(\?v=\d+\.\d+\.\d+)?$/,
-        use: loaders.fontLoader(options)
+        use: loaders.fontLoader(options),
+        include: [
+          path.resolve(`client/${appName}/assets`)
+        ]
       },
       {
         test: /\/*\.(tga|babylon|gltf|bin|manifest|png|jpg|gif)$/,

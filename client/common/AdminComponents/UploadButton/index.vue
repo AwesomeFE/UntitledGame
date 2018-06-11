@@ -1,7 +1,7 @@
 <template>
   <FormButton class="upload-button btn-primary">
     <slot></slot>
-    <input class="file-input" type="file" :name="name" :value="value" @change="$emit('input', $event.target.value)" />
+    <input class="file-input" type="file" :name="name" @change="$emit('input', $event.target.files[0])" />
   </FormButton>
 </template>
 

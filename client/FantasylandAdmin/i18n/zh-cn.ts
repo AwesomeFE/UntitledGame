@@ -12,6 +12,7 @@ export default {
   username: '用户名',
   password: '密码',
   description: '描述',
+  upload: '文件上传',
   userList: '用户列表',
   enemyList: '敌人列表',
   enemyBisic: '敌人基础信息',

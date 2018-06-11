@@ -1,1 +1,2 @@
-export { table } from './table'
+export { table } from './table';
+export { image } from './image';

@@ -9,7 +9,7 @@
           <div class="left"></div>
           <div class="right">
             <FormButton class="btn-primary">{{$t('cancel')}}</FormButton>
-            <FormButton class="btn-primary">{{$t('submit')}}</FormButton>
+            <FormButton class="btn-primary" @click="submit">{{$t('submit')}}</FormButton>
           </div>
           <div class="clear-fix"></div>
         </div>
@@ -25,11 +25,11 @@
               <FormInput type="text" name="MP" validate="required" v-model="formData.MP" :label="$t('MP')" :disabled="isDisabled" />
             </div>
 
-            <div class="col-4 image-preview">
+            <div class="col-4 image-gallery">
               <Swiper>
-                <!-- <FormImage class="swiper-slide" name="2Dstanding"></FormImage> -->
-                <div class="swiper-slide">
-                  <UploadButton name="2Dstanding" v-model="formData.standing2D">文件上传</UploadButton>
+                <div class="swiper-slide" v-for="(file, field) in fieldFileMap" :key="field">
+                  <ImagePreview :src="formData[field]" :file="fieldFileMap[field]" />
+                  <UploadButton :name="field" v-model="fieldFileMap[field]">{{$t('upload')}}</UploadButton>
                 </div>
               </Swiper>
             </div>
@@ -62,17 +62,19 @@ import Vue from 'vue';
 import { namespace } from 'vuex-class';
 import { Component } from 'vue-property-decorator';
 
+import { FormData } from '../../types/index.d';
 import { Enemy } from '../../services';
 import vSidebar from '../../components/vSidebar/index.vue';
 import vPageHeader from '../../components/vPageHeader/index.vue';
 import PageBody from '../../../common/AdminComponents/PageBody/index.vue';
 import Box from '../../../common/AdminComponents/Box/index.vue';
-import BoxHeader from '../../../common/AdminComponents/BoxHeader/index.vue';
 import BoxBody from '../../../common/AdminComponents/BoxBody/index.vue';
-// import Swiper from '../../../common/AdminComponents/Swiper/index.vue';
+import BoxHeader from '../../../common/AdminComponents/BoxHeader/index.vue';
 import FormInput from '../../../common/AdminComponents/FormInput/index.vue';
 import FormImage from '../../../common/AdminComponents/FormImage/index.vue';
 import FormButton from '../../../common/AdminComponents/FormButton/index.vue';
+import Swiper from '../../../common/AdminComponents/Swiper/index.vue';
+import ImagePreview from '../../../common/AdminComponents/ImagePreview/index.vue';
 import UploadButton from '../../../common/AdminComponents/UploadButton/index.vue';
 
 const System = namespace('system');
@@ -83,13 +85,14 @@ const System = namespace('system');
     vSidebar,
     PageBody,
     Box,
-    BoxHeader,
     BoxBody,
+    BoxHeader,
     FormInput,
-    FormButton,
     FormImage,
-    // Swiper,
-    UploadButton
+    FormButton,
+    Swiper,
+    ImagePreview,
+    UploadButton,
   }
 })
 export default class EnemyEdit extends Vue {
@@ -110,7 +113,16 @@ export default class EnemyEdit extends Vue {
       LUK: 1,
     },
     standing2D: '',
+    attack2D: ''
   };
+
+  fieldFileMap: FormData.FieldFile = {
+    standing2D: null,
+    attack2D: null
+  };
+
+  submit() {
+  }
 
   async fetchEnemyById(enemyId: string) {
     // const { data = [] } = await Enemy.getEnemyById(enemyId);
@@ -131,10 +143,20 @@ export default class EnemyEdit extends Vue {
   .form-actions {
     margin-bottom: 15px;
   }
-  .image-preview {
+  .image-gallery {
     padding: 10px;
-    height: 200px;
+    height: 380px;
     box-sizing: border-box;
+    position: relative;
+  }
+  .swiper-slide {
+    text-align: center;
+  }
+  .upload-button {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 </style>
