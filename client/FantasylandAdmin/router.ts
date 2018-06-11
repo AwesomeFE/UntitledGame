@@ -33,6 +33,11 @@ export default () => new VueRouter({
           component: () => import('./views/EnemyEdit/index.vue')
         },
         {
+          name: 'enemyCreate',
+          path: 'enemy/create',
+          component: () => import('./views/EnemyEdit/index.vue')
+        },
+        {
           path: '*',
           component: () => import('./views/NotFound/index.vue')
         }

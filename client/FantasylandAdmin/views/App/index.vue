@@ -67,5 +67,8 @@ export default class App extends Vue {
 }
 .App {
   overflow: auto;
+  > div {
+    position: relative;
+  }
 }
 </style>

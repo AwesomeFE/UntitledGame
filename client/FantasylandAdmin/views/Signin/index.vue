@@ -9,35 +9,15 @@
       <section class="form-body">
         <div class="form-message">{{$t(message, { fieldName: $t(fieldName) })}}</div>
 
-        <FormInput
-          type="text"
-          name="username"
-          validate="required"
-          v-model="formData.username"
-          :placeholder="$t('username')"
-          :disabled="isDisabled"
-        />
-
-        <FormInput
-          type="password"
-          name="password"
-          validate="required"
-          v-model="formData.password"
-          :placeholder="$t('password')"
-          :disabled="isDisabled"
-        />
+        <FormInput type="text" name="username" validate="required" v-model="formData.username" :placeholder="$t('username')" :disabled="isDisabled" />
+        <FormInput type="password" name="password" validate="required" v-model="formData.password" :placeholder="$t('password')" :disabled="isDisabled" />
 
         <div>
           <div class="left">
             remember me
           </div>
           <div class="right">
-            <FormButton
-              className="btn-primary"
-              :disabled="isDisabled"
-              @click="submit">
-              {{$t('signin')}}
-            </FormButton>
+            <FormButton class="btn-primary":disabled="isDisabled"@click="submit">{{$t('signin')}}</FormButton>
           </div>
           <div class="clear-fix"></div>
         </div>

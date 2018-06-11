@@ -20,7 +20,8 @@ export default class Sidebar extends Vue {
 .sidebar {
   width: 230px;
   position: absolute;
-  min-height: 100%;
+  min-height: 100vh;
+  height: 100%;
   top: 0;
   padding-top: 50px;
   background: #222d32;

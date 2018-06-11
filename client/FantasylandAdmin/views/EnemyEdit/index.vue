@@ -4,11 +4,32 @@
     <vSidebar></vSidebar>
     
     <PageBody>
-      <Box>
-        <BoxHeader>{{$t('enemyEdit')}}</BoxHeader>
-        <BoxBody>
-        </BoxBody>
-      </Box>
+      <form>
+        <FormButton class="btn-primary">{{$t('submit')}}</FormButton>
+
+        <Box>
+          <BoxHeader>{{$t('enemyBisic')}}</BoxHeader>
+          <BoxBody>
+            <FormInput type="text" name="name" validate="required" v-model="formData.name" :label="$t('name')" :disabled="isDisabled" />
+            <FormInput type="text" name="gender" validate="required" v-model="formData.gender" :label="$t('gender')" :disabled="isDisabled" />
+            <FormInput type="text" name="XP" validate="required" v-model="formData.XP" :label="$t('XP')" :disabled="isDisabled" />
+            <FormInput type="text" name="HP" validate="required" v-model="formData.HP" :label="$t('HP')" :disabled="isDisabled" />
+            <FormInput type="text" name="MP" validate="required" v-model="formData.MP" :label="$t('MP')" :disabled="isDisabled" />
+          </BoxBody>
+        </Box>
+
+        <Box>
+          <BoxHeader>{{$t('enemyAbility')}}</BoxHeader>
+          <BoxBody>
+            <FormInput type="text" name="STR" validate="required" v-model="formData.ability.STR" :label="$t('STR')" :disabled="isDisabled" />
+            <FormInput type="text" name="AGI" validate="required" v-model="formData.ability.AGI" :label="$t('AGI')" :disabled="isDisabled" />
+            <FormInput type="text" name="VIT" validate="required" v-model="formData.ability.VIT" :label="$t('VIT')" :disabled="isDisabled" />
+            <FormInput type="text" name="INT" validate="required" v-model="formData.ability.INT" :label="$t('INT')" :disabled="isDisabled" />
+            <FormInput type="text" name="DEX" validate="required" v-model="formData.ability.DEX" :label="$t('DEX')" :disabled="isDisabled" />
+            <FormInput type="text" name="LUK" validate="required" v-model="formData.ability.LUK" :label="$t('LUK')" :disabled="isDisabled" />
+          </BoxBody>
+        </Box>
+      </form>
     </PageBody>
   </div>
 </template>
@@ -25,6 +46,8 @@ import PageBody from '../../../common/AdminComponents/PageBody/index.vue';
 import Box from '../../../common/AdminComponents/Box/index.vue';
 import BoxHeader from '../../../common/AdminComponents/BoxHeader/index.vue';
 import BoxBody from '../../../common/AdminComponents/BoxBody/index.vue';
+import FormInput from '../../../common/AdminComponents/FormInput/index.vue';
+import FormButton from '../../../common/AdminComponents/FormButton/index.vue';
 
 const System = namespace('system');
 
@@ -36,9 +59,29 @@ const System = namespace('system');
     Box,
     BoxHeader,
     BoxBody,
+    FormInput,
+    FormButton
   }
 })
 export default class EnemyEdit extends Vue {
+  isDisabled = false;
+
+  formData = {
+    name: '',
+    gender: 'male',
+    XP: 0,
+    HP: 1,
+    MP: 1,
+    ability: {
+      STR: 1,
+      AGI: 1,
+      VIT: 1,
+      INT: 1,
+      DEX: 1,
+      LUK: 1,
+    }
+  };
+
   async fetchEnemyById(enemyId: string) {
     // const { data = [] } = await Enemy.getEnemyById(enemyId);
   }

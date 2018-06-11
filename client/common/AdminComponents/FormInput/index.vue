@@ -1,5 +1,6 @@
 <template>
   <label class="form-control" :class="classNames">
+    <div v-if="label">{{label}}</div>
     <input
       v-if="validate"
       v-validate="validate"
@@ -31,6 +32,7 @@ import { Component, Prop, Inject } from "vue-property-decorator";
 export default class FormInput extends Vue {
   @Prop() name: string;
   @Prop() type: string;
+  @Prop() label: string;
   @Prop() value: string;
   @Prop() disabled?: string;
   @Prop() validate?: string;

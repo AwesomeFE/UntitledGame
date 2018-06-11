@@ -1,5 +1,5 @@
 <template>
-  <button class="form-button" :class="className" :type="type" @click="clickHandler">
+  <button class="form-button" :type="type" @click="clickHandler">
     <slot></slot>
   </button>
 </template>
@@ -10,7 +10,6 @@ import { Component, Prop, Emit } from 'vue-property-decorator';
 
 @Component
 export default class FormButton extends Vue {
-  @Prop() className: string;
   @Prop({default: 'button'}) type: string;
 
   @Emit('click')

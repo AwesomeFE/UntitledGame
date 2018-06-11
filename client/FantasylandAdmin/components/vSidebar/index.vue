@@ -2,6 +2,7 @@
   <Sidebar>
     <SideItem to="/user">用户列表</SideItem>
     <SideItem to="/enemy">敌人列表</SideItem>
+    <SideItem to="/enemy/create">创建敌人</SideItem>
     <SideItem>副本列表</SideItem>
     <SideItem>物品列表</SideItem>
   </Sidebar>
