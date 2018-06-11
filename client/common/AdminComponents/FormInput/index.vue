@@ -1,6 +1,6 @@
 <template>
   <label class="form-control" :class="classNames">
-    <div v-if="label">{{label}}</div>
+    <div class="form-label" v-if="label">{{label}}</div>
     <input
       v-if="validate"
       v-validate="validate"
@@ -60,6 +60,11 @@ export default class FormInput extends Vue {
   display: block;
   line-height: 1.42857143;
   margin-bottom: 15px;
+
+  .form-label {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
 
   input {
     display: block;

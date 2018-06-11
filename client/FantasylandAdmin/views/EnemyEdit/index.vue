@@ -5,16 +5,39 @@
     
     <PageBody>
       <form>
-        <FormButton class="btn-primary">{{$t('submit')}}</FormButton>
+        <div class="form-actions">
+          <div class="left"></div>
+          <div class="right">
+            <FormButton class="btn-primary">{{$t('cancel')}}</FormButton>
+            <FormButton class="btn-primary">{{$t('submit')}}</FormButton>
+          </div>
+          <div class="clear-fix"></div>
+        </div>
 
         <Box>
           <BoxHeader>{{$t('enemyBisic')}}</BoxHeader>
           <BoxBody>
-            <FormInput type="text" name="name" validate="required" v-model="formData.name" :label="$t('name')" :disabled="isDisabled" />
-            <FormInput type="text" name="gender" validate="required" v-model="formData.gender" :label="$t('gender')" :disabled="isDisabled" />
-            <FormInput type="text" name="XP" validate="required" v-model="formData.XP" :label="$t('XP')" :disabled="isDisabled" />
-            <FormInput type="text" name="HP" validate="required" v-model="formData.HP" :label="$t('HP')" :disabled="isDisabled" />
-            <FormInput type="text" name="MP" validate="required" v-model="formData.MP" :label="$t('MP')" :disabled="isDisabled" />
+            <div class="col-8">
+              <FormInput type="text" name="name" validate="required" v-model="formData.name" :label="$t('name')" :disabled="isDisabled" />
+              <FormInput type="text" name="gender" validate="required" v-model="formData.gender" :label="$t('gender')" :disabled="isDisabled" />
+              <FormInput type="text" name="XP" validate="required" v-model="formData.XP" :label="$t('XP')" :disabled="isDisabled" />
+              <FormInput type="text" name="HP" validate="required" v-model="formData.HP" :label="$t('HP')" :disabled="isDisabled" />
+              <FormInput type="text" name="MP" validate="required" v-model="formData.MP" :label="$t('MP')" :disabled="isDisabled" />
+            </div>
+
+            <div class="col-4 image-preview">
+              <Swiper>
+                <!-- <FormImage class="swiper-slide" name="2Dstanding"></FormImage> -->
+                <div class="swiper-slide">
+                  <UploadButton name="2Dstanding" v-model="formData.standing2D">文件上传</UploadButton>
+                </div>
+              </Swiper>
+            </div>
+
+            <div class="col-12">
+              <FormInput type="text" name="description" validate="required" v-model="formData.description" :label="$t('description')" :disabled="isDisabled" />
+            </div>
+            <div class="clear-fix"></div>
           </BoxBody>
         </Box>
 
@@ -46,8 +69,11 @@ import PageBody from '../../../common/AdminComponents/PageBody/index.vue';
 import Box from '../../../common/AdminComponents/Box/index.vue';
 import BoxHeader from '../../../common/AdminComponents/BoxHeader/index.vue';
 import BoxBody from '../../../common/AdminComponents/BoxBody/index.vue';
+import Swiper from '../../../common/AdminComponents/Swiper/index.vue';
 import FormInput from '../../../common/AdminComponents/FormInput/index.vue';
+import FormImage from '../../../common/AdminComponents/FormImage/index.vue';
 import FormButton from '../../../common/AdminComponents/FormButton/index.vue';
+import UploadButton from '../../../common/AdminComponents/UploadButton/index.vue';
 
 const System = namespace('system');
 
@@ -60,7 +86,10 @@ const System = namespace('system');
     BoxHeader,
     BoxBody,
     FormInput,
-    FormButton
+    FormButton,
+    FormImage,
+    Swiper,
+    UploadButton
   }
 })
 export default class EnemyEdit extends Vue {
@@ -79,7 +108,8 @@ export default class EnemyEdit extends Vue {
       INT: 1,
       DEX: 1,
       LUK: 1,
-    }
+    },
+    standing2D: '',
   };
 
   async fetchEnemyById(enemyId: string) {
@@ -98,6 +128,13 @@ export default class EnemyEdit extends Vue {
 
 <style type="text/scss" lang="scss">
 .enemy-edit {
-
+  .form-actions {
+    margin-bottom: 15px;
+  }
+  .image-preview {
+    padding: 10px;
+    height: 200px;
+    box-sizing: border-box;
+  }
 }
 </style>
