@@ -6,10 +6,12 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
+import { Validator } from 'vee-validate';
+import { Component, Inject, Provide } from 'vue-property-decorator';
 
 @Component
 export default class BoxBody extends Vue {
+  @Inject('$validator') $validator: Validator;
 }
 </script>
 

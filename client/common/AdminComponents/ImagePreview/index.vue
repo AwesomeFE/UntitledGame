@@ -10,7 +10,7 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 
-import { image } from '../../utils';
+import { UtilImage } from '../../utils';
 
 // why png is empty???
 import emptyUrl from './image.svg';
@@ -34,7 +34,7 @@ export default class ImagePreview extends Vue {
 
   async mounted() {
     this.isLoading = true;
-    this.blobUrl = await image.fetchImage(this.src);
+    this.blobUrl = await UtilImage.fetchImage(this.src);
     this.isLoading = false;
   }
 }

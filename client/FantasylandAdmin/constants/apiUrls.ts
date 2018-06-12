@@ -1,4 +1,4 @@
-import { Store } from '../types';
+import { FormData } from '../types/index.d';
 
 export const apiUrls = {
   GET_ENEMY: () => ({
@@ -8,5 +8,10 @@ export const apiUrls = {
   GET_ENEMY_BY_ID: (enemyId: string) => ({
     method: 'get',
     url: `/api/enemy/${enemyId}`
+  }),
+  CREATE_ENEMY: (data: FormData.Enemy) => ({
+    method: 'post',
+    url: `/api/enemy`,
+    data
   }),
 };

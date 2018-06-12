@@ -1,6 +1,6 @@
 import { DataTable } from '../types';
 
-export const table = {
+export const UtilTable = {
   getTableRows(headers: Array<DataTable.headerItem>, data: Array<any>) {
     const tableRows: Array<Array<DataTable.dataItem>> = [];
   

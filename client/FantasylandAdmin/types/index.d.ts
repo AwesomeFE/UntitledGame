@@ -18,7 +18,9 @@ export namespace FormData {
     XP: number,
     HP: number,
     MP: number,
-    ability: Ability
+    ability: Ability,
+    standing2D: string,
+    attack2D: string
   }
 
   interface FieldFile {

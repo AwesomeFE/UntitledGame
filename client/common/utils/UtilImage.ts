@@ -1,4 +1,4 @@
-export const image = {
+export const UtilImage = {
   fetchImage(src: string): Promise<string> {
     return new Promise((resolve, reject) => {
       if(src) {

@@ -60,7 +60,8 @@
 <script lang="ts">
 import Vue from 'vue';
 import { namespace } from 'vuex-class';
-import { Component } from 'vue-property-decorator';
+import { Validator } from 'vee-validate';
+import { Component, Inject } from 'vue-property-decorator';
 
 import { FormData } from '../../types/index.d';
 import { Enemy } from '../../services';
@@ -71,11 +72,11 @@ import Box from '../../../common/AdminComponents/Box/index.vue';
 import BoxBody from '../../../common/AdminComponents/BoxBody/index.vue';
 import BoxHeader from '../../../common/AdminComponents/BoxHeader/index.vue';
 import FormInput from '../../../common/AdminComponents/FormInput/index.vue';
-import FormImage from '../../../common/AdminComponents/FormImage/index.vue';
 import FormButton from '../../../common/AdminComponents/FormButton/index.vue';
 import Swiper from '../../../common/AdminComponents/Swiper/index.vue';
 import ImagePreview from '../../../common/AdminComponents/ImagePreview/index.vue';
 import UploadButton from '../../../common/AdminComponents/UploadButton/index.vue';
+import { UtilFormData } from '../../../common/utils';
 
 const System = namespace('system');
 
@@ -88,7 +89,6 @@ const System = namespace('system');
     BoxBody,
     BoxHeader,
     FormInput,
-    FormImage,
     FormButton,
     Swiper,
     ImagePreview,
@@ -96,9 +96,11 @@ const System = namespace('system');
   }
 })
 export default class EnemyEdit extends Vue {
-  isDisabled = false;
+  @Inject('$validator') $validator: Validator;
+  
+  isDisabled: boolean = false;
 
-  formData = {
+  formData: FormData.Enemy = {
     name: '',
     gender: 'male',
     XP: 0,
@@ -121,11 +123,32 @@ export default class EnemyEdit extends Vue {
     attack2D: null
   };
 
-  submit() {
+  async submit() {
+    this.disableForm();
+
+    const isVailed = await this.$validator.validateAll();
+
+    if(isVailed) {
+      // const { data } = await Enemy.createEnemy(this.formData);
+
+      // console.log(data);
+    } else {
+
+
+      this.enableForm();
+    }
   }
 
   async fetchEnemyById(enemyId: string) {
     // const { data = [] } = await Enemy.getEnemyById(enemyId);
+  }
+
+  disableForm() {
+    this.isDisabled = true;
+  }
+
+  enableForm() {
+    this.isDisabled = false;
   }
 
   async mounted() {

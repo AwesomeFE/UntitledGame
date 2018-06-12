@@ -24,7 +24,7 @@ import Vue from 'vue';
 import { namespace } from 'vuex-class';
 import { Component } from 'vue-property-decorator';
 
-import { table } from '../../../common/utils';
+import { UtilTable } from '../../../common/utils';
 import { EnemyDataItem } from './index.d'
 import { Enemy } from '../../services';
 import vSidebar from '../../components/vSidebar/index.vue';
@@ -66,7 +66,7 @@ export default class EnemyList extends Vue {
 
   async fetchNextPage() {
     const { data = [] } = await Enemy.getEnemy();
-    const newTableRows = table.getTableRows(this.headers, data);
+    const newTableRows = UtilTable.getTableRows(this.headers, data);
 
     newTableRows.forEach((tableRow) => this.tableRows.push(tableRow));
   }
