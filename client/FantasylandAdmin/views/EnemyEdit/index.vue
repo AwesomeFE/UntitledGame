@@ -158,5 +158,8 @@ export default class EnemyEdit extends Vue {
     left: 50%;
     transform: translateX(-50%);
   }
+  .image-preview {
+    height: 320px;
+  }
 }
 </style>

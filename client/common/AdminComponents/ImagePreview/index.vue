@@ -43,12 +43,12 @@ export default class ImagePreview extends Vue {
 <style type="text/scss" lang="scss">
 .image-preview {
   img {
-    display: block;
+    display: inline-block;
   }
 
   .image {
-    width: 100%;
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
   }
 
   .empty-image {
