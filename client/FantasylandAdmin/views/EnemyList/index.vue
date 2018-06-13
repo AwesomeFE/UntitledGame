@@ -78,7 +78,7 @@ export default class EnemyList extends Vue {
 </script>
 
 <style type="text/scss" lang="scss">
-.enemy-list {
+// .enemy-list {
 
-}
+// }
 </style>

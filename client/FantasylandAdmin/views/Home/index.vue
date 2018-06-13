@@ -32,7 +32,7 @@ export default class Home extends Vue {
 </script>
 
 <style type="text/scss" lang="scss">
-.home {
+// .home {
 
-}
+// }
 </style>

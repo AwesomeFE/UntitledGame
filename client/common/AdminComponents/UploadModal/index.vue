@@ -1,5 +1,5 @@
 <template>
-  <Modal class="loading-modal" v-show="modal.isShow">
+  <Modal class="upload-modal" v-show="modal.isShow">
     <ModalHeader>{{$t('title')}}</ModalHeader>
     <ModalBody>
 
@@ -55,8 +55,8 @@ export default class UploadModal extends Vue {
 </script>
 
 <style type="text/scss" lang="scss">
-.upload-modal {
-}
+// .upload-modal {
+// }
 </style>
 
 <i18n lang="i18n">

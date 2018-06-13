@@ -51,8 +51,8 @@ export default class ImagePreview extends Vue {
     max-height: 100%;
   }
 
-  .empty-image {
+  // .empty-image {
     
-  }
+  // }
 }
 </style>

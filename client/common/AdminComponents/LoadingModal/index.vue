@@ -44,6 +44,6 @@ export default class LoadingModal extends Vue {
 </script>
 
 <style type="text/scss" lang="scss">
-.loading-modal {
-}
+// .loading-modal {
+// }
 </style>
