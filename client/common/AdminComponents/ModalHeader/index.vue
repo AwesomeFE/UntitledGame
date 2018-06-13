@@ -17,5 +17,6 @@ export default class ModalHeader extends Vue {
 .modal-header {
   padding: 15px;
   background: white;
+  border-bottom: 1px solid #e5e5e5;
 }
 </style>

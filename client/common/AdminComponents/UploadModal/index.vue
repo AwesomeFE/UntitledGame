@@ -43,7 +43,8 @@ export default class UploadModal extends Vue {
   created() {
     this.registerModal({
       type: modalTypes.UploadModal,
-      isShow: false
+      isShow: false,
+      uploadFiles: []
     });
   }
 

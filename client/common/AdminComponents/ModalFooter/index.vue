@@ -17,5 +17,6 @@ export default class ModalFooter extends Vue {
 .modal-footer {
   padding: 15px;
   background: white;
+  border-top: 1px solid #e5e5e5;
 }
 </style>

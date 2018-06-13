@@ -5,7 +5,7 @@ export namespace CommonTypes {
       interface User {
         _id: string;
       }
-  
+
       interface Modal {
         isShow?: boolean;
         type: string;

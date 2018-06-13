@@ -63,7 +63,7 @@ import { namespace } from 'vuex-class';
 import { Validator } from 'vee-validate';
 import { Component, Inject } from 'vue-property-decorator';
 
-import { Types } from '../../types/index.d';
+import { Types } from '../../types';
 import { CommonTypes } from '../../../common/types';
 import { Enemy } from '../../services';
 import vSidebar from '../../components/vSidebar/index.vue';
@@ -78,6 +78,7 @@ import Swiper from '../../../common/AdminComponents/Swiper/index.vue';
 import ImagePreview from '../../../common/AdminComponents/ImagePreview/index.vue';
 import UploadButton from '../../../common/AdminComponents/UploadButton/index.vue';
 import { UtilFormData } from '../../../common/utils';
+import { modalTypes } from '../../constants';
 
 const System = namespace('system');
 
@@ -133,7 +134,7 @@ export default class EnemyEdit extends Vue {
     const isVailed = await this.$validator.validateAll();
 
     if(isVailed) {
-      // this.showModal();
+      this.showModal({ type: modalTypes.UploadModal });
       // const { data } = await Enemy.createEnemy(this.formData);
 
       // console.log(data);

@@ -1,3 +1,5 @@
+/// <reference path="../../common/types/index.d.ts" />
+
 export namespace Types {
   namespace FormData {
     interface Ability {
