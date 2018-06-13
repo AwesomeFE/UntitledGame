@@ -27,9 +27,9 @@
 
             <div class="col-4 image-gallery">
               <Swiper>
-                <div class="swiper-slide" v-for="(file, field) in fieldFileMap" :key="field">
-                  <ImagePreview :src="formData[field]" :file="fieldFileMap[field]" />
-                  <UploadButton :name="field" v-model="fieldFileMap[field]">{{$t('upload')}}</UploadButton>
+                <div class="swiper-slide" v-for="(file, field) in fieldFiles" :key="field">
+                  <ImagePreview :src="formData[field]" :file="fieldFiles[field]" />
+                  <UploadButton :name="field" v-model="fieldFiles[field]">{{$t('upload')}}</UploadButton>
                 </div>
               </Swiper>
             </div>
@@ -63,7 +63,7 @@ import { namespace } from 'vuex-class';
 import { Validator } from 'vee-validate';
 import { Component, Inject } from 'vue-property-decorator';
 
-import { FormData } from '../../types/index.d';
+import { Types } from '../../types/index.d';
 import { Enemy } from '../../services';
 import vSidebar from '../../components/vSidebar/index.vue';
 import vPageHeader from '../../components/vPageHeader/index.vue';
@@ -100,7 +100,7 @@ export default class EnemyEdit extends Vue {
   
   isDisabled: boolean = false;
 
-  formData: FormData.Enemy = {
+  formData: Types.FormData.Enemy = {
     name: '',
     gender: 'male',
     XP: 0,
@@ -118,7 +118,7 @@ export default class EnemyEdit extends Vue {
     attack2D: ''
   };
 
-  fieldFileMap: FormData.FieldFile = {
+  fieldFiles: Types.FormData.FieldFile = {
     standing2D: null,
     attack2D: null
   };

@@ -31,10 +31,10 @@ export default class App extends Vue {
   getUser: () => void;
 
   @System.Mutation('showModal')
-  showModal: (modalType: string) => void;
+  showModal: (modalType: Types.Store.System.Modal) => void;
 
   @System.Mutation('hideModal')
-  hideModal: (modalType: string) => void;
+  hideModal: (modalType: Types.Store.System.Modal) => void;
 
   @Watch('user')
   userChangeHandler(user: Types.Store.System.User) {
@@ -46,10 +46,10 @@ export default class App extends Vue {
   isInitialized = false;
 
   async mounted() {
-    this.showModal(modalTypes.LoadingModal);
+    this.showModal({ type: modalTypes.LoadingModal });
     await this.getUser();
 
-    this.hideModal(modalTypes.LoadingModal);
+    this.hideModal({ type: modalTypes.LoadingModal });
     this.showApp();
   }
 
@@ -67,7 +67,7 @@ export default class App extends Vue {
 }
 .App {
   overflow: auto;
-  > div {
+  > div:first-child {
     position: relative;
   }
 }

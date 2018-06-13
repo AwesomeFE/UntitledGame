@@ -1,5 +1,5 @@
 <template>
-  <Modal class="loading-modal" v-show="modal.isModalShow">
+  <Modal class="loading-modal" v-show="modal.isShow">
     loading
   </Modal>
 </template>
@@ -25,13 +25,16 @@ export default class LoadingModal extends Vue {
   modal: Types.Store.System.Modal;
 
   @System.Mutation('registerModal')
-  registerModal: (modalType: string) => void;
+  registerModal: (modal: Types.Store.System.Modal) => void;
 
   @System.Mutation('destoryModal')
   destoryModal: (modalType: string) => void;
 
   created() {
-    this.registerModal(modalTypes.LoadingModal);
+    this.registerModal({
+      type: modalTypes.LoadingModal,
+      isShow: false
+    });
   }
 
   destroyed() {

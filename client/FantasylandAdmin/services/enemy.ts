@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { FormData } from '../types/index.d';
+import { Types } from '../types/index.d';
 import { apiUrls } from '../constants';
 
 class EnemyService {
@@ -11,7 +11,7 @@ class EnemyService {
     return axios(apiUrls.GET_ENEMY_BY_ID(enemyId));
   }
 
-  createEnemy(enemyData: FormData.Enemy): Promise<AxiosResponse> {
+  createEnemy(enemyData: Types.FormData.Enemy): Promise<AxiosResponse> {
     return axios(apiUrls.CREATE_ENEMY(enemyData));
   }
 }

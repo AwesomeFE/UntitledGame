@@ -9,6 +9,7 @@ export namespace Types {
       interface Modal {
         isShow?: boolean;
         type: string;
+        [key: string]: any;
       }
       
       interface State {
