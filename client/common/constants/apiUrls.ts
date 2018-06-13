@@ -1,6 +1,6 @@
 /// <reference types="node" />
 
-import { Types } from '../types';
+import { CommonTypes } from '../types';
 
 export const apiUrls = {
   BASE_URL: () => {
@@ -9,12 +9,12 @@ export const apiUrls = {
 
     return `http://${SERVER_HOST}:${SERVER_PORT}/`;
   },
-  SIGNIN: (data: Types.FormData.Signin) => ({
+  SIGNIN: (data: CommonTypes.FormData.Signin) => ({
     method: 'post',
     url: '/api/user/signin',
     data
   }),
-  SIGNUP: (data: Types.FormData.Signin) => ({
+  SIGNUP: (data: CommonTypes.FormData.Signin) => ({
     method: 'post',
     url: '/api/user/signup',
     data

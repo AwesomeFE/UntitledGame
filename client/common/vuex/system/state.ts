@@ -1,6 +1,6 @@
-import { Types } from '../../types/index.d'
+import { CommonTypes } from '../../types/index.d'
 
-export const state: Types.Store.System.State = {
+export const state: CommonTypes.Store.System.State = {
   user: null,
   modals: []
 };

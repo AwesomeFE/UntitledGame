@@ -64,6 +64,7 @@ import { Validator } from 'vee-validate';
 import { Component, Inject } from 'vue-property-decorator';
 
 import { Types } from '../../types/index.d';
+import { CommonTypes } from '../../../common/types';
 import { Enemy } from '../../services';
 import vSidebar from '../../components/vSidebar/index.vue';
 import vPageHeader from '../../components/vPageHeader/index.vue';
@@ -97,6 +98,9 @@ const System = namespace('system');
 })
 export default class EnemyEdit extends Vue {
   @Inject('$validator') $validator: Validator;
+
+  @System.Mutation('showModal')
+  showModal: (modal: CommonTypes.Store.System.Modal) => void;
   
   isDisabled: boolean = false;
 
@@ -129,6 +133,7 @@ export default class EnemyEdit extends Vue {
     const isVailed = await this.$validator.validateAll();
 
     if(isVailed) {
+      // this.showModal();
       // const { data } = await Enemy.createEnemy(this.formData);
 
       // console.log(data);

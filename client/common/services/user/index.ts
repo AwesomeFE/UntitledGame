@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { Types } from '../../types';
+import { CommonTypes } from '../../types';
 import { apiUrls } from '../../constants';
 
 class UserService {
@@ -7,11 +7,11 @@ class UserService {
     return axios(apiUrls.GET_USER());
   }
 
-  signin(data: Types.FormData.Signin): Promise<AxiosResponse> {
+  signin(data: CommonTypes.FormData.Signin): Promise<AxiosResponse> {
     return axios(apiUrls.SIGNIN(data));
   }
 
-  signup(data: Types.FormData.Signin): Promise<AxiosResponse> {
+  signup(data: CommonTypes.FormData.Signin): Promise<AxiosResponse> {
     return axios(apiUrls.SIGNUP(data));
   }
 

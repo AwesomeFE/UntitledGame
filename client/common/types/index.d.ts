@@ -1,4 +1,4 @@
-export namespace Types {
+export namespace CommonTypes {
   
   export namespace Store {
     namespace System {

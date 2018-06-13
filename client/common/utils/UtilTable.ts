@@ -1,8 +1,8 @@
-import { Types } from '../types';
+import { CommonTypes } from '../types';
 
 export const UtilTable = {
-  getTableRows(headers: Array<Types.DataTable.headerItem>, data: Array<any>) {
-    const tableRows: Array<Array<Types.DataTable.dataItem>> = [];
+  getTableRows(headers: Array<CommonTypes.DataTable.headerItem>, data: Array<any>) {
+    const tableRows: Array<Array<CommonTypes.DataTable.dataItem>> = [];
   
     for(const item of data) {
       const row = [];

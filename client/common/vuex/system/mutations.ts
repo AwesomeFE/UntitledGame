@@ -1,4 +1,4 @@
-import { Types } from '../../types';
+import { CommonTypes } from '../../types';
 
 export const mutations = {
   /**
@@ -6,7 +6,7 @@ export const mutations = {
    * @param state 
    * @param user 
    */
-  setUser(state: Types.Store.System.State, user: Types.Store.System.User) {
+  setUser(state: CommonTypes.Store.System.State, user: CommonTypes.Store.System.User) {
     state.user = user;
   },
   /**
@@ -15,8 +15,8 @@ export const mutations = {
    * @param type 
    * 注：可以允许重复注册模态框，由于hot-replace是先挂载新组件，后删除旧组件。
    */
-  registerModal(state: Types.Store.System.State, payload: Types.Store.System.Modal) {
-    const modalInitState: Types.Store.System.Modal = { 
+  registerModal(state: CommonTypes.Store.System.State, payload: CommonTypes.Store.System.Modal) {
+    const modalInitState: CommonTypes.Store.System.Modal = { 
       type: payload.type,
       isShow: false
     };
@@ -31,8 +31,8 @@ export const mutations = {
    * @param state 
    * @param type 
    */
-  destoryModal(state: Types.Store.System.State, type: string) {
-    const modalIndex = state.modals.findIndex(modalItem => modalItem.type === type);
+  destoryModal(state: CommonTypes.Store.System.State, payload: CommonTypes.Store.System.Modal) {
+    const modalIndex = state.modals.findIndex(modalItem => modalItem.type === payload.type);
     state.modals.splice(modalIndex, 1);
   },
   /**
@@ -40,7 +40,7 @@ export const mutations = {
    * @param state 
    * @param type 
    */
-  showModal(state: Types.Store.System.State, payload: Types.Store.System.Modal) {
+  showModal(state: CommonTypes.Store.System.State, payload: CommonTypes.Store.System.Modal) {
     const modal = state.modals.find(modalItem => modalItem.type === payload.type);
     if(modal) {
       for(const key in payload) {
@@ -54,7 +54,7 @@ export const mutations = {
    * @param state 
    * @param type 
    */
-  hideModal(state: Types.Store.System.State, payload: Types.Store.System.Modal) {
+  hideModal(state: CommonTypes.Store.System.State, payload: CommonTypes.Store.System.Modal) {
     const modal = state.modals.find(modalItem => modalItem.type === payload.type);
     if(modal) {
       modal.isShow = false;

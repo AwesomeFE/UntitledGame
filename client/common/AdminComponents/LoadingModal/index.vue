@@ -10,7 +10,7 @@ import { namespace } from 'vuex-class';
 import { Component, Prop } from 'vue-property-decorator';
 
 import { modalTypes } from '../../constants';
-import { Types } from '../../../common/types';
+import { CommonTypes } from '../../types';
 import Modal from '../../../common/AdminComponents/Modal/index.vue';
 
 const System = namespace('system');
@@ -21,14 +21,14 @@ const System = namespace('system');
   }
 })
 export default class LoadingModal extends Vue {
-  @System.State((state: Types.Store.System.State) => (state.modals.find(modalItem => modalItem.type === modalTypes.LoadingModal) || {}))
-  modal: Types.Store.System.Modal;
+  @System.State((state: CommonTypes.Store.System.State) => (state.modals.find(modalItem => modalItem.type === modalTypes.LoadingModal) || {}))
+  modal: CommonTypes.Store.System.Modal;
 
   @System.Mutation('registerModal')
-  registerModal: (modal: Types.Store.System.Modal) => void;
+  registerModal: (modal: CommonTypes.Store.System.Modal) => void;
 
   @System.Mutation('destoryModal')
-  destoryModal: (modalType: string) => void;
+  destoryModal: (modal: CommonTypes.Store.System.Modal) => void;
 
   created() {
     this.registerModal({
@@ -38,7 +38,7 @@ export default class LoadingModal extends Vue {
   }
 
   destroyed() {
-    this.destoryModal(modalTypes.LoadingModal);
+    this.destoryModal({ type: modalTypes.LoadingModal });
   }
 }
 </script>

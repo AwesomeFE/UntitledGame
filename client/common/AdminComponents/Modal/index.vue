@@ -1,18 +1,14 @@
 <template>
   <div class="modal">
     <div class="modal-dialog">
-      <header></header>
-      <section>
-        <slot></slot>
-      </section>
-      <footer></footer>
+      <slot></slot>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { Component, Prop } from 'vue-property-decorator';
+import { Component } from 'vue-property-decorator';
 
 @Component
 export default class Modal extends Vue {

@@ -1,5 +1,4 @@
 import axios, { AxiosResponse } from 'axios';
-import { Types } from '../../types';
 import { apiUrls } from '../../constants';
 
 class FileService {
