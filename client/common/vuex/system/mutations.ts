@@ -1,4 +1,4 @@
-import { Store } from '../../types';
+import { Types } from '../../types';
 
 export const mutations = {
   /**
@@ -6,7 +6,7 @@ export const mutations = {
    * @param state 
    * @param user 
    */
-  setUser(state: Store.System.State, user: Store.System.User) {
+  setUser(state: Types.Store.System.State, user: Types.Store.System.User) {
     state.user = user;
   },
   /**
@@ -15,7 +15,7 @@ export const mutations = {
    * @param type 
    * 注：可以允许重复注册模态框，由于hot-replace是先挂载新组件，后删除旧组件。
    */
-  registerModal(state: Store.System.State, type: string) {
+  registerModal(state: Types.Store.System.State, type: string) {
     state.modals.push({ type, isShow: false })
   },
   /**
@@ -23,7 +23,7 @@ export const mutations = {
    * @param state 
    * @param type 
    */
-  destoryModal(state: Store.System.State, type: string) {
+  destoryModal(state: Types.Store.System.State, type: string) {
     const modalIndex = state.modals.findIndex(modalItem => modalItem.type === type);
     state.modals.splice(modalIndex, 1);
   },
@@ -32,7 +32,7 @@ export const mutations = {
    * @param state 
    * @param type 
    */
-  showModal(state: Store.System.State, type: string) {
+  showModal(state: Types.Store.System.State, type: string) {
     const modal = state.modals.find(modalItem => modalItem.type === type);
     if(modal) {
       modal.isShow = true;
@@ -43,7 +43,7 @@ export const mutations = {
    * @param state 
    * @param type 
    */
-  hideModal(state: Store.System.State, type: string) {
+  hideModal(state: Types.Store.System.State, type: string) {
     const modal = state.modals.find(modalItem => modalItem.type === type);
     if(modal) {
       modal.isShow = false;

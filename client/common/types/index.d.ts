@@ -1,51 +1,44 @@
-export namespace Store {
-
-  namespace System {
-    /**
-     * Store.System.User
-     */
-    interface User {
-      _id: string;
-    }
-
-    interface Modal {
-      isShow?: boolean;
-      type: string;
-    }
-    
-    /**
-     * Store.System.State
-     */
-    interface State {
-      user?: User;
-      modals: Array<Modal>
-    }
-
-    /**
-     * Store.System.FormData
-     */
-    namespace FormData {
-      interface Signin {
-        username: string;
-        password: string;
+export namespace Types {
+  
+  export namespace Store {
+    namespace System {
+      interface User {
+        _id: string;
       }
-    
-      interface Signup {
-        username: string;
-        password: string;
+  
+      interface Modal {
+        isShow?: boolean;
+        type: string;
+      }
+      
+      interface State {
+        user?: User;
+        modals: Array<Modal>
       }
     }
   }
-}
-
-export namespace DataTable {
-  interface headerItem {
-    key: string,
-    title: string
+  
+  export namespace FormData {
+    interface Signin {
+      username: string;
+      password: string;
+    }
+  
+    interface Signup {
+      username: string;
+      password: string;
+    }
   }
-
-  interface dataItem {
-    key: string,
-    value: number | string
+  
+  export namespace DataTable {
+    interface headerItem {
+      key: string,
+      title: string
+    }
+  
+    interface dataItem {
+      key: string,
+      value: number | string
+    }
   }
 }

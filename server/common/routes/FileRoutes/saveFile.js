@@ -1,13 +1,18 @@
+import multer from 'multer';
 import { File } from '../../models';
 import { messages } from '../../constants';
-import { removeFieldsFromProjection } from '../../utils/dataFormat';
+// import { removeFieldsFromProjection } from '../../utils/dataFormat';
 
-class GetFile {
-  required = {
-    body: [
-      'fileId'
-    ]
-  };
+const upload = multer({ dest: 'uploads/Fantasyland/' });
+
+class SaveFile {
+  // required = {
+  //   body: [
+  //     'fileId'
+  //   ]
+  // };
+
+  middleware = upload.single('file');
 
   constructor() {
     this.validate = this.validate.bind(this);
@@ -17,14 +22,15 @@ class GetFile {
   validate(req, res) {}
 
   async handler(req, res) {
-    const { user, params } = req;
-    const fileId = params.fileId;
+    const { user, body } = req;
     const userId = user._id;
 
-    const fileInfo = await File.findOne({ user: userId, _id: fileId });
+    console.log(body);
 
-    res.json(messages.REQUEST_SUCCESS(fileInfo));
+    // const fileInfo = await File.findOne({ user: userId, _id: fileId });
+
+    res.json(messages.REQUEST_SUCCESS());
   }
 }
 
-export const getFile = new GetFile();
+export const saveFile = new SaveFile();

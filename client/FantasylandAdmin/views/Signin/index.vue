@@ -33,7 +33,7 @@ import { Component } from 'vue-property-decorator';
 import { messageTypes, linkUrls } from '../../constants';
 import FormInput from '../../../common/AdminComponents/FormInput/index.vue';
 import FormButton from '../../../common/AdminComponents/FormButton/index.vue';
-import { Store } from '../../../common/types';
+import { Types } from '../../../common/types';
 
 const System = namespace('system');
 
@@ -55,7 +55,7 @@ export default class Signin extends Vue {
   };
 
   @System.Action('signin')
-  signin: (formData: Store.System.FormData.Signin) => void;
+  signin: (formData: Types.FormData.Signin) => void;
 
   async submit() {
     this.isDisabled = true;

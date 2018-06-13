@@ -1,10 +1,10 @@
 import { Commit } from 'vuex';
-import { Store } from '../../types';
+import { Types } from '../../types';
 import { User } from '../../services';
 
 interface Context {
   commit: Commit,
-  state: Store.System.State
+  state: Types.Store.System.State
 };
 
 export const actions = {
@@ -13,12 +13,12 @@ export const actions = {
     const { data } = await User.getSessionUser();
     commit('setUser', data);
   },
-  async signin(context: Context, formData: Store.System.FormData.Signin) {
+  async signin(context: Context, formData: Types.FormData.Signin) {
     const { commit } = context;
     const { data } = await User.signin(formData);
     commit('setUser', data);
   },
-  async signup(context: Context, formData: Store.System.FormData.Signin) {
+  async signup(context: Context, formData: Types.FormData.Signin) {
     const { commit } = context;
     const { data } = await User.signup(formData);
     commit('setUser', data);

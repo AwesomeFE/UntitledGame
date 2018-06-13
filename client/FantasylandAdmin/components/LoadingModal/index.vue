@@ -10,7 +10,7 @@ import { namespace } from 'vuex-class';
 import { Component, Prop } from 'vue-property-decorator';
 
 import { modalTypes } from '../../constants';
-import { Store } from '../../../common/types';
+import { Types } from '../../../common/types';
 import Modal from '../../../common/AdminComponents/Modal/index.vue';
 
 const System = namespace('system');
@@ -21,8 +21,8 @@ const System = namespace('system');
   }
 })
 export default class LoadingModal extends Vue {
-  @System.State((state: Store.System.State) => (state.modals.find(modalItem => modalItem.type === modalTypes.LoadingModal) || {}))
-  modal: Store.System.Modal;
+  @System.State((state: Types.Store.System.State) => (state.modals.find(modalItem => modalItem.type === modalTypes.LoadingModal) || {}))
+  modal: Types.Store.System.Modal;
 
   @System.Mutation('registerModal')
   registerModal: (modalType: string) => void;

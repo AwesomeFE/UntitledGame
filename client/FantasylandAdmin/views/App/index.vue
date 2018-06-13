@@ -12,7 +12,7 @@ import { namespace } from 'vuex-class';
 import { Component, Watch } from 'vue-property-decorator';
 import { Route, RawLocation } from 'vue-router';
 
-import { Store } from '../../../common/types';
+import { Types } from '../../../common/types';
 import { modalTypes, linkUrls } from '../../constants';
 import LoadingModal from '../../components/LoadingModal/index.vue';
 
@@ -24,8 +24,8 @@ const System = namespace('system');
   }
 })
 export default class App extends Vue {
-  @System.State((state: Store.System.State) => state.user)
-  user: Store.System.User;
+  @System.State((state: Types.Store.System.State) => state.user)
+  user: Types.Store.System.User;
 
   @System.Action('getUser')
   getUser: () => void;
@@ -37,7 +37,7 @@ export default class App extends Vue {
   hideModal: (modalType: string) => void;
 
   @Watch('user')
-  userChangeHandler(user: Store.System.User) {
+  userChangeHandler(user: Types.Store.System.User) {
     if(!user) {
       this.$router.push(linkUrls.SIGNIN());
     }

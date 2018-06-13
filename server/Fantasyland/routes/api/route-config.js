@@ -23,6 +23,7 @@ export default [
   middlewares.ensurePlayerLogin,
   { path: '/dungeon-chapter', method: 'get', ...DungeonRoutes.getAllDungeonChapters },
   { path: '/dungeon/:dungeonBattleId/start', method: 'get', ...DungeonRoutes.startDungeonBattle },
+  { path: '/file', method: 'post', ...FileRoutes.saveFile },
 
   // middlewares.ensureAdmin,
   // { path: '/dungeon', method: 'get', ...DungeonChapterRoutes.getAllDungeonChapters },

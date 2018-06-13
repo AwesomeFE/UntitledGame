@@ -1,6 +1,6 @@
 /// <reference types="node" />
 
-import { Store } from '../types';
+import { Types } from '../types';
 
 export const apiUrls = {
   BASE_URL: () => {
@@ -9,12 +9,12 @@ export const apiUrls = {
 
     return `http://${SERVER_HOST}:${SERVER_PORT}/`;
   },
-  SIGNIN: (data: Store.System.FormData.Signin) => ({
+  SIGNIN: (data: Types.FormData.Signin) => ({
     method: 'post',
     url: '/api/user/signin',
     data
   }),
-  SIGNUP: (data: Store.System.FormData.Signin) => ({
+  SIGNUP: (data: Types.FormData.Signin) => ({
     method: 'post',
     url: '/api/user/signup',
     data
@@ -27,10 +27,15 @@ export const apiUrls = {
     method: 'get',
     url: '/api/user/signout'
   }),
-  GET_PLAYERS: () => ({
-    method: 'get',
-    url: '/api/player'
-  }),
+  UPLOAD_FILE: (data: FormData) => ({
+    method: 'post',
+    url: '/api/file',
+    data
+  })
+  // GET_PLAYERS: () => ({
+  //   method: 'get',
+  //   url: '/api/player'
+  // }),
   // CREATE_PLAYER: (data) => ({
   //   method: 'post',
   //   url: '/api/player',
