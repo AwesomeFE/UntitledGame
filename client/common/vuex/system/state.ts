@@ -1,6 +1,6 @@
-import { Store } from './types';
+import { System } from './types';
 
-import State = Store.System.State;
+import State = System.State;
 
 export const state: State = {
   user: null

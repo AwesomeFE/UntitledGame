@@ -1,6 +1,6 @@
 /// <reference types="node" />
 
-import { Store } from './types';
+import { Store } from './types.d';
 import * as System from './System';
 import * as Modal from './Modal';
 

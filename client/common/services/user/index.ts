@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { CommonTypes } from '../../types';
+import * as SystemTypes from '../../vuex/system/types.d';
 import { apiUrls } from '../../constants';
 
 class UserService {
@@ -7,11 +7,11 @@ class UserService {
     return axios(apiUrls.GET_USER());
   }
 
-  signin(data: CommonTypes.FormData.Signin): Promise<AxiosResponse> {
+  signin(data: SystemTypes.System.Payload.SignIn): Promise<AxiosResponse> {
     return axios(apiUrls.SIGNIN(data));
   }
 
-  signup(data: CommonTypes.FormData.Signin): Promise<AxiosResponse> {
+  signup(data: SystemTypes.System.Payload.SignUp): Promise<AxiosResponse> {
     return axios(apiUrls.SIGNUP(data));
   }
 

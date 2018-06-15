@@ -1,6 +1,6 @@
-import { Store } from './types';
+import { LoadingModal } from './types.d';
 
-import State = Store.Modal.LoadingModal.State;
+import State = LoadingModal.State;
 
 export const state: State = {
   isShow: false

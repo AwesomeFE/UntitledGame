@@ -2,8 +2,8 @@
   <div class="App">
     <router-view v-if="isInitialized"></router-view>
 
-    <!-- <LoadingModal></LoadingModal> -->
-    <!-- <UploadModal></UploadModal> -->
+    <LoadingModal></LoadingModal>
+    <UploadModal></UploadModal>
   </div>
 </template>
 
@@ -13,33 +13,30 @@ import { namespace } from 'vuex-class';
 import { Component, Watch } from 'vue-property-decorator';
 import { Route, RawLocation } from 'vue-router';
 
-import { CommonTypes } from '../../../common/types';
+import * as SystemTypes from '../../../common/vuex/system/types.d';
 import { linkUrls } from '../../constants';
 import { modalTypes } from '../../../common/constants';
-// import UploadModal from '../../../common/AdminComponents/UploadModal/index.vue';
-// import LoadingModal from '../../../common/AdminComponents/LoadingModal/index.vue';
+import UploadModal from '../../../common/AdminComponents/UploadModal/index.vue';
+import LoadingModal from '../../../common/AdminComponents/LoadingModal/index.vue';
 
-const System = namespace('system');
-const LoadingModal = namespace('modal/LoadingModal');
+const SystemStore = namespace('System');
+const LoadingModalStore = namespace('modal/LoadingModal');
 
 @Component({
   components: {
-    // UploadModal,
-    // LoadingModal
+    UploadModal,
+    LoadingModal
   }
 })
 export default class App extends Vue {
-  @System.State((state: CommonTypes.Store.System.State) => state.user)
-  user: CommonTypes.Store.System.User;
+  @SystemStore.State((state: SystemTypes.System.State) => state.user)
+  user: SystemTypes.System.Model.User;
 
-  @System.Action('getUser')
+  @SystemStore.Action('getUser')
   getUser: () => void;
 
-  @LoadingModal.State((state) => state)
-  isShow: boolean;
-
   @Watch('user')
-  userChangeHandler(user: CommonTypes.Store.System.User) {
+  userChangeHandler(user: SystemTypes.System.Model.User) {
     if(!user) {
       this.$router.push(linkUrls.SIGNIN());
     }
@@ -48,7 +45,6 @@ export default class App extends Vue {
   isInitialized = false;
 
   async mounted() {
-    console.log(this.isShow)
     await this.getUser();
     this.showApp();
   }

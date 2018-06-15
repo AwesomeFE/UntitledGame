@@ -1,7 +1,7 @@
-import { Store } from './types';
+import { UploadModal } from './types.d';
 
-import State = Store.Modal.UploadModal.State;
-import Payload = Store.Modal.UploadModal.Payload.UploadFile;
+import State = UploadModal.State;
+import Payload = UploadModal.Payload.UploadFile;
 
 export const mutations = {
   show(state: State) {

@@ -1,7 +1,7 @@
-import { Store } from './types';
+import { UploadModal } from './types.d';
 import { File } from '../../../services';
 
-import Context = Store.Modal.UploadModal.Context;
+import Context = UploadModal.Context;
 
 export const actions = {
   async uploadFiles(context: Context, payload: Array<FormData>) {

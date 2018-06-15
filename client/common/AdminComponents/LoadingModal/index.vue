@@ -9,9 +9,7 @@ import Vue from 'vue';
 import { namespace } from 'vuex-class';
 import { Component, Prop } from 'vue-property-decorator';
 
-import { modalTypes } from '../../constants';
-import { CommonTypes } from '../../types';
-import Modal from '../../../common/AdminComponents/Modal/index.vue';
+import Modal from '..//Modal/index.vue';
 
 const System = namespace('system');
 
@@ -22,8 +20,6 @@ const System = namespace('system');
 })
 export default class LoadingModal extends Vue {
   isShow = false;
-
-  
 }
 </script>
 

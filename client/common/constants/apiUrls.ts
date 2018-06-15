@@ -1,6 +1,6 @@
 /// <reference types="node" />
 
-import { CommonTypes } from '../types';
+import * as SystemTypes from '../vuex/system/types.d';
 
 export const apiUrls = {
   BASE_URL: () => {
@@ -9,12 +9,12 @@ export const apiUrls = {
 
     return `http://${SERVER_HOST}:${SERVER_PORT}/`;
   },
-  SIGNIN: (data: CommonTypes.FormData.Signin) => ({
+  SIGNIN: (data: SystemTypes.System.Payload.SignIn) => ({
     method: 'post',
     url: '/api/user/signin',
     data
   }),
-  SIGNUP: (data: CommonTypes.FormData.Signin) => ({
+  SIGNUP: (data: SystemTypes.System.Payload.SignUp) => ({
     method: 'post',
     url: '/api/user/signup',
     data

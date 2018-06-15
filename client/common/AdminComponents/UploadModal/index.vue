@@ -1,5 +1,5 @@
 <template>
-  <Modal class="upload-modal">
+  <Modal class="upload-modal" v-show="false">
     <ModalHeader>{{$t('title')}}</ModalHeader>
     <ModalBody>
 
@@ -18,8 +18,6 @@ import { Component } from 'vue-property-decorator';
 import Modal from '../Modal/index.vue';
 import ModalBody from '../ModalBody/index.vue';
 import ModalHeader from '../ModalHeader/index.vue';
-import { modalTypes } from '../../constants';
-import { CommonTypes } from '../../types';
 
 const System = namespace('system');
 

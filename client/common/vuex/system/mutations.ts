@@ -1,7 +1,7 @@
-import { Store } from './types';
+import { System } from './types';
 
-import State = Store.System.State;
-import Payload = Store.System.Payload;
+import State = System.State;
+import Payload = System.Payload;
 
 export const mutations = {
   setUser(state: State, payload: Payload.User) {

@@ -1,8 +1,8 @@
-import { Store } from './types';
+import { System } from './types';
 import { User } from '../../services';
 
-import Context = Store.System.Context;
-import Payload = Store.System.Payload;
+import Context = System.Context;
+import Payload = System.Payload;
 
 export const actions = {
   async getUser(context: Context) {
