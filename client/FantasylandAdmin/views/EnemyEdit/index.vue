@@ -100,8 +100,8 @@ const System = namespace('system');
 export default class EnemyEdit extends Vue {
   @Inject('$validator') $validator: Validator;
 
-  @System.Mutation('showModal')
-  showModal: (modal: CommonTypes.Store.System.Modal) => void;
+  // @System.Mutation('showModal')
+  // showModal: (modal: CommonTypes.Store.System.Modal) => void;
   
   isDisabled: boolean = false;
 
@@ -134,7 +134,7 @@ export default class EnemyEdit extends Vue {
     const isVailed = await this.$validator.validateAll();
 
     if(isVailed) {
-      this.showModal({ type: modalTypes.UploadModal });
+      // this.showModal({ type: modalTypes.UploadModal });
       // const { data } = await Enemy.createEnemy(this.formData);
 
       // console.log(data);

@@ -1,5 +1,9 @@
-export { state } from './state';
-export { actions } from './actions';
-export { getters } from './getters';
-export { mutations } from './mutations';
+import * as UploadModal from '../../AdminComponents/UploadModal/store';
+import * as LoadingModal from '../../AdminComponents/LoadingModal/store';
+
 export const namespaced = true;
+
+export const modules = {
+  UploadModal,
+  LoadingModal
+};

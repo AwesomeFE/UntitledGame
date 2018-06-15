@@ -42,3 +42,4 @@ export function initService() {
 };
 
 export { User } from './user';
+export { File } from './file';

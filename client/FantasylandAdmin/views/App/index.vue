@@ -2,8 +2,8 @@
   <div class="App">
     <router-view v-if="isInitialized"></router-view>
 
-    <LoadingModal></LoadingModal>
-    <UploadModal></UploadModal>
+    <!-- <LoadingModal></LoadingModal> -->
+    <!-- <UploadModal></UploadModal> -->
   </div>
 </template>
 
@@ -16,15 +16,16 @@ import { Route, RawLocation } from 'vue-router';
 import { CommonTypes } from '../../../common/types';
 import { linkUrls } from '../../constants';
 import { modalTypes } from '../../../common/constants';
-import UploadModal from '../../../common/AdminComponents/UploadModal/index.vue';
-import LoadingModal from '../../../common/AdminComponents/LoadingModal/index.vue';
+// import UploadModal from '../../../common/AdminComponents/UploadModal/index.vue';
+// import LoadingModal from '../../../common/AdminComponents/LoadingModal/index.vue';
 
 const System = namespace('system');
+const LoadingModal = namespace('modal/LoadingModal');
 
 @Component({
   components: {
-    UploadModal,
-    LoadingModal
+    // UploadModal,
+    // LoadingModal
   }
 })
 export default class App extends Vue {
@@ -34,11 +35,8 @@ export default class App extends Vue {
   @System.Action('getUser')
   getUser: () => void;
 
-  @System.Mutation('showModal')
-  showModal: (modal: CommonTypes.Store.System.Modal) => void;
-
-  @System.Mutation('hideModal')
-  hideModal: (modal: CommonTypes.Store.System.Modal) => void;
+  @LoadingModal.State((state) => state)
+  isShow: boolean;
 
   @Watch('user')
   userChangeHandler(user: CommonTypes.Store.System.User) {
@@ -50,10 +48,8 @@ export default class App extends Vue {
   isInitialized = false;
 
   async mounted() {
-    this.showModal({ type: modalTypes.LoadingModal });
+    console.log(this.isShow)
     await this.getUser();
-
-    this.hideModal({ type: modalTypes.LoadingModal });
     this.showApp();
   }
 

@@ -1,5 +1,5 @@
 <template>
-  <Modal class="upload-modal" v-show="modal.isShow">
+  <Modal class="upload-modal">
     <ModalHeader>{{$t('title')}}</ModalHeader>
     <ModalBody>
 
@@ -31,26 +31,6 @@ const System = namespace('system');
   }
 })
 export default class UploadModal extends Vue {
-  @System.State((state: CommonTypes.Store.System.State) => (state.modals.find(modalItem => modalItem.type === modalTypes.UploadModal) || {}))
-  modal: CommonTypes.Store.System.Modal;
-
-  @System.Mutation('registerModal')
-  registerModal: (modal: CommonTypes.Store.System.Modal) => void;
-
-  @System.Mutation('destoryModal')
-  destoryModal: (modal: CommonTypes.Store.System.Modal) => void;
-
-  created() {
-    this.registerModal({
-      type: modalTypes.UploadModal,
-      isShow: false,
-      uploadFiles: []
-    });
-  }
-
-  destroyed() {
-    this.destoryModal({ type: modalTypes.UploadModal });
-  }
 }
 </script>
 

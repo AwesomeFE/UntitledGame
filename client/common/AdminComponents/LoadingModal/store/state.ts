@@ -1,7 +1,7 @@
 import { Store } from './types';
 
-import State = Store.System.State;
+import State = Store.Modal.LoadingModal.State;
 
 export const state: State = {
-  user: null
+  isShow: false
 };

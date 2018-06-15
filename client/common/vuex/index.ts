@@ -1,22 +1,22 @@
 /// <reference types="node" />
 
-import { CommonStoreOptions, Module } from './index.d';
-import * as system from './system';
-import * as modal from './modal';
+import { Store } from './types';
+import * as System from './System';
+import * as Modal from './Modal';
 
 class CommonStore {
-  strict = process.env.NODE_ENV !== 'production';
+  strict: boolean = process.env.NODE_ENV !== 'production';
 
-  modules: Module = {
-    system,
-    modal
+  modules: Store.Module = {
+    System,
+    Modal
   };
 
-  constructor(options?: CommonStoreOptions) {
+  constructor(options?: Store.options) {
     this.mergeModulesFromOption(options);
   }
 
-  mergeModulesFromOption(options?: CommonStoreOptions) {
+  mergeModulesFromOption(options?: Store.options) {
     if(options) {
       const { disableModules = [], modules } = options;
     

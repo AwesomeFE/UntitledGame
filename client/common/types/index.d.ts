@@ -1,6 +1,4 @@
-import { modalTypes } from '../constants/index';
-import { UploadModal } from '../AdminComponents/UploadModal';
-import { LoadingModal } from '../AdminComponents/LoadingModal';
+import { ModalState } from './modal';
 
 export namespace CommonTypes {
   
@@ -23,14 +21,8 @@ export namespace CommonTypes {
     }
     
     namespace Modal {
-      type Payload = LoadingModal | UploadModal;
-
-      // type ModalState = 
-
       interface State {
-        [key: string]:
-          LoadingModal |
-          UploadModal;
+        [key: string]: ModalState;
       }
     }
   }
