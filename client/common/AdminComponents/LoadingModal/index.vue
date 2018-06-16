@@ -7,19 +7,20 @@
 <script lang="ts">
 import Vue from 'vue';
 import { namespace } from 'vuex-class';
-import { Component, Prop } from 'vue-property-decorator';
+import { Component } from 'vue-property-decorator';
 
-import Modal from '..//Modal/index.vue';
-
-const System = namespace('system');
+const Modal = {
+  UploadModal: namespace('Modal/LoadingModal')
+};
 
 @Component({
   components: {
-    Modal
+    Modal: () => import('../Modal/index.vue')
   }
 })
 export default class LoadingModal extends Vue {
-  isShow = false;
+  @Modal.UploadModal.State(state => state.isShow)
+  isShow: boolean;
 }
 </script>
 

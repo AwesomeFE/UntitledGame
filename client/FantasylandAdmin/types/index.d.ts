@@ -1,3 +1,7 @@
+import * as CommonTypes from '../../common/types';
+
+export { CommonTypes };
+
 export namespace Types {
   namespace FormData {
     interface Ability {

@@ -33,9 +33,9 @@ import { Component } from 'vue-property-decorator';
 import { messageTypes, linkUrls } from '../../constants';
 import FormInput from '../../../common/AdminComponents/FormInput/index.vue';
 import FormButton from '../../../common/AdminComponents/FormButton/index.vue';
-import * as SystemTypes from '../../../common/vuex/system/types.d';
+import { CommonTypes } from '../../types';
 
-const System = namespace('system');
+const System = namespace('System');
 
 @Component({
   components: {
@@ -55,33 +55,41 @@ export default class Signin extends Vue {
   };
 
   @System.Action('signin')
-  signin: (formData: SystemTypes.System.Payload.SignIn) => void;
+  signin: (formData: CommonTypes.System.Payload.SignIn) => void;
 
   async submit() {
-    this.isDisabled = true;
+    this.disableForm();
 
     if(await this.$validator.validateAll()) {
-      this.showMessage();
-      
       try {
         await this.signin(this.formData);
         this.$router.push(linkUrls.HOME());
       } catch(res) {
-        this.isDisabled = false;
-        this.message = res.type;
+        this.enableForm();
+        this.showMessage(res.type);
       }
     } else {
+      this.enableForm();
       this.showMessage();
-      this.isDisabled = false;
     }
   }
 
-  showMessage() {
+  disableForm() {
+    this.isDisabled = true;
+  }
+
+  enableForm() {
+    this.isDisabled = false;
+  }
+
+  showMessage(msg?: string) {
     const [ errorItem ] = this.$validator.errors.items;
 
     if(errorItem) {
       this.message = messageTypes.FIELD_REQUIRED;
       this.fieldName = errorItem.field;
+    } else if(msg) {
+      this.message = msg;
     } else {
       this.message = messageTypes.PLEASE_SIGNIN;
     }

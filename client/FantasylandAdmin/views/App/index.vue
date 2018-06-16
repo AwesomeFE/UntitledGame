@@ -13,14 +13,17 @@ import { namespace } from 'vuex-class';
 import { Component, Watch } from 'vue-property-decorator';
 import { Route, RawLocation } from 'vue-router';
 
-import * as SystemTypes from '../../../common/vuex/system/types.d';
+import { CommonTypes } from '../../types';
 import { linkUrls } from '../../constants';
 import { modalTypes } from '../../../common/constants';
 import UploadModal from '../../../common/AdminComponents/UploadModal/index.vue';
 import LoadingModal from '../../../common/AdminComponents/LoadingModal/index.vue';
 
-const SystemStore = namespace('System');
-const LoadingModalStore = namespace('modal/LoadingModal');
+const System = namespace('System');
+const Modal = {
+  UploadModal: namespace('Modal/UploadModal'),
+  LoadingModal: namespace('Modal/LoadingModal')
+};
 
 @Component({
   components: {
@@ -29,14 +32,20 @@ const LoadingModalStore = namespace('modal/LoadingModal');
   }
 })
 export default class App extends Vue {
-  @SystemStore.State((state: SystemTypes.System.State) => state.user)
-  user: SystemTypes.System.Model.User;
+  @System.State((state: CommonTypes.System.State) => state.user)
+  user: CommonTypes.System.Model.User;
 
-  @SystemStore.Action('getUser')
+  @System.Action('getUser')
   getUser: () => void;
 
+  @Modal.LoadingModal.Mutation('show')
+  showLoadingModal: () => void;
+
+  @Modal.LoadingModal.Mutation('hide')
+  hideLoadingModal: () => void;
+
   @Watch('user')
-  userChangeHandler(user: SystemTypes.System.Model.User) {
+  userChangeHandler(user: CommonTypes.System.Model.User) {
     if(!user) {
       this.$router.push(linkUrls.SIGNIN());
     }
@@ -45,7 +54,11 @@ export default class App extends Vue {
   isInitialized = false;
 
   async mounted() {
+    this.showLoadingModal();
+
     await this.getUser();
+    
+    this.hideLoadingModal();
     this.showApp();
   }
 
