@@ -18,8 +18,6 @@ import vSidebar from '../../components/vSidebar/index.vue';
 import vPageHeader from '../../components/vPageHeader/index.vue';
 import PageBody from '../../../common/AdminComponents/PageBody/index.vue';
 
-const SystemStore = namespace('System');
-
 @Component({
   components: {
     vPageHeader,

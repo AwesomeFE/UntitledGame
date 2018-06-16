@@ -33,7 +33,7 @@ import BoxBody from '../../../common/AdminComponents/BoxBody/index.vue';
 // import TableHeader from '../../../common/AdminComponents/TableHeader/index.vue';
 // import TableRow from '../../../common/AdminComponents/TableRow/index.vue';
 
-const System = namespace('system');
+const System = namespace('System');
 
 @Component({
   components: {

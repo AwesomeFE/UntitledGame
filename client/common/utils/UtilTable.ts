@@ -1,13 +1,11 @@
-namespace DataTable {
-  export interface HeaderItem {
-    key: string,
-    value: string
-  }
-}
+import { Utils } from './types.d';
+
+import Headers = Utils.DataTable.Headers;
+import Rows = Utils.DataTable.Rows;
 
 export const UtilTable = {
-  getTableRows(headers: Array<DataTable.HeaderItem>, data: Array<any>) {
-    const tableRows: Array<Array<DataTable.HeaderItem>> = [];
+  getTableRows(headers: Headers, data: Array<any>) {
+    const tableRows: Rows = [];
   
     for(const item of data) {
       const row = [];
@@ -20,7 +18,8 @@ export const UtilTable = {
           case 'action':
             break;
           default:
-            row.push({ key, value: item[key] })
+            row.push({ key, value: item[key] });
+            break;
         }
       }
   

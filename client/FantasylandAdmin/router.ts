@@ -7,26 +7,26 @@ export default () => new VueRouter({
       path: '/',
       component: () => import('./views/App/index.vue'),
       children: [
-        // {
-        //   name: 'home',
-        //   path: '/',
-        //   component: () => import('./views/Home/index.vue')
-        // },
+        {
+          name: 'home',
+          path: '/',
+          component: () => import('./views/Home/index.vue')
+        },
         {
           name: 'signin',
           path: 'signin',
           component: () => import('./views/Signin/index.vue')
         },
-        // {
-        //   name: 'user',
-        //   path: 'user',
-        //   component: () => import('./views/User/index.vue')
-        // },
-        // {
-        //   name: 'enemy',
-        //   path: 'enemy',
-        //   component: () => import('./views/EnemyList/index.vue')
-        // },
+        {
+          name: 'user',
+          path: 'user',
+          component: () => import('./views/User/index.vue')
+        },
+        {
+          name: 'enemy',
+          path: 'enemy',
+          component: () => import('./views/EnemyList/index.vue')
+        },
         // {
         //   name: 'enemyEdit',
         //   path: 'enemy/:enemyId',

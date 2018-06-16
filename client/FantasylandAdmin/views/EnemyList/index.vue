@@ -25,7 +25,7 @@ import { namespace } from 'vuex-class';
 import { Component } from 'vue-property-decorator';
 
 import { UtilTable } from '../../../common/utils';
-import { EnemyDataItem } from './index.d'
+import { CommonTypes } from '../../types';
 import { Enemy } from '../../services';
 import vSidebar from '../../components/vSidebar/index.vue';
 import vPageHeader from '../../components/vPageHeader/index.vue';
@@ -38,7 +38,7 @@ import TableHeader from '../../../common/AdminComponents/TableHeader/index.vue';
 import TableRow from '../../../common/AdminComponents/TableRow/index.vue';
 // import TableAction from '../../../common/AdminComponents/TableAction/index.vue';
 
-const System = namespace('system');
+const System = namespace('System');
 
 @Component({
   components: {
@@ -62,7 +62,7 @@ export default class EnemyList extends Vue {
     { key: 'action', title: '操作', sortable: false}
   ];
 
-  tableRows: Array<Array<EnemyDataItem>> = [];
+  tableRows: CommonTypes.Utils.DataTable.Rows = [];
 
   async fetchNextPage() {
     const { data = [] } = await Enemy.getEnemy();

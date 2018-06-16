@@ -63,8 +63,7 @@ import { namespace } from 'vuex-class';
 import { Validator } from 'vee-validate';
 import { Component, Inject } from 'vue-property-decorator';
 
-import { Types } from '../../types';
-import { CommonTypes } from '../../../common/types';
+import { Types, CommonTypes } from '../../types';
 import { Enemy } from '../../services';
 import vSidebar from '../../components/vSidebar/index.vue';
 import vPageHeader from '../../components/vPageHeader/index.vue';
