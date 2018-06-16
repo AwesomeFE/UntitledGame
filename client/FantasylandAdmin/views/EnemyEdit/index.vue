@@ -79,7 +79,9 @@ import UploadButton from '../../../common/AdminComponents/UploadButton/index.vue
 import { UtilFormData } from '../../../common/utils';
 import { modalTypes } from '../../constants';
 
-const System = namespace('system');
+const Modal = {
+  UploadModal: namespace('Modal/UploadModal')
+};
 
 @Component({
   components: {
@@ -99,8 +101,8 @@ const System = namespace('system');
 export default class EnemyEdit extends Vue {
   @Inject('$validator') $validator: Validator;
 
-  // @System.Mutation('showModal')
-  // showModal: (modal: CommonTypes.Store.System.Modal) => void;
+  @Modal.UploadModal.Mutation('show')
+  showUploadModal: () => void;
   
   isDisabled: boolean = false;
 
@@ -133,7 +135,7 @@ export default class EnemyEdit extends Vue {
     const isVailed = await this.$validator.validateAll();
 
     if(isVailed) {
-      // this.showModal({ type: modalTypes.UploadModal });
+      this.showUploadModal();
       // const { data } = await Enemy.createEnemy(this.formData);
 
       // console.log(data);

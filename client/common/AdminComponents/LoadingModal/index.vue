@@ -10,7 +10,7 @@ import { namespace } from 'vuex-class';
 import { Component } from 'vue-property-decorator';
 
 const Modal = {
-  UploadModal: namespace('Modal/LoadingModal')
+  LoadingModal: namespace('Modal/LoadingModal')
 };
 
 @Component({
@@ -19,7 +19,7 @@ const Modal = {
   }
 })
 export default class LoadingModal extends Vue {
-  @Modal.UploadModal.State(state => state.isShow)
+  @Modal.LoadingModal.State(state => state.isShow)
   isShow: boolean;
 }
 </script>

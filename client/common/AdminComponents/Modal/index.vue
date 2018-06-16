@@ -22,7 +22,6 @@ export default class Modal extends Vue {
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.6);
-  opacity: 0.8;
   top: 0;
   left: 0;
 

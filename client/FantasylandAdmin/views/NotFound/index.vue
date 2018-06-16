@@ -9,8 +9,6 @@ import Vue from 'vue';
 import { namespace } from 'vuex-class';
 import { Component } from 'vue-property-decorator';
 
-const System = namespace('system');
-
 @Component
 export default class NotFound extends Vue {
 }

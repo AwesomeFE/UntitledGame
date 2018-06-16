@@ -1,5 +1,5 @@
 <template>
-  <Modal class="upload-modal" v-show="false">
+  <Modal class="upload-modal" v-show="isShow">
     <ModalHeader>{{$t('title')}}</ModalHeader>
     <ModalBody>
 
@@ -15,20 +15,20 @@ import Vue from 'vue';
 import { namespace } from 'vuex-class';
 import { Component } from 'vue-property-decorator';
 
-import Modal from '../Modal/index.vue';
-import ModalBody from '../ModalBody/index.vue';
-import ModalHeader from '../ModalHeader/index.vue';
-
-const System = namespace('system');
+const Modal = {
+  UploadModal: namespace('Modal/UploadModal')
+};
 
 @Component({
   components: {
-    Modal,
-    ModalBody,
-    ModalHeader
+    Modal: () => import('../Modal/index.vue'),
+    ModalBody: () => import('../ModalBody/index.vue'),
+    ModalHeader: () => import('../ModalHeader/index.vue')
   }
 })
 export default class UploadModal extends Vue {
+  @Modal.UploadModal.State('isShow')
+  isShow: boolean;
 }
 </script>
 
