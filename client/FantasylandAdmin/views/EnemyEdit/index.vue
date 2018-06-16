@@ -103,6 +103,9 @@ export default class EnemyEdit extends Vue {
 
   @Modal.UploadModal.Mutation('show')
   showUploadModal: () => void;
+
+  @Modal.UploadModal.Action('uploadFiles')
+  uploadFiles: (payload: Array<FormData>) => Promise<void>;
   
   isDisabled: boolean = false;
 
@@ -136,6 +139,7 @@ export default class EnemyEdit extends Vue {
 
     if(isVailed) {
       this.showUploadModal();
+      // await this.uploadFiles();
       // const { data } = await Enemy.createEnemy(this.formData);
 
       // console.log(data);

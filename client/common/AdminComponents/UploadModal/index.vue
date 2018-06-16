@@ -2,7 +2,7 @@
   <Modal class="upload-modal" v-show="isShow">
     <ModalHeader>{{$t('title')}}</ModalHeader>
     <ModalBody>
-
+      
     </ModalBody>
     <!-- <ModalFooter>
 
@@ -14,6 +14,9 @@
 import Vue from 'vue';
 import { namespace } from 'vuex-class';
 import { Component } from 'vue-property-decorator';
+import * as ModalTypes from './store/types.d';
+
+import UploadFile = ModalTypes.UploadModal.Model.UploadFile;
 
 const Modal = {
   UploadModal: namespace('Modal/UploadModal')
@@ -29,6 +32,9 @@ const Modal = {
 export default class UploadModal extends Vue {
   @Modal.UploadModal.State('isShow')
   isShow: boolean;
+
+  @Modal.UploadModal.State('uploadFiles')
+  uploadFiles: Array<UploadFile>;
 }
 </script>
 
