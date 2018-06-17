@@ -24,7 +24,7 @@ class Server extends Application {
 
   useStaticResource() {
     this.app.use('/public', express.static(path.resolve('client/dist/Fantasyland')));
-    this.app.use('/uploads', express.static(path.resolve('uploads/Fantasyland')));
+    this.app.use('/uploads', express.static(path.resolve('uploads')));
   }
 
   useViewEngine() {
@@ -34,7 +34,7 @@ class Server extends Application {
 
   useRouter() {
     this.app.use(/^\/api/, ApiRoutes);
-    this.app.use(/^(?!\/api\/[\s\S]+)/, WebRoutes);
+    // this.app.use(/^(?!\/api\/[\s\S]+)/, WebRoutes);
   }
 }
 

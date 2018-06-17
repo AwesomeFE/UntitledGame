@@ -15,7 +15,7 @@ export default class NotFound extends Vue {
 </script>
 
 <style type="text/scss" lang="scss">
-.not-found {
+// .not-found {
 
-}
+// }
 </style>

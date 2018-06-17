@@ -13,4 +13,10 @@ export namespace Utils {
     type Headers = Array<Header>;
     type Rows = Array<Array<Row>>;
   }
+
+  namespace FormFile {
+    interface FieldFiles {
+      [key: string]: File
+    }
+  }
 }

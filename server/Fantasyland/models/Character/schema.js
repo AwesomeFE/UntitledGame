@@ -89,9 +89,8 @@ const CharacterSchema = new Schema({
     ref: 'buff'
   }],
   // 2d 角色模型贴图
-  '2Dstanding': {
-    type: Schema.Types.ObjectId,
-    ref: 'file'
+  standing2D: {
+    type: String
   }
 }, {
   timestamps: true,

@@ -27,10 +27,11 @@ export const apiUrls = {
     method: 'get',
     url: '/api/user/signout'
   }),
-  UPLOAD_FILE: (data: FormData) => ({
+  UPLOAD_FILE: (data: FormData, onUploadProgress: (e: ProgressEvent) => void) => ({
     method: 'post',
     url: '/api/file',
-    data
+    data,
+    onUploadProgress
   })
   // GET_PLAYERS: () => ({
   //   method: 'get',

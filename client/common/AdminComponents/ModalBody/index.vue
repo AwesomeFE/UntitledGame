@@ -18,5 +18,6 @@ export default class ModalBody extends Vue {
   padding: 15px;
   background: white;
   min-width: 600px;
+  max-height: 500px;
 }
 </style>

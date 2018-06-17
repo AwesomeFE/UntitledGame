@@ -76,7 +76,7 @@ import FormButton from '../../../common/AdminComponents/FormButton/index.vue';
 import Swiper from '../../../common/AdminComponents/Swiper/index.vue';
 import ImagePreview from '../../../common/AdminComponents/ImagePreview/index.vue';
 import UploadButton from '../../../common/AdminComponents/UploadButton/index.vue';
-import { UtilFormData } from '../../../common/utils';
+import { UtilFormFile } from '../../../common/utils';
 import { modalTypes } from '../../constants';
 
 const Modal = {
@@ -104,12 +104,15 @@ export default class EnemyEdit extends Vue {
   @Modal.UploadModal.Mutation('show')
   showUploadModal: () => void;
 
+  @Modal.UploadModal.Mutation('hide')
+  hideUploadModal: () => void;
+
   @Modal.UploadModal.Action('uploadFiles')
-  uploadFiles: (payload: Array<FormData>) => Promise<void>;
+  uploadFiles: (payload: Array<FormData>) => Array<any>;
   
   isDisabled: boolean = false;
 
-  formData: Types.FormData.Enemy = {
+  formData: any = {
     name: '',
     gender: 'male',
     XP: 0,
@@ -127,7 +130,7 @@ export default class EnemyEdit extends Vue {
     attack2D: ''
   };
 
-  fieldFiles: Types.FormData.FieldFile = {
+  fieldFiles: any = {
     standing2D: null,
     attack2D: null
   };
@@ -135,17 +138,22 @@ export default class EnemyEdit extends Vue {
   async submit() {
     this.disableForm();
 
-    const isVailed = await this.$validator.validateAll();
+    if(await this.$validator.validateAll()) {
+      const fileArray = UtilFormFile.getFormDatasFromFieldFiles(this.fieldFiles, 'enemy');
 
-    if(isVailed) {
       this.showUploadModal();
-      // await this.uploadFiles();
-      // const { data } = await Enemy.createEnemy(this.formData);
+      const results = await this.uploadFiles(fileArray);
 
-      // console.log(data);
+      for(const { data } of results) {
+        for(const fieldName in this.fieldFiles) {
+          this.formData[fieldName] = data;
+        }
+      }
+
+      const { data } = await Enemy.createEnemy(this.formData);
+
+      this.hideUploadModal();
     } else {
-
-
       this.enableForm();
     }
   }

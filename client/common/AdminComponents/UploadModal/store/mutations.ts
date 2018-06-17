@@ -1,7 +1,7 @@
 import { UploadModal } from './types.d';
 
 import State = UploadModal.State;
-import Payload = UploadModal.Payload.UploadFile;
+import Payload = UploadModal.Payload;
 
 export const mutations = {
   show(state: State) {
@@ -10,15 +10,17 @@ export const mutations = {
   hide(state: State) {
     state.isShow = false;
   },
-  addUploadFile(state: State, payload: Payload) {
+  addUploadFile(state: State, payload: Payload.UploadFile) {
     state.uploadFiles.push(payload);
   },
-  updateProgress(state: State, payload: Payload) {
-    const uploadFile = state.uploadFiles.find(uploadFile => uploadFile.id === payload.id);
+  updateProgress(state: State, payload: Payload.UploadFile) {
+    const uploadFile = state.uploadFiles.find(
+      uploadFile => uploadFile.name === payload.name && uploadFile.type === payload.type
+    );
 
     uploadFile.status = payload.status;
   },
-  finishUpload(state: State, payload: Payload) {
+  finishUpload(state: State) {
     state.uploadFiles = state.uploadFiles.map(uploadFile => {
       
       uploadFile.status = 100;

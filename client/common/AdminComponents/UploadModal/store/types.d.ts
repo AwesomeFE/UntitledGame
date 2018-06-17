@@ -3,9 +3,8 @@ import { Commit } from 'vuex';
 export namespace UploadModal {
   namespace Model {
     interface UploadFile {
-      id: string;
+      type: string;
       name: string;
-      field: string;
       status: number;
     }
   }

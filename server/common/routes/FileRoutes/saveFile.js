@@ -1,17 +1,10 @@
 import multer from 'multer';
 import { File } from '../../models';
 import { messages } from '../../constants';
-// import { removeFieldsFromProjection } from '../../utils/dataFormat';
 
 const upload = multer({ dest: 'uploads/Fantasyland/' });
 
 class SaveFile {
-  // required = {
-  //   body: [
-  //     'fileId'
-  //   ]
-  // };
-
   middleware = upload.single('file');
 
   constructor() {
@@ -19,17 +12,15 @@ class SaveFile {
     this.handler = this.handler.bind(this);
   }
 
-  validate(req, res) {}
+  async validate(req, res) {}
 
   async handler(req, res) {
-    const { user, body } = req;
+    const { user, body, file } = req;
     const userId = user._id;
 
-    console.log(body);
+    const fileInfo = await File.create({ user: userId, ...file });
 
-    // const fileInfo = await File.findOne({ user: userId, _id: fileId });
-
-    res.json(messages.REQUEST_SUCCESS());
+    res.json(messages.REQUEST_SUCCESS(fileInfo.path));
   }
 }
 
