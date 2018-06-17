@@ -17,7 +17,7 @@
             remember me
           </div>
           <div class="right">
-            <FormButton class="btn-primary":disabled="isDisabled"@click="submit">{{$t('signin')}}</FormButton>
+            <SmartButton class="btn-primary":disabled="isDisabled"@click="submit">{{$t('signin')}}</SmartButton>
           </div>
           <div class="clear-fix"></div>
         </div>
@@ -32,7 +32,7 @@ import { namespace } from 'vuex-class';
 import { Component } from 'vue-property-decorator';
 import { messageTypes, linkUrls } from '../../constants';
 import FormInput from '../../../common/AdminComponents/FormInput/index.vue';
-import FormButton from '../../../common/AdminComponents/FormButton/index.vue';
+import SmartButton from '../../../common/AdminComponents/SmartButton/index.vue';
 import { CommonTypes } from '../../types';
 
 const System = namespace('System');
@@ -40,7 +40,7 @@ const System = namespace('System');
 @Component({
   components: {
     FormInput,
-    FormButton
+    SmartButton
   }
 })
 export default class Signin extends Vue {

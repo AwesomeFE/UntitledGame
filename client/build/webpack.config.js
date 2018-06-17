@@ -83,7 +83,8 @@ export default {
         test: /\.(woff2|woff|eot|svg|ttf)(\?v=\d+\.\d+\.\d+)?$/,
         use: loaders.fontLoader(options),
         include: [
-          path.resolve(`client/${appName}/assets`)
+          path.resolve(`client/${appName}/assets`),
+          path.resolve(`node_modules/font-awesome`)
         ]
       },
       {

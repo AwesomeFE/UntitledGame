@@ -1,19 +1,19 @@
 <template>
-  <FormButton class="upload-button btn-primary">
+  <SmartButton class="upload-button btn-primary">
     <slot></slot>
     <input class="file-input" type="file" :name="name" @change="$emit('input', $event.target.files[0])" />
-  </FormButton>
+  </SmartButton>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import { Component, Prop, Emit } from 'vue-property-decorator';
 
-import FormButton from '../FormButton/index.vue';
+import SmartButton from '../SmartButton/index.vue';
 
 @Component({
   components: {
-    FormButton
+    SmartButton
   }
 })
 export default class UploadButton extends Vue {

@@ -8,9 +8,11 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 
+import { TableHeaders } from './types.d';
+
 @Component
 export default class TableHeader extends Vue {
-  @Prop({required: true}) headers: Array<string>;
+  @Prop({required: true}) headers: TableHeaders;
 }
 </script>
 

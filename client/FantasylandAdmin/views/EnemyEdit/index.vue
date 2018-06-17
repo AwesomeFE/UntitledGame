@@ -8,8 +8,8 @@
         <div class="form-actions">
           <div class="left"></div>
           <div class="right">
-            <FormButton class="btn-primary">{{$t('cancel')}}</FormButton>
-            <FormButton class="btn-primary" @click="submit">{{$t('submit')}}</FormButton>
+            <SmartButton class="btn-primary">{{$t('cancel')}}</SmartButton>
+            <SmartButton class="btn-primary" @click="submit" :disabled="isDisabled">{{$t('submit')}}</SmartButton>
           </div>
           <div class="clear-fix"></div>
         </div>
@@ -18,24 +18,24 @@
           <BoxHeader>{{$t('enemyBisic')}}</BoxHeader>
           <BoxBody>
             <div class="col-8">
-              <FormInput type="text" name="name" validate="required" v-model="formData.name" :label="$t('name')" :disabled="isDisabled" />
-              <FormInput type="text" name="gender" validate="required" v-model="formData.gender" :label="$t('gender')" :disabled="isDisabled" />
-              <FormInput type="text" name="XP" validate="required" v-model="formData.XP" :label="$t('XP')" :disabled="isDisabled" />
-              <FormInput type="text" name="HP" validate="required" v-model="formData.HP" :label="$t('HP')" :disabled="isDisabled" />
-              <FormInput type="text" name="MP" validate="required" v-model="formData.MP" :label="$t('MP')" :disabled="isDisabled" />
+              <FormInput type="text" name="name" validate="required" v-model="formJson.name" :label="$t('name')" :disabled="isDisabled" />
+              <FormInput type="text" name="gender" validate="required" v-model="formJson.gender" :label="$t('gender')" :disabled="isDisabled" />
+              <FormInput type="text" name="XP" validate="required" v-model="formJson.XP" :label="$t('XP')" :disabled="isDisabled" />
+              <FormInput type="text" name="HP" validate="required" v-model="formJson.HP" :label="$t('HP')" :disabled="isDisabled" />
+              <FormInput type="text" name="MP" validate="required" v-model="formJson.MP" :label="$t('MP')" :disabled="isDisabled" />
             </div>
 
             <div class="col-4 image-gallery">
               <Swiper>
                 <div class="swiper-slide" v-for="(file, field) in fieldFiles" :key="field">
-                  <ImagePreview :src="formData[field]" :file="fieldFiles[field]" />
+                  <ImagePreview :src="formJson[field]" :file="fieldFiles[field]" />
                   <UploadButton :name="field" v-model="fieldFiles[field]">{{$t('upload')}}</UploadButton>
                 </div>
               </Swiper>
             </div>
 
             <div class="col-12">
-              <FormInput type="text" name="description" validate="required" v-model="formData.description" :label="$t('description')" :disabled="isDisabled" />
+              <FormInput type="text" name="description" validate="required" v-model="formJson.description" :label="$t('description')" :disabled="isDisabled" />
             </div>
             <div class="clear-fix"></div>
           </BoxBody>
@@ -44,12 +44,12 @@
         <Box>
           <BoxHeader>{{$t('enemyAbility')}}</BoxHeader>
           <BoxBody>
-            <FormInput type="text" name="STR" validate="required" v-model="formData.ability.STR" :label="$t('STR')" :disabled="isDisabled" />
-            <FormInput type="text" name="AGI" validate="required" v-model="formData.ability.AGI" :label="$t('AGI')" :disabled="isDisabled" />
-            <FormInput type="text" name="VIT" validate="required" v-model="formData.ability.VIT" :label="$t('VIT')" :disabled="isDisabled" />
-            <FormInput type="text" name="INT" validate="required" v-model="formData.ability.INT" :label="$t('INT')" :disabled="isDisabled" />
-            <FormInput type="text" name="DEX" validate="required" v-model="formData.ability.DEX" :label="$t('DEX')" :disabled="isDisabled" />
-            <FormInput type="text" name="LUK" validate="required" v-model="formData.ability.LUK" :label="$t('LUK')" :disabled="isDisabled" />
+            <FormInput type="text" name="STR" validate="required" v-model="formJson.ability.STR" :label="$t('STR')" :disabled="isDisabled" />
+            <FormInput type="text" name="AGI" validate="required" v-model="formJson.ability.AGI" :label="$t('AGI')" :disabled="isDisabled" />
+            <FormInput type="text" name="VIT" validate="required" v-model="formJson.ability.VIT" :label="$t('VIT')" :disabled="isDisabled" />
+            <FormInput type="text" name="INT" validate="required" v-model="formJson.ability.INT" :label="$t('INT')" :disabled="isDisabled" />
+            <FormInput type="text" name="DEX" validate="required" v-model="formJson.ability.DEX" :label="$t('DEX')" :disabled="isDisabled" />
+            <FormInput type="text" name="LUK" validate="required" v-model="formJson.ability.LUK" :label="$t('LUK')" :disabled="isDisabled" />
           </BoxBody>
         </Box>
       </form>
@@ -72,12 +72,12 @@ import Box from '../../../common/AdminComponents/Box/index.vue';
 import BoxBody from '../../../common/AdminComponents/BoxBody/index.vue';
 import BoxHeader from '../../../common/AdminComponents/BoxHeader/index.vue';
 import FormInput from '../../../common/AdminComponents/FormInput/index.vue';
-import FormButton from '../../../common/AdminComponents/FormButton/index.vue';
+import SmartButton from '../../../common/AdminComponents/SmartButton/index.vue';
 import Swiper from '../../../common/AdminComponents/Swiper/index.vue';
 import ImagePreview from '../../../common/AdminComponents/ImagePreview/index.vue';
 import UploadButton from '../../../common/AdminComponents/UploadButton/index.vue';
 import { UtilFormFile } from '../../../common/utils';
-import { modalTypes } from '../../constants';
+import { modalTypes, linkUrls } from '../../constants';
 
 const Modal = {
   UploadModal: namespace('Modal/UploadModal')
@@ -92,7 +92,7 @@ const Modal = {
     BoxBody,
     BoxHeader,
     FormInput,
-    FormButton,
+    SmartButton,
     Swiper,
     ImagePreview,
     UploadButton,
@@ -112,7 +112,7 @@ export default class EnemyEdit extends Vue {
   
   isDisabled: boolean = false;
 
-  formData: any = {
+  formJson: any = {
     name: '',
     gender: 'male',
     XP: 0,
@@ -139,22 +139,27 @@ export default class EnemyEdit extends Vue {
     this.disableForm();
 
     if(await this.$validator.validateAll()) {
-      const fileArray = UtilFormFile.getFormDatasFromFieldFiles(this.fieldFiles, 'enemy');
+      const fileArray = UtilFormFile.getFileArrayFromFieldFiles(this.fieldFiles, 'enemy');
 
       this.showUploadModal();
       const results = await this.uploadFiles(fileArray);
-
-      for(const { data } of results) {
-        for(const fieldName in this.fieldFiles) {
-          this.formData[fieldName] = data;
-        }
-      }
-
-      const { data } = await Enemy.createEnemy(this.formData);
+      this.setUrl2FormJson(results);
+      
+      await Enemy.createEnemy(this.formJson);
 
       this.hideUploadModal();
+
+      this.$router.push(linkUrls.ENEMY_LIST());
     } else {
       this.enableForm();
+    }
+  }
+
+  setUrl2FormJson(results: Array<any>) {
+    for(const { data } of results) {
+      for(const fieldName in this.fieldFiles) {
+        this.formJson[fieldName] = data;
+      }
     }
   }
 

@@ -1,6 +1,6 @@
 /// <reference types="node" />
 
-import { RawLocation } from 'vue-router'
+import { RawLocation } from 'vue-router';
 
 export const linkUrls = {
   BASE_URL: () => {
@@ -14,5 +14,14 @@ export const linkUrls = {
   }),
   SIGNIN: (): RawLocation => ({
     path: '/signin'
+  }),
+  ENEMY_LIST: (): RawLocation => ({
+    path: '/enemy'
+  }),
+  ENEMY_EDIT: (enemyId: string): RawLocation => ({
+    path: '/enemy/:enemyId',
+    params: {
+      enemyId
+    }
   })
 };

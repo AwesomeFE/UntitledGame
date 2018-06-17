@@ -9,8 +9,13 @@
         <BoxBody>
           <DataTable :isShowPaginaton="false">
             <TableHeader :headers="headers"></TableHeader>
-            <TableRow v-for="tableRow in tableRows" :key="tableRow.no" :row="tableRow">
-              <!-- <TableAction></TableAction> -->
+            <TableRow v-for="row in rows" :key="row._id" :row="row" :headers="headers">
+              <SmartButton class="btn-primary" :to="linkUrls.ENEMY_EDIT(row._id)">
+                <i class="fa fa-pencil"></i>
+              </SmartButton>
+              <SmartButton class="btn-primary">
+                <i class="fa fa-trash"></i>
+              </SmartButton>
             </TableRow>
           </DataTable>
         </BoxBody>
@@ -24,8 +29,9 @@ import Vue from 'vue';
 import { namespace } from 'vuex-class';
 import { Component } from 'vue-property-decorator';
 
-import { UtilTable } from '../../../common/utils';
+import { linkUrls } from '../../constants'
 import { CommonTypes } from '../../types';
+import { EnemyItem, EnemyArray } from './types.d';
 import { Enemy } from '../../services';
 import vSidebar from '../../components/vSidebar/index.vue';
 import vPageHeader from '../../components/vPageHeader/index.vue';
@@ -36,7 +42,7 @@ import BoxBody from '../../../common/AdminComponents/BoxBody/index.vue';
 import DataTable from '../../../common/AdminComponents/DataTable/index.vue';
 import TableHeader from '../../../common/AdminComponents/TableHeader/index.vue';
 import TableRow from '../../../common/AdminComponents/TableRow/index.vue';
-// import TableAction from '../../../common/AdminComponents/TableAction/index.vue';
+import SmartButton from '../../../common/AdminComponents/SmartButton/index.vue';
 
 const System = namespace('System');
 
@@ -51,24 +57,27 @@ const System = namespace('System');
     DataTable,
     TableHeader,
     TableRow,
-    // TableAction
+    SmartButton
   }
 })
 export default class EnemyList extends Vue {
   headers = [
-    { key: 'no', title: '#' },
+    { key: 'index', title: '#' },
     { key: '_id', title: 'id' },
     { key: 'name', title: '名称' },
     { key: 'action', title: '操作', sortable: false}
   ];
 
-  tableRows: CommonTypes.Utils.DataTable.Rows = [];
+  rows: EnemyArray = [];
+
+  linkUrls = linkUrls;
 
   async fetchNextPage() {
-    const { data = [] } = await Enemy.getEnemy();
-    const newTableRows = UtilTable.getTableRows(this.headers, data);
+    const data: EnemyArray = (await Enemy.getEnemy()).data;
 
-    newTableRows.forEach((tableRow) => this.tableRows.push(tableRow));
+    data.forEach((item: EnemyItem, index) => item.index = ++index);
+
+    this.rows = data;
   }
 
   async mounted() {

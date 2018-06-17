@@ -1,7 +1,12 @@
 <template>
   <tr class="table-row">
-    <td v-for="data in row" :key="data.key">{{data.value}}</td>
-    <td v-if="isShowActions">
+    <td v-for="header in headers" v-if="header.key === 'no'">
+      {{0}}
+    </td>
+    <td v-else-if="header.key !== 'action'" :key="header.key">
+      {{row[header.key]}}
+    </td>
+    <td v-else>
       <slot></slot>
     </td>
   </tr>
@@ -11,15 +16,12 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 
-import { rowData } from './index.d';
+import { TableHeaders, TableRow } from './index.d';
 
 @Component
 export default class TableHeader extends Vue {
-  @Prop({required: true}) row: Array<rowData>;
-
-  get isShowActions() {
-    return !!this.$slots.default;
-  }
+  @Prop({required: true}) headers: TableHeaders;
+  @Prop({required: true}) row: Array<TableRow>;
 }
 </script>
 
