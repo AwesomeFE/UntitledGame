@@ -1,1 +1,0 @@
-export { linkUrls } from '../../common/constants'
