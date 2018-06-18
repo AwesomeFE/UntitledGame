@@ -4,6 +4,7 @@ import * as BuffRoutes from './BuffRoutes';
 import * as EnemyRoutes from './EnemyRoutes';
 import * as PlayerRoutes from './PlayerRoutes';
 import * as DungeonRoutes from './DungeonRoutes';
+import * as ConsumableRoutes from './ConsumableRoutes';
 import middlewares from './middlewares';
 
 export default [
@@ -39,6 +40,12 @@ export default [
   { path: '/buff', method: 'get', ...BuffRoutes.getAll },
   { path: '/buff/:buffId', method: 'get', ...BuffRoutes.getById },
   { path: '/buff/:buffId', method: 'delete', ...BuffRoutes.remove },
+
+  { path: '/consumable', method: 'post', ...ConsumableRoutes.create },
+  { path: '/consumable', method: 'patch', ...ConsumableRoutes.update },
+  { path: '/consumable', method: 'get', ...ConsumableRoutes.getAll },
+  { path: '/consumable/:consumableId', method: 'get', ...ConsumableRoutes.getById },
+  { path: '/consumable/:consumableId', method: 'delete', ...ConsumableRoutes.remove },
 
   { path: '/dungeon-chapter', method: 'post', ...DungeonRoutes.createDungeonChapter },
 ];

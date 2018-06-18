@@ -1,16 +1,16 @@
 <template>
-  <div class="enemy-list">
+  <div class="consumable-list">
     <vPageHeader></vPageHeader>
     <vSidebar></vSidebar>
     
     <PageBody>
       <Box>
-        <BoxHeader>{{$t('enemyList')}}</BoxHeader>
+        <BoxHeader>{{$t('consumableList')}}</BoxHeader>
         <BoxBody>
           <DataTable :isShowPaginaton="false">
             <TableHeader :headers="headers"></TableHeader>
             <TableRow v-for="row in rows" :key="row._id" :row="row" :headers="headers">
-              <SmartButton class="btn-primary" :to="linkUrls.ENEMY_EDIT(row._id)">
+              <SmartButton class="btn-primary" :to="linkUrls.BUFF_EDIT(row._id)">
                 <i class="fa fa-pencil"></i>
               </SmartButton>
               <SmartButton class="btn-primary">
@@ -30,9 +30,8 @@ import { namespace } from 'vuex-class';
 import { Component } from 'vue-property-decorator';
 
 import { linkUrls } from '../../constants'
-import { CommonTypes } from '../../types';
-import { EnemyItem, EnemyArray } from './types.d';
-import { Enemy } from '../../services';
+import { CommonTypes, View } from '../../types';
+import { Consumable } from '../../services';
 import vSidebar from '../../components/vSidebar/index.vue';
 import vPageHeader from '../../components/vPageHeader/index.vue';
 import PageBody from '../../../common/AdminComponents/PageBody/index.vue';
@@ -60,7 +59,7 @@ const System = namespace('System');
     SmartButton
   }
 })
-export default class EnemyList extends Vue {
+export default class BuffList extends Vue {
   headers = [
     { key: 'index', title: '#' },
     { key: '_id', title: 'id' },
@@ -68,14 +67,14 @@ export default class EnemyList extends Vue {
     { key: 'action', title: '操作', sortable: false}
   ];
 
-  rows: EnemyArray = [];
+  rows: View.ViewList = [];
 
   linkUrls = linkUrls;
 
   async fetchNextPage() {
-    const data: EnemyArray = (await Enemy.getEnemy()).data;
+    const data: View.ViewList = (await Consumable.getConsumable()).data;
 
-    data.forEach((item: EnemyItem, index) => item.index = ++index);
+    data.forEach((item: View.ListItem, index) => item.index = ++index);
 
     this.rows = data;
   }
@@ -87,7 +86,4 @@ export default class EnemyList extends Vue {
 </script>
 
 <style type="text/scss" lang="scss">
-// .enemy-list {
-
-// }
 </style>

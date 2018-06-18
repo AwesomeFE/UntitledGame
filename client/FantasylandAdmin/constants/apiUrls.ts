@@ -5,9 +5,9 @@ export const apiUrls = {
     method: 'get',
     url: '/api/enemy'
   }),
-  GET_ENEMY_BY_ID: (enemyId: string) => ({
+  GET_ENEMY_BY_ID: (id: string) => ({
     method: 'get',
-    url: `/api/enemy/${enemyId}`
+    url: `/api/enemy/${id}`
   }),
   CREATE_ENEMY: (data: Models.Enemy.Model) => ({
     method: 'post',
@@ -23,9 +23,9 @@ export const apiUrls = {
     method: 'get',
     url: '/api/buff'
   }),
-  GET_BUFF_BY_ID: (buffId: string) => ({
+  GET_BUFF_BY_ID: (id: string) => ({
     method: 'get',
-    url: `/api/buff/${buffId}`
+    url: `/api/buff/${id}`
   }),
   CREATE_BUFF: (data: Models.Buff.Model) => ({
     method: 'post',
@@ -35,6 +35,24 @@ export const apiUrls = {
   UPDATE_BUFF: (data: Models.Buff.Model) => ({
     method: 'patch',
     url: `/api/buff`,
+    data
+  }),
+  GET_CONSUMABLE: () => ({
+    method: 'get',
+    url: '/api/consumable'
+  }),
+  GET_CONSUMABLE_BY_ID: (id: string) => ({
+    method: 'get',
+    url: `/api/consumable/${id}`
+  }),
+  CREATE_CONSUMABLE: (data: Models.Consumable.Model) => ({
+    method: 'post',
+    url: `/api/consumable`,
+    data
+  }),
+  UPDATE_CONSUMABLE: (data: Models.Consumable.Model) => ({
+    method: 'patch',
+    url: `/api/consumable`,
     data
   }),
 };

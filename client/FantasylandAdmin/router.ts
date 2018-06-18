@@ -53,6 +53,21 @@ export default () => new VueRouter({
           component: () => import('./views/BuffEdit/index.vue')
         },
         {
+          name: 'consumableList',
+          path: 'consumable',
+          component: () => import('./views/ConsumableList/index.vue')
+        },
+        {
+          name: 'consumableCreate',
+          path: 'consumable/create',
+          component: () => import('./views/ConsumableEdit/index.vue')
+        },
+        {
+          name: 'consumableEdit',
+          path: 'consumable/:consumableId',
+          component: () => import('./views/ConsumableEdit/index.vue')
+        },
+        {
           path: '*',
           component: () => import('./views/NotFound/index.vue')
         }

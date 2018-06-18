@@ -30,8 +30,7 @@ import { namespace } from 'vuex-class';
 import { Component } from 'vue-property-decorator';
 
 import { linkUrls } from '../../constants'
-import { CommonTypes } from '../../types';
-import { BuffItem, BuffArray } from './types.d';
+import { CommonTypes, View } from '../../types';
 import { Buff } from '../../services';
 import vSidebar from '../../components/vSidebar/index.vue';
 import vPageHeader from '../../components/vPageHeader/index.vue';
@@ -68,14 +67,14 @@ export default class BuffList extends Vue {
     { key: 'action', title: '操作', sortable: false}
   ];
 
-  rows: BuffArray = [];
+  rows: View.ViewList = [];
 
   linkUrls = linkUrls;
 
   async fetchNextPage() {
-    const data: BuffArray = (await Buff.getBuff()).data;
+    const data: View.ViewList = (await Buff.getBuff()).data;
 
-    data.forEach((item: BuffItem, index) => item.index = ++index);
+    data.forEach((item: View.ListItem, index) => item.index = ++index);
 
     this.rows = data;
   }

@@ -30,8 +30,7 @@ import { namespace } from 'vuex-class';
 import { Component } from 'vue-property-decorator';
 
 import { linkUrls } from '../../constants'
-import { CommonTypes } from '../../types';
-import { EnemyItem, EnemyArray } from './types.d';
+import { CommonTypes, View } from '../../types';
 import { Enemy } from '../../services';
 import vSidebar from '../../components/vSidebar/index.vue';
 import vPageHeader from '../../components/vPageHeader/index.vue';
@@ -68,14 +67,14 @@ export default class EnemyList extends Vue {
     { key: 'action', title: '操作', sortable: false}
   ];
 
-  rows: EnemyArray = [];
+  rows: View.ViewList = [];
 
   linkUrls = linkUrls;
 
   async fetchNextPage() {
-    const data: EnemyArray = (await Enemy.getEnemy()).data;
+    const data: View.ViewList = (await Enemy.getEnemy()).data;
 
-    data.forEach((item: EnemyItem, index) => item.index = ++index);
+    data.forEach((item: View.ListItem, index) => item.index = ++index);
 
     this.rows = data;
   }

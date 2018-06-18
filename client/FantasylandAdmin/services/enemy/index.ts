@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import EnemyTypes from './types.d';
+import Types from './types.d';
 import { apiUrls } from '../../constants';
 
 class EnemyService {
@@ -7,17 +7,17 @@ class EnemyService {
     return axios(apiUrls.GET_ENEMY());
   }
 
-  getEnemyById(enemyId: string): Promise<AxiosResponse> {
-    return axios(apiUrls.GET_ENEMY_BY_ID(enemyId));
+  getEnemyById(id: string): Promise<AxiosResponse> {
+    return axios(apiUrls.GET_ENEMY_BY_ID(id));
   }
 
-  createEnemy(enemyData: EnemyTypes.Model): Promise<AxiosResponse> {
-    delete enemyData._id;
-    return axios(apiUrls.CREATE_ENEMY(enemyData));
+  createEnemy(data: Types.Model): Promise<AxiosResponse> {
+    delete data._id;
+    return axios(apiUrls.CREATE_ENEMY(data));
   }
 
-  updateEnemy(enemyData: EnemyTypes.Model): Promise<AxiosResponse> {
-    return axios(apiUrls.UPDATE_ENEMY(enemyData));
+  updateEnemy(data: Types.Model): Promise<AxiosResponse> {
+    return axios(apiUrls.UPDATE_ENEMY(data));
   }
 }
 

@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import BuffTypes from './types.d';
+import Types from './types.d';
 import { apiUrls } from '../../constants';
 
 class Service {
@@ -7,17 +7,17 @@ class Service {
     return axios(apiUrls.GET_BUFF());
   }
 
-  getBuffById(enemyId: string): Promise<AxiosResponse> {
-    return axios(apiUrls.GET_BUFF_BY_ID(enemyId));
+  getBuffById(id: string): Promise<AxiosResponse> {
+    return axios(apiUrls.GET_BUFF_BY_ID(id));
   }
 
-  createBuff(enemyData: BuffTypes.Model): Promise<AxiosResponse> {
-    delete enemyData._id;
-    return axios(apiUrls.CREATE_BUFF(enemyData));
+  createBuff(data: Types.Model): Promise<AxiosResponse> {
+    delete data._id;
+    return axios(apiUrls.CREATE_BUFF(data));
   }
 
-  updateBuff(enemyData: BuffTypes.Model): Promise<AxiosResponse> {
-    return axios(apiUrls.UPDATE_BUFF(enemyData));
+  updateBuff(data: Types.Model): Promise<AxiosResponse> {
+    return axios(apiUrls.UPDATE_BUFF(data));
   }
 }
 
