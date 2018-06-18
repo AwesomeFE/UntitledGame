@@ -23,8 +23,8 @@ class Update {
   }
 
   removeUnusedFiles(oldDoc, newDoc) {
-    const oldResources = oldEnemy.resources;
-    const newResources = newEnemy.resources;
+    const oldResources = oldDoc.resources;
+    const newResources = newDoc.resources;
 
     for(const key in oldResources) {
       if(oldResources[key] !== newResources[key]) {
