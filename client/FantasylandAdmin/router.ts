@@ -23,7 +23,7 @@ export default () => new VueRouter({
           component: () => import('./views/User/index.vue')
         },
         {
-          name: 'enemy',
+          name: 'enemyList',
           path: 'enemy',
           component: () => import('./views/EnemyList/index.vue')
         },
@@ -36,6 +36,21 @@ export default () => new VueRouter({
           name: 'enemyEdit',
           path: 'enemy/:enemyId',
           component: () => import('./views/EnemyEdit/index.vue')
+        },
+        {
+          name: 'buffList',
+          path: 'buff',
+          component: () => import('./views/BuffList/index.vue')
+        },
+        {
+          name: 'buffCreate',
+          path: 'buff/create',
+          component: () => import('./views/BuffEdit/index.vue')
+        },
+        {
+          name: 'buffEdit',
+          path: 'buff/:buffId',
+          component: () => import('./views/BuffEdit/index.vue')
         },
         {
           path: '*',

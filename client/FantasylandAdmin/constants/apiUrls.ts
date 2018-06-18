@@ -19,4 +19,22 @@ export const apiUrls = {
     url: `/api/enemy`,
     data
   }),
+  GET_BUFF: () => ({
+    method: 'get',
+    url: '/api/buff'
+  }),
+  GET_BUFF_BY_ID: (buffId: string) => ({
+    method: 'get',
+    url: `/api/buff/${buffId}`
+  }),
+  CREATE_BUFF: (data: Models.Buff.Model) => ({
+    method: 'post',
+    url: `/api/buff`,
+    data
+  }),
+  UPDATE_BUFF: (data: Models.Buff.Model) => ({
+    method: 'patch',
+    url: `/api/buff`,
+    data
+  }),
 };

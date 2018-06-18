@@ -1,9 +1,9 @@
-import { Enemy } from '../../../models';
+import { Buff } from '../../../models';
 import { messages } from '../../../../common/constants';
 
-class CreateEnemy {
+class Remove {
   required = {
-    body: [ 'name', 'gender' ]
+    params: [ 'buffId' ]
   };
 
   constructor() {
@@ -14,10 +14,11 @@ class CreateEnemy {
   validate(req, res) {}
 
   async handler(req, res) {
-    const enemy = await Enemy.create(req.body);
+    const { buffId } = req.params;
 
-    res.json(messages.REQUEST_SUCCESS(enemy && enemy.toJSON()));
+    await Buff.findByIdAndRemove(buffId);
+    res.json(messages.REQUEST_SUCCESS());
   }
 }
 
-export const createEnemy = new CreateEnemy();
+export const remove = new Remove();

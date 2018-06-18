@@ -17,8 +17,11 @@ export default {
   enemyList: '敌人列表',
   enemyBisic: '敌人基础信息',
   enemyAbility: '敌人能力参数',
+  buffList: '状态列表',
+  buffBisic: '状态基础信息',
   USER_NOT_FOUND: '用户不存在',
   PASSWORD_INVALID: '密码不正确',
+
   name: '名称',
   gender: '性别',
   XP: '经验值',
@@ -30,6 +33,13 @@ export default {
   INT: '智力',
   DEX: '命中',
   LUK: '幸运',
+
+  tip: '状态简述',
+  recover: '状态恢复类型',
+  total: '恢复总量',
+  isIncrease: '是否增量',
+  maintain: '持续时间',
+  
   [messageTypes.PLEASE_SIGNIN]: '请登录您的账号',
   [messageTypes.FIELD_REQUIRED]: '请输入{fieldName}',
 };

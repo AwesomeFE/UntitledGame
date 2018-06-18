@@ -4,7 +4,7 @@ declare namespace Enemy {
     attack2D?: File;
   }
 
-  interface Resource {
+  interface Resources {
     standing2D: string;
     attack2D: string;
   }
@@ -27,7 +27,7 @@ declare namespace Enemy {
   }
 
   type ModelKeys = keyof Model;
-  type ResourceKeys = keyof Resource;
+  type ResourceKeys = keyof Resources;
 }
 
 export default Enemy;

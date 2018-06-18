@@ -1,9 +1,9 @@
 import { Enemy } from '../../../models';
 import { messages } from '../../../../common/constants';
 
-class GetEnemyById {
+class Create {
   required = {
-    params: [ 'enemyId' ]
+    body: [ 'name', 'gender' ]
   };
 
   constructor() {
@@ -14,12 +14,10 @@ class GetEnemyById {
   validate(req, res) {}
 
   async handler(req, res) {
-    const { enemyId } = req.params;
-    
-    const enemy = (await Enemy.findById(enemyId)).toJSON();
+    const enemy = await Enemy.create(req.body);
 
-    res.json(messages.REQUEST_SUCCESS(enemy));
+    res.json(messages.REQUEST_SUCCESS(enemy && enemy.toJSON()));
   }
 }
 
-export const getEnemyById = new GetEnemyById();
+export const create = new Create();

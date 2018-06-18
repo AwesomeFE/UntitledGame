@@ -1,5 +1,6 @@
 import * as UserRoutes from '../../../common/routes/UserRoutes';
 import * as FileRoutes from '../../../common/routes/FileRoutes';
+import * as BuffRoutes from './BuffRoutes';
 import * as EnemyRoutes from './EnemyRoutes';
 import * as PlayerRoutes from './PlayerRoutes';
 import * as DungeonRoutes from './DungeonRoutes';
@@ -27,10 +28,17 @@ export default [
 
   // middlewares.ensureAdmin,
   // { path: '/dungeon', method: 'get', ...DungeonChapterRoutes.getAllDungeonChapters },
-  { path: '/enemy', method: 'post', ...EnemyRoutes.createEnemy },
-  { path: '/enemy', method: 'patch', ...EnemyRoutes.updateEnemy },
-  { path: '/enemy', method: 'get', ...EnemyRoutes.getAllEnemy },
-  { path: '/enemy/:enemyId', method: 'get', ...EnemyRoutes.getEnemyById },
-  { path: '/enemy/:enemyId', method: 'delete', ...EnemyRoutes.deleteEnemy },
+  { path: '/enemy', method: 'post', ...EnemyRoutes.create },
+  { path: '/enemy', method: 'patch', ...EnemyRoutes.update },
+  { path: '/enemy', method: 'get', ...EnemyRoutes.getAll },
+  { path: '/enemy/:enemyId', method: 'get', ...EnemyRoutes.getById },
+  { path: '/enemy/:enemyId', method: 'delete', ...EnemyRoutes.delete },
+
+  { path: '/buff', method: 'post', ...BuffRoutes.create },
+  { path: '/buff', method: 'patch', ...BuffRoutes.update },
+  { path: '/buff', method: 'get', ...BuffRoutes.getAll },
+  { path: '/buff/:buffId', method: 'get', ...BuffRoutes.getById },
+  { path: '/buff/:buffId', method: 'delete', ...BuffRoutes.remove },
+
   { path: '/dungeon-chapter', method: 'post', ...DungeonRoutes.createDungeonChapter },
 ];

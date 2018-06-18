@@ -1,7 +1,7 @@
 import { Enemy, File } from '../../../models';
 import { messages } from '../../../../common/constants';
 
-class UpdateEnemy {
+class Update {
   required = {
     body: [ '_id' ]
   };
@@ -14,15 +14,15 @@ class UpdateEnemy {
   validate(req, res) {}
 
   async handler(req, res) {
-    const oldEnemy = await Enemy.findByIdAndUpdate(req.body._id, req.body);
-    const newEnemy = await Enemy.findById(req.body._id);
+    const oldDoc = await Enemy.findByIdAndUpdate(req.body._id, req.body);
+    const newDoc = await Enemy.findById(req.body._id);
 
-    this.removeUnusedFiles(oldEnemy, newEnemy);
+    this.removeUnusedFiles(oldDoc, newDoc);
 
     res.json(messages.REQUEST_SUCCESS());
   }
 
-  removeUnusedFiles(oldEnemy, newEnemy) {
+  removeUnusedFiles(oldDoc, newDoc) {
     const oldResources = oldEnemy.resources;
     const newResources = newEnemy.resources;
 
@@ -34,4 +34,4 @@ class UpdateEnemy {
   }
 }
 
-export const updateEnemy = new UpdateEnemy();
+export const update = new Update();

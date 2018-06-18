@@ -20,5 +20,11 @@ export const linkUrls = {
   }),
   ENEMY_EDIT: (enemyId: string): RawLocation => ({
     path: `/enemy/${enemyId}`
+  }),
+  BUFF_LIST: (): RawLocation => ({
+    path: '/buff'
+  }),
+  BUFF_EDIT: (buffId: string): RawLocation => ({
+    path: `/buff/${buffId}`
   })
 };

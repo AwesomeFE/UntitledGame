@@ -1,7 +1,7 @@
-import { Enemy } from '../../../models';
+import { Buff } from '../../../models';
 import { messages } from '../../../../common/constants';
 
-class GetAllEnemy {
+class GetAll {
   required = {};
 
   constructor() {
@@ -12,10 +12,10 @@ class GetAllEnemy {
   validate(req, res) {}
 
   async handler(req, res) {
-    const enemys = await Enemy.find().select('_id name');
+    const buff = await Buff.find().select('_id name');
 
-    res.json(messages.REQUEST_SUCCESS(enemys));
+    res.json(messages.REQUEST_SUCCESS(buff));
   }
 }
 
-export const getAllEnemy = new GetAllEnemy();
+export const getAll = new GetAll();

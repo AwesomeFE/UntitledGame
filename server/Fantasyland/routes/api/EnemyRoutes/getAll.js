@@ -1,10 +1,8 @@
 import { Enemy } from '../../../models';
 import { messages } from '../../../../common/constants';
 
-class DeleteEnemy {
-  required = {
-    params: [ 'enemyId' ]
-  };
+class GetAll {
+  required = {};
 
   constructor() {
     this.validate = this.validate.bind(this);
@@ -14,11 +12,10 @@ class DeleteEnemy {
   validate(req, res) {}
 
   async handler(req, res) {
-    const { enemyId } = req.params;
+    const enemys = await Enemy.find().select('_id name');
 
-    await Enemy.findByIdAndRemove(enemyId);
-    res.json(messages.REQUEST_SUCCESS());
+    res.json(messages.REQUEST_SUCCESS(enemys));
   }
 }
 
-export const deleteEnemy = new DeleteEnemy();
+export const getAll = new GetAll();

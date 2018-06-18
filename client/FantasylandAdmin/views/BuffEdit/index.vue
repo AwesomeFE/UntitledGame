@@ -1,5 +1,5 @@
 <template>
-  <div class="enemy-edit">
+  <div class="buff-edit">
     <vPageHeader></vPageHeader>
     <vSidebar></vSidebar>
     
@@ -15,14 +15,15 @@
         </div>
 
         <Box>
-          <BoxHeader>{{$t('enemyBisic')}}</BoxHeader>
+          <BoxHeader>{{$t('buffBisic')}}</BoxHeader>
           <BoxBody>
             <div class="col-8">
               <FormInput type="text" name="name" validate="required" v-model="formJson.name" :label="$t('name')" :disabled="isDisabled" />
-              <FormInput type="text" name="gender" validate="required" v-model="formJson.gender" :label="$t('gender')" :disabled="isDisabled" />
-              <FormInput type="text" name="XP" validate="required" v-model="formJson.XP" :label="$t('XP')" :disabled="isDisabled" />
-              <FormInput type="text" name="HP" validate="required" v-model="formJson.HP" :label="$t('HP')" :disabled="isDisabled" />
-              <FormInput type="text" name="MP" validate="required" v-model="formJson.MP" :label="$t('MP')" :disabled="isDisabled" />
+              <FormInput type="text" name="tip" validate="required" v-model="formJson.tip" :label="$t('tip')" :disabled="isDisabled" />
+              <FormInput type="text" name="recover" validate="required" v-model="formJson.recover" :label="$t('recover')" :disabled="isDisabled" />
+              <FormInput type="text" name="total" validate="required" v-model="formJson.total" :label="$t('total')" :disabled="isDisabled" />
+              <FormInput type="text" name="isIncrease" validate="required" v-model="formJson.isIncrease" :label="$t('isIncrease')" :disabled="isDisabled" />
+              <FormInput type="text" name="maintain" validate="required" v-model="formJson.maintain" :label="$t('maintain')" :disabled="isDisabled" />
             </div>
 
             <div class="col-4 image-gallery">
@@ -41,18 +42,6 @@
             <div class="clear-fix"></div>
           </BoxBody>
         </Box>
-
-        <Box>
-          <BoxHeader>{{$t('enemyAbility')}}</BoxHeader>
-          <BoxBody>
-            <FormInput type="text" name="STR" validate="required" v-model="formJson.STR" :label="$t('STR')" :disabled="isDisabled" />
-            <FormInput type="text" name="AGI" validate="required" v-model="formJson.AGI" :label="$t('AGI')" :disabled="isDisabled" />
-            <FormInput type="text" name="VIT" validate="required" v-model="formJson.VIT" :label="$t('VIT')" :disabled="isDisabled" />
-            <FormInput type="text" name="INT" validate="required" v-model="formJson.INT" :label="$t('INT')" :disabled="isDisabled" />
-            <FormInput type="text" name="DEX" validate="required" v-model="formJson.DEX" :label="$t('DEX')" :disabled="isDisabled" />
-            <FormInput type="text" name="LUK" validate="required" v-model="formJson.LUK" :label="$t('LUK')" :disabled="isDisabled" />
-          </BoxBody>
-        </Box>
       </form>
     </PageBody>
   </div>
@@ -65,7 +54,7 @@ import { Validator } from 'vee-validate';
 import { Component, Inject } from 'vue-property-decorator';
 
 import { Models, CommonTypes } from '../../types';
-import { Enemy } from '../../services';
+import { Buff } from '../../services';
 import vSidebar from '../../components/vSidebar/index.vue';
 import vPageHeader from '../../components/vPageHeader/index.vue';
 import PageBody from '../../../common/AdminComponents/PageBody/index.vue';
@@ -99,7 +88,7 @@ const Modal = {
     UploadButton,
   }
 })
-export default class EnemyEdit extends Vue {
+export default class BuffEdit extends Vue {
   @Inject('$validator') $validator: Validator;
 
   @Modal.UploadModal.Mutation('show')
@@ -113,38 +102,31 @@ export default class EnemyEdit extends Vue {
   
   isDisabled: boolean = false;
 
-  formJson: Models.Enemy.Model = {
+  formJson: Models.Buff.Model = {
     _id: '',
     name: '',
-    gender: 'male',
     description: '',
-    XP: 0,
-    HP: 1,
-    MP: 1,
-    STR: 1,
-    AGI: 1,
-    VIT: 1,
-    INT: 1,
-    DEX: 1,
-    LUK: 1,
+    tip: '',
+    recover: 'HP',
+    total: 1,
+    isIncrease: false,
+    maintain: 1000,
     resources: {
-      standing2D: '',
-      attack2D: ''
+      thumbnail: ''
     }
   };
 
   fieldFiles: CommonTypes.Utils.FormFile.FieldFiles = {
-    standing2D: null,
-    attack2D: null
+    thumbnail: null
   };
 
   async submit() {
-    const { enemyId } = this.$route.params;
+    const { buffId } = this.$route.params;
 
     this.disableForm();
 
     if(await this.$validator.validateAll()) {
-      const fileArray = UtilFormFile.getFileArrayFromFieldFiles(this.fieldFiles, 'enemy');
+      const fileArray = UtilFormFile.getFileArrayFromFieldFiles(this.fieldFiles, 'buff');
 
       if(fileArray.length) {
         this.showUploadModal();
@@ -152,15 +134,15 @@ export default class EnemyEdit extends Vue {
         this.setUrl2FormJson(results.map(({ data }) => data));
       }
       
-      !enemyId
-        ? await Enemy.createEnemy(this.formJson)
-        : await Enemy.updateEnemy(this.formJson);
+      !buffId
+        ? await Buff.createBuff(this.formJson)
+        : await Buff.updateBuff(this.formJson);
 
       if(fileArray.length) {
         this.hideUploadModal();
       }
 
-      this.$router.push(linkUrls.ENEMY_LIST());
+      this.$router.push(linkUrls.BUFF_LIST());
     } else {
       this.enableForm();
     }
@@ -168,7 +150,7 @@ export default class EnemyEdit extends Vue {
 
   setUrl2FormJson(urls: Array<string>) {
     for(const url of urls) {
-      const keys = Object.keys(this.formJson.resources) as Models.Enemy.ResourceKeys[];
+      const keys = Object.keys(this.formJson.resources) as Models.Buff.ResourceKeys[];
 
       for(const fieldName of keys) {
         this.formJson.resources[fieldName] = url;
@@ -176,10 +158,10 @@ export default class EnemyEdit extends Vue {
     }
   }
 
-  async fetchEnemyById(enemyId: string) {
-    const data: Models.Enemy.Model = (await Enemy.getEnemyById(enemyId)).data;
+  async fetchBuffById(buffId: string) {
+    const data: Models.Buff.Model = (await Buff.getBuffById(buffId)).data;
 
-    const keys = Object.keys(this.formJson) as Models.Enemy.ModelKeys[];
+    const keys = Object.keys(this.formJson) as Models.Buff.ModelKeys[];
 
     for(const key of keys) {
       this.formJson[key] = data[key];
@@ -195,17 +177,17 @@ export default class EnemyEdit extends Vue {
   }
 
   async mounted() {
-    const { enemyId } = this.$route.params;
+    const { buffId } = this.$route.params;
 
-    if(enemyId) {
-      await this.fetchEnemyById(enemyId);
+    if(buffId) {
+      await this.fetchBuffById(buffId);
     }
   }
 }
 </script>
 
 <style type="text/scss" lang="scss">
-.enemy-edit {
+.buff-edit {
   .form-actions {
     margin-bottom: 15px;
   }
