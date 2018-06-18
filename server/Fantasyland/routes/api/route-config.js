@@ -29,6 +29,7 @@ export default [
   // { path: '/dungeon', method: 'get', ...DungeonChapterRoutes.getAllDungeonChapters },
   { path: '/enemy', method: 'post', ...EnemyRoutes.createEnemy },
   { path: '/enemy', method: 'get', ...EnemyRoutes.getAllEnemy },
+  { path: '/enemy/:enemyId', method: 'get', ...EnemyRoutes.getEnemyById },
   { path: '/enemy/:enemyId', method: 'delete', ...EnemyRoutes.deleteEnemy },
   { path: '/dungeon-chapter', method: 'post', ...DungeonRoutes.createDungeonChapter },
 ];

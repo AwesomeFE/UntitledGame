@@ -15,6 +15,13 @@ switch (process.env.NODE_ENV) {
         headers: {
           Referer: `http://${SERVER_HOST}:${SERVER_PORT}/`
         }
+      },
+      '/uploads': {
+        target: `http://${SERVER_HOST}:${SERVER_PORT}`,
+        changeOrigin: true,
+        headers: {
+          Referer: `http://${SERVER_HOST}:${SERVER_PORT}/`
+        }
       }
     };
 

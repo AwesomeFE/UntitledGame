@@ -19,9 +19,6 @@ export const linkUrls = {
     path: '/enemy'
   }),
   ENEMY_EDIT: (enemyId: string): RawLocation => ({
-    path: '/enemy/:enemyId',
-    params: {
-      enemyId
-    }
+    path: `/enemy/${enemyId}`
   })
 };

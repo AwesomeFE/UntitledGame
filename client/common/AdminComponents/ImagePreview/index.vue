@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { Component, Prop } from 'vue-property-decorator';
+import { Component, Prop, Watch } from 'vue-property-decorator';
 
 import { UtilImage } from '../../utils';
 
@@ -24,6 +24,13 @@ export default class ImagePreview extends Vue {
   isLoading: boolean = false;
   emptyImageUrl: string = emptyUrl;
 
+  @Watch('src')
+  async srcChangeHandler() {
+    this.isLoading = true;
+    this.blobUrl = await UtilImage.fetchImage(this.src);
+    this.isLoading = false;
+  }
+
   get blobUrl() {
     return this.file ? URL.createObjectURL(this.file) : this.blob;
   }
@@ -32,10 +39,8 @@ export default class ImagePreview extends Vue {
     this.blob = val;
   }
 
-  async mounted() {
-    this.isLoading = true;
-    this.blobUrl = await UtilImage.fetchImage(this.src);
-    this.isLoading = false;
+  mounted() {
+    // this.srcChangeHandler();
   }
 }
 </script>

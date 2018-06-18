@@ -1,8 +1,10 @@
 import { Enemy } from '../../../models';
 import { messages } from '../../../../common/constants';
 
-class GetAllEnemy {
-  required = {};
+class GetEnemyById {
+  required = {
+    params: [ 'enemyId' ]
+  };
 
   constructor() {
     this.validate = this.validate.bind(this);
@@ -12,10 +14,12 @@ class GetAllEnemy {
   validate(req, res) {}
 
   async handler(req, res) {
-    const enemys = await Enemy.find().select('_id name');
+    const { enemyId } = req.params;
+    
+    const enemy = (await Enemy.findById(enemyId)).toJSON();
 
-    res.json(messages.REQUEST_SUCCESS(enemys));
+    res.json(messages.REQUEST_SUCCESS(enemy));
   }
 }
 
-export const getAllEnemy = new GetAllEnemy();
+export const getEnemyById = new GetEnemyById();

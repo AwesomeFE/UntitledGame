@@ -33,31 +33,29 @@ const CharacterSchema = new Schema({
     type: Number,
     default: 0
   },
-  ability: {
-    STR: {
-      type: Number,
-      default: 0
-    },
-    AGI: {
-      type: Number,
-      default: 0
-    },
-    VIT: {
-      type: Number,
-      default: 0
-    },
-    INT: {
-      type: Number,
-      default: 0
-    },
-    DEX: {
-      type: Number,
-      default: 0
-    },
-    LUK: {
-      type: Number,
-      default: 0
-    }
+  STR: {
+    type: Number,
+    default: 0
+  },
+  AGI: {
+    type: Number,
+    default: 0
+  },
+  VIT: {
+    type: Number,
+    default: 0
+  },
+  INT: {
+    type: Number,
+    default: 0
+  },
+  DEX: {
+    type: Number,
+    default: 0
+  },
+  LUK: {
+    type: Number,
+    default: 0
   },
   lastPosition: {
     x: {

@@ -27,14 +27,14 @@ export default () => new VueRouter({
           path: 'enemy',
           component: () => import('./views/EnemyList/index.vue')
         },
-        // {
-        //   name: 'enemyEdit',
-        //   path: 'enemy/:enemyId',
-        //   component: () => import('./views/EnemyEdit/index.vue')
-        // },
         {
           name: 'enemyCreate',
           path: 'enemy/create',
+          component: () => import('./views/EnemyEdit/index.vue')
+        },
+        {
+          name: 'enemyEdit',
+          path: 'enemy/:enemyId',
           component: () => import('./views/EnemyEdit/index.vue')
         },
         {

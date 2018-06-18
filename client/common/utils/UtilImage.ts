@@ -3,9 +3,17 @@ export const UtilImage = {
     return new Promise((resolve, reject) => {
       if(src) {
         const image = new Image();
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
   
         image.onload = event => {
-          resolve(URL.createObjectURL(image));
+          canvas.width = image.width;
+          canvas.height = image.height;
+          ctx.drawImage(image, 0, 0);
+
+          canvas.toBlob(blob => {
+            resolve(URL.createObjectURL(blob));
+          });
         };
         image.onerror = event => reject(event);
     

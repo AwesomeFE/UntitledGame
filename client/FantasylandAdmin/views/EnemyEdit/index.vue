@@ -44,12 +44,12 @@
         <Box>
           <BoxHeader>{{$t('enemyAbility')}}</BoxHeader>
           <BoxBody>
-            <FormInput type="text" name="STR" validate="required" v-model="formJson.ability.STR" :label="$t('STR')" :disabled="isDisabled" />
-            <FormInput type="text" name="AGI" validate="required" v-model="formJson.ability.AGI" :label="$t('AGI')" :disabled="isDisabled" />
-            <FormInput type="text" name="VIT" validate="required" v-model="formJson.ability.VIT" :label="$t('VIT')" :disabled="isDisabled" />
-            <FormInput type="text" name="INT" validate="required" v-model="formJson.ability.INT" :label="$t('INT')" :disabled="isDisabled" />
-            <FormInput type="text" name="DEX" validate="required" v-model="formJson.ability.DEX" :label="$t('DEX')" :disabled="isDisabled" />
-            <FormInput type="text" name="LUK" validate="required" v-model="formJson.ability.LUK" :label="$t('LUK')" :disabled="isDisabled" />
+            <FormInput type="text" name="STR" validate="required" v-model="formJson.STR" :label="$t('STR')" :disabled="isDisabled" />
+            <FormInput type="text" name="AGI" validate="required" v-model="formJson.AGI" :label="$t('AGI')" :disabled="isDisabled" />
+            <FormInput type="text" name="VIT" validate="required" v-model="formJson.VIT" :label="$t('VIT')" :disabled="isDisabled" />
+            <FormInput type="text" name="INT" validate="required" v-model="formJson.INT" :label="$t('INT')" :disabled="isDisabled" />
+            <FormInput type="text" name="DEX" validate="required" v-model="formJson.DEX" :label="$t('DEX')" :disabled="isDisabled" />
+            <FormInput type="text" name="LUK" validate="required" v-model="formJson.LUK" :label="$t('LUK')" :disabled="isDisabled" />
           </BoxBody>
         </Box>
       </form>
@@ -63,7 +63,7 @@ import { namespace } from 'vuex-class';
 import { Validator } from 'vee-validate';
 import { Component, Inject } from 'vue-property-decorator';
 
-import { Types, CommonTypes } from '../../types';
+import { Models, CommonTypes } from '../../types';
 import { Enemy } from '../../services';
 import vSidebar from '../../components/vSidebar/index.vue';
 import vPageHeader from '../../components/vPageHeader/index.vue';
@@ -112,30 +112,32 @@ export default class EnemyEdit extends Vue {
   
   isDisabled: boolean = false;
 
-  formJson: any = {
+  formJson: Models.Enemy.Model = {
+    _id: '',
     name: '',
     gender: 'male',
+    description: '',
     XP: 0,
     HP: 1,
     MP: 1,
-    ability: {
-      STR: 1,
-      AGI: 1,
-      VIT: 1,
-      INT: 1,
-      DEX: 1,
-      LUK: 1,
-    },
+    STR: 1,
+    AGI: 1,
+    VIT: 1,
+    INT: 1,
+    DEX: 1,
+    LUK: 1,
     standing2D: '',
     attack2D: ''
   };
 
-  fieldFiles: any = {
+  fieldFiles: CommonTypes.Utils.FormFile.FieldFiles = {
     standing2D: null,
     attack2D: null
   };
 
   async submit() {
+    const { enemyId } = this.$route.params;
+
     this.disableForm();
 
     if(await this.$validator.validateAll()) {
@@ -143,9 +145,11 @@ export default class EnemyEdit extends Vue {
 
       this.showUploadModal();
       const results = await this.uploadFiles(fileArray);
-      this.setUrl2FormJson(results);
+      this.setUrl2FormJson(results.map(({ data }) => data));
       
-      await Enemy.createEnemy(this.formJson);
+      !enemyId
+        ? await Enemy.createEnemy(this.formJson)
+        : await Enemy.updateEnemy(this.formJson);
 
       this.hideUploadModal();
 
@@ -155,16 +159,24 @@ export default class EnemyEdit extends Vue {
     }
   }
 
-  setUrl2FormJson(results: Array<any>) {
-    for(const { data } of results) {
-      for(const fieldName in this.fieldFiles) {
-        this.formJson[fieldName] = data;
+  setUrl2FormJson(urls: Array<string>) {
+    for(const url of urls) {
+      const keys = Object.keys(this.fieldFiles) as Models.Enemy.ResourceKeys[];
+
+      for(const fieldName of keys) {
+        this.formJson[fieldName] = `/${url}`;
       }
     }
   }
 
   async fetchEnemyById(enemyId: string) {
-    // const { data = [] } = await Enemy.getEnemyById(enemyId);
+    const data: Models.Enemy.Model = (await Enemy.getEnemyById(enemyId)).data;
+
+    const keys = Object.keys(this.formJson) as Models.Enemy.ModelKeys[];
+
+    for(const key of keys) {
+      this.formJson[key] = data[key];
+    }
   }
 
   disableForm() {

@@ -1,4 +1,4 @@
-import { Types } from '../types/index.d';
+import { Models } from '../types';
 
 export const apiUrls = {
   GET_ENEMY: () => ({
@@ -9,8 +9,13 @@ export const apiUrls = {
     method: 'get',
     url: `/api/enemy/${enemyId}`
   }),
-  CREATE_ENEMY: (data: Types.FormData.Enemy) => ({
+  CREATE_ENEMY: (data: Models.Enemy.Model) => ({
     method: 'post',
+    url: `/api/enemy`,
+    data
+  }),
+  UPDATE_ENEMY: (data: Models.Enemy.Model) => ({
+    method: 'patch',
     url: `/api/enemy`,
     data
   }),
