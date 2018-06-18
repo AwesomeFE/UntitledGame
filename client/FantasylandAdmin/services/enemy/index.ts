@@ -12,6 +12,7 @@ class EnemyService {
   }
 
   createEnemy(enemyData: EnemyTypes.Model): Promise<AxiosResponse> {
+    delete enemyData._id;
     return axios(apiUrls.CREATE_ENEMY(enemyData));
   }
 

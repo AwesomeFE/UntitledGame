@@ -1,7 +1,12 @@
 declare namespace Enemy {
-  interface Resource {
+  interface ResourceFile {
     standing2D?: File;
     attack2D?: File;
+  }
+
+  interface Resource {
+    standing2D: string;
+    attack2D: string;
   }
   
   interface Model {
@@ -18,8 +23,7 @@ declare namespace Enemy {
     INT: number;
     DEX: number;
     LUK: number;
-    standing2D: string;
-    attack2D: string;
+    resources: Resources;
   }
 
   type ModelKeys = keyof Model;

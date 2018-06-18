@@ -27,7 +27,7 @@ export default class ImagePreview extends Vue {
   @Watch('src')
   async srcChangeHandler() {
     this.isLoading = true;
-    this.blobUrl = await UtilImage.fetchImage(this.src);
+    this.blobUrl = await UtilImage.fetchImage(`/${this.src}`);
     this.isLoading = false;
   }
 

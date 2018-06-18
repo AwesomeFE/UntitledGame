@@ -28,7 +28,8 @@
             <div class="col-4 image-gallery">
               <Swiper>
                 <div class="swiper-slide" v-for="(file, field) in fieldFiles" :key="field">
-                  <ImagePreview :src="formJson[field]" :file="fieldFiles[field]" />
+                  <ImagePreview :src="formJson.resources[field]" :file="fieldFiles[field]" />
+                  <div>{{field}}</div>
                   <UploadButton :name="field" v-model="fieldFiles[field]">{{$t('upload')}}</UploadButton>
                 </div>
               </Swiper>
@@ -126,8 +127,10 @@ export default class EnemyEdit extends Vue {
     INT: 1,
     DEX: 1,
     LUK: 1,
-    standing2D: '',
-    attack2D: ''
+    resources: {
+      standing2D: '',
+      attack2D: ''
+    }
   };
 
   fieldFiles: CommonTypes.Utils.FormFile.FieldFiles = {
@@ -143,15 +146,19 @@ export default class EnemyEdit extends Vue {
     if(await this.$validator.validateAll()) {
       const fileArray = UtilFormFile.getFileArrayFromFieldFiles(this.fieldFiles, 'enemy');
 
-      this.showUploadModal();
-      const results = await this.uploadFiles(fileArray);
-      this.setUrl2FormJson(results.map(({ data }) => data));
+      if(fileArray.length) {
+        this.showUploadModal();
+        const results = await this.uploadFiles(fileArray);
+        this.setUrl2FormJson(results.map(({ data }) => data));
+      }
       
       !enemyId
         ? await Enemy.createEnemy(this.formJson)
         : await Enemy.updateEnemy(this.formJson);
 
-      this.hideUploadModal();
+      if(fileArray.length) {
+        this.hideUploadModal();
+      }
 
       this.$router.push(linkUrls.ENEMY_LIST());
     } else {
@@ -164,7 +171,7 @@ export default class EnemyEdit extends Vue {
       const keys = Object.keys(this.fieldFiles) as Models.Enemy.ResourceKeys[];
 
       for(const fieldName of keys) {
-        this.formJson[fieldName] = `/${url}`;
+        this.formJson.resources[fieldName] = url;
       }
     }
   }

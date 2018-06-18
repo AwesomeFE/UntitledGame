@@ -28,6 +28,7 @@ export default [
   // middlewares.ensureAdmin,
   // { path: '/dungeon', method: 'get', ...DungeonChapterRoutes.getAllDungeonChapters },
   { path: '/enemy', method: 'post', ...EnemyRoutes.createEnemy },
+  { path: '/enemy', method: 'patch', ...EnemyRoutes.updateEnemy },
   { path: '/enemy', method: 'get', ...EnemyRoutes.getAllEnemy },
   { path: '/enemy/:enemyId', method: 'get', ...EnemyRoutes.getEnemyById },
   { path: '/enemy/:enemyId', method: 'delete', ...EnemyRoutes.deleteEnemy },

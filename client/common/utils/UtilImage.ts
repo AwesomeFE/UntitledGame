@@ -11,9 +11,9 @@ export const UtilImage = {
           canvas.height = image.height;
           ctx.drawImage(image, 0, 0);
 
-          canvas.toBlob(blob => {
-            resolve(URL.createObjectURL(blob));
-          });
+          canvas.toBlob
+            ? canvas.toBlob(blob => resolve(URL.createObjectURL(blob)))
+            : resolve(URL.createObjectURL(canvas.msToBlob()));
         };
         image.onerror = event => reject(event);
     
