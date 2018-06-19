@@ -23,28 +23,28 @@ const ItemSchema = new Schema({
     type: Number,
     default: 1
   },
-  limitation: {
-    STR: {
-      type: Number,
-      default: 0
-    },
-    AGI: {
-      type: Number,
-      default: 0
-    },
-    INT: {
-      type: Number,
-      default: 0
-    },
-    level: {
-      type: Number,
-      default: 0
-    },
-    career: {
-      type: Schema.Types.ObjectId,
-      ref: 'career'
-    }
-  }
+  // limitation: {
+  //   STR: {
+  //     type: Number,
+  //     default: 0
+  //   },
+  //   AGI: {
+  //     type: Number,
+  //     default: 0
+  //   },
+  //   INT: {
+  //     type: Number,
+  //     default: 0
+  //   },
+  //   level: {
+  //     type: Number,
+  //     default: 0
+  //   },
+  //   career: {
+  //     type: Schema.Types.ObjectId,
+  //     ref: 'career'
+  //   }
+  // }
 }, {timestamps: true});
 
 export default ItemSchema;

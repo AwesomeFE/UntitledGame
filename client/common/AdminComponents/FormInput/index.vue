@@ -1,5 +1,5 @@
 <template>
-  <label class="form-control" :class="classNames">
+  <label class="form-control" :class="className">
     <div class="form-label" v-if="label">{{label}}</div>
     <input
       v-if="validate"
@@ -36,17 +36,12 @@ export default class FormInput extends Vue {
   @Prop() value: string;
   @Prop() disabled?: string;
   @Prop() validate?: string;
-  @Prop() className: string;
   @Prop() placeholder: string;
 
   @Inject('$validator') $validator: Validator;
 
-  get classNames(): Array<string> {
-    const classNames = [this.className];
-
-    this.isError ? classNames.push('has-error') : null;
-
-    return classNames;
+  get className(): string {
+    return this.isError ? 'has-error' : null;
   }
 
   get isError(): boolean {

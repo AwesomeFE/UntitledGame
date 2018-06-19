@@ -32,13 +32,19 @@ export default {
 
   buffList: '状态列表',
   buffBisic: '状态基础信息',
-  tip: '状态简述',
+  tip: '作用',
   recover: '状态恢复类型',
   total: '恢复总量',
   isIncrease: '是否增量',
   maintain: '持续时间',
 
   consumableList: '消费品列表',
+  consumableBisic: '消费品参数',
+  weight: '重量',
+  width: '宽度',
+  height: '高度',
+  maxCount: '最大数量',
+  buffs: '效果',
 
   USER_NOT_FOUND: '用户不存在',
   PASSWORD_INVALID: '密码不正确',

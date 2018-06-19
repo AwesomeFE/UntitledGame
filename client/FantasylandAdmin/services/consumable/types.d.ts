@@ -12,10 +12,11 @@ declare namespace Consumable {
     name: string;
     description: string;
     tip: string;
-    recover: string;
-    total: number;
-    isIncrease: boolean;
-    maintain: number;
+    weight: number;
+    width: number;
+    height: number;
+    maxCount: number;
+    buffs: Array<string>;
     resources: Resources;
   }
 

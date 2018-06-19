@@ -1,5 +1,5 @@
 <template>
-  <div class="buff-edit">
+  <div class="consumable-edit">
     <vPageHeader></vPageHeader>
     <vSidebar></vSidebar>
     
@@ -15,15 +15,21 @@
         </div>
 
         <Box>
-          <BoxHeader>{{$t('buffBisic')}}</BoxHeader>
+          <BoxHeader>{{$t('consumableBisic')}}</BoxHeader>
           <BoxBody>
             <div class="col-8">
               <FormInput type="text" name="name" validate="required" v-model="formJson.name" :label="$t('name')" :disabled="isDisabled" />
               <FormInput type="text" name="tip" validate="required" v-model="formJson.tip" :label="$t('tip')" :disabled="isDisabled" />
-              <FormInput type="text" name="recover" validate="required" v-model="formJson.recover" :label="$t('recover')" :disabled="isDisabled" />
-              <FormInput type="text" name="total" validate="required" v-model="formJson.total" :label="$t('total')" :disabled="isDisabled" />
-              <FormInput type="text" name="isIncrease" validate="required" v-model="formJson.isIncrease" :label="$t('isIncrease')" :disabled="isDisabled" />
-              <FormInput type="text" name="maintain" validate="required" v-model="formJson.maintain" :label="$t('maintain')" :disabled="isDisabled" />
+              <FormInput type="text" name="weight" validate="required" v-model="formJson.weight" :label="$t('weight')" :disabled="isDisabled" />
+              <FormInput type="text" name="width" validate="required" v-model="formJson.width" :label="$t('width')" :disabled="isDisabled" />
+              <FormInput type="text" name="height" validate="required" v-model="formJson.height" :label="$t('height')" :disabled="isDisabled" />
+              <FormInput type="text" name="maxCount" validate="required" v-model="formJson.maxCount" :label="$t('maxCount')" :disabled="isDisabled" />
+              <!-- <FormInput type="text" name="buffs" validate="required" v-model="formJson.buffs" :label="$t('buffs')" :disabled="isDisabled" /> -->
+              <FormSelect v-model="formJson.buffs">
+                <option value="aaa">aaa</option>
+                <option value="bbb">bbb</option>
+                <option value="ccc">ccc</option>
+              </FormSelect>
             </div>
 
             <div class="col-4 image-gallery">
@@ -54,7 +60,7 @@ import { Validator } from 'vee-validate';
 import { Component, Inject } from 'vue-property-decorator';
 
 import { Models, CommonTypes } from '../../types';
-import { Buff } from '../../services';
+import { Consumable } from '../../services';
 import vSidebar from '../../components/vSidebar/index.vue';
 import vPageHeader from '../../components/vPageHeader/index.vue';
 import PageBody from '../../../common/AdminComponents/PageBody/index.vue';
@@ -62,6 +68,7 @@ import Box from '../../../common/AdminComponents/Box/index.vue';
 import BoxBody from '../../../common/AdminComponents/BoxBody/index.vue';
 import BoxHeader from '../../../common/AdminComponents/BoxHeader/index.vue';
 import FormInput from '../../../common/AdminComponents/FormInput/index.vue';
+import FormSelect from '../../../common/AdminComponents/FormSelect/index.vue';
 import SmartButton from '../../../common/AdminComponents/SmartButton/index.vue';
 import Swiper from '../../../common/AdminComponents/Swiper/index.vue';
 import ImagePreview from '../../../common/AdminComponents/ImagePreview/index.vue';
@@ -86,6 +93,7 @@ const Modal = {
     Swiper,
     ImagePreview,
     UploadButton,
+    FormSelect,
   }
 })
 export default class BuffEdit extends Vue {
@@ -102,15 +110,16 @@ export default class BuffEdit extends Vue {
   
   isDisabled: boolean = false;
 
-  formJson: Models.Buff.Model = {
+  formJson: Models.Consumable.Model = {
     _id: '',
     name: '',
     description: '',
     tip: '',
-    recover: 'HP',
-    total: 1,
-    isIncrease: false,
-    maintain: 1000,
+    weight: 1,
+    width: 1,
+    height: 1,
+    maxCount: 1,
+    buffs: [],
     resources: {
       thumbnail: ''
     }
@@ -135,8 +144,8 @@ export default class BuffEdit extends Vue {
       }
       
       !buffId
-        ? await Buff.createBuff(this.formJson)
-        : await Buff.updateBuff(this.formJson);
+        ? await Consumable.createConsumable(this.formJson)
+        : await Consumable.updateConsumable(this.formJson);
 
       if(fileArray.length) {
         this.hideUploadModal();
@@ -150,7 +159,7 @@ export default class BuffEdit extends Vue {
 
   setUrl2FormJson(urls: Array<string>) {
     for(const url of urls) {
-      const keys = Object.keys(this.formJson.resources) as Models.Buff.ResourceKeys[];
+      const keys = Object.keys(this.formJson.resources) as Models.Consumable.ResourceKeys[];
 
       for(const fieldName of keys) {
         this.formJson.resources[fieldName] = url;
@@ -158,10 +167,10 @@ export default class BuffEdit extends Vue {
     }
   }
 
-  async fetchBuffById(buffId: string) {
-    const data: Models.Buff.Model = (await Buff.getBuffById(buffId)).data;
+  async fetchBuffById(consumableId: string) {
+    const data: Models.Consumable.Model = (await Consumable.getConsumableById(consumableId)).data;
 
-    const keys = Object.keys(this.formJson) as Models.Buff.ModelKeys[];
+    const keys = Object.keys(this.formJson) as Models.Consumable.ModelKeys[];
 
     for(const key of keys) {
       this.formJson[key] = data[key];
@@ -187,7 +196,7 @@ export default class BuffEdit extends Vue {
 </script>
 
 <style type="text/scss" lang="scss">
-.buff-edit {
+.consumable-edit {
   .form-actions {
     margin-bottom: 15px;
   }
