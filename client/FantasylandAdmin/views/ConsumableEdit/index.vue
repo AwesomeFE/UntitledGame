@@ -26,9 +26,9 @@
               <FormInput type="text" name="maxCount" validate="required" v-model="formJson.maxCount" :label="$t('maxCount')" :disabled="isDisabled" />
               <!-- <FormInput type="text" name="buffs" validate="required" v-model="formJson.buffs" :label="$t('buffs')" :disabled="isDisabled" /> -->
               <FormSelect v-model="formJson.buffs">
-                <option value="aaa">aaa</option>
-                <option value="bbb">bbb</option>
-                <option value="ccc">ccc</option>
+                <div value="aaa">aaa</div>
+                <div value="bbb">bbb</div>
+                <div value="ccc">ccc</div>
               </FormSelect>
             </div>
 

@@ -1,10 +1,7 @@
 <template>
-  <div class="form-select">
+  <div class="form-select" @click="clickHandler">
     <div class="select-value"></div>
-    <div class="form-option" v-for="option in optionArray" :key="option.value">{{option.title}}</div>
-    <select class="select" ref="selectEl">
-      <slot></slot>
-    </select>
+    <slot></slot>
   </div>
 </template>
 
@@ -13,7 +10,6 @@ import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 
 interface Option {
-  title: string;
   value: string;
 }
 
@@ -21,11 +17,9 @@ interface Option {
 export default class FormSelect extends Vue {
   @Prop() value: string;
 
-  optionArray: Array<Option> = [];
-
-  mounted() {
-    this.freshSelectView();
-    this.setEventListener();
+  clickHandler(event: MouseEvent) {
+    const target = event.target as HTMLDivElement;
+    console.log(target.attributes.getNamedItem('value').value)
   }
 
   setEventListener() {
@@ -35,17 +29,15 @@ export default class FormSelect extends Vue {
   }
 
   freshSelectView() {
-    const selectEl = this.$refs['selectEl'] as HTMLSelectElement;
-    const optionEl = selectEl.querySelectorAll('option');
+    const optionEl = this.$slots.default.filter(vNode => !!vNode.tag).map(vNode => vNode.elm);
 
-    this.optionArray = [];
+    // this.optionArray = [];
 
-    for(let i = 0; i < optionEl.length; i++) {
-      const value = optionEl[i].value;
-      const title = optionEl[i].innerText;
+    // for(let i = 0; i < optionEl.length; i++) {
+    //   const value = optionEl[i].attributes.getNamedItem('value').value;
 
-      this.optionArray.push({ title, value });
-    }
+    //   this.optionArray.push({ value });
+    // }
   }
 }
 </script>
