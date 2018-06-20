@@ -99,6 +99,9 @@ export default class BuffEdit extends Vue {
 
   @Modal.UploadModal.Action('uploadFiles')
   uploadFiles: (payload: Array<FormData>) => Array<any>;
+
+  @Modal.UploadModal.Mutation('clearUpload')
+  clearUpload: () => void;
   
   isDisabled: boolean = false;
 
@@ -140,6 +143,7 @@ export default class BuffEdit extends Vue {
 
       if(fileArray.length) {
         this.hideUploadModal();
+        this.clearUpload();
       }
 
       this.$router.push(linkUrls.BUFF_LIST());

@@ -107,6 +107,9 @@ export default class ConsumableEdit extends Vue {
 
   @Modal.UploadModal.Action('uploadFiles')
   uploadFiles: (payload: Array<FormData>) => Array<any>;
+
+  @Modal.UploadModal.Mutation('clearUpload')
+  clearUpload: () => void;
   
   isDisabled: boolean = false;
 
@@ -160,6 +163,7 @@ export default class ConsumableEdit extends Vue {
 
       if(fileArray.length) {
         this.hideUploadModal();
+        this.clearUpload();
       }
 
       this.$router.push(linkUrls.CONSUMABLE_LIST());

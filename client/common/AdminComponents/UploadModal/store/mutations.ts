@@ -26,5 +26,8 @@ export const mutations = {
       uploadFile.status = 100;
       return uploadFile;
     })
+  },
+  clearUpload(state: State) {
+    state.uploadFiles = [];
   }
 };
