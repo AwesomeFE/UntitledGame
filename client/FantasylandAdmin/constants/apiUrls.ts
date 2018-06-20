@@ -55,4 +55,23 @@ export const apiUrls = {
     url: `/api/consumable`,
     data
   }),
+
+  GET_DUNGEON: () => ({
+    method: 'get',
+    url: '/api/dungeon'
+  }),
+  GET_DUNGEON_BY_ID: (id: string) => ({
+    method: 'get',
+    url: `/api/dungeon/${id}`
+  }),
+  CREATE_DUNGEON: (data: Models.Dungeon.Model) => ({
+    method: 'post',
+    url: `/api/dungeon`,
+    data
+  }),
+  UPDATE_DUNGEON: (data: Models.Dungeon.Model) => ({
+    method: 'patch',
+    url: `/api/dungeon`,
+    data
+  }),
 };

@@ -1,7 +1,7 @@
 import { DungeonChapter } from '../../../models';
 import { messages } from '../../../../common/constants';
 
-class GetAllDungeonChapters {
+class GetAll {
   required = {};
 
   constructor() {
@@ -19,4 +19,4 @@ class GetAllDungeonChapters {
   }
 }
 
-export const getAllDungeonChapters = new GetAllDungeonChapters();
+export const getAll = new GetAll();

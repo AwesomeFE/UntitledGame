@@ -23,7 +23,7 @@ export default [
   { path: '/player/:playerId', method: 'patch', ...PlayerRoutes.patchPlayer },
   { path: '/player/:playerId', method: 'delete', ...PlayerRoutes.deletePlayer },
   middlewares.ensurePlayerLogin,
-  { path: '/dungeon-chapter', method: 'get', ...DungeonRoutes.getAllDungeonChapters },
+  { path: '/dungeon', method: 'get', ...DungeonRoutes.getAll },
   { path: '/dungeon/:dungeonBattleId/start', method: 'get', ...DungeonRoutes.startDungeonBattle },
   { path: '/file', method: 'post', ...FileRoutes.saveFile },
 
@@ -47,5 +47,5 @@ export default [
   { path: '/consumable/:consumableId', method: 'get', ...ConsumableRoutes.getById },
   { path: '/consumable/:consumableId', method: 'delete', ...ConsumableRoutes.remove },
 
-  { path: '/dungeon-chapter', method: 'post', ...DungeonRoutes.createDungeonChapter },
+  { path: '/dungeon', method: 'post', ...DungeonRoutes.create },
 ];

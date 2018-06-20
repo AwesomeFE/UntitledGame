@@ -7,6 +7,7 @@
     <SideItem to="/buff/create">创建状态</SideItem>
     <SideItem to="/consumable">消耗品列表</SideItem>
     <SideItem to="/consumable/create">创建消耗品</SideItem>
+    <SideItem to="/dungeon">剧情章节列表</SideItem>
     <SideItem>副本列表</SideItem>
     <SideItem>物品列表</SideItem>
   </Sidebar>

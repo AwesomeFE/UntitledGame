@@ -68,6 +68,11 @@ export default () => new VueRouter({
           component: () => import('./views/ConsumableEdit/index.vue')
         },
         {
+          name: 'dungeonList',
+          path: 'dungeon',
+          component: () => import('./views/DungeonList/index.vue')
+        },
+        {
           path: '*',
           component: () => import('./views/NotFound/index.vue')
         }

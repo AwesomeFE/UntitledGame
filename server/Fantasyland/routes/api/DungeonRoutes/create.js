@@ -1,7 +1,7 @@
 import { DungeonChapter, DungeonBattle } from '../../../models';
 import { messages } from '../../../../common/constants';
 
-class CreateDungeonChapter {
+class Create {
   required = {
     body: [ 'name', 'chapters' ]
   };
@@ -20,4 +20,4 @@ class CreateDungeonChapter {
   }
 }
 
-export const createDungeonChapter = new CreateDungeonChapter();
+export const create = new Create();
