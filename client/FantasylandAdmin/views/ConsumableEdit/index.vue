@@ -26,21 +26,7 @@
               <FormInput type="text" name="maxCount" validate="required" v-model="formJson.maxCount" :label="$t('maxCount')" :disabled="isDisabled" />
               <!-- <FormInput type="text" name="buffs" validate="required" v-model="formJson.buffs" :label="$t('buffs')" :disabled="isDisabled" /> -->
               <FormSelect v-model="formJson.buffs" placeholder="请选择" :label="$t('buffs')">
-                <FormOption value="aaa" :selected="formJson.buffs.includes('aaa')">aaa</FormOption>
-                <FormOption value="bbb" :selected="formJson.buffs.includes('bbb')">bbb</FormOption>
-                <FormOption value="ccc" :selected="formJson.buffs.includes('ccc')">ccc</FormOption>
-                <FormOption value="ddd" :selected="formJson.buffs.includes('ddd')">ddd</FormOption>
-                <FormOption value="eee" :selected="formJson.buffs.includes('eee')">eee</FormOption>
-                <FormOption value="fff" :selected="formJson.buffs.includes('fff')">fff</FormOption>
-                <FormOption value="ggg" :selected="formJson.buffs.includes('ggg')">ggg</FormOption>
-                <FormOption value="hhh" :selected="formJson.buffs.includes('hhh')">hhh</FormOption>
-                <FormOption value="iii" :selected="formJson.buffs.includes('iii')">iii</FormOption>
-                <FormOption value="jjj" :selected="formJson.buffs.includes('jjj')">jjj</FormOption>
-                <FormOption value="kkk" :selected="formJson.buffs.includes('kkk')">kkk</FormOption>
-                <FormOption value="lll" :selected="formJson.buffs.includes('lll')">lll</FormOption>
-                <FormOption value="mmm" :selected="formJson.buffs.includes('mmm')">mmm</FormOption>
-                <FormOption value="nnn" :selected="formJson.buffs.includes('nnn')">nnn</FormOption>
-                <FormOption value="ooo" :selected="formJson.buffs.includes('ooo')">ooo</FormOption>
+                <FormOption v-for="buff of buffList" :value="buff._id" :selected="formJson.buffs.includes(buff._id)">{{buff.name}}</FormOption>
               </FormSelect>
             </div>
 
@@ -71,8 +57,8 @@ import { namespace } from 'vuex-class';
 import { Validator } from 'vee-validate';
 import { Component, Inject } from 'vue-property-decorator';
 
-import { Models, CommonTypes } from '../../types';
-import { Consumable } from '../../services';
+import { Models, CommonTypes, View } from '../../types';
+import { Buff, Consumable } from '../../services';
 import vSidebar from '../../components/vSidebar/index.vue';
 import vPageHeader from '../../components/vPageHeader/index.vue';
 import PageBody from '../../../common/AdminComponents/PageBody/index.vue';
@@ -110,7 +96,7 @@ const Modal = {
     FormOption,
   }
 })
-export default class BuffEdit extends Vue {
+export default class ConsumableEdit extends Vue {
   @Inject('$validator') $validator: Validator;
 
   @Modal.UploadModal.Mutation('show')
@@ -139,9 +125,20 @@ export default class BuffEdit extends Vue {
     }
   };
 
+  buffList: View.ViewList = [];
+
   fieldFiles: CommonTypes.Utils.FormFile.FieldFiles = {
     thumbnail: null
   };
+
+  async fetchBuffList() {
+    const data: View.ViewList = (await Buff.getBuff()).data;
+
+    data.forEach((item: View.ListItem, index) => {
+      item.index = ++index;
+      this.buffList.push(item);
+    });
+  }
 
   async submit() {
     const { buffId } = this.$route.params;
@@ -202,6 +199,7 @@ export default class BuffEdit extends Vue {
   async mounted() {
     const { buffId } = this.$route.params;
 
+    await this.fetchBuffList();
     if(buffId) {
       await this.fetchBuffById(buffId);
     }
