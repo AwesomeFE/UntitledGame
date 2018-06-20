@@ -1,5 +1,5 @@
 <template>
-  <label class="form-control" :class="className">
+  <label class="form-input" :class="className">
     <div class="form-label" v-if="label">{{label}}</div>
     <input
       v-if="validate"
@@ -51,7 +51,7 @@ export default class FormInput extends Vue {
 </script>
 
 <style type="text/scss" lang="scss">
-.form-control {
+.form-input {
   display: block;
   line-height: 1.42857143;
   margin-bottom: 15px;
@@ -68,7 +68,7 @@ export default class FormInput extends Vue {
     border: 1px solid #d2d6de;
     box-sizing: border-box;
     outline: 0;
-    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s;
 
     &:focus {
       border-color: #3c8dbc;

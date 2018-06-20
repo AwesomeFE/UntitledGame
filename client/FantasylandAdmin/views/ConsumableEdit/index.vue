@@ -25,10 +25,22 @@
               <FormInput type="text" name="height" validate="required" v-model="formJson.height" :label="$t('height')" :disabled="isDisabled" />
               <FormInput type="text" name="maxCount" validate="required" v-model="formJson.maxCount" :label="$t('maxCount')" :disabled="isDisabled" />
               <!-- <FormInput type="text" name="buffs" validate="required" v-model="formJson.buffs" :label="$t('buffs')" :disabled="isDisabled" /> -->
-              <FormSelect v-model="formJson.buffs">
-                <div value="aaa">aaa</div>
-                <div value="bbb">bbb</div>
-                <div value="ccc">ccc</div>
+              <FormSelect v-model="formJson.buffs" placeholder="请选择" :label="$t('buffs')">
+                <FormOption value="aaa" :selected="formJson.buffs.includes('aaa')">aaa</FormOption>
+                <FormOption value="bbb" :selected="formJson.buffs.includes('bbb')">bbb</FormOption>
+                <FormOption value="ccc" :selected="formJson.buffs.includes('ccc')">ccc</FormOption>
+                <FormOption value="ddd" :selected="formJson.buffs.includes('ddd')">ddd</FormOption>
+                <FormOption value="eee" :selected="formJson.buffs.includes('eee')">eee</FormOption>
+                <FormOption value="fff" :selected="formJson.buffs.includes('fff')">fff</FormOption>
+                <FormOption value="ggg" :selected="formJson.buffs.includes('ggg')">ggg</FormOption>
+                <FormOption value="hhh" :selected="formJson.buffs.includes('hhh')">hhh</FormOption>
+                <FormOption value="iii" :selected="formJson.buffs.includes('iii')">iii</FormOption>
+                <FormOption value="jjj" :selected="formJson.buffs.includes('jjj')">jjj</FormOption>
+                <FormOption value="kkk" :selected="formJson.buffs.includes('kkk')">kkk</FormOption>
+                <FormOption value="lll" :selected="formJson.buffs.includes('lll')">lll</FormOption>
+                <FormOption value="mmm" :selected="formJson.buffs.includes('mmm')">mmm</FormOption>
+                <FormOption value="nnn" :selected="formJson.buffs.includes('nnn')">nnn</FormOption>
+                <FormOption value="ooo" :selected="formJson.buffs.includes('ooo')">ooo</FormOption>
               </FormSelect>
             </div>
 
@@ -68,6 +80,7 @@ import Box from '../../../common/AdminComponents/Box/index.vue';
 import BoxBody from '../../../common/AdminComponents/BoxBody/index.vue';
 import BoxHeader from '../../../common/AdminComponents/BoxHeader/index.vue';
 import FormInput from '../../../common/AdminComponents/FormInput/index.vue';
+import FormOption from '../../../common/AdminComponents/FormOption/index.vue';
 import FormSelect from '../../../common/AdminComponents/FormSelect/index.vue';
 import SmartButton from '../../../common/AdminComponents/SmartButton/index.vue';
 import Swiper from '../../../common/AdminComponents/Swiper/index.vue';
@@ -94,6 +107,7 @@ const Modal = {
     ImagePreview,
     UploadButton,
     FormSelect,
+    FormOption,
   }
 })
 export default class BuffEdit extends Vue {
