@@ -15,5 +15,11 @@ export default class FormOption extends Vue {
 
 <style type="text/scss" lang="scss">
 .form-option {
+  padding: 6px 42.5px 6px 12px;
+  cursor: pointer;
+  
+  &:hover {
+    background: #f6f6f6;
+  }
 }
 </style>

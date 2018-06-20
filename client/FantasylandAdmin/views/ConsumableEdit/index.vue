@@ -26,7 +26,7 @@
               <FormInput type="text" name="maxCount" validate="required" v-model="formJson.maxCount" :label="$t('maxCount')" :disabled="isDisabled" />
               <!-- <FormInput type="text" name="buffs" validate="required" v-model="formJson.buffs" :label="$t('buffs')" :disabled="isDisabled" /> -->
               <FormSelect v-model="formJson.buffs" placeholder="请选择" :label="$t('buffs')">
-                <FormOption v-for="buff of buffList" :value="buff._id" :selected="formJson.buffs.includes(buff._id)">{{buff.name}}</FormOption>
+                <FormOption v-for="buff of buffList" :value="buff._id" :key="buff._id" :selected="formJson.buffs.includes(buff._id)">{{buff.name}}</FormOption>
               </FormSelect>
             </div>
 
@@ -141,7 +141,7 @@ export default class ConsumableEdit extends Vue {
   }
 
   async submit() {
-    const { buffId } = this.$route.params;
+    const { consumableId } = this.$route.params;
 
     this.disableForm();
 
@@ -154,7 +154,7 @@ export default class ConsumableEdit extends Vue {
         this.setUrl2FormJson(results.map(({ data }) => data));
       }
       
-      !buffId
+      !consumableId
         ? await Consumable.createConsumable(this.formJson)
         : await Consumable.updateConsumable(this.formJson);
 
@@ -162,7 +162,7 @@ export default class ConsumableEdit extends Vue {
         this.hideUploadModal();
       }
 
-      this.$router.push(linkUrls.BUFF_LIST());
+      this.$router.push(linkUrls.CONSUMABLE_LIST());
     } else {
       this.enableForm();
     }
@@ -178,7 +178,7 @@ export default class ConsumableEdit extends Vue {
     }
   }
 
-  async fetchBuffById(consumableId: string) {
+  async fetchById(consumableId: string) {
     const data: Models.Consumable.Model = (await Consumable.getConsumableById(consumableId)).data;
 
     const keys = Object.keys(this.formJson) as Models.Consumable.ModelKeys[];
@@ -197,11 +197,11 @@ export default class ConsumableEdit extends Vue {
   }
 
   async mounted() {
-    const { buffId } = this.$route.params;
+    const { consumableId } = this.$route.params;
 
     await this.fetchBuffList();
-    if(buffId) {
-      await this.fetchBuffById(buffId);
+    if(consumableId) {
+      await this.fetchById(consumableId);
     }
   }
 }

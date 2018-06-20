@@ -7,6 +7,9 @@ const ItemSchema = new Schema({
   description: {
     type: String
   },
+  tip: {
+    type: String
+  },
   weight: {
     type: Number,
     default: 1

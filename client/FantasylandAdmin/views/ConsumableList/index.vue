@@ -10,7 +10,7 @@
           <DataTable :isShowPaginaton="false">
             <TableHeader :headers="headers"></TableHeader>
             <TableRow v-for="row in rows" :key="row._id" :row="row" :headers="headers">
-              <SmartButton class="btn-primary" :to="linkUrls.BUFF_EDIT(row._id)">
+              <SmartButton class="btn-primary" :to="linkUrls.CONSUMABLE_EDIT(row._id)">
                 <i class="fa fa-pencil"></i>
               </SmartButton>
               <SmartButton class="btn-primary">

@@ -18,13 +18,19 @@ export const linkUrls = {
   ENEMY_LIST: (): RawLocation => ({
     path: '/enemy'
   }),
-  ENEMY_EDIT: (enemyId: string): RawLocation => ({
-    path: `/enemy/${enemyId}`
+  ENEMY_EDIT: (id: string): RawLocation => ({
+    path: `/enemy/${id}`
   }),
   BUFF_LIST: (): RawLocation => ({
     path: '/buff'
   }),
-  BUFF_EDIT: (buffId: string): RawLocation => ({
-    path: `/buff/${buffId}`
+  BUFF_EDIT: (id: string): RawLocation => ({
+    path: `/buff/${id}`
+  }),
+  CONSUMABLE_LIST: (): RawLocation => ({
+    path: '/consumable'
+  }),
+  CONSUMABLE_EDIT: (id: string): RawLocation => ({
+    path: `/consumable/${id}`
   })
 };
