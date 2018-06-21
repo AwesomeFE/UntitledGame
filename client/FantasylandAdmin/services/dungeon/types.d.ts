@@ -1,4 +1,6 @@
 declare namespace Dungeon {
+  type DungeonTypes = 'dungeon-battle' | 'dungeon-story';
+
   interface ResourceFile {
     thumbnail?: File;
   }
@@ -23,6 +25,8 @@ declare namespace Dungeon {
   }
 
   interface DungeonBattle {
+    name: string;
+    type: DungeonTypes;
     battles: Array<Battle>;
   }
 
@@ -43,11 +47,13 @@ declare namespace Dungeon {
   }
 
   interface DungeonStory {
-    storys: Array<Battle>;
+    name: string;
+    type: DungeonTypes;
+    storys: Array<StoryContent>;
   }
 
   interface Chapter {
-    _id: string;
+    _id?: string;
     name: string;
     dungeons: Array<DungeonBattle | DungeonStory>;
     items: Array<string>;
@@ -58,6 +64,7 @@ declare namespace Dungeon {
     _id: string;
     name: string;
     chapters: Array<Chapter>;
+    resources: Resources;
   }
 
   type ModelKeys = keyof Model;
