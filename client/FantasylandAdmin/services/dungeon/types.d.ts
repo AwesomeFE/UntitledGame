@@ -49,7 +49,7 @@ declare namespace Dungeon {
   interface DungeonStory {
     name: string;
     type: DungeonTypes;
-    storys: Array<StoryContent>;
+    storys: Array<Story>;
   }
 
   interface Chapter {

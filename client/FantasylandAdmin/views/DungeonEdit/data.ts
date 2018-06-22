@@ -35,3 +35,13 @@ export const newDungeonBattle: Models.Dungeon.DungeonBattle = {
   type: 'dungeon-battle',
   battles: []
 };
+
+export const newStory: Models.Dungeon.Story = {
+  name: '',
+  contents: []
+};
+
+export const newContent: Models.Dungeon.StoryContent = {
+  text: '',
+  images: []
+};

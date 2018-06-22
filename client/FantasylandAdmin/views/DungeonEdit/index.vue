@@ -22,7 +22,7 @@
           </BoxBody>
         </Box>
 
-        <Box v-if="formJson.chapters.length" v-for="(chapter, chapterIndex) in formJson.chapters" :key="`chapter_${index}`">
+        <Box v-if="formJson.chapters.length" v-for="(chapter, chapterIndex) in formJson.chapters" :key="`chapter_${chapterIndex}`">
           <BoxHeader>副本 - {{chapterIndex}}</BoxHeader>
 
           <BoxBody>
@@ -36,11 +36,24 @@
           </BoxBody>
 
           <template v-if="chapter.dungeons.length" v-for="(dungeon, dungeonIndex) in chapter.dungeons">
-            <BoxHeader :key="`chapter_${chapterIndex}_dungeon_${dungeonIndex}`">副本内容 - {{dungeon.type === 'dungeon-story' ? '故事' : '战斗'}} - {{dungeonIndex}}</BoxHeader>
+            <BoxHeader>
+              副本内容 - {{dungeon.type === 'dungeon-story' ? '故事' : '战斗'}} - {{dungeonIndex}}
+            </BoxHeader>
 
-            <BoxBody :key="`chapter_${chapterIndex}_dungeon_${dungeonIndex}`">
+            <BoxBody v-if="dungeon.type === 'dungeon-story'">
               <FormInput type="text" :name="`chapter_${chapterIndex}_dungeon_${dungeonIndex}_name`" validate="required" v-model="dungeon.name" :label="$t('name')" :disabled="isDisabled" />
+              <SmartButton class="btn-primary" @click="createStory(dungeon)" :disabled="isDisabled">添加故事</SmartButton>
+
+              <template v-if="dungeon.storys.length" v-for="(story, storyIndex) in dungeon.storys">
+                <div>故事 - {{storyIndex + 1}}</div>
+                <!-- <FormInput type="text" :name="`chapter_${chapterIndex}_dungeon_${dungeonIndex}_name`" validate="required" v-model="dungeon.name" :label="$t('name')" :disabled="isDisabled" /> -->
+              </template>
             </BoxBody>
+
+            <!-- <BoxBody :key="getDungeonIndex(chapterIndex, dungeonIndex)" v-if="dungeon.type === 'dungeon-battle'">
+              <FormInput type="text" :name="`chapter_${chapterIndex}_dungeon_${dungeonIndex}_name`" validate="required" v-model="dungeon.name" :label="$t('name')" :disabled="isDisabled" />
+              <SmartButton class="btn-primary" @click="createBattle(dungeon)" :disabled="isDisabled">添加战斗</SmartButton>
+            </BoxBody> -->
           </template>
         </Box>
       </form>
@@ -125,6 +138,18 @@ export default class EnemyEdit extends Vue {
 
   createDungeonBattle(chapter: Models.Dungeon.Chapter) {
     chapter.dungeons.push(data.newDungeonBattle);
+  }
+
+  createStory(dungeon: Models.Dungeon.DungeonStory) {
+    dungeon.storys.push(data.newStory);
+  }
+
+  createStoryContent(story: Models.Dungeon.Story) {
+    story.contents.push(data.newContent);
+  }
+
+  getDungeonIndex(chapterIndex: string, dungeonIndex: string) {
+    return `chapter_${chapterIndex}_dungeon_${dungeonIndex}`;
   }
 
   async submit() {
