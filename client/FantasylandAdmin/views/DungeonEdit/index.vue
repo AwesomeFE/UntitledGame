@@ -15,18 +15,18 @@
         </div>
 
         <Box>
-          <BoxHeader>主线副本</BoxHeader>
+          <BoxHeader>主线章节</BoxHeader>
           <BoxBody>
             <FormInput type="text" name="name" validate="required" v-model="formJson.name" :label="$t('name')" :disabled="isDisabled" />
-            <SmartButton class="btn-primary" @click="createChapter" :disabled="isDisabled">创建章节</SmartButton>
+            <SmartButton class="btn-primary" @click="createChapter" :disabled="isDisabled">创建副本</SmartButton>
           </BoxBody>
         </Box>
 
-        <Box v-if="formJson.chapters.length" v-for="(chapter, index) in formJson.chapters" :key="`chapter_${index}`">
-          <BoxHeader>副本章节 - {{index}}</BoxHeader>
+        <Box v-if="formJson.chapters.length" v-for="(chapter, chapterIndex) in formJson.chapters" :key="`chapter_${index}`">
+          <BoxHeader>副本 - {{chapterIndex}}</BoxHeader>
 
           <BoxBody>
-            <FormInput type="text" :name="`chapter_${index}_name`" validate="required" v-model="chapter.name" :label="$t('name')" :disabled="isDisabled" />
+            <FormInput type="text" :name="`chapter_${chapterIndex}_name`" validate="required" v-model="chapter.name" :label="$t('name')" :disabled="isDisabled" />
             <FormSelect v-model="chapter.items" placeholder="请选择" label="章节奖励道具">
               <FormOption v-for="item of itemList" :value="item._id" :key="item._id" :selected="chapter.items.includes(item._id)">{{item.name}}</FormOption>
             </FormSelect>
@@ -35,7 +35,13 @@
             <SmartButton class="btn-primary" @click="createDungeonBattle(chapter)" :disabled="isDisabled">创建副本战斗</SmartButton>
           </BoxBody>
 
-          <BoxHeader>章节 - {{index}}</BoxHeader>
+          <template v-if="chapter.dungeons.length" v-for="(dungeon, dungeonIndex) in chapter.dungeons">
+            <BoxHeader :key="`chapter_${chapterIndex}_dungeon_${dungeonIndex}`">副本内容 - {{dungeon.type === 'dungeon-story' ? '故事' : '战斗'}} - {{dungeonIndex}}</BoxHeader>
+
+            <BoxBody :key="`chapter_${chapterIndex}_dungeon_${dungeonIndex}`">
+              <FormInput type="text" :name="`chapter_${chapterIndex}_dungeon_${dungeonIndex}_name`" validate="required" v-model="dungeon.name" :label="$t('name')" :disabled="isDisabled" />
+            </BoxBody>
+          </template>
         </Box>
       </form>
     </PageBody>
