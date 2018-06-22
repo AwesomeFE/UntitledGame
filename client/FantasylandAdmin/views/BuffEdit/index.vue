@@ -53,6 +53,7 @@ import { namespace } from 'vuex-class';
 import { Validator } from 'vee-validate';
 import { Component, Inject } from 'vue-property-decorator';
 
+import * as data from './data';
 import { Models, CommonTypes } from '../../types';
 import { Buff } from '../../services';
 import vSidebar from '../../components/vSidebar/index.vue';
@@ -105,23 +106,8 @@ export default class BuffEdit extends Vue {
   
   isDisabled: boolean = false;
 
-  formJson: Models.Buff.Model = {
-    _id: '',
-    name: '',
-    description: '',
-    tip: '',
-    recover: 'HP',
-    total: 1,
-    isIncrease: false,
-    maintain: 1000,
-    resources: {
-      thumbnail: ''
-    }
-  };
-
-  fieldFiles: CommonTypes.Utils.FormFile.FieldFiles = {
-    thumbnail: null
-  };
+  formJson = data.formJson;
+  fieldFiles = data.fieldFiles;
 
   async submit() {
     const { buffId } = this.$route.params;

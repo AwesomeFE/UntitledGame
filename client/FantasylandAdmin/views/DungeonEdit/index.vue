@@ -48,6 +48,7 @@ import { namespace } from 'vuex-class';
 import { Validator } from 'vee-validate';
 import { Component, Inject } from 'vue-property-decorator';
 
+import * as data from './data';
 import { Models, CommonTypes, View } from '../../types';
 import { Dungeon, Consumable } from '../../services';
 import vSidebar from '../../components/vSidebar/index.vue';
@@ -101,49 +102,23 @@ export default class EnemyEdit extends Vue {
 
   @Modal.UploadModal.Mutation('clearUpload')
   clearUpload: () => void;
-
-  itemList: View.ViewList = [];
   
   isDisabled: boolean = false;
 
-  formJson: Models.Dungeon.Model = {
-    _id: '',
-    name: '',
-    chapters: [],
-    resources: {
-      thumbnail: ''
-    }
-  };
-
-  fieldFiles: CommonTypes.Utils.FormFile.FieldFiles = {
-    thumbnail: null
-  };
+  itemList = data.itemList;
+  formJson = data.formJson;
+  fieldFiles = data.fieldFiles;
 
   createChapter() {
-    this.formJson.chapters.push({
-      name: '',
-      dungeons: [],
-      items: [],
-      resources: {
-        thumbnail: ''
-      }
-    });
+    this.formJson.chapters.push(data.newChapter);
   }
 
   createDungeonStory(chapter: Models.Dungeon.Chapter) {
-    chapter.dungeons.push({
-      name: '',
-      type: 'dungeon-story',
-      storys: []
-    });
+    chapter.dungeons.push(data.newDungeonStory);
   }
 
   createDungeonBattle(chapter: Models.Dungeon.Chapter) {
-    chapter.dungeons.push({
-      name: '',
-      type: 'dungeon-battle',
-      battles: []
-    });
+    chapter.dungeons.push(data.newDungeonBattle);
   }
 
   async submit() {

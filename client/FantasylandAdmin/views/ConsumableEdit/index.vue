@@ -57,6 +57,7 @@ import { namespace } from 'vuex-class';
 import { Validator } from 'vee-validate';
 import { Component, Inject } from 'vue-property-decorator';
 
+import * as data from './data';
 import { Models, CommonTypes, View } from '../../types';
 import { Buff, Consumable } from '../../services';
 import vSidebar from '../../components/vSidebar/index.vue';
@@ -113,26 +114,9 @@ export default class ConsumableEdit extends Vue {
   
   isDisabled: boolean = false;
 
-  formJson: Models.Consumable.Model = {
-    _id: '',
-    name: '',
-    description: '',
-    tip: '',
-    weight: 1,
-    width: 1,
-    height: 1,
-    maxCount: 1,
-    buffs: [],
-    resources: {
-      thumbnail: ''
-    }
-  };
-
-  buffList: View.ViewList = [];
-
-  fieldFiles: CommonTypes.Utils.FormFile.FieldFiles = {
-    thumbnail: null
-  };
+  formJson = data.formJson;
+  buffList = data.buffList;
+  fieldFiles = data.fieldFiles;
 
   async fetchBuffList() {
     const data: View.ViewList = (await Buff.getBuff()).data;
