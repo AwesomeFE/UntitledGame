@@ -22,11 +22,11 @@
           </BoxBody>
         </Box>
 
-        <Box v-if="formJson.chapters.length" v-for="(chapter, chapterIndex) in formJson.chapters" :key="`chapter_${chapterIndex}`">
-          <BoxHeader>副本 - {{chapterIndex}}</BoxHeader>
+        <Box v-if="formJson.chapters.length" v-for="(chapter, cIdx) in formJson.chapters" :key="getKey(cIdx)">
+          <BoxHeader>副本 - {{cIdx}}</BoxHeader>
 
           <BoxBody>
-            <FormInput type="text" :name="`chapter_${chapterIndex}_name`" validate="required" v-model="chapter.name" :label="$t('name')" :disabled="isDisabled" />
+            <FormInput type="text" :name="getKey(cIdx, 'name')" validate="required" v-model="chapter.name" :label="$t('name')" :disabled="isDisabled" />
             <FormSelect v-model="chapter.items" placeholder="请选择" label="章节奖励道具">
               <FormOption v-for="item of itemList" :value="item._id" :key="item._id" :selected="chapter.items.includes(item._id)">{{item.name}}</FormOption>
             </FormSelect>
@@ -35,18 +35,23 @@
             <SmartButton class="btn-primary" @click="createDungeonBattle(chapter)" :disabled="isDisabled">创建副本战斗</SmartButton>
           </BoxBody>
 
-          <template v-if="chapter.dungeons.length" v-for="(dungeon, dungeonIndex) in chapter.dungeons">
-            <BoxHeader>
-              副本内容 - {{dungeon.type === 'dungeon-story' ? '故事' : '战斗'}} - {{dungeonIndex}}
+          <template v-if="chapter.dungeons.length" v-for="(dungeon, dIdx) in chapter.dungeons">
+            <BoxHeader :key="getKey(cIdx, dIdx, 'header')">
+              副本内容 - {{dungeon.type === 'dungeon-story' ? '故事' : '战斗'}} - {{dIdx}}
             </BoxHeader>
 
-            <BoxBody v-if="dungeon.type === 'dungeon-story'">
-              <FormInput type="text" :name="`chapter_${chapterIndex}_dungeon_${dungeonIndex}_name`" validate="required" v-model="dungeon.name" :label="$t('name')" :disabled="isDisabled" />
+            <BoxBody v-if="dungeon.type === 'dungeon-story'" :key="getKey(cIdx, dIdx, 'body')">
+              <FormInput type="text" :name="getKey(cIdx, dIdx, 'name')" validate="required" v-model="dungeon.name" :label="$t('name')" :disabled="isDisabled" />
               <SmartButton class="btn-primary" @click="createStory(dungeon)" :disabled="isDisabled">添加故事</SmartButton>
 
-              <template v-if="dungeon.storys.length" v-for="(story, storyIndex) in dungeon.storys">
-                <div>故事 - {{storyIndex + 1}}</div>
-                <!-- <FormInput type="text" :name="`chapter_${chapterIndex}_dungeon_${dungeonIndex}_name`" validate="required" v-model="dungeon.name" :label="$t('name')" :disabled="isDisabled" /> -->
+              <template v-if="dungeon.storys.length" v-for="(story, sIdx) in dungeon.storys">
+                <div :key="getKey(cIdx, dIdx, sIdx)">故事 - {{sIdx + 1}}</div>
+                <FormInput type="text" :name="getKey(cIdx, dIdx, sIdx, 'name')" validate="required" v-model="story.name" :label="$t('name')" :disabled="isDisabled" />
+                <SmartButton class="btn-primary" @click="createStoryContent(story)" :disabled="isDisabled">添加故事文本</SmartButton>
+
+                <template v-for="(content, oIdx) in story.contents">
+                  <FormInput type="text" :name="getKey(cIdx, dIdx, sIdx, oIdx, 'text')" validate="required" v-model="story.text" :label="$t('text')" :disabled="isDisabled" />
+                </template>
               </template>
             </BoxBody>
 
@@ -83,7 +88,7 @@ import SmartButton from '../../../common/AdminComponents/SmartButton/index.vue';
 import Swiper from '../../../common/AdminComponents/Swiper/index.vue';
 import ImagePreview from '../../../common/AdminComponents/ImagePreview/index.vue';
 import UploadButton from '../../../common/AdminComponents/UploadButton/index.vue';
-import { UtilFormFile } from '../../../common/utils';
+import { UtilForm } from '../../../common/utils';
 import { modalTypes, linkUrls } from '../../constants';
 
 const Modal = {
@@ -152,13 +157,19 @@ export default class EnemyEdit extends Vue {
     return `chapter_${chapterIndex}_dungeon_${dungeonIndex}`;
   }
 
+  getKey() {
+    const key = UtilForm.getKey(arguments);
+    console.log(key);
+    return key;
+  }
+
   async submit() {
     const { enemyId } = this.$route.params;
 
     this.disableForm();
 
     if(await this.$validator.validateAll()) {
-      const fileArray = UtilFormFile.getFileArrayFromFieldFiles(this.fieldFiles, 'enemy');
+      const fileArray = UtilForm.getFileArrayFromFieldFiles(this.fieldFiles, 'enemy');
 
       if(fileArray.length) {
         this.showUploadModal();

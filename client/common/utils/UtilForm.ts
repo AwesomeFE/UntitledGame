@@ -2,7 +2,19 @@ import { Utils } from './types.d';
 
 import FieldFiles = Utils.FormFile.FieldFiles;
 
-export const UtilFormFile = {
+export const UtilForm = {
+  getKey(args: IArguments) {
+    const keys: Array<string> = [];
+
+    for(let i = 0; i < args.length; i++) {
+      const argument = args[i];
+
+      keys.push(argument);
+    }
+
+    return keys.join('_');
+  },
+
   getFileArrayFromFieldFiles(fieldFiles: FieldFiles, type?: string) {
     const formDatas = [];
 
@@ -22,4 +34,4 @@ export const UtilFormFile = {
 
     return formDatas;
   }
-};
+}

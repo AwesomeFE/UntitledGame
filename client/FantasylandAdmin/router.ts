@@ -75,7 +75,7 @@ export default () => new VueRouter({
         {
           name: 'dungeonCreate',
           path: 'dungeon/create',
-          component: () => import('./views/dungeonEdit/index.vue')
+          component: () => import('./views/DungeonEdit/index.vue')
         },
         {
           path: '*',

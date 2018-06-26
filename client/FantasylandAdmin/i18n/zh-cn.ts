@@ -47,6 +47,7 @@ export default {
   buffs: '效果',
 
   dungeonList: '副本列表',
+  text: '文字',
 
   USER_NOT_FOUND: '用户不存在',
   PASSWORD_INVALID: '密码不正确',

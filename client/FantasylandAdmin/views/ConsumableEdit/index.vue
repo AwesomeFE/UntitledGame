@@ -73,7 +73,7 @@ import SmartButton from '../../../common/AdminComponents/SmartButton/index.vue';
 import Swiper from '../../../common/AdminComponents/Swiper/index.vue';
 import ImagePreview from '../../../common/AdminComponents/ImagePreview/index.vue';
 import UploadButton from '../../../common/AdminComponents/UploadButton/index.vue';
-import { UtilFormFile } from '../../../common/utils';
+import { UtilForm } from '../../../common/utils';
 import { modalTypes, linkUrls } from '../../constants';
 
 const Modal = {
@@ -133,7 +133,7 @@ export default class ConsumableEdit extends Vue {
     this.disableForm();
 
     if(await this.$validator.validateAll()) {
-      const fileArray = UtilFormFile.getFileArrayFromFieldFiles(this.fieldFiles, 'buff');
+      const fileArray = UtilForm.getFileArrayFromFieldFiles(this.fieldFiles, 'buff');
 
       if(fileArray.length) {
         this.showUploadModal();
